@@ -48,3 +48,4 @@ buildNumber.properties
 #### Genapp ####
 rungenapp/lastconfig.properties
 /.vscode/settings.json
+/powertoys-ejb/src/test/java/org/fundaciobit/powertoys/logic/earmoduls/testfiles

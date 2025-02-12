@@ -16,7 +16,7 @@ public class Jar2JBossModuleTest {
 
     public static void main(String[] args) {
         File earWarFile = new File(
-                "test-files\\portafib.ear");
+                "testfiles\\portafib.ear");
         try {
 
             List<EarWarInfo> trobats = new ArrayList<EarWarInfo>();
