@@ -1,6 +1,6 @@
 {
   "packageName": "org.fundaciobit.powertoys",
-  "projectName": "powertoys",
+  "projectName": "PowerToys",
   "dataBaseInfo": {
     "url": "jdbc:postgresql://localhost:5432/powertoys",
     "driver": "org.postgresql.Driver",

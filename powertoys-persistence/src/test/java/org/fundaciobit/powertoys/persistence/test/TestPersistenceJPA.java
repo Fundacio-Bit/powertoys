@@ -10,8 +10,8 @@ import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
 
-import org.fundaciobit.powertoys.persistence.powertoysJPADaoManagers;
-import org.fundaciobit.powertoys.model.powertoysDaoManager;
+import org.fundaciobit.powertoys.persistence.PowerToysJPADaoManagers;
+import org.fundaciobit.powertoys.model.PowerToysDaoManager;
 
 /*
  * IMPORTANT - NO MODIFICAR - DERIVA AQUESTA CLASSE SI VOLS FER UN TEST 
@@ -62,7 +62,7 @@ public class TestPersistenceJPA {
             /*
              EXEMPLE DE LLISTAT 
              
-            IPluginManager pluginMan = powertoysDaoManager.getDaoManagers().getPluginManager();
+            IPluginManager pluginMan = PowerToysDaoManager.getDaoManagers().getPluginManager();
             
             
             SelectTraduccio st = new SelectTraduccio(PluginFields.NOMID, "es");
@@ -76,7 +76,7 @@ public class TestPersistenceJPA {
             */
 
             /*  CONSULTA IDIOMES DISPONIBLES
-             * IIdiomaManager idioma = powertoysDaoManager.getDaoManagers().getIdiomaManager();
+             * IIdiomaManager idioma = PowerToysDaoManager.getDaoManagers().getIdiomaManager();
              * 
              * List<Idioma> llist = idioma.select(new OrderBy(IdiomaFields.IDIOMAID,
              * OrderType.DESC));
@@ -131,7 +131,7 @@ public class TestPersistenceJPA {
 
         em.setFlushMode(FlushModeType.AUTO);
         
-        powertoysDaoManager.setDaoManagers(new powertoysJPADaoManagers(em)); 
+        PowerToysDaoManager.setDaoManagers(new PowerToysJPADaoManagers(em)); 
         
         return em;
     }

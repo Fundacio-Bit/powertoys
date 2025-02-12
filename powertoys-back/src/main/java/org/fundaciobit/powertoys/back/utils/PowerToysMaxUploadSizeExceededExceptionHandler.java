@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
  * @author anadal
  * 
  */
-public class powertoysMaxUploadSizeExceededExceptionHandler implements
+public class PowerToysMaxUploadSizeExceededExceptionHandler implements
     org.springframework.web.servlet.HandlerExceptionResolver {
 
   protected final Logger log = Logger.getLogger(getClass());
@@ -25,7 +25,7 @@ public class powertoysMaxUploadSizeExceededExceptionHandler implements
   public ModelAndView resolveException(HttpServletRequest request,
       HttpServletResponse response, Object handler, Exception ex) {
 
-    if (ex instanceof powertoysMaxUploadSizeExceededException
+    if (ex instanceof PowerToysMaxUploadSizeExceededException
         || ex instanceof MaxUploadSizeExceededException
         || ex instanceof SizeLimitExceededException) {
 
@@ -44,8 +44,8 @@ public class powertoysMaxUploadSizeExceededExceptionHandler implements
       String msgCode;
       if (ex instanceof MaxUploadSizeExceededException) {
         MaxUploadSizeExceededException musee = (MaxUploadSizeExceededException) ex;
-        if (musee instanceof powertoysMaxUploadSizeExceededException) {
-          msgCode = ((powertoysMaxUploadSizeExceededException) musee).getMsgCode();
+        if (musee instanceof PowerToysMaxUploadSizeExceededException) {
+          msgCode = ((PowerToysMaxUploadSizeExceededException) musee).getMsgCode();
         } else {
           msgCode = "tamanyfitxerpujatsuperat";
         }

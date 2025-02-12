@@ -50,7 +50,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 @RequestMapping(value = "/webdb/ear")
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
 public class EarController
-    extends org.fundaciobit.powertoys.back.controller.powertoysFilesBaseController<Ear, java.lang.Long, EarForm> implements EarFields {
+    extends org.fundaciobit.powertoys.back.controller.PowerToysFilesBaseController<Ear, java.lang.Long, EarForm> implements EarFields {
 
   @EJB(mappedName = org.fundaciobit.powertoys.ejb.EarService.JNDI_NAME)
   protected org.fundaciobit.powertoys.ejb.EarService earEjb;

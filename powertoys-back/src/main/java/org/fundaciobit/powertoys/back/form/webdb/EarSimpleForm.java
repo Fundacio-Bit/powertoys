@@ -1,14 +1,14 @@
 package org.fundaciobit.powertoys.back.form.webdb;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.fundaciobit.powertoys.back.form.powertoysBaseForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseForm;
 import org.fundaciobit.powertoys.persistence.EarSimpleJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
  * Created by GenApp. Do not modify.
  */
-public class EarSimpleForm extends powertoysBaseForm {
+public class EarSimpleForm extends PowerToysBaseForm {
   
   private EarSimpleJPA earSimple;
   

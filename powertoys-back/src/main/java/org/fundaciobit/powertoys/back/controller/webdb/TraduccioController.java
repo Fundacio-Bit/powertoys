@@ -47,7 +47,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 @RequestMapping(value = "/webdb/traduccio")
 @SessionAttributes(types = { TraduccioForm.class, TraduccioFilterForm.class })
 public class TraduccioController
-    extends org.fundaciobit.powertoys.back.controller.powertoysBaseController<Traduccio, java.lang.Long> implements TraduccioFields {
+    extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Traduccio, java.lang.Long> implements TraduccioFields {
 
   @EJB(mappedName = org.fundaciobit.powertoys.ejb.TraduccioService.JNDI_NAME)
   protected org.fundaciobit.powertoys.ejb.TraduccioService traduccioEjb;

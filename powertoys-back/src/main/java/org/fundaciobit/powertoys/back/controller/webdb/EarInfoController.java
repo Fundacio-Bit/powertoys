@@ -49,7 +49,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 @RequestMapping(value = "/webdb/earInfo")
 @SessionAttributes(types = { EarInfoForm.class, EarInfoFilterForm.class })
 public class EarInfoController
-    extends org.fundaciobit.powertoys.back.controller.powertoysBaseController<EarInfo, java.lang.Long> implements EarInfoFields {
+    extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<EarInfo, java.lang.Long> implements EarInfoFields {
 
   @EJB(mappedName = org.fundaciobit.powertoys.ejb.EarInfoService.JNDI_NAME)
   protected org.fundaciobit.powertoys.ejb.EarInfoService earInfoEjb;

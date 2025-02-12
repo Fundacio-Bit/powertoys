@@ -50,7 +50,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public LocaleResolver localeResolver() {
-	    SessionLocaleResolver slr = new org.fundaciobit.powertoys.back.utils.powertoysSessionLocaleResolver();
+	    SessionLocaleResolver slr = new org.fundaciobit.powertoys.back.utils.PowerToysSessionLocaleResolver();
 	    slr.setDefaultLocale(new Locale(Configuracio.getDefaultLanguage()));
 	    return slr;
 	}
@@ -89,12 +89,12 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public MultipartResolver multipartResolver() {
-		return new org.fundaciobit.powertoys.back.utils.powertoysCommonsMultipartResolver();
+		return new org.fundaciobit.powertoys.back.utils.PowerToysCommonsMultipartResolver();
 	}
 
 	@Bean
 	public HandlerExceptionResolver getFileSizeExceeds() {
-	  return new org.fundaciobit.powertoys.back.utils.powertoysMaxUploadSizeExceededExceptionHandler();
+	  return new org.fundaciobit.powertoys.back.utils.PowerToysMaxUploadSizeExceededExceptionHandler();
 	}
 
 	@Bean

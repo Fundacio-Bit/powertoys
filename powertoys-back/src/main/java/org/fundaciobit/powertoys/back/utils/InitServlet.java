@@ -148,7 +148,7 @@ public class InitServlet extends HttpServlet {
                     } else {
                         log.warn("Registrant DataExporter: " + class1.getName());
                         DataExporterManager
-                                .addDataExporter(new org.fundaciobit.powertoys.back.utils.powertoysDataExporter(edp));
+                                .addDataExporter(new org.fundaciobit.powertoys.back.utils.PowerToysDataExporter(edp));
                     }
                 }
             }

@@ -4,7 +4,7 @@
     <version>1.0.0</version>
     <artifactId>powertoys</artifactId>
     <packaging>pom</packaging>
-    <name>powertoys</name>
+    <name>PowerToys</name>
 
     <parent>
         <artifactId>caib-artifacts-github-governib-distribution-with-jdk11-jboss72</artifactId>

@@ -8,7 +8,7 @@ import org.fundaciobit.genapp.common.web.controller.CommonBaseController;
  * @author anadal
  *
  */
-public abstract class powertoysBaseController<I extends IGenAppEntity, PK extends Object> 
+public abstract class PowerToysBaseController<I extends IGenAppEntity, PK extends Object> 
   extends CommonBaseController<I, PK> {
 
 }

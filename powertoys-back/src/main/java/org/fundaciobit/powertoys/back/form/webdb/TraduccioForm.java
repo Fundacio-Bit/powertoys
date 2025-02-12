@@ -1,13 +1,13 @@
 package org.fundaciobit.powertoys.back.form.webdb;
 
-import org.fundaciobit.powertoys.back.form.powertoysBaseForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseForm;
 import org.fundaciobit.powertoys.persistence.TraduccioJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
  * Created by GenApp. Do not modify.
  */
-public class TraduccioForm extends powertoysBaseForm {
+public class TraduccioForm extends PowerToysBaseForm {
   
   private TraduccioJPA traduccio;
   

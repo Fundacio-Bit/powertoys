@@ -22,7 +22,7 @@ import javax.ejb.EJB;
  * 
  */
 @Controller
-public abstract class powertoysFilesBaseController<I extends IGenAppEntity, PK extends Object, F extends BaseForm>
+public abstract class PowerToysFilesBaseController<I extends IGenAppEntity, PK extends Object, F extends BaseForm>
     extends CommonFilesBaseController<I, PK, F, Fitxer> {
 
   @EJB(mappedName = FitxerService.JNDI_NAME)
@@ -33,7 +33,7 @@ public abstract class powertoysFilesBaseController<I extends IGenAppEntity, PK e
    * @return
    */
   protected FilesFormManager<Fitxer> getFilesFormManager() {
-    return new powertoysFilesFormManager(fitxerEjb);
+    return new PowerToysFilesFormManager(fitxerEjb);
   }
 
   /**

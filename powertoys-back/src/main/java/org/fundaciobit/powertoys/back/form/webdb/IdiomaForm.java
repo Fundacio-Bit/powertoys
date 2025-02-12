@@ -1,13 +1,13 @@
 package org.fundaciobit.powertoys.back.form.webdb;
 
-import org.fundaciobit.powertoys.back.form.powertoysBaseForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseForm;
 import org.fundaciobit.powertoys.persistence.IdiomaJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
  * Created by GenApp. Do not modify.
  */
-public class IdiomaForm extends powertoysBaseForm {
+public class IdiomaForm extends PowerToysBaseForm {
   
   private IdiomaJPA idioma;
   

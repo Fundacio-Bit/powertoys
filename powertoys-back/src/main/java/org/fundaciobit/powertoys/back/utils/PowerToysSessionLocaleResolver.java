@@ -15,7 +15,7 @@ import org.springframework.web.util.WebUtils;
  * @author anadal
  *
  */
-public class powertoysSessionLocaleResolver extends SessionLocaleResolver{
+public class PowerToysSessionLocaleResolver extends SessionLocaleResolver{
 
 	protected final Logger log = Logger.getLogger(getClass());
 

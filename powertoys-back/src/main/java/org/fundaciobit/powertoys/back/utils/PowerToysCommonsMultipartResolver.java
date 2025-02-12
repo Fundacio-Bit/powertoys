@@ -16,12 +16,12 @@ import org.fundaciobit.powertoys.commons.utils.Configuracio;
  * 
  */
 @Component
-public class powertoysCommonsMultipartResolver extends
+public class PowerToysCommonsMultipartResolver extends
     org.springframework.web.multipart.commons.CommonsMultipartResolver {
 
   protected final Logger log = Logger.getLogger(getClass());
 
-  public powertoysCommonsMultipartResolver() {
+  public PowerToysCommonsMultipartResolver() {
     super();
   }
 
@@ -73,7 +73,7 @@ public class powertoysCommonsMultipartResolver extends
     try {
       return super.resolveMultipart(request);
     } catch (MaxUploadSizeExceededException musee) {
-      throw new powertoysMaxUploadSizeExceededException(musee.getCause(),
+      throw new PowerToysMaxUploadSizeExceededException(musee.getCause(),
           musee.getMaxUploadSize(), msgCode);
     }
 

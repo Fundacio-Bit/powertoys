@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
-import org.fundaciobit.powertoys.back.form.powertoysBaseFilterForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseFilterForm;
 
 import org.fundaciobit.powertoys.model.fields.FitxerFields;
 
@@ -18,7 +18,7 @@ import org.fundaciobit.powertoys.model.fields.FitxerFields;
  * 
  */
 @Component
-public class FitxerFilterForm extends powertoysBaseFilterForm implements FitxerFields {
+public class FitxerFilterForm extends PowerToysBaseFilterForm implements FitxerFields {
 
   private java.lang.Long fitxerIDDesde;
 

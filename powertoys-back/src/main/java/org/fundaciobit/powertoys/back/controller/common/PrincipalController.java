@@ -44,7 +44,7 @@ public class PrincipalController {
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(name = "idioma") String idioma) throws Exception {
-		org.fundaciobit.powertoys.back.utils.powertoysSessionLocaleResolver.setLocaleManually(request, idioma);		
+		org.fundaciobit.powertoys.back.utils.PowerToysSessionLocaleResolver.setLocaleManually(request, idioma);		
 		return new ModelAndView("principal");
 	}
 

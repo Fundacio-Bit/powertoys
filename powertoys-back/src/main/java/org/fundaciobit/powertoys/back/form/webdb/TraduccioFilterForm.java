@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
-import org.fundaciobit.powertoys.back.form.powertoysBaseFilterForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseFilterForm;
 
 import org.fundaciobit.powertoys.model.fields.TraduccioFields;
 
@@ -18,7 +18,7 @@ import org.fundaciobit.powertoys.model.fields.TraduccioFields;
  * 
  */
 @Component
-public class TraduccioFilterForm extends powertoysBaseFilterForm implements TraduccioFields {
+public class TraduccioFilterForm extends PowerToysBaseFilterForm implements TraduccioFields {
 
   private java.lang.Long traduccioIDDesde;
 

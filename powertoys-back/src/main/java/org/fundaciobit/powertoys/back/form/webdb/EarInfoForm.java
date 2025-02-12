@@ -2,14 +2,14 @@ package org.fundaciobit.powertoys.back.form.webdb;
 
 import java.util.List;
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.powertoys.back.form.powertoysBaseForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseForm;
 import org.fundaciobit.powertoys.persistence.EarInfoJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
  * Created by GenApp. Do not modify.
  */
-public class EarInfoForm extends powertoysBaseForm {
+public class EarInfoForm extends PowerToysBaseForm {
   
   private EarInfoJPA earInfo;
   

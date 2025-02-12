@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
-import org.fundaciobit.powertoys.back.form.powertoysBaseFilterForm;
+import org.fundaciobit.powertoys.back.form.PowerToysBaseFilterForm;
 
 import org.fundaciobit.powertoys.model.fields.EarInfoFields;
 
@@ -19,7 +19,7 @@ import org.fundaciobit.powertoys.model.fields.EarInfoFields;
  * 
  */
 @Component
-public class EarInfoFilterForm extends powertoysBaseFilterForm implements EarInfoFields {
+public class EarInfoFilterForm extends PowerToysBaseFilterForm implements EarInfoFields {
 
   private java.lang.Long earinfoIDDesde;
 

@@ -26,7 +26,7 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
  * @author anadal
  *
  */
-public class  powertoysDataExporter implements IDataExporter {
+public class  PowerToysDataExporter implements IDataExporter {
 	private IExportDataPlugin exportDataPlugin;
 
 	protected final Logger log = Logger.getLogger(getClass());
@@ -34,7 +34,7 @@ public class  powertoysDataExporter implements IDataExporter {
 	/**
 	 * @param exportDataPlugin
 	 */
-	public  powertoysDataExporter(IExportDataPlugin exportDataPlugin) {
+	public  PowerToysDataExporter(IExportDataPlugin exportDataPlugin) {
 		super();
 		this.exportDataPlugin = exportDataPlugin;
 	}

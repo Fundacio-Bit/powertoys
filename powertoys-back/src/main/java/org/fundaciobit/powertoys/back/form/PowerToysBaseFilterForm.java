@@ -7,16 +7,16 @@ import org.fundaciobit.genapp.common.web.form.BaseFilterForm;
  * @author anadal
  *
  */
-public abstract class powertoysBaseFilterForm extends BaseFilterForm {
+public abstract class PowerToysBaseFilterForm extends BaseFilterForm {
   
   
   
-  public powertoysBaseFilterForm() {
+  public PowerToysBaseFilterForm() {
   }
   
   
   
-  public powertoysBaseFilterForm(powertoysBaseFilterForm __toClone) {
+  public PowerToysBaseFilterForm(PowerToysBaseFilterForm __toClone) {
     super(__toClone);
   }
   

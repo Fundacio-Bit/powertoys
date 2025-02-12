@@ -7,16 +7,16 @@ import org.fundaciobit.genapp.common.web.form.BaseForm;
  * @author anadal
  *
  */
-public abstract class powertoysBaseForm extends BaseForm {
+public abstract class PowerToysBaseForm extends BaseForm {
 
-  public powertoysBaseForm() {
+  public PowerToysBaseForm() {
   }
   
-  public powertoysBaseForm(boolean nou) {
+  public PowerToysBaseForm(boolean nou) {
     super(nou);
   }
   
-  public powertoysBaseForm(powertoysBaseForm __toClone) {
+  public PowerToysBaseForm(PowerToysBaseForm __toClone) {
     super(__toClone);
   }
   

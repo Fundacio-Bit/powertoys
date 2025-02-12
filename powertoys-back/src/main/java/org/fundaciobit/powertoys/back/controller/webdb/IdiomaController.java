@@ -47,7 +47,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 @RequestMapping(value = "/webdb/idioma")
 @SessionAttributes(types = { IdiomaForm.class, IdiomaFilterForm.class })
 public class IdiomaController
-    extends org.fundaciobit.powertoys.back.controller.powertoysBaseController<Idioma, java.lang.String> implements IdiomaFields {
+    extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Idioma, java.lang.String> implements IdiomaFields {
 
   @EJB(mappedName = org.fundaciobit.powertoys.ejb.IdiomaService.JNDI_NAME)
   protected org.fundaciobit.powertoys.ejb.IdiomaService idiomaEjb;

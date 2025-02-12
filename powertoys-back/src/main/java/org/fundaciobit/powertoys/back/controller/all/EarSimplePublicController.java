@@ -21,7 +21,7 @@ import org.fundaciobit.powertoys.logic.EarSimplePublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar.EarWarInfo;
-import org.fundaciobit.powertoys.back.controller.powertoysFilesFormManager;
+import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
 import org.fundaciobit.powertoys.back.controller.webdb.EarSimpleController;
 import org.fundaciobit.powertoys.back.form.webdb.EarSimpleFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.EarSimpleForm;
@@ -49,7 +49,7 @@ public class EarSimplePublicController extends EarSimpleController {
 
     @Override
     protected FilesFormManager<Fitxer> getFilesFormManager() {
-        return new powertoysFilesFormManager(fitxerLogicaEjb);
+        return new PowerToysFilesFormManager(fitxerLogicaEjb);
     }
 
     @Override
@@ -77,8 +77,7 @@ public class EarSimplePublicController extends EarSimpleController {
             earSimpleFilterForm.setEditButtonVisible(false);
             earSimpleFilterForm.setAddButtonVisible(false);
             earSimpleFilterForm.setViewButtonVisible(true);
-            AdditionalButton processEarButton = new AdditionalButton("fas fa-upload",
-                    "ear.processarear",
+            AdditionalButton processEarButton = new AdditionalButton("fas fa-upload", "ear.processarear",
                     getContextWeb() + "/new", AdditionalButtonStyle.PRIMARY);
             earSimpleFilterForm.addAdditionalButton(processEarButton);
         }
@@ -87,8 +86,8 @@ public class EarSimplePublicController extends EarSimpleController {
     }
 
     @Override
-    public EarSimpleForm getEarSimpleForm(EarSimpleJPA _jpa,
-            boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+    public EarSimpleForm getEarSimpleForm(EarSimpleJPA _jpa, boolean __isView, HttpServletRequest request,
+            ModelAndView mav) throws I18NException {
         EarSimpleForm earSimpleForm = super.getEarSimpleForm(_jpa, __isView, request, mav);
 
         if (earSimpleForm.isNou()) {
@@ -97,8 +96,7 @@ public class EarSimplePublicController extends EarSimpleController {
             earSimpleForm.addHiddenField(EarSimpleFields.DATA);
 
             earSimpleForm.setSaveButtonVisible(false);
-            AdditionalButton processEarButton = new AdditionalButton("fas fa-file-import",
-                    "ear.processar",
+            AdditionalButton processEarButton = new AdditionalButton("fas fa-file-import", "ear.processar",
                     "javascript:$('form#earSimpleForm').submit();", AdditionalButtonStyle.PRIMARY);
             earSimpleForm.addAdditionalButton(processEarButton);
 
@@ -106,8 +104,7 @@ public class EarSimplePublicController extends EarSimpleController {
         }
 
         earSimpleForm.setCancelButtonVisible(false);
-        AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left",
-                "ear.tornar",
+        AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                 getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
         earSimpleForm.addAdditionalButton(returnButton);
 

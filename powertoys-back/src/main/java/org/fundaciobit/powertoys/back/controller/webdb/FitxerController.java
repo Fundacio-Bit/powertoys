@@ -47,7 +47,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 @RequestMapping(value = "/webdb/fitxer")
 @SessionAttributes(types = { FitxerForm.class, FitxerFilterForm.class })
 public class FitxerController
-    extends org.fundaciobit.powertoys.back.controller.powertoysBaseController<Fitxer, java.lang.Long> implements FitxerFields {
+    extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Fitxer, java.lang.Long> implements FitxerFields {
 
   @EJB(mappedName = org.fundaciobit.powertoys.ejb.FitxerService.JNDI_NAME)
   protected org.fundaciobit.powertoys.ejb.FitxerService fitxerEjb;

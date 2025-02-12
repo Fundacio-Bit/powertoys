@@ -13,9 +13,9 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
  * @author anadal
  * 
  */
-public class powertoysFilesFormManager extends FilesFormManager<Fitxer> {
+public class PowerToysFilesFormManager extends FilesFormManager<Fitxer> {
 
-  public powertoysFilesFormManager(IFileManager<Fitxer> fitxerEjb) {
+  public PowerToysFilesFormManager(IFileManager<Fitxer> fitxerEjb) {
     super(fitxerEjb);
   }
 

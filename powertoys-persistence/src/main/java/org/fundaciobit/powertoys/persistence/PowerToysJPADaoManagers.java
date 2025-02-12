@@ -4,7 +4,7 @@ import org.fundaciobit.powertoys.model.*;
 import org.fundaciobit.powertoys.model.dao.*;
 import javax.persistence.EntityManager;
 
-public final class powertoysJPADaoManagers implements IpowertoysDaoManagers{
+public final class PowerToysJPADaoManagers implements IPowerToysDaoManagers{
 
    private final EarJPAManager pwt_ear;
    private final EarInfoJPAManager pwt_earinfo;
@@ -13,7 +13,7 @@ public final class powertoysJPADaoManagers implements IpowertoysDaoManagers{
    private final IdiomaJPAManager pwt_idioma;
    private final TraduccioJPAManager pwt_traduccio;
 
-  public  powertoysJPADaoManagers(EntityManager __em) {
+  public  PowerToysJPADaoManagers(EntityManager __em) {
     this.pwt_ear = new EarJPAManager(__em);
     this.pwt_earinfo = new EarInfoJPAManager(__em);
     this.pwt_earsimple = new EarSimpleJPAManager(__em);
