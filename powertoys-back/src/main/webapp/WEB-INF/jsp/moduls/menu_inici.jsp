@@ -47,7 +47,7 @@
     <%
     List<List<MenuItem>> menus = new ArrayList<List<MenuItem>>();
     MenuItem[] menusAddicionals;
-    /*Object loginInfo = request.getAttribute("loginInfo");
+    Object loginInfo = request.getAttribute("loginInfo");
     
     if (loginInfo == null) {
         menusAddicionals = new MenuItem[] {
@@ -61,8 +61,8 @@
                 new MenuItem("=Menú Inici Option 1","/common/option1", 20),
                 new MenuItem("=Menú Inici Option 2","/common/option2", 30),
         };
-    }*/
-    List<MenuItem> discoveredMenus = MenuOptionManager.getMenuItems("PUBLIC"/*, menusAddicionals*/);
+    }
+    List<MenuItem> discoveredMenus = MenuOptionManager.getMenuItems("PUBLIC", menusAddicionals);
     menus.add(discoveredMenus);
     %>
 
