@@ -1,0 +1,22 @@
+﻿<datasources>
+    ...
+    <datasource jndi-name="java:jboss/datasources/powertoysDS" pool-name="powertoysDS" enabled="true" use-java-context="true">
+        <connection-url>jdbc:oracle:thin:@oraclehost:1521:xe</connection-url>
+        <driver>oracle</driver>
+        <pool>
+            <min-pool-size>1</min-pool-size>
+            <max-pool-size>20</max-pool-size>
+            <prefill>true</prefill>
+        </pool>
+        <security>
+            <user-name>powertoys</user-name>
+            <password>powertoys</password>
+        </security>
+        <new-connection-sql>
+            BEGIN
+            EXECUTE IMMEDIATE 'ALTER SESSION SET CURRENT_SCHEMA = powertoys';
+            END;
+        </new-connection-sql>
+    </datasource>
+    ...
+</datasources>

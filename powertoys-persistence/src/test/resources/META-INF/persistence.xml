@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="powertoysPULocal" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<class>org.fundaciobit.powertoys.persistence.EarJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EarInfoJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EarSimpleJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.FitxerJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.IdiomaJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.TraduccioJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.TraduccioMapJPA</class>
+
+        <!-- Desactivar cache -->
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <!-- Desactivar validació -->
+        <validation-mode>NONE</validation-mode>
+
+        <properties>
+         
+        </properties>
+    </persistence-unit>
+</persistence>
