@@ -47,6 +47,11 @@ buildNumber.properties
 
 #### Genapp ####
 rungenapp/lastconfig.properties
-/.vscode/settings.json
+
+#### Tests ####
 /powertoys-ejb/src/test/java/org/fundaciobit/powertoys/logic/earmoduls/testfiles
-/powertoys-back/.settings
+
+#### IDEs ####
+/.vscode/settings.json
+**/.settings/**
+.vscode/powertoys-1.0.code-workspace

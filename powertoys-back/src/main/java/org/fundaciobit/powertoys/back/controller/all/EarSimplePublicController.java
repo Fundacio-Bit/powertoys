@@ -80,6 +80,9 @@ public class EarSimplePublicController extends EarSimpleController {
             AdditionalButton processEarButton = new AdditionalButton("fas fa-upload", "ear.processarear",
                     getContextWeb() + "/new", AdditionalButtonStyle.PRIMARY);
             earSimpleFilterForm.addAdditionalButton(processEarButton);
+
+            earSimpleFilterForm.setOrderBy(EarSimpleFields.DATA.getJavaName());
+            earSimpleFilterForm.setOrderAsc(false);
         }
 
         return earSimpleFilterForm;
