@@ -30,7 +30,23 @@ public class EarValidator<I extends Ear>
     ,org.fundaciobit.powertoys.model.dao.IEarManager __earManager) {
 
     // Valors Not Null
+    __vr.rejectIfEmptyOrWhitespace(__target__,DATA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATA)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,NOM, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
+
     // Check size
+    if (__vr.getFieldErrorCount(NOM) == 0) {
+      java.lang.String __nom = __target__.getNom();
+      if (__nom!= null && __nom.length() > 255) {
+        __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

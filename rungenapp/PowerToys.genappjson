@@ -18,13 +18,13 @@
       "shortName": "ear",
       "labels": {
         "en": "pwt_ear_XX_en",
-        "ca": "ear",
-        "es": "ear"
+        "ca": "EAR",
+        "es": "EAR"
       },
       "labelsPlural": {
         "en": "Ear_plural_XX_en",
-        "ca": "ears",
-        "es": "ears"
+        "ca": "EARs",
+        "es": "EARs"
       },
       "generate": true,
       "fileMappingEntity": false,
@@ -81,8 +81,8 @@
           "isNotNullable": true,
           "labels": {
             "en": "fitxerid",
-            "ca": "fitxerid",
-            "es": "fitxerid"
+            "ca": "Fitxer",
+            "es": "Fichero"
           },
           "javaName": "fitxerID",
           "javaType": "long",
@@ -110,6 +110,56 @@
               "type": 1
             }
           ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "data",
+          "sqlType": 93,
+          "size": 35,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Data darrera act.",
+            "es": "Fecha útlima act."
+          },
+          "javaName": "data",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
         }
       ]
     },
@@ -119,13 +169,13 @@
       "shortName": "earinfo",
       "labels": {
         "en": "pwt_earinfo_XX_en",
-        "ca": "informació ear",
-        "es": "información ear"
+        "ca": "Informació EAR",
+        "es": "información EAR"
       },
       "labelsPlural": {
         "en": "EarInfo_plural_XX_en",
-        "ca": "informacions ear",
-        "es": "informaciones ear"
+        "ca": "Informacions EAR",
+        "es": "Informaciones EAR"
       },
       "generate": true,
       "fileMappingEntity": false,
@@ -172,10 +222,10 @@
           "isNotNullable": true,
           "labels": {
             "en": "earid",
-            "ca": "earid",
-            "es": "earid"
+            "ca": "EAR",
+            "es": "EAR"
           },
-          "javaName": "earid",
+          "javaName": "earID",
           "javaType": "long",
           "traduible": false,
           "showInWebList": true,
@@ -224,7 +274,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 1
           },
           "foreignKeys": []
         },
@@ -250,7 +300,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 8
           },
           "foreignKeys": []
         },
@@ -275,7 +325,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 8
           },
           "foreignKeys": []
         },
@@ -300,7 +350,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 8
           },
           "foreignKeys": []
         },
@@ -325,7 +375,7 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 2
+            "webtype": 8
           },
           "foreignKeys": []
         }

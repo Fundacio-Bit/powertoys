@@ -3,25 +3,25 @@
 <un:useConstants var="EarInfoFields" className="org.fundaciobit.powertoys.model.fields.EarInfoFields"/>
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,EarInfoFields.EARID)}">
-        <tr id="earInfo_earid_rowid">
-          <td id="earInfo_earid_columnlabelid">
+        <tr id="earInfo_earID_rowid">
+          <td id="earInfo_earID_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[EarInfoFields.EARID])?'earInfo.earid':__theForm.labels[EarInfoFields.EARID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[EarInfoFields.EARID])?'earInfo.earID':__theForm.labels[EarInfoFields.EARID]}" /> &nbsp;(*)
              </label>
               <c:if test="${not empty __theForm.help[EarInfoFields.EARID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EarInfoFields.EARID]}" ></i>
               </c:if>
             </td>
-          <td id="earInfo_earid_columnvalueid">
-          <form:errors path="earInfo.earid" cssClass="errorField alert alert-danger" />
+          <td id="earInfo_earID_columnvalueid">
+          <form:errors path="earInfo.earID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EarInfoFields.EARID)}" >
-          <form:hidden path="earInfo.earid"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.earInfo.earid,__theForm.listOfEarForEarid)}"  />
+          <form:hidden path="earInfo.earID"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.earInfo.earID,__theForm.listOfEarForEarID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EarInfoFields.EARID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="earInfo_earid"  onchange="if(typeof onChangeEarid == 'function') {  onChangeEarid(this); };"  cssClass="form-control col-md-9-optional" path="earInfo.earid">
-            <c:forEach items="${__theForm.listOfEarForEarid}" var="tmp">
+          <form:select id="earInfo_earID"  onchange="if(typeof onChangeEarID == 'function') {  onChangeEarID(this); };"  cssClass="form-control col-md-9-optional" path="earInfo.earID">
+            <c:forEach items="${__theForm.listOfEarForEarID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
                   <c:set var="containEmptyValue"  value="true" />
@@ -44,30 +44,9 @@
               </c:if>
             </td>
           <td id="earInfo_fileName_columnvalueid">
-              <form:errors path="earInfo.fileName" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.FILENAME)? 'true' : 'false'}" path="earInfo.fileName"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_fileName" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_fileName" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.fileName'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('earInfo.fileName'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.fileName'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_fileName').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_fileName').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_fileName').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+            <form:errors path="earInfo.fileName" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.FILENAME)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EarInfoFields.FILENAME)? ' uneditable-input' : ''}"  style="" maxlength="2147483647" path="earInfo.fileName"   />
+
            </td>
         </tr>
         </c:if>
@@ -84,29 +63,7 @@
             </td>
           <td id="earInfo_errors_columnvalueid">
               <form:errors path="earInfo.errors" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.ERRORS)? 'true' : 'false'}" path="earInfo.errors"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_errors" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_errors" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.errors'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('earInfo.errors'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.errors'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_errors').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_errors').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_errors').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EarInfoFields.ERRORS)? 'mceEditorReadOnly':'mceEditor'}"  path="earInfo.errors"  />
            </td>
         </tr>
         </c:if>
@@ -123,29 +80,7 @@
             </td>
           <td id="earInfo_redhatJarsToModules_columnvalueid">
               <form:errors path="earInfo.redhatJarsToModules" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.REDHATJARSTOMODULES)? 'true' : 'false'}" path="earInfo.redhatJarsToModules"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_redhatJarsToModules" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_redhatJarsToModules" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.redhatJarsToModules'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('earInfo.redhatJarsToModules'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.redhatJarsToModules'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_redhatJarsToModules').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_redhatJarsToModules').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_redhatJarsToModules').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EarInfoFields.REDHATJARSTOMODULES)? 'mceEditorReadOnly':'mceEditor'}"  path="earInfo.redhatJarsToModules"  />
            </td>
         </tr>
         </c:if>
@@ -162,29 +97,7 @@
             </td>
           <td id="earInfo_jbossDeploymentStructure_columnvalueid">
               <form:errors path="earInfo.jbossDeploymentStructure" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.JBOSSDEPLOYMENTSTRUCTURE)? 'true' : 'false'}" path="earInfo.jbossDeploymentStructure"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_jbossDeploymentStructure" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_jbossDeploymentStructure" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.jbossDeploymentStructure'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('earInfo.jbossDeploymentStructure'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.jbossDeploymentStructure'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_jbossDeploymentStructure').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_jbossDeploymentStructure').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_jbossDeploymentStructure').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EarInfoFields.JBOSSDEPLOYMENTSTRUCTURE)? 'mceEditorReadOnly':'mceEditor'}"  path="earInfo.jbossDeploymentStructure"  />
            </td>
         </tr>
         </c:if>
@@ -201,29 +114,7 @@
             </td>
           <td id="earInfo_potencialCanviDeJarAModul_columnvalueid">
               <form:errors path="earInfo.potencialCanviDeJarAModul" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,EarInfoFields.POTENCIALCANVIDEJARAMODUL)? 'true' : 'false'}" path="earInfo.potencialCanviDeJarAModul"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_potencialCanviDeJarAModul" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_potencialCanviDeJarAModul" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.potencialCanviDeJarAModul'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('earInfo.potencialCanviDeJarAModul'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('earInfo.potencialCanviDeJarAModul'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_potencialCanviDeJarAModul').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_potencialCanviDeJarAModul').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_potencialCanviDeJarAModul').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,EarInfoFields.POTENCIALCANVIDEJARAMODUL)? 'mceEditorReadOnly':'mceEditor'}"  path="earInfo.potencialCanviDeJarAModul"  />
            </td>
         </tr>
         </c:if>

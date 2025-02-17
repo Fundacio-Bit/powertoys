@@ -184,11 +184,11 @@ public class EarInfoController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field earid
+    // Field earID
     {
-      _listSKV = getReferenceListForEarid(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForEarID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfEarForEarid(_tmp);
+      filterForm.setMapOfEarForEarID(_tmp);
       if (filterForm.getGroupByFields().contains(EARID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, EARID, false);
       };
@@ -209,7 +209,7 @@ public class EarInfoController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(EARID, filterForm.getMapOfEarForEarid());
+    __mapping.put(EARID, filterForm.getMapOfEarForEarID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -258,13 +258,13 @@ public class EarInfoController
   public void fillReferencesForForm(EarInfoForm earInfoForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (earInfoForm.getListOfEarForEarid() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForEarid(request, mav, earInfoForm, null);
+    if (earInfoForm.getListOfEarForEarID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEarID(request, mav, earInfoForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      earInfoForm.setListOfEarForEarid(_listSKV);
+      earInfoForm.setListOfEarForEarID(_listSKV);
     }
     
   }
@@ -576,20 +576,20 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForEarid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForEarID(HttpServletRequest request,
        ModelAndView mav, EarInfoForm earInfoForm, Where where)  throws I18NException {
     if (earInfoForm.isHiddenField(EARID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _where = null;
     if (earInfoForm.isReadOnlyField(EARID)) {
-      _where = EarFields.EARID.equal(earInfoForm.getEarInfo().getEarid());
+      _where = EarFields.EARID.equal(earInfoForm.getEarInfo().getEarID());
     }
-    return getReferenceListForEarid(request, mav, Where.AND(where, _where));
+    return getReferenceListForEarID(request, mav, Where.AND(where, _where));
   }
 
 
-  public List<StringKeyValue> getReferenceListForEarid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForEarID(HttpServletRequest request,
        ModelAndView mav, EarInfoFilterForm earInfoFilterForm,
        List<EarInfo> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (earInfoFilterForm.isHiddenField(EARID)
@@ -601,15 +601,15 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (EarInfo _item : list) {
-        _pkList.add(_item.getEarid());
+        _pkList.add(_item.getEarID());
         }
         _w = EarFields.EARID.in(_pkList);
       }
-    return getReferenceListForEarid(request, mav, Where.AND(where,_w));
+    return getReferenceListForEarID(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForEarid(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForEarID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return earRefList.getReferenceList(EarFields.EARID, where );
   }

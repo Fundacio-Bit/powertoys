@@ -55,8 +55,8 @@ public class EarInfoJPAManager
         return list.toArray(new EarInfo[list.size()]);
     };
 
-    public EarInfo create( long _earid_, java.lang.String _fileName_, java.lang.String _errors_, java.lang.String _redhatJarsToModules_, java.lang.String _jbossDeploymentStructure_, java.lang.String _potencialCanviDeJarAModul_) throws I18NException {
-        EarInfoJPA __bean =  new EarInfoJPA(_earid_,_fileName_,_errors_,_redhatJarsToModules_,_jbossDeploymentStructure_,_potencialCanviDeJarAModul_);
+    public EarInfo create( long _earID_, java.lang.String _fileName_, java.lang.String _errors_, java.lang.String _redhatJarsToModules_, java.lang.String _jbossDeploymentStructure_, java.lang.String _potencialCanviDeJarAModul_) throws I18NException {
+        EarInfoJPA __bean =  new EarInfoJPA(_earID_,_fileName_,_errors_,_redhatJarsToModules_,_jbossDeploymentStructure_,_potencialCanviDeJarAModul_);
         return create(__bean);
     }
 

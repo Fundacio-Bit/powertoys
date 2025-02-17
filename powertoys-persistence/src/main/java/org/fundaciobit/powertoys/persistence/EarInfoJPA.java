@@ -31,7 +31,7 @@ public class EarInfoJPA implements EarInfo {
     long earinfoID;
 
     @Column(name="earid",nullable = false,length = 19)
-    long earid;
+    long earID;
 
     @Column(name="filename",nullable = false,length = 2147483647)
     @Lob
@@ -65,9 +65,9 @@ public class EarInfoJPA implements EarInfo {
   }
 
   /** Constructor amb tots els camps  */
-  public EarInfoJPA(long earinfoID , long earid , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
+  public EarInfoJPA(long earinfoID , long earID , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
     this.earinfoID=earinfoID;
-    this.earid=earid;
+    this.earID=earID;
     this.fileName=fileName;
     this.errors=errors;
     this.redhatJarsToModules=redhatJarsToModules;
@@ -75,8 +75,8 @@ public class EarInfoJPA implements EarInfo {
     this.potencialCanviDeJarAModul=potencialCanviDeJarAModul;
 }
   /** Constructor sense valors autoincrementals */
-  public EarInfoJPA(long earid , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
-    this.earid=earid;
+  public EarInfoJPA(long earID , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
+    this.earID=earID;
     this.fileName=fileName;
     this.errors=errors;
     this.redhatJarsToModules=redhatJarsToModules;
@@ -84,14 +84,14 @@ public class EarInfoJPA implements EarInfo {
     this.potencialCanviDeJarAModul=potencialCanviDeJarAModul;
 }
   /** Constructor dels valors Not Null */
-  public EarInfoJPA(long earinfoID , long earid , java.lang.String fileName) {
+  public EarInfoJPA(long earinfoID , long earID , java.lang.String fileName) {
     this.earinfoID=earinfoID;
-    this.earid=earid;
+    this.earID=earID;
     this.fileName=fileName;
 }
   public EarInfoJPA(EarInfo __bean) {
     this.setEarinfoID(__bean.getEarinfoID());
-    this.setEarid(__bean.getEarid());
+    this.setEarID(__bean.getEarID());
     this.setFileName(__bean.getFileName());
     this.setErrors(__bean.getErrors());
     this.setRedhatJarsToModules(__bean.getRedhatJarsToModules());
@@ -106,11 +106,11 @@ public class EarInfoJPA implements EarInfo {
 		this.earinfoID = _earinfoID_;
 	};
 
-	public long getEarid() {
-		return(earid);
+	public long getEarID() {
+		return(earID);
 	};
-	public void setEarid(long _earid_) {
-		this.earid = _earid_;
+	public void setEarID(long _earID_) {
+		this.earID = _earID_;
 	};
 
 	public java.lang.String getFileName() {
@@ -188,7 +188,7 @@ public class EarInfoJPA implements EarInfo {
     if (__bean == null) { return null;}
     EarInfoJPA __tmp = new EarInfoJPA();
     __tmp.setEarinfoID(__bean.getEarinfoID());
-    __tmp.setEarid(__bean.getEarid());
+    __tmp.setEarID(__bean.getEarID());
     __tmp.setFileName(__bean.getFileName());
     __tmp.setErrors(__bean.getErrors());
     __tmp.setRedhatJarsToModules(__bean.getRedhatJarsToModules());

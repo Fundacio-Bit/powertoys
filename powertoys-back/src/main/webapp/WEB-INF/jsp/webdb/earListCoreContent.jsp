@@ -36,6 +36,14 @@
             </c:if>
            </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.DATA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${ear.data}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.NOM)}">
+          <td>
+          ${ear.nom}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

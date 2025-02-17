@@ -31,9 +31,9 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarInfoFields.EARID)}">
           <td>
-          <c:set var="tmp">${earInfo.earid}</c:set>
+          <c:set var="tmp">${earInfo.earID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfEarForEarid[tmp]}
+          ${__theFilterForm.mapOfEarForEarID[tmp]}
           </c:if>
           </td>
         </c:if>

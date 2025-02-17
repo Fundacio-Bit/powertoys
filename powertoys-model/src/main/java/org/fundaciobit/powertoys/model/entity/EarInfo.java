@@ -5,8 +5,8 @@ public interface EarInfo extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getEarinfoID();
 	public void setEarinfoID(long _earinfoID_);
 
-	public long getEarid();
-	public void setEarid(long _earid_);
+	public long getEarID();
+	public void setEarID(long _earID_);
 
 	public java.lang.String getFileName();
 	public void setFileName(java.lang.String _fileName_);

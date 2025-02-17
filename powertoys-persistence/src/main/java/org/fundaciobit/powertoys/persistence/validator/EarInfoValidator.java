@@ -98,7 +98,7 @@ public class EarInfoValidator<I extends EarInfo>
 
     // Fields with References to Other tables 
     if (__vr.getFieldErrorCount(EARID) == 0) {
-      java.lang.Long __earid = __target__.getEarid();
+      java.lang.Long __earid = __target__.getEarID();
       Long __count_ = null;
       try { __count_ = __earManager.count(EarFields.EARID.equal(__earid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
       if (__count_ == null || __count_ == 0) {        

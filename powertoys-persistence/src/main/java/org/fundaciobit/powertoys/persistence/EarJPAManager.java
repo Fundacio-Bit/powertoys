@@ -55,8 +55,8 @@ public class EarJPAManager
         return list.toArray(new Ear[list.size()]);
     };
 
-    public Ear create( long _fitxerID_) throws I18NException {
-        EarJPA __bean =  new EarJPA(_fitxerID_);
+    public Ear create( long _fitxerID_, java.sql.Timestamp _data_, java.lang.String _nom_) throws I18NException {
+        EarJPA __bean =  new EarJPA(_fitxerID_,_data_,_nom_);
         return create(__bean);
     }
 

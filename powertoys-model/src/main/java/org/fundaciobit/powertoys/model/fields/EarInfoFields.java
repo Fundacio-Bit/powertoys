@@ -13,7 +13,7 @@ public interface EarInfoFields extends java.io.Serializable {
 
 
 	 public static final LongField EARINFOID = new LongField(_TABLE_MODEL, "earinfoID", "earinfoid");  // PK
-	 public static final LongField EARID = new LongField(_TABLE_MODEL, "earid", "earid");
+	 public static final LongField EARID = new LongField(_TABLE_MODEL, "earID", "earid");
 	 public static final StringField FILENAME = new StringField(_TABLE_MODEL, "fileName", "filename");
 	 public static final StringField ERRORS = new StringField(_TABLE_MODEL, "errors", "errors");
 	 public static final StringField REDHATJARSTOMODULES = new StringField(_TABLE_MODEL, "redhatJarsToModules", "redhatjarstomodules");

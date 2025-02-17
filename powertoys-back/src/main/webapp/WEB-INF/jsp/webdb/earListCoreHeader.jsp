@@ -18,6 +18,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.FITXERID)}">
         <th>${pwt:getSortIcons(__theFilterForm,EarFields.FITXERID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.DATA)}">
+        <th>${pwt:getSortIcons(__theFilterForm,EarFields.DATA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.NOM)}">
+        <th>${pwt:getSortIcons(__theFilterForm,EarFields.NOM)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

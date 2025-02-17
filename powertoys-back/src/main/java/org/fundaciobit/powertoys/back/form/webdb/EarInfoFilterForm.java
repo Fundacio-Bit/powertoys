@@ -43,25 +43,25 @@ public class EarInfoFilterForm extends PowerToysBaseFilterForm implements EarInf
   }
 
 
-  private java.lang.Long earidDesde;
+  private java.lang.Long earIDDesde;
 
-  public java.lang.Long getEaridDesde() {
-    return this.earidDesde;
+  public java.lang.Long getEarIDDesde() {
+    return this.earIDDesde;
   }
 
-  public void setEaridDesde(java.lang.Long earidDesde) {
-    this.earidDesde = earidDesde;
+  public void setEarIDDesde(java.lang.Long earIDDesde) {
+    this.earIDDesde = earIDDesde;
   }
 
 
-  private java.lang.Long earidFins;
+  private java.lang.Long earIDFins;
 
-  public java.lang.Long getEaridFins() {
-    return this.earidFins;
+  public java.lang.Long getEarIDFins() {
+    return this.earIDFins;
   }
 
-  public void setEaridFins(java.lang.Long earidFins) {
-    this.earidFins = earidFins;
+  public void setEarIDFins(java.lang.Long earIDFins) {
+    this.earIDFins = earIDFins;
   }
 
 
@@ -127,14 +127,14 @@ public class EarInfoFilterForm extends PowerToysBaseFilterForm implements EarInf
     super(__toClone);
     this.earinfoIDDesde = __toClone.earinfoIDDesde;
     this.earinfoIDFins = __toClone.earinfoIDFins;
-    this.earidDesde = __toClone.earidDesde;
-    this.earidFins = __toClone.earidFins;
+    this.earIDDesde = __toClone.earIDDesde;
+    this.earIDFins = __toClone.earIDFins;
     this.fileName = __toClone.fileName;
     this.errors = __toClone.errors;
     this.redhatJarsToModules = __toClone.redhatJarsToModules;
     this.jbossDeploymentStructure = __toClone.jbossDeploymentStructure;
     this.potencialCanviDeJarAModul = __toClone.potencialCanviDeJarAModul;
-    this.mapOfEarForEarid = __toClone.mapOfEarForEarid;
+    this.mapOfEarForEarID = __toClone.mapOfEarForEarID;
   }
   
   /* ========= UTILS ========== */
@@ -169,14 +169,14 @@ public class EarInfoFilterForm extends PowerToysBaseFilterForm implements EarInf
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfEarForEarid;
+  private Map<String, String> mapOfEarForEarID;
 
-  public Map<String, String> getMapOfEarForEarid() {
-    return this.mapOfEarForEarid;
+  public Map<String, String> getMapOfEarForEarID() {
+    return this.mapOfEarForEarID;
   }
 
-  public void setMapOfEarForEarid(Map<String, String> mapOfEarForEarid) {
-    this.mapOfEarForEarid = mapOfEarForEarid;
+  public void setMapOfEarForEarID(Map<String, String> mapOfEarForEarID) {
+    this.mapOfEarForEarID = mapOfEarForEarID;
   }
 
 

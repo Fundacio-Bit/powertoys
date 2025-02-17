@@ -19,6 +19,14 @@ public class EarQueryPath extends org.fundaciobit.genapp.common.query.QueryPath 
     return new LongField(getQueryPath(), EarFields.FITXERID);
   }
 
+  public TimestampField DATA() {
+    return new TimestampField(getQueryPath(), EarFields.DATA);
+  }
+
+  public StringField NOM() {
+    return new StringField(getQueryPath(), EarFields.NOM);
+  }
+
 
 
   @Override

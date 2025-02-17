@@ -34,6 +34,12 @@ public class EarJPA implements Ear {
     @Column(name="fitxerid",nullable = false,length = 19)
     long fitxerID;
 
+    @Column(name="data",nullable = false,length = 35,precision = 6)
+    java.sql.Timestamp data;
+
+    @Column(name="nom",nullable = false,length = 255)
+    java.lang.String nom;
+
 
 
   /** Constructor Buit */
@@ -41,17 +47,23 @@ public class EarJPA implements Ear {
   }
 
   /** Constructor amb tots els camps  */
-  public EarJPA(long earID , long fitxerID) {
+  public EarJPA(long earID , long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
     this.earID=earID;
     this.fitxerID=fitxerID;
+    this.data=data;
+    this.nom=nom;
 }
   /** Constructor sense valors autoincrementals */
-  public EarJPA(long fitxerID) {
+  public EarJPA(long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
     this.fitxerID=fitxerID;
+    this.data=data;
+    this.nom=nom;
 }
   public EarJPA(Ear __bean) {
     this.setEarID(__bean.getEarID());
     this.setFitxerID(__bean.getFitxerID());
+    this.setData(__bean.getData());
+    this.setNom(__bean.getNom());
     // Fitxer
     this.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 	}
@@ -68,6 +80,20 @@ public class EarJPA implements Ear {
 	};
 	public void setFitxerID(long _fitxerID_) {
 		this.fitxerID = _fitxerID_;
+	};
+
+	public java.sql.Timestamp getData() {
+		return(data);
+	};
+	public void setData(java.sql.Timestamp _data_) {
+		this.data = _data_;
+	};
+
+	public java.lang.String getNom() {
+		return(nom);
+	};
+	public void setNom(java.lang.String _nom_) {
+		this.nom = _nom_;
 	};
 
 
@@ -124,6 +150,8 @@ public class EarJPA implements Ear {
     EarJPA __tmp = new EarJPA();
     __tmp.setEarID(__bean.getEarID());
     __tmp.setFitxerID(__bean.getFitxerID());
+    __tmp.setData(__bean.getData());
+    __tmp.setNom(__bean.getNom());
     // Fitxer
     __tmp.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 		return __tmp;

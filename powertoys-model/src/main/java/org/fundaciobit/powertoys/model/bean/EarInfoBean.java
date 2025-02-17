@@ -9,7 +9,7 @@ public class EarInfoBean implements EarInfo {
 
 
 	long earinfoID;// PK
-	long earid;
+	long earID;
 	java.lang.String fileName;
 	java.lang.String errors;
 	java.lang.String redhatJarsToModules;
@@ -22,9 +22,9 @@ public class EarInfoBean implements EarInfo {
   }
 
   /** Constructor amb tots els camps  */
-  public EarInfoBean(long earinfoID , long earid , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
+  public EarInfoBean(long earinfoID , long earID , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
     this.earinfoID=earinfoID;
-    this.earid=earid;
+    this.earID=earID;
     this.fileName=fileName;
     this.errors=errors;
     this.redhatJarsToModules=redhatJarsToModules;
@@ -32,8 +32,8 @@ public class EarInfoBean implements EarInfo {
     this.potencialCanviDeJarAModul=potencialCanviDeJarAModul;
 }
   /** Constructor sense valors autoincrementals */
-  public EarInfoBean(long earid , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
-    this.earid=earid;
+  public EarInfoBean(long earID , java.lang.String fileName , java.lang.String errors , java.lang.String redhatJarsToModules , java.lang.String jbossDeploymentStructure , java.lang.String potencialCanviDeJarAModul) {
+    this.earID=earID;
     this.fileName=fileName;
     this.errors=errors;
     this.redhatJarsToModules=redhatJarsToModules;
@@ -41,14 +41,14 @@ public class EarInfoBean implements EarInfo {
     this.potencialCanviDeJarAModul=potencialCanviDeJarAModul;
 }
   /** Constructor dels valors Not Null */
-  public EarInfoBean(long earinfoID , long earid , java.lang.String fileName) {
+  public EarInfoBean(long earinfoID , long earID , java.lang.String fileName) {
     this.earinfoID=earinfoID;
-    this.earid=earid;
+    this.earID=earID;
     this.fileName=fileName;
 }
   public EarInfoBean(EarInfo __bean) {
     this.setEarinfoID(__bean.getEarinfoID());
-    this.setEarid(__bean.getEarid());
+    this.setEarID(__bean.getEarID());
     this.setFileName(__bean.getFileName());
     this.setErrors(__bean.getErrors());
     this.setRedhatJarsToModules(__bean.getRedhatJarsToModules());
@@ -63,11 +63,11 @@ public class EarInfoBean implements EarInfo {
 		this.earinfoID = _earinfoID_;
 	};
 
-	public long getEarid() {
-		return(earid);
+	public long getEarID() {
+		return(earID);
 	};
-	public void setEarid(long _earid_) {
-		this.earid = _earid_;
+	public void setEarID(long _earID_) {
+		this.earID = _earID_;
 	};
 
 	public java.lang.String getFileName() {
@@ -113,7 +113,7 @@ public class EarInfoBean implements EarInfo {
     if (__bean == null) { return null;}
     EarInfoBean __tmp = new EarInfoBean();
     __tmp.setEarinfoID(__bean.getEarinfoID());
-    __tmp.setEarid(__bean.getEarid());
+    __tmp.setEarID(__bean.getEarID());
     __tmp.setFileName(__bean.getFileName());
     __tmp.setErrors(__bean.getErrors());
     __tmp.setRedhatJarsToModules(__bean.getRedhatJarsToModules());

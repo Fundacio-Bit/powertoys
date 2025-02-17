@@ -58,6 +58,22 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earSimpleList.jsp" />
     </definition>
 
+    <definition name="earNoSimpleFormPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earForm.jsp" />
+    </definition>
+
+    <definition name="earNoSimpleListPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earList.jsp" />
+    </definition>
+
+    <definition name="earInfoFormPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earInfoForm.jsp" />
+    </definition>
+
+    <definition name="earInfoListPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earInfoList.jsp" />
+    </definition>
+
     <!--  ===========  COMMON  ================== -->
 
     <definition name="common" extends="base.definition">

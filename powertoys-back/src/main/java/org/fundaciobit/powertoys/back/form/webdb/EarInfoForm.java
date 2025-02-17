@@ -19,7 +19,7 @@ public class EarInfoForm extends PowerToysBaseForm {
   public EarInfoForm(EarInfoForm __toClone) {
     super(__toClone);
       this.earInfo = __toClone.earInfo;
-    this.listOfEarForEarid = __toClone.listOfEarForEarid;
+    this.listOfEarForEarID = __toClone.listOfEarForEarID;
   }
   
   public EarInfoForm(EarInfoJPA earInfo, boolean nou) {
@@ -35,14 +35,14 @@ public class EarInfoForm extends PowerToysBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfEarForEarid;
+  private List<StringKeyValue> listOfEarForEarID;
 
-  public List<StringKeyValue> getListOfEarForEarid() {
-    return this.listOfEarForEarid;
+  public List<StringKeyValue> getListOfEarForEarID() {
+    return this.listOfEarForEarID;
   }
 
-  public void setListOfEarForEarid(List<StringKeyValue> listOfEarForEarid) {
-    this.listOfEarForEarid = listOfEarForEarid;
+  public void setListOfEarForEarID(List<StringKeyValue> listOfEarForEarID) {
+    this.listOfEarForEarID = listOfEarForEarID;
   }
 
 

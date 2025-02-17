@@ -42,6 +42,39 @@ public class EarFilterForm extends PowerToysBaseFilterForm implements EarFields 
   }
 
 
+  private java.sql.Timestamp dataDesde;
+
+  public java.sql.Timestamp getDataDesde() {
+    return this.dataDesde;
+  }
+
+  public void setDataDesde(java.sql.Timestamp dataDesde) {
+    this.dataDesde = dataDesde;
+  }
+
+
+  private java.sql.Timestamp dataFins;
+
+  public java.sql.Timestamp getDataFins() {
+    return this.dataFins;
+  }
+
+  public void setDataFins(java.sql.Timestamp dataFins) {
+    this.dataFins = dataFins;
+  }
+
+
+  private java.lang.String nom;
+
+  public java.lang.String getNom() {
+    return this.nom;
+  }
+
+  public void setNom(java.lang.String nom) {
+    this.nom = nom;
+  }
+
+
   public EarFilterForm() {
   }
   
@@ -49,6 +82,9 @@ public class EarFilterForm extends PowerToysBaseFilterForm implements EarFields 
     super(__toClone);
     this.earIDDesde = __toClone.earIDDesde;
     this.earIDFins = __toClone.earIDFins;
+    this.dataDesde = __toClone.dataDesde;
+    this.dataFins = __toClone.dataFins;
+    this.nom = __toClone.nom;
   }
   
   /* ========= UTILS ========== */

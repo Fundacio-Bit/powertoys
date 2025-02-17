@@ -17,6 +17,12 @@ public class FitxerPublicLogicaEJB extends FitxerEJB implements FitxerPublicLogi
 
     @Override
     @PermitAll
+    public void delete(Fitxer instance) {
+        super.delete(instance);
+    }
+
+    @Override
+    @PermitAll
     public Fitxer create(Fitxer instance) throws I18NException {
         return super.create(instance);
     }
