@@ -44,7 +44,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="earInfo.earInfo.plural", order=10, group="WEBDB")
+@MenuOption(labelCode="earInfo.earInfo.plural", order=20, group="WEBDB")
 @Controller
 @RequestMapping(value = "/webdb/earInfo")
 @SessionAttributes(types = { EarInfoForm.class, EarInfoFilterForm.class })

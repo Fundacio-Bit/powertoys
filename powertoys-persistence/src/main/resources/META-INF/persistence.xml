@@ -10,13 +10,17 @@
         <provider>org.fundaciobit.powertoys.hibernate.CustomHibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/powertoysDS</jta-data-source>
         
+		<class>org.fundaciobit.powertoys.persistence.AplicacioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarInfoJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarSimpleJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EntornJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EntornAplicacioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.FitxerJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.IdiomaJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.TraduccioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.TraduccioMapJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.VersioJPA</class>
 
         <!-- Activar cache només per aquelles entitats on volguem expressament -->
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

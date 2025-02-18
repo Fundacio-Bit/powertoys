@@ -158,6 +158,16 @@
 <!-- ==== GENAPP MARK START -->
 
 
+    <definition name="aplicacioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="aplicacio.aplicacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/aplicacioForm.jsp" />
+    </definition>
+    
+    <definition name="aplicacioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/aplicacioList.jsp" />
+    </definition>
+
+
     <definition name="earFormWebDB" extends="webdb">
         <put-attribute name="titol" value="ear.ear" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earForm.jsp" />
@@ -188,6 +198,26 @@
     </definition>
 
 
+    <definition name="entornFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="entorn.entorn" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornForm.jsp" />
+    </definition>
+    
+    <definition name="entornListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornList.jsp" />
+    </definition>
+
+
+    <definition name="entornAplicacioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="entornAplicacio.entornAplicacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornAplicacioForm.jsp" />
+    </definition>
+    
+    <definition name="entornAplicacioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornAplicacioList.jsp" />
+    </definition>
+
+
     <definition name="fitxerFormWebDB" extends="webdb">
         <put-attribute name="titol" value="fitxer.fitxer" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerForm.jsp" />
@@ -215,6 +245,16 @@
     
     <definition name="traduccioListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/traduccioList.jsp" />
+    </definition>
+
+
+    <definition name="versioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="versio.versio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/versioForm.jsp" />
+    </definition>
+    
+    <definition name="versioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/versioList.jsp" />
     </definition>
 
 <!-- ==== GENAPP MARK END -->

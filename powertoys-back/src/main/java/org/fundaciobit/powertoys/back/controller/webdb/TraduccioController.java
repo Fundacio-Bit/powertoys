@@ -42,7 +42,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="traduccio.traduccio.plural", order=50, group="WEBDB")
+@MenuOption(labelCode="traduccio.traduccio.plural", order=80, group="WEBDB")
 @Controller
 @RequestMapping(value = "/webdb/traduccio")
 @SessionAttributes(types = { TraduccioForm.class, TraduccioFilterForm.class })

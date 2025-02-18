@@ -42,7 +42,7 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="idioma.idioma.plural", order=40, group="WEBDB")
+@MenuOption(labelCode="idioma.idioma.plural", order=70, group="WEBDB")
 @Controller
 @RequestMapping(value = "/webdb/idioma")
 @SessionAttributes(types = { IdiomaForm.class, IdiomaFilterForm.class })

@@ -13,6 +13,114 @@
   "schema": "public",
   "tables": [
     {
+      "name": "pwt_aplicacio",
+      "nameJava": "Aplicacio",
+      "shortName": "aplicacio",
+      "labels": {
+        "ca": "Aplicació",
+        "es": "Aplicación"
+      },
+      "labelsPlural": {
+        "ca": "Aplicacions",
+        "es": "Aplicaciones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "pwt_aplicacio_pk",
+          "index": "pwt_aplicacio_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "aplicacioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "aplicacioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027pwt_aplicacio_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_entornapli_aplicacio_fk",
+              "table": "pwt_entornaplicacio",
+              "field": "aplicacioid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "contextpath",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "ContextPath",
+            "es": "ContextPath"
+          },
+          "javaName": "contextPath",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
       "name": "pwt_ear",
       "nameJava": "Ear",
       "shortName": "ear",
@@ -544,6 +652,285 @@
       ]
     },
     {
+      "name": "pwt_entorn",
+      "nameJava": "Entorn",
+      "shortName": "entorn",
+      "labels": {
+        "ca": "Entorn",
+        "es": "Entorno"
+      },
+      "labelsPlural": {
+        "ca": "Entorns",
+        "es": "Entornos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "pwt_entorn_pk",
+          "index": "pwt_entorn_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "entornid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "entornID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027pwt_entorn_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_entornapli_entorn_entor_fk",
+              "table": "pwt_entornaplicacio",
+              "field": "entornid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "domini",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "domini",
+            "es": "domini"
+          },
+          "javaName": "domini",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "0",
+          "filter": false,
+          "orderBy": 1,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "pwt_entornaplicacio",
+      "nameJava": "EntornAplicacio",
+      "shortName": "entornapli",
+      "labels": {
+        "ca": "Entorn-Aplicació",
+        "es": "Entorno-Aplicación"
+      },
+      "labelsPlural": {
+        "ca": "Entorn-Aplicacions",
+        "es": "Entorno-Aplicaciones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "pwt_entornaplicacio_pk",
+          "index": "pwt_entornaplicacio_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "entornaplicacioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "entornaplicacioid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027pwt_entornaplicacio_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_versio_entornapli_fk",
+              "table": "pwt_versio",
+              "field": "entornaplicacioid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "index": "pwt_entornapli_aplica_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "aplicacioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Aplicació",
+            "es": "Aplicación"
+          },
+          "javaName": "aplicacioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "pwt_entornapli_aplicacio_fk",
+              "table": "pwt_aplicacio",
+              "field": "aplicacioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_entornapli_aplicacio_fk",
+              "table": "pwt_aplicacio",
+              "field": "aplicacioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "pwt_entornapli_entornid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entornid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Entorn",
+            "es": "Entorno"
+          },
+          "javaName": "entornid",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "pwt_entornapli_entorn_entor_fk",
+              "table": "pwt_entorn",
+              "field": "entornid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_entornapli_entorn_entor_fk",
+              "table": "pwt_entorn",
+              "field": "entornid",
+              "type": 1
+            }
+          ]
+        }
+      ],
+      "multipleUniques": [
+        {
+          "name": "pwt_entornapli_entorn_apli_uk",
+          "sqlColumns": [
+            "aplicacioid",
+            "entornid"
+          ]
+        }
+      ]
+    },
+    {
       "name": "pwt_fitxer",
       "nameJava": "Fitxer",
       "shortName": "fitxer",
@@ -1035,6 +1422,193 @@
           "showInReferenceList": true,
           "transientField": false,
           "descripcio": "",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "pwt_versio",
+      "nameJava": "Versio",
+      "shortName": "versio",
+      "labels": {
+        "ca": "Versió",
+        "es": "Versión"
+      },
+      "labelsPlural": {
+        "ca": "Versions",
+        "es": "Versiones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "pwt_versio_pk",
+          "index": "pwt_versio_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "versioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "versioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027pwt_versio_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "pwt_versio_entornapli_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entornaplicacioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Entorn-Aplicació",
+            "es": "Entorno-Aplicación"
+          },
+          "javaName": "entornAplicacioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "pwt_versio_entornapli_entor_fk",
+              "table": "pwt_entornaplicacio",
+              "field": "entornaplicacioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "pwt_versio_entornapli_fk",
+              "table": "pwt_entornaplicacio",
+              "field": "entornaplicacioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "versio",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Versió",
+            "es": "Versión"
+          },
+          "javaName": "versio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "build",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Build",
+            "es": "Build"
+          },
+          "javaName": "build",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "data",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Data",
+            "es": "Fecha"
+          },
+          "javaName": "data",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "altresdades",
+          "sqlType": 12,
+          "size": 4096,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "ca": "Altres Dades",
+            "es": "Otros Datos"
+          },
+          "javaName": "altresDades",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
           "filter": false,
           "orderBy": 0,
           "groupBy": false,

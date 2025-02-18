@@ -7,13 +7,17 @@
     <persistence-unit name="powertoysPULocal" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+		<class>org.fundaciobit.powertoys.persistence.AplicacioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarInfoJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.EarSimpleJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EntornJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.EntornAplicacioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.FitxerJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.IdiomaJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.TraduccioJPA</class>
 		<class>org.fundaciobit.powertoys.persistence.TraduccioMapJPA</class>
+		<class>org.fundaciobit.powertoys.persistence.VersioJPA</class>
 
         <!-- Desactivar cache -->
         <shared-cache-mode>NONE</shared-cache-mode>
