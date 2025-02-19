@@ -40,14 +40,12 @@ public class PrincipalController {
 
 	}
 
-
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(name = "idioma") String idioma) throws Exception {
-		org.fundaciobit.powertoys.back.utils.PowerToysSessionLocaleResolver.setLocaleManually(request, idioma);		
+		org.fundaciobit.powertoys.back.utils.PowerToysSessionLocaleResolver.setLocaleManually(request, idioma);
 		return new ModelAndView("principal");
 	}
-
 
 	@RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
 	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -68,12 +66,11 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/option1", true));
+				return new ModelAndView(new RedirectView("/admin/aplicacio/list/1", true));
 			}
 
 			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/user/option1", true));
-				// return new ModelAndView(new RedirectView("/user/earSimple/list/1", true));
+				return new ModelAndView("user");
 			}
 
 			if ("webdb".equals(pipella)) {

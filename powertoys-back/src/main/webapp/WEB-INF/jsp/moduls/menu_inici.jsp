@@ -57,7 +57,6 @@
     } else {
         menusAddicionals = new MenuItem[] {
                 new MenuItem("=Pàgina Inicial Autenticat","/common/principal.html", 0),
-                null,
         };
     }
     List<MenuItem> discoveredMenus = MenuOptionManager.getMenuItems("PUBLIC", menusAddicionals);
