@@ -55,3 +55,8 @@ rungenapp/lastconfig.properties
 /.vscode/settings.json
 **/.settings/**
 .vscode/powertoys-1.0.code-workspace
+
+#### Certificats ####
+installCerts.bat
+log.txt
+pemfiles/

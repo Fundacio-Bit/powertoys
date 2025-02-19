@@ -51,12 +51,12 @@
     
     if (loginInfo == null) {
         menusAddicionals = new MenuItem[] {
-                new MenuItem("=Pàgina Inicial Public","/public/index.html", 10),
+                new MenuItem("=Pàgina Inicial Public","/public/index.html", 0),
             
         };
     } else {
         menusAddicionals = new MenuItem[] {
-                new MenuItem("=Pàgina Inicial Autenticat","/common/principal.html", 10),
+                new MenuItem("=Pàgina Inicial Autenticat","/common/principal.html", 0),
                 null,
         };
     }

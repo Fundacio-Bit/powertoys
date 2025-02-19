@@ -1,10 +1,5 @@
 package org.fundaciobit.powertoys.back.controller.all;
 
-import java.io.File;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 

@@ -74,6 +74,14 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earInfoList.jsp" />
     </definition>
 
+    <definition name="versioListPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/versioList.jsp" />
+    </definition>
+
+    <definition name="versionsaplicacioListPublic" extends="all">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/aplicacioList.jsp" />
+    </definition>
+
     <!--  ===========  COMMON  ================== -->
 
     <definition name="common" extends="base.definition">
@@ -123,6 +131,24 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
     
+        <definition name="versionsaplicacioListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/aplicacioList.jsp" />
+    </definition>
+    
+        <definition name="versionsaplicacioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="versio.versio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/versioForm.jsp" />
+    </definition>
+    
+    <definition name="entornFormAdmin" extends="admin">
+        <put-attribute name="titol" value="entorn.entorn" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornForm.jsp" />
+    </definition>
+    
+    <definition name="entornListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornList.jsp" />
+    </definition>
+
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

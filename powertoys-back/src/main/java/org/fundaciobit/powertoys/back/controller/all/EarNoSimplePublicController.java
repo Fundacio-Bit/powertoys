@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
-import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -28,7 +27,6 @@ import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
 import org.fundaciobit.powertoys.back.controller.webdb.EarController;
 import org.fundaciobit.powertoys.back.form.webdb.EarFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.EarForm;
-import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.model.entity.Ear;
 import org.fundaciobit.powertoys.model.entity.EarInfo;
 import org.fundaciobit.powertoys.model.entity.Fitxer;
@@ -42,9 +40,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.bytebuddy.build.Plugin;
-
-@MenuOption(labelCode = "ear.ear.plural", order = 10, group = "PUBLIC", addSeparatorBefore = true)
+@MenuOption(labelCode = "ear.ear.plural", order = 2, group = "PUBLIC", addSeparatorBefore = false)
 @Controller
 @RequestMapping(value = "/public/earNoSimple")
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
