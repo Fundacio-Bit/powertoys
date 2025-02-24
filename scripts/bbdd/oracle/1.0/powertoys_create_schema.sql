@@ -1,99 +1,99 @@
-create sequence pwt_aplicacio_seq start 1000 increment 1;
-create sequence pwt_ear_seq start 1000 increment 1;
-create sequence pwt_earinfo_seq start 1000 increment 1;
-create sequence pwt_earsimple_seq start 1000 increment 1;
-create sequence pwt_entorn_seq start 1000 increment 1;
-create sequence pwt_entornaplicacio_seq start 1000 increment 1;
-create sequence pwt_fitxer_seq start 1000 increment 1;
-create sequence pwt_traduccio_seq start 1000 increment 1;
-create sequence pwt_versio_seq start 1000 increment 1;
+create sequence pwt_aplicacio_seq start with 1000 increment by  1;
+create sequence pwt_ear_seq start with 1000 increment by  1;
+create sequence pwt_earinfo_seq start with 1000 increment by  1;
+create sequence pwt_earsimple_seq start with 1000 increment by  1;
+create sequence pwt_entorn_seq start with 1000 increment by  1;
+create sequence pwt_entornaplicacio_seq start with 1000 increment by  1;
+create sequence pwt_fitxer_seq start with 1000 increment by  1;
+create sequence pwt_traduccio_seq start with 1000 increment by  1;
+create sequence pwt_versio_seq start with 1000 increment by  1;
 
     create table pwt_aplicacio (
-       aplicacioid int8 not null,
-        contextpath varchar(255) not null,
-        nom varchar(255) not null,
+       aplicacioid number(19,0) not null,
+        contextpath varchar2(255 char) not null,
+        nom varchar2(255 char) not null,
         primary key (aplicacioid)
     );
 
     create table pwt_ear (
-       earid int8 not null,
+       earid number(19,0) not null,
         data timestamp not null,
-        fitxerid int8 not null,
-        nom varchar(255) not null,
+        fitxerid number(19,0) not null,
+        nom varchar2(255 char) not null,
         primary key (earid)
     );
 
     create table pwt_earinfo (
-       earinfoid int8 not null,
-        earid int8 not null,
-        errors text,
-        filename text not null,
-        jbossdeploymentstructure text,
-        potencialcanvidejaramodul text,
-        redhatjarstomodules text,
+       earinfoid number(19,0) not null,
+        earid number(19,0) not null,
+        errors long,
+        filename long not null,
+        jbossdeploymentstructure long,
+        potencialcanvidejaramodul long,
+        redhatjarstomodules long,
         primary key (earinfoid)
     );
 
     create table pwt_earsimple (
-       earsimpleid int8 not null,
+       earsimpleid number(19,0) not null,
         data timestamp not null,
-        detall text not null,
-        fitxerid int8 not null,
-        nom varchar(255) not null,
+        detall long not null,
+        fitxerid number(19,0) not null,
+        nom varchar2(255 char) not null,
         primary key (earsimpleid)
     );
 
     create table pwt_entorn (
-       entornid int8 not null,
-        domini varchar(255) not null,
-        nom varchar(100) not null,
-        ordre int4 default 0 not null,
+       entornid number(19,0) not null,
+        domini varchar2(255 char) not null,
+        nom varchar2(100 char) not null,
+        ordre number(10,0) default 0 not null,
         primary key (entornid)
     );
 
     create table pwt_entornaplicacio (
-       entornaplicacioid int8 not null,
-        aplicacioid int8 not null,
-        entornid int8 not null,
+       entornaplicacioid number(19,0) not null,
+        aplicacioid number(19,0) not null,
+        entornid number(19,0) not null,
         primary key (entornaplicacioid)
     );
 
     create table pwt_fitxer (
-       fitxerid int8 not null,
-        descripcio varchar(1000),
-        mime varchar(255) not null,
-        nom varchar(255) not null,
-        tamany int8 not null,
+       fitxerid number(19,0) not null,
+        descripcio varchar2(1000 char),
+        mime varchar2(255 char) not null,
+        nom varchar2(255 char) not null,
+        tamany number(19,0) not null,
         primary key (fitxerid)
     );
 
     create table pwt_idioma (
-       idiomaid varchar(5) not null,
-        nom varchar(50) not null,
-        ordre int4 default 0 not null,
-        suportat boolean not null,
+       idiomaid varchar2(5 char) not null,
+        nom varchar2(50 char) not null,
+        ordre number(10,0) default 0 not null,
+        suportat number(1,0) not null,
         primary key (idiomaid)
     );
 
     create table pwt_traduccio (
-       traduccioid int8 not null,
+       traduccioid number(19,0) not null,
         primary key (traduccioid)
     );
 
     create table pwt_traducciomap (
-       traducciomapid int8 not null,
-        valor varchar(4000),
-        idiomaid varchar(255) not null,
+       traducciomapid number(19,0) not null,
+        valor varchar2(4000 char),
+        idiomaid varchar2(255 char) not null,
         primary key (traducciomapid, idiomaid)
     );
 
     create table pwt_versio (
-       versioid int8 not null,
-        altresdades varchar(4096),
-        build varchar(100),
+       versioid number(19,0) not null,
+        altresdades long,
+        build varchar2(100 char),
         data timestamp not null,
-        entornaplicacioid int8 not null,
-        versio varchar(100) not null,
+        entornaplicacioid number(19,0) not null,
+        versio varchar2(100 char) not null,
         primary key (versioid)
     );
 create index pwt_aplicacio_pk_i on pwt_aplicacio (aplicacioid);

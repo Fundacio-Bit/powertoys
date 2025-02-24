@@ -1,0 +1,9 @@
+create sequence pwt_aplicacio_seq start with 1000 increment by  1;
+create sequence pwt_ear_seq start with 1000 increment by  1;
+create sequence pwt_earinfo_seq start with 1000 increment by  1;
+create sequence pwt_earsimple_seq start with 1000 increment by  1;
+create sequence pwt_entorn_seq start with 1000 increment by  1;
+create sequence pwt_entornaplicacio_seq start with 1000 increment by  1;
+create sequence pwt_fitxer_seq start with 1000 increment by  1;
+create sequence pwt_traduccio_seq start with 1000 increment by  1;
+create sequence pwt_versio_seq start with 1000 increment by  1;
