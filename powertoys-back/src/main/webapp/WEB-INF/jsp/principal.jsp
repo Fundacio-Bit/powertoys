@@ -24,7 +24,7 @@ This page is generated automatically. Please edit.
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">
 <a href="http://blog.fundaciobit.org/category/admindigital/" target="_blank">
-<img src="<c:url value="/img/fundaciobit.png"/>"  alt="Fundaci� Bit" title="Fundaci� Bit"/>
+<img src="<c:url value="/img/fundaciobit.png"/>"  alt="Fundació Bit" title="Fundació Bit"/>
 </a>
 </td>
 </tr>
@@ -35,23 +35,35 @@ This page is generated automatically. Please edit.
 </div>
 
 <br/>
-Username: ${loginInfo.username}<br/>
-&#36;{pwt:hasRole(ROLE_ADMIN)}= ${pwt:hasRole('ROLE_ADMIN')}<br/>
-&#36;{pwt:hasRole(ROLE_USER) }= ${pwt:hasRole('ROLE_USER') }<br/>
-Locale = <%=LocaleContextHolder.getLocale() %> <br/>
-lang = ${lang} <br/>
-> UserInformation:<br/>
- <c:if test="${not empty loginInfo.userInfo}">
-	name= ${loginInfo.userInfo.name} <br/> 
- 	surname1= ${loginInfo.userInfo.surname1} <br/>
- 	surname2= ${loginInfo.userInfo.surname2} <br/>
- 	email= ${loginInfo.userInfo.email} <br/>
- 	nif= ${loginInfo.userInfo.attributes["nif"]} <br/> 
-  <br/>
-</c:if>
-<c:if test="${empty loginInfo.userInfo}">
-	Error carregant Plugin UserInfo. Revisar logs per mes informacio.<br/>
-</c:if>
+<div class="user-info">
+    <h3>User Information:</h3>
+    <div class="user-details">
+        <div>
+            <c:if test="${not empty loginInfo.userInfo}">
+                <p><strong><fmt:message key="principal.nom"></fmt:message></strong> ${loginInfo.userInfo.name}</p>
+                <p><strong><fmt:message key="principal.llinatges"></fmt:message></strong> ${loginInfo.userInfo.surname1} ${loginInfo.userInfo.surname2}</p>
+                <p><strong><fmt:message key="principal.correu"></fmt:message></strong> ${loginInfo.userInfo.email}</p>
+                <p><strong>NIF:</strong> ${loginInfo.userInfo.attributes["nif"]}</p>
+            </c:if>
+        </div>
+        <div>
+            <p><fmt:message key="principal.usuari">
+                <fmt:param value="${loginInfo.username}"/>
+            </fmt:message></p>
+            <p>ROLE_ADMIN: <c:if test="${pwt:hasRole('ROLE_ADMIN')}"><img src="<c:url value="/img/icn_alert_success.png"/>" alt="true" title="true"/></c:if><c:if test="${!pwt:hasRole('ROLE_ADMIN')}"><img src="<c:url value="/img/icn_alert_error.png"/>" alt="false" title="false"/></c:if></p>
+            <p>ROLE_USER: <c:if test="${pwt:hasRole('ROLE_USER')}"><img src="<c:url value="/img/icn_alert_success.png"/>" alt="true" title="true"/></c:if><c:if test="${!pwt:hasRole('ROLE_USER')}"><img src="<c:url value="/img/icn_alert_error.png"/>" alt="false" title="false"/></c:if></p>
+            <p><fmt:message key="principal.locale">
+                <fmt:param value="<%=LocaleContextHolder.getLocale() %>"/>
+            </fmt:message></p>
+            <p><fmt:message key="principal.llengua">
+                <fmt:param value="${lang}"/>
+            </fmt:message></p>
+        </div>
+    </div>
+    <c:if test="${empty loginInfo.userInfo}">
+        <p class="error-message">Error carregant Plugin UserInfo. Revisar logs per mes informacio.</p>
+    </c:if>
+</div>
 
 <c:if test="${pwt:isDesenvolupament()}">
 Only in Development Mode

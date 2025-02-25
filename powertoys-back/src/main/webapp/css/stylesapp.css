@@ -1,2 +1,30 @@
-
-/* Estils especifics de l'APP */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+.user-info h3 {
+  margin-top: 0;
+  color: #333;
+}
+.user-info p {
+  margin: 5px 0;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+.user-details {
+  display: flex;
+  justify-content: space-between;
+}
+.user-details > div {
+  width: 48%;
+}
