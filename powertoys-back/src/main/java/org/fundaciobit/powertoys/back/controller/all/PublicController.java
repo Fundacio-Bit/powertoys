@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 
- * @autor anadal
+ * @autor jpou
  * 
  */
 @Controller
@@ -36,7 +36,7 @@ public class PublicController {
 		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
 
 		if (initialized == null) {
-			HtmlUtils.saveMessageInfo(request, "Benvingut a powertoys");
+			HtmlUtils.saveMessageInfo(request, "Benvingut a PowerToys");
 			session.setAttribute("inicialitzat", true);
 		}
 

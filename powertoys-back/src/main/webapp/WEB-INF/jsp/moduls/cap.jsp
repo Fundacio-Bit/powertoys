@@ -28,7 +28,7 @@
 
 			<div class="logoGovern">
 				<img src="<c:url value="/img/app-logo.png"/>" alt="powertoys"
-					title="powertoys" />
+					title="powertoys" style="height: 50px" />
 			</div>
 
 			<div>

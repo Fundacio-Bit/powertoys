@@ -43,7 +43,7 @@
 		</div>
 
 		<!-- Dreta -->
-		<div class="col-4 text-right" >
+		<div class="col-4 pt-2 text-right" >
 			<a href="https://governdigital.fundaciobit.org/" style="padding-top: 10px" target="_blank"> <img
 				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
 				alt="Fundacio Bit" />

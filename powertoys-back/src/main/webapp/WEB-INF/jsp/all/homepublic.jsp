@@ -9,7 +9,7 @@
 <div>
 <br/>
 <center>
-<img src="<c:url value="/img/app-logo.png"/>"  alt="powertoys" title="powertoys"/>
+<img src="<c:url value="/img/app-logo.png"/>" style="width: 61px" alt="powertoys" title="powertoys"/>
 
 <br/>
 <br/>
