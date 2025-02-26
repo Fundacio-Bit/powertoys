@@ -7,7 +7,7 @@
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <c:set var="url" value="${urlActual}" />
 <div>
-  <h5>Menú ROLE_ADMIN</h5>
+  <h5><fmt:message key="public.menu.administrador"/></h5>
   <ul class="tree" style="margin: 3px; padding: 0px;">
 
     <%--
