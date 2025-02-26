@@ -7,7 +7,7 @@
     <definition name="base.menu" template="/WEB-INF/jsp/moduls/blanc.jsp" preparer="org.fundaciobit.powertoys.back.preparer.MenuPreparer"/>
     <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
     <definition name="base.peu" template="/WEB-INF/jsp/moduls/peu.jsp" preparer="org.fundaciobit.powertoys.back.preparer.PeuPreparer"/>
- <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
+    <definition name="base.contingut" template="/WEB-INF/jsp/moduls/blanc.jsp"/>
 
     <definition name="base.definition" template="/WEB-INF/jsp/layout/layout.jsp" preparer="org.fundaciobit.powertoys.back.preparer.BasePreparer">
         <put-attribute name="cap" value="base.cap" />

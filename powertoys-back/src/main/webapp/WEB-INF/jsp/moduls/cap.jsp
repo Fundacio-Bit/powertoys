@@ -39,7 +39,9 @@
 				<div>
 					<strong class="subtitol llevarMobil"><fmt:message
 							key="usuari" />: </strong> <span class="subtitolMay"> <%=request.getUserPrincipal()== null? "ANONIM": request.getUserPrincipal().getName()%>
-						| <%= request.getRemoteUser() %>
+						<c:if test="${request.getRemoteUser() != null}">
+							| <%= request.getRemoteUser() %>
+						</c:if>
 					</span>
 				</div>
 			</div>
