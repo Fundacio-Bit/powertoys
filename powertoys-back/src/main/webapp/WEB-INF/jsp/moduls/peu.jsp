@@ -78,7 +78,7 @@
                         <li><fmt:message key="ajuda.viatelefon" />&nbsp<%=Configuracio.getAjudaViaTelefon()%></li>
                         <li>
 							<fmt:message key="ajuda.viaweb" />&nbsp
-                            <a href="<%=Configuracio.getAjudaViaWeb()%>"><%=Configuracio.getAjudaViaWeb()%></a>
+                            <a href="<%=Configuracio.getAjudaViaWeb()%>" target="_blank"><%=Configuracio.getAjudaViaWeb()%></a>
 						</li>
                         <li>
 							<fmt:message key="ajuda.viaemail" />&nbsp

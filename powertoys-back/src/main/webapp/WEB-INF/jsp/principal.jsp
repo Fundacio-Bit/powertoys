@@ -35,8 +35,8 @@ page language="java" %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" %>
             href="http://blog.fundaciobit.org/category/admindigital/"
             target="_blank"
           >
-            <img src="<c:url value="/img/fundaciobit.png" />" alt="Fundació Bit"
-            title="Fundació Bit"/>
+		  <img src="<c:url value="/img/fundaciobit.png" />" alt="Fundació Bit"
+		  title="Fundació Bit"/>
           </a>
         </td>
       </tr>
@@ -46,69 +46,72 @@ page language="java" %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp" %>
 </div>
 
 <br />
-<div class="user-info">
-  <h3>User Information:</h3>
-  <div class="user-details">
-    <div>
-      <c:if test="${not empty loginInfo.userInfo}">
-        <p>
-          <strong><fmt:message key="principal.nom" /></strong>
-          ${loginInfo.userInfo.name}
-        </p>
-        <p>
-          <strong><fmt:message key="principal.llinatges" /></strong>
-          ${loginInfo.userInfo.surname1} ${loginInfo.userInfo.surname2}
-        </p>
-        <p>
-          <strong><fmt:message key="principal.correu" /></strong>
-          ${loginInfo.userInfo.email}
-        </p>
-        <p><strong>NIF:</strong> ${loginInfo.userInfo.attributes["nif"]}</p>
-      </c:if>
-    </div>
-    <div>
-      <p>
-        <fmt:message key="principal.usuari">
-          <fmt:param value="${loginInfo.username}" />
-        </fmt:message>
-      </p>
-      <p>
-        ROLE_ADMIN:
-        <c:if test="${pwt:hasRole('ROLE_ADMIN')}"
-          ><img src="<c:url value="/img/icn_alert_success.png" />" alt="true"
-          title="true"/></c:if
-        ><c:if test="${!pwt:hasRole('ROLE_ADMIN')}"
-          ><img src="<c:url value="/img/icn_alert_error.png" />" alt="false"
-          title="false"/></c:if
-        >
-      </p>
-      <p>
-        ROLE_USER:
-        <c:if test="${pwt:hasRole('ROLE_USER')}"
-          ><img src="<c:url value="/img/icn_alert_success.png" />" alt="true"
-          title="true"/></c:if
-        ><c:if test="${!pwt:hasRole('ROLE_USER')}"
-          ><img src="<c:url value="/img/icn_alert_error.png" />" alt="false"
-          title="false"/></c:if
-        >
-      </p>
-      <p>
-        <fmt:message key="principal.locale">
-          <fmt:param value="<%=LocaleContextHolder.getLocale() %>" />
-        </fmt:message>
-      </p>
-      <p>
-        <fmt:message key="principal.llengua">
-          <fmt:param value="${lang}" />
-        </fmt:message>
-      </p>
-    </div>
-  </div>
-  <c:if test="${empty loginInfo.userInfo}">
-    <p class="error-message">
-      <fmt:message key="public.errorpluginuserinfo" />
-    </p>
-  </c:if>
-</div>
 
-<c:if test="${pwt:isDesenvolupament()}"> Only in Development Mode </c:if>
+<c:if test="${pwt:isDesenvolupament()}"> 
+	<div class="user-info">
+		<h3>User Information:</h3>
+		<div class="user-details">
+			<div>
+			<c:if test="${not empty loginInfo.userInfo}">
+				<p>
+				<strong><fmt:message key="principal.nom" /></strong>
+				${loginInfo.userInfo.name}
+				</p>
+				<p>
+				<strong><fmt:message key="principal.llinatges" /></strong>
+				${loginInfo.userInfo.surname1} ${loginInfo.userInfo.surname2}
+				</p>
+				<p>
+				<strong><fmt:message key="principal.correu" /></strong>
+				${loginInfo.userInfo.email}
+				</p>
+				<p><strong>NIF:</strong> ${loginInfo.userInfo.attributes["nif"]}</p>
+			</c:if>
+			</div>
+			<div>
+			<p>
+				<fmt:message key="principal.usuari">
+				<fmt:param value="${loginInfo.username}" />
+				</fmt:message>
+			</p>
+			<p>
+				ROLE_ADMIN:
+				<c:if test="${pwt:hasRole('ROLE_ADMIN')}"
+				><img src="<c:url value="/img/icn_alert_success.png" />" alt="true"
+				title="true"/></c:if
+				><c:if test="${!pwt:hasRole('ROLE_ADMIN')}"
+				><img src="<c:url value="/img/icn_alert_error.png" />" alt="false"
+				title="false"/></c:if
+				>
+			</p>
+			<p>
+				ROLE_USER:
+				<c:if test="${pwt:hasRole('ROLE_USER')}"
+				><img src="<c:url value="/img/icn_alert_success.png" />" alt="true"
+				title="true"/></c:if
+				><c:if test="${!pwt:hasRole('ROLE_USER')}"
+				><img src="<c:url value="/img/icn_alert_error.png" />" alt="false"
+				title="false"/></c:if
+				>
+			</p>
+			<p>
+				<fmt:message key="principal.locale">
+				<fmt:param value="<%=LocaleContextHolder.getLocale() %>" />
+				</fmt:message>
+			</p>
+			<p>
+				<fmt:message key="principal.llengua">
+				<fmt:param value="${lang}" />
+				</fmt:message>
+			</p>
+			</div>
+		</div>
+		<c:if test="${empty loginInfo.userInfo}">
+			<p class="error-message">
+			<fmt:message key="public.errorpluginuserinfo" />
+			</p>
+		</c:if>
+	</div>
+
+	Only in Development Mode 
+</c:if>

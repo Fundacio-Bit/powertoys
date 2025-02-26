@@ -36,13 +36,13 @@
 				<h1 class="titol"><%=version.getProjectName() + " " + version.getVersion()%></h1>
 			</div>
 			<div>
-				<div>
-					<strong class="subtitol llevarMobil"><fmt:message
-							key="usuari" />: </strong> <span class="subtitolMay"> <%=request.getUserPrincipal()== null? "ANONIM": request.getUserPrincipal().getName()%>
-						<c:if test="${request.getRemoteUser() != null}">
-							| <%= request.getRemoteUser() %>
-						</c:if>
-					</span>
+				<div style="min-height: 1.25em;">
+					<c:if test="${not empty loginInfo}">
+						<strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong> 
+						<span class="subtitolMay"> 
+							${loginInfo.userInfo.name}&nbsp;${loginInfo.userInfo.surname1}&nbsp;${loginInfo.userInfo.surname2}
+						</span>
+					</c:if>
 				</div>
 			</div>
 		</div>

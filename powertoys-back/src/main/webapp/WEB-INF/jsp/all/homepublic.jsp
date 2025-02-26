@@ -50,32 +50,34 @@ language="java" %><%@include file="/WEB-INF/jsp/moduls/includes.jsp" %>
 
 <br />
 
-<!-- LOGIN ANONIM <br />
-Locale = <%=LocaleContextHolder.getLocale() %> <br />
-lang = ${lang} <br />
-<br /> -->
+<c:if test="${pwt:isDesenvolupament()}"> 
+    <!-- LOGIN ANONIM <br />
+    Locale = <%=LocaleContextHolder.getLocale() %> <br />
+    lang = ${lang} <br />
+    <br /> -->
 
-<div class="user-info">
-  <h3><fmt:message key="public.login.anonim" /></h3>
-  <div class="user-details">
-    <div>
-      <p>
-        <fmt:message key="principal.locale">
-          <fmt:param value="<%=LocaleContextHolder.getLocale() %>" />
-        </fmt:message>
-      </p>
-      <p>
-        <fmt:message key="principal.llengua">
-          <fmt:param value="${lang}" />
-        </fmt:message>
-      </p>
+    <div class="user-info">
+        <h3><fmt:message key="public.login.anonim" /></h3>
+        <div class="user-details">
+        <div>
+            <p>
+            <fmt:message key="principal.locale">
+                <fmt:param value="<%=LocaleContextHolder.getLocale() %>" />
+            </fmt:message>
+            </p>
+            <p>
+            <fmt:message key="principal.llengua">
+                <fmt:param value="${lang}" />
+            </fmt:message>
+            </p>
+        </div>
+        </div>
+        <c:if test="${empty loginInfo.userInfo}">
+        <p class="error-message">
+            <fmt:message key="public.errorpluginuserinfo"/>
+        </p>
+        </c:if>
     </div>
-  </div>
-  <c:if test="${empty loginInfo.userInfo}">
-    <p class="error-message">
-        <fmt:message key="public.errorpluginuserinfo"/>
-    </p>
-  </c:if>
-</div>
-
-<c:if test="${pwt:isDesenvolupament()}"> Only in Development Mode </c:if>
+  
+    Only in Development Mode 
+</c:if>
