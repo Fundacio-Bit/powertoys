@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 
- * @autor anadal
+ * @autor jpou
  * 
  */
 @Controller
@@ -36,7 +36,7 @@ public class PrincipalController {
 			session.setAttribute("inicialitzat", true);
 		}
 
-		return new ModelAndView("principal");
+		return new ModelAndView("homepublic");
 
 	}
 
@@ -44,7 +44,7 @@ public class PrincipalController {
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(name = "idioma") String idioma) throws Exception {
 		org.fundaciobit.powertoys.back.utils.PowerToysSessionLocaleResolver.setLocaleManually(request, idioma);
-		return new ModelAndView("principal");
+		return new ModelAndView("homepublic");
 	}
 
 	@RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
@@ -84,7 +84,7 @@ public class PrincipalController {
 			log.error("S'ha accedit a canviarPipella amb un paràmetre desconegut: " + pipella);
 		}
 
-		return new ModelAndView("principal");
+		return new ModelAndView("homepublic");
 	}
 
 }
