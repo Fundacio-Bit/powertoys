@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-@MenuOption(labelCode = "earSimple.earSimple.plural", order = 1, group = "PUBLIC", addSeparatorBefore = true)
+@MenuOption(labelCode = "ear.menu", order = 1, group = "PUBLIC", addSeparatorBefore = true)
 @Controller
 @RequestMapping(value = "/public/earSimple")
 @SessionAttributes(types = { EarSimpleForm.class, EarSimpleFilterForm.class })

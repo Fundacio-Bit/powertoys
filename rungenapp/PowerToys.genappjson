@@ -494,12 +494,12 @@
       "nameJava": "EarSimple",
       "shortName": "earsimple",
       "labels": {
-        "ca": "Ear Simple",
-        "es": "Ear Simple"
+        "ca": "EAR",
+        "es": "EAR"
       },
       "labelsPlural": {
-        "ca": "Ears Simples",
-        "es": "Ears Simples"
+        "ca": "EARs",
+        "es": "EARs"
       },
       "generate": true,
       "fileMappingEntity": false,
