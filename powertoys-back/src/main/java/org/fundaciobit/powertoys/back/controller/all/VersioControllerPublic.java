@@ -13,7 +13,6 @@ import org.fundaciobit.genapp.common.query.ITableManager;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.powertoys.back.controller.webdb.VersioController;
 import org.fundaciobit.powertoys.back.form.webdb.EntornAplicacioRefList;
 import org.fundaciobit.powertoys.back.form.webdb.VersioFilterForm;
@@ -30,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
  * @author jpou
  *
  */
-@MenuOption(labelCode = "versionsversio.versio.plural", order = 4, group = "PUBLIC", addSeparatorBefore = false)
 @Controller
 @RequestMapping(value = "/public/versions")
 @SessionAttributes(types = { VersioForm.class, VersioFilterForm.class })

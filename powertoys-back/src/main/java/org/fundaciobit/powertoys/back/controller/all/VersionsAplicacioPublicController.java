@@ -75,13 +75,14 @@ public class VersionsAplicacioPublicController extends AplicacioController {
             throws I18NException {
         AplicacioFilterForm appFilterForm = super.getAplicacioFilterForm(pagina, mav, request);
         if (appFilterForm.isNou()) {
+            appFilterForm.addAdditionalButton(new AdditionalButton("fas fa-code-branch",
+                    "versionsversio.versio.plural", (new VersioControllerPublic()).getContextWeb() + "/list/1",
+                    AdditionalButtonStyle.INFO));
 
             if (isAdmin()) {
-
                 appFilterForm.addAdditionalButton(new AdditionalButton("fas fa-sync",
                         "versioaplicacio.refrescartotesversions", getContextWeb() + "/refreshall",
                         AdditionalButtonStyle.INFO));
-
             } else {
                 appFilterForm.setEditButtonVisible(false);
                 appFilterForm.setDeleteButtonVisible(false);
@@ -149,7 +150,6 @@ public class VersionsAplicacioPublicController extends AplicacioController {
             List<Timestamp> dates = new ArrayList<Timestamp>();
 
             {
-
                 SelectGroupBy<Long> groupBy = new SelectGroupBy<Long>(VersioFields.ENTORNAPLICACIOID);
 
                 SelectMax<Timestamp> maxDate = new SelectMax<Timestamp>(VersioFields.DATA);
@@ -252,15 +252,11 @@ public class VersionsAplicacioPublicController extends AplicacioController {
                                     entornN.put(app.getAplicacioID(), str.toString()); // + " - " + build);
                                 }
                             }
-
                         }
-
                     }
                 }
             }
-
         }
-
     }
 
     @EJB(mappedName = org.fundaciobit.powertoys.ejb.EntornAplicacioService.JNDI_NAME)
