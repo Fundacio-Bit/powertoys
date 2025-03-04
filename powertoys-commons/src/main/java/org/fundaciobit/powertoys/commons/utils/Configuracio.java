@@ -4,11 +4,12 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
  * 
- * @author GenApp
+ * @author jpou
  * 
  */
 public class Configuracio implements Constants {
@@ -55,7 +56,7 @@ public class Configuracio implements Constants {
                     + " del fitxer standalone apunta a un fitxer que no existeix (" + propertyFileName + ")");
         }
 
-        try (Reader reader = new FileReader(file)) {
+        try (Reader reader = new FileReader(file, StandardCharsets.UTF_8)) {
             Properties prop = new Properties();
             prop.load(reader);
             return prop;
@@ -130,7 +131,8 @@ public class Configuracio implements Constants {
     }
 
     public static byte[] getEncryptKey() {
-        return getAppProperties().getProperty(POWERTOYS_PROPERTY_BASE + "encryptkey", "0123456789123456").getBytes();
+        return getAppProperties().getProperty(POWERTOYS_PROPERTY_BASE + "encryptkey", "0123456789123456")
+                .getBytes(StandardCharsets.UTF_8);
     }
 
     public static Long getMaxUploadSizeInBytes() {
@@ -155,12 +157,12 @@ public class Configuracio implements Constants {
             throw new RuntimeException("No s'ha definit la propietat '" + POWERTOYS_PROPERTY_BASE + "filesdirectory'"
                     + " al fitxer " + System.getProperty(POWERTOYS_PROPERTY_BASE + "system.properties")
                     + ". S'hauria d'anar al fitxer " + System.getProperty(POWERTOYS_PROPERTY_BASE + "system.properties")
-                    + " i donar valor a la propietat '" + POWERTOYS_PROPERTY_BASE +"filesdirectory'"
+                    + " i donar valor a la propietat '" + POWERTOYS_PROPERTY_BASE + "filesdirectory'"
                     + " amb una ruta al directori on l'aplició gestionara els fitxers.");
         }
-        
+
         File filesFolder = new File(path);
-        
+
         if (!filesFolder.exists()) {
             throw new RuntimeException("El directori indicat a la propietat '" + POWERTOYS_PROPERTY_BASE
                     + ".filesdirectory'" + " del fitxer "

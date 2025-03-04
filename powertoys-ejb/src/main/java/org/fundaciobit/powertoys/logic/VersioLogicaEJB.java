@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -148,7 +149,8 @@ public class VersioLogicaEJB extends VersioEJB implements VersioLogicaService {
 
     public static String readToString(String targetURL) throws IOException {
         URL url = new URL(targetURL);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
+        BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
 
         StringBuilder stringBuilder = new StringBuilder();
 

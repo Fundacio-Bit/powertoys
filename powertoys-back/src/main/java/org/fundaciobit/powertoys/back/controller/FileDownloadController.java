@@ -21,10 +21,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 /**
- * @autor anadal
+ * @autor jpou
  * 
  */
 @Controller
@@ -41,7 +42,6 @@ public class FileDownloadController {
      * @param arxiuId
      * @param request
      * @param response
-     * @author anadal
      */
     @RequestMapping("{arxiuId}")
     public void arxiu(@PathVariable("arxiuId") String encryptedArxiuId, 
@@ -54,7 +54,7 @@ public class FileDownloadController {
       
       if (arxiuId == 0) {
         FileIDEncrypter enc = HibernateFileUtil.getEncrypter();
-        log.error("+ Key = ]"+ new String(enc.getKey().getEncoded()) + "[");
+        log.error("+ Key = ]"+ new String(enc.getKey().getEncoded(), StandardCharsets.UTF_8) + "[");
         log.error("+ Algorithm = " + enc.getAlgorithm());
         log.error("+ EncryptedArxiuId = ]"+ encryptedArxiuId + "[");
         // TODO TRADUIR Identificador no trobar
