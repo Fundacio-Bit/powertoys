@@ -36,8 +36,7 @@ public class PrincipalController {
 			session.setAttribute("inicialitzat", true);
 		}
 
-		return new ModelAndView("homepublic");
-
+		return new ModelAndView(new RedirectView("/public/index.html", true));
 	}
 
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)

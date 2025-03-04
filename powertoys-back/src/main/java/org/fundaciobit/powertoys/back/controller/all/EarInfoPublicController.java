@@ -64,7 +64,6 @@ public class EarInfoPublicController extends EarInfoController {
     @Override
     public String getTileForm() {
         return "earInfoFormPublic";
-
     }
 
     @Override
