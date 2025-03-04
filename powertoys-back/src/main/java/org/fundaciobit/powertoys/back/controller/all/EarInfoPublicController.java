@@ -24,6 +24,37 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { EarInfoForm.class, EarInfoFilterForm.class })
 public class EarInfoPublicController extends EarInfoController {
 
+    @Override
+    public boolean isActiveList() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormNew() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormEdit() {
+        return false;
+        // TODO:deixar aquest si es deixaaquesta funcionalitat
+        // return false;
+    }
+
+    @Override
+    public boolean isActiveDelete() {
+        return false;
+        // TODO:deixar aquest si es deixaaquesta funcionalitat
+        // return true;
+    }
+
+    @Override
+    public boolean isActiveFormView() {
+        return false;
+        // TODO:deixar aquest si es deixaaquesta funcionalitat
+        // return true;
+    }
+
     @EJB(mappedName = EarInfoPublicLogicaService.JNDI_NAME)
     protected EarInfoPublicLogicaService earInfoLogicaEjb;
 
@@ -76,21 +107,6 @@ public class EarInfoPublicController extends EarInfoController {
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
         long earId = (long) request.getSession().getAttribute("earID");
         return EarInfoFields.EARID.equal(earId);
-    }
-
-    @Override
-    public boolean isActiveFormEdit() {
-        return false;
-    }
-
-    @Override
-    public boolean isActiveFormView() {
-        return true;
-    }
-
-    @Override
-    public boolean isActiveDelete() {
-        return true;
     }
 
     @Override

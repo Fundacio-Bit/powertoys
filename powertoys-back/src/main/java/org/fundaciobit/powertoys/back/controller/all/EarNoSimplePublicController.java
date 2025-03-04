@@ -40,11 +40,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-@MenuOption(labelCode = "ear.ear.plural", order = 2, group = "PUBLIC", addSeparatorBefore = false)
+// @MenuOption(labelCode = "ear.ear.plural", order = 2, group = "PUBLIC", addSeparatorBefore = false)
 @Controller
 @RequestMapping(value = "/public/earNoSimple")
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
 public class EarNoSimplePublicController extends EarController {
+
+    @Override
+    public boolean isActiveList() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormNew() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormEdit() {
+        return false;
+        // TODO:deixar aquest si es deixaaquesta funcionalitat
+        // return false;
+    }
+
+    @Override
+    public boolean isActiveDelete() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormView() {
+        return false;
+        // TODO:deixar aquest si es deixaaquesta funcionalitat
+        // return true;
+    }
 
     @EJB(mappedName = EarInfoPublicLogicaService.JNDI_NAME)
     protected EarInfoPublicLogicaService earInfoLogicaEjb;
@@ -172,16 +201,6 @@ public class EarNoSimplePublicController extends EarController {
         log.info("Redirigint per a verue els earInfo de l'EAR " + earID);
 
         return "redirect:" + (new EarInfoPublicController()).getContextWeb() + "/list/1";
-    }
-
-    @Override
-    public boolean isActiveFormEdit() {
-        return false;
-    }
-
-    @Override
-    public boolean isActiveFormView() {
-        return true;
     }
 
     @Override
