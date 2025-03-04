@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -31,7 +34,10 @@ import org.fundaciobit.powertoys.model.fields.EarSimpleFields;
 import org.fundaciobit.powertoys.persistence.EarSimpleJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,6 +46,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/public/earSimple")
 @SessionAttributes(types = { EarSimpleForm.class, EarSimpleFilterForm.class })
 public class EarSimplePublicController extends EarSimpleController {
+
+    private static final String EARS_PUJATS_COOKIE_NAME = "__Secure_ears_pujats";
+    private static final String EARS_PUJATS_COOKIE_ITEM_PREFIX = "#";
 
     @EJB(mappedName = EarSimplePublicLogicaService.JNDI_NAME)
     protected EarSimplePublicLogicaService earSimpleLogicaEjb;
@@ -158,6 +167,92 @@ public class EarSimplePublicController extends EarSimpleController {
         HtmlUtils.saveMessageSuccess(request, I18NUtils.tradueix("ear.processat", earSimple.getFitxer().getNom()));
 
         return "redirect:" + getContextWeb() + "/view/" + newId;
+    }
+
+    /**
+     * Eliminar un EarSimple existent
+     */
+    @Override
+    @RequestMapping(value = "/{earSimpleID}/delete")
+    public String eliminarEarSimple(@PathVariable("earSimpleID") java.lang.Long earSimpleID,
+            HttpServletRequest request, HttpServletResponse response) {
+        String responseStr = super.eliminarEarSimple(earSimpleID, request, response);
+
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
+                String newCookieValue = cookie.getValue()
+                        .replace(EARS_PUJATS_COOKIE_ITEM_PREFIX + earSimpleID.toString(), "");
+                cookie.setValue(newCookieValue);
+
+                cookie.setPath(request.getContextPath());
+                cookie.setSecure(true);
+                cookie.setHttpOnly(true);
+                cookie.setMaxAge(60 * 60 * 24 * 365);
+
+                if (newCookieValue.isEmpty()) {
+                    cookie.setMaxAge(0);
+                    cookie.setValue(null);
+                }
+
+                response.addCookie(cookie);
+                break;
+            }
+        }
+
+        return responseStr;
+    }
+
+    /**
+     * Guardar un nou EarSimple
+     */
+    @Override
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String crearEarSimplePost(@ModelAttribute EarSimpleForm earSimpleForm,
+            BindingResult result, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String responseStr = super.crearEarSimplePost(earSimpleForm, result, request, response);
+
+        EarSimpleJPA earSimple = earSimpleForm.getEarSimple();
+        long newId = earSimple.getEarSimpleID();
+
+        Cookie newCookie = null;
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
+                newCookie = cookie;
+
+                String newCookieValue = cookie.getValue() + EARS_PUJATS_COOKIE_ITEM_PREFIX + newId;
+                newCookie.setValue(newCookieValue);
+                break;
+            }
+        }
+
+        if (newCookie == null) {
+            newCookie = new Cookie(EARS_PUJATS_COOKIE_NAME, EARS_PUJATS_COOKIE_ITEM_PREFIX + newId);
+        }
+        newCookie.setPath(request.getContextPath());
+        newCookie.setSecure(true);
+        newCookie.setHttpOnly(true);
+        newCookie.setMaxAge(60 * 60 * 24 * 365);
+        response.addCookie(newCookie);
+
+        return responseStr;
+    }
+
+    @Override
+    public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+        List<Long> earIds = new ArrayList<Long>();
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
+                String[] earIdsStr = cookie.getValue().split(EARS_PUJATS_COOKIE_ITEM_PREFIX);
+                for (String earIdStr : earIdsStr) {
+                    if (!earIdStr.isEmpty()) {
+                        earIds.add(Long.parseLong(earIdStr));
+                    }
+                }
+                break;
+            }
+        }
+        return EarSimpleFields.EARSIMPLEID.in(earIds);
     }
 
     @Override
