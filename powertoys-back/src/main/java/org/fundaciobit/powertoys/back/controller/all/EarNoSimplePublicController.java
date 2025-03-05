@@ -17,7 +17,6 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.powertoys.logic.EarInfoPublicLogicaService;
 import org.fundaciobit.powertoys.logic.EarPublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;

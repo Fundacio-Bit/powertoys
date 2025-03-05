@@ -56,14 +56,6 @@ public class PrincipalController {
 			@PathVariable String pipella) throws Exception {
 
 		if (pipella != null && pipella.trim().length() != 0) {
-
-			// TODO GENAPP Afegir altres pipelles !!!!!
-			/*
-			 * if ("ROLE_ADEN".equals(pipella)) { //return new ModelAndView("role_aden");
-			 * return new ModelAndView(new RedirectView("/aden/peticionscaducades/list/1",
-			 * true)); }
-			 */
-
 			if ("admin".equals(pipella)) {
 				return new ModelAndView(new RedirectView("/admin/aplicacio/list/1", true));
 			}

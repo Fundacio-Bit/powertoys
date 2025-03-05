@@ -27,9 +27,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-
-
-
 /**
  * 
  * @author anadal
@@ -39,11 +36,10 @@ import org.springframework.stereotype.Component;
 public class AuthenticationSuccessListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
     protected final Logger log = Logger.getLogger(getClass());
-    
+
     public static final String LOGIN_PLUGIN_KEY = Constants.POWERTOYS_PROPERTY_BASE + "userinformationplugin";
 
     public static IUserInformationPlugin loginPlugin = null;
-
 
     @Override
     public synchronized void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
@@ -52,8 +48,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         Authentication au = sc.getAuthentication();
 
         if (au == null) {
-            // TODO traduccio
-            throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
+            String errorMsg = I18NUtils.tradueix("error.login.noinformacio");
+            throw new LoginException(errorMsg);
         }
 
         User user = (User) au.getPrincipal();
@@ -115,7 +111,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         log.info(" =================================================================");
 
     }
-    
+
     public static IUserInformationPlugin getUserInformationPluginInstance() throws I18NException {
         if (loginPlugin == null) {
             final String propertyPlugin = LOGIN_PLUGIN_KEY;
@@ -133,6 +129,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         return loginPlugin;
     }
 
-    public static final Comparator<GrantedAuthority> GRANTEDAUTHORITYCOMPARATOR=new Comparator<GrantedAuthority>(){@Override public int compare(GrantedAuthority o1,GrantedAuthority o2){return-o1.getAuthority().compareTo(o2.getAuthority());}};
+    public static final Comparator<GrantedAuthority> GRANTEDAUTHORITYCOMPARATOR = new Comparator<GrantedAuthority>() {
+        @Override
+        public int compare(GrantedAuthority o1, GrantedAuthority o2) {
+            return -o1.getAuthority().compareTo(o2.getAuthority());
+        }
+    };
 
 }
