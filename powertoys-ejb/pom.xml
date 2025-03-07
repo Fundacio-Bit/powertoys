@@ -12,6 +12,10 @@
 
     <name>powertoys - EJB</name>
 
+    <properties>
+            <maven.test.skip>false</maven.test.skip>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -79,5 +83,8 @@
                 </configuration>
             </plugin>
         </plugins>
+
+
+        <!-- <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory> -->
     </build>
 </project>
