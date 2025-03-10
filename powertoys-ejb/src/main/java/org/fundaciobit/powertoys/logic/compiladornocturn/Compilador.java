@@ -47,13 +47,14 @@ public class Compilador {
     public void compilarRepositori(File repoDir, String comanda) throws Exception {
         // Executar la comanda de compilació
         List<String> comandaList = new ArrayList<String>(Arrays.asList(comanda.split(" ")));
-        if(System.getProperty("os.name").toLowerCase().contains("win")) {
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
             comandaList.add(0, "/C");
             comandaList.add(0, "cmd.exe");
-        }else{
+        } else {
             comandaList.add(0, "-c");
             comandaList.add(0, "sh");
         }
+        System.out.println("Comanda: " + comandaList);
         ProcessBuilder processBuilder = new ProcessBuilder(comandaList);
         processBuilder.directory(repoDir);
         processBuilder.redirectErrorStream(true);
@@ -69,7 +70,8 @@ public class Compilador {
         int exitCode = process.waitFor();
         System.out.println("Procés acabat: " + process.info() + ", codi de sortida: " + exitCode);
         if (exitCode != 0) {
-            throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode);
+            throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
+                    + comanda + " -- directori: " + repoDir);
         }
     }
 

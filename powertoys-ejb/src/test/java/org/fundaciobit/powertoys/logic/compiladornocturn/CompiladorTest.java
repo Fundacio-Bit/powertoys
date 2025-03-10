@@ -45,15 +45,28 @@ public class CompiladorTest {
     @Test
     public void testDescarregarICompilar() throws Exception {
         try {
+            System.out.println("Inici del test, descarregant i compilant el repositori: " + gitUrl + " amb el tag: "
+                    + tag + " i la comanda: " + comanda);
             compilador.descarregarICompilar(gitUrl, tag, comanda);
         } catch (IOException e) {
             if (comanda.equals("invalidcommand")) {
                 // Expected exception for invalid command
-                System.out.println("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: " + "invalidcommand");
+                System.out.println("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
+                        + "invalidcommand");
+                return;
+            } else {
+                throw e;
+            }
+        } catch (RuntimeException e) {
+            if (comanda.equals("invalidcommand")) {
+                // Expected exception for invalid command
+                System.out.println("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
+                        + "invalidcommand");
                 return;
             } else {
                 throw e;
             }
         }
+        System.out.println("Fi del test satisfactòriament.");
     }
 }
