@@ -68,6 +68,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>5.13.0.202109080827-r</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -84,7 +90,5 @@
             </plugin>
         </plugins>
 
-
-        <!-- <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory> -->
     </build>
 </project>
