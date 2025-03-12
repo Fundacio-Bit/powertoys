@@ -83,8 +83,6 @@ public class GitHubManagerTest {
 
     private static String token;
 
-    private static String organization;
-
     private static GitHubManager gitHubManager;
 
     @Parameterized.Parameters
@@ -137,11 +135,9 @@ public class GitHubManagerTest {
 
         username = configGH.getProperty("githubmanager.username");
         token = configGH.getProperty("githubmanager.token");
-        organization = configGH.getProperty("githubmanager.entitat");
 
         // username = Configuracio.getGitHubManagerUser();
         // token = Configuracio.getGitHubManagerToken();
-        // organization = Configuracio.getGitHubManagerOrganization();
 
         gitHubManager = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
     }
@@ -152,12 +148,12 @@ public class GitHubManagerTest {
 
     @Test
     public void testGetRepositories() throws IOException {
-        List<GHRepository> result = gitHubManager.getRepositories(organization);
+        List<GHRepository> result = gitHubManager.getRepositories(owner);
 
         assertNotNull(result);
         int nRepos = result.size();
         assertTrue(
-                "El nombre de repositoris de " + organization + " (" + nRepos + ")"
+                "El nombre de repositoris de " + owner + " (" + nRepos + ")"
                         + " hauria de ser major o igual a "
                         + MIN_REPOS,
                 nRepos >= MIN_REPOS);

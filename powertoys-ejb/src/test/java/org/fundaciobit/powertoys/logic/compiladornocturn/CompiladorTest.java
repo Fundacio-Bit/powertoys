@@ -124,8 +124,6 @@ public class CompiladorTest {
 
         private static String token;
 
-        private static String organization;
-
         private static GitHubManager gitHubManager;
 
         @BeforeClass
@@ -139,7 +137,6 @@ public class CompiladorTest {
 
             // username = Configuracio.getGitHubManagerUser();
             // token = Configuracio.getGitHubManagerToken();
-            // organization = Configuracio.getGitHubManagerOrganization();
 
             gitHubManager = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
             compilador = new Compilador(gitHubManager);
