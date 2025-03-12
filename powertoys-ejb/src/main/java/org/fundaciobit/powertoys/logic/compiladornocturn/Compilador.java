@@ -3,6 +3,7 @@ package org.fundaciobit.powertoys.logic.compiladornocturn;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -114,6 +115,19 @@ public class Compilador {
                 log.info("Directori temporal eliminat: " + tempDir);
             }
         }
+    }
+
+    /**
+     * Descarrega un repositori de GitHub i el compila utilitzant la comanda
+     * especificada.
+     *
+     * @param gitUrl  URL del repositori de GitHub
+     * @param tag     Tag del repositori a fer checkout
+     * @param comanda Comanda de compilació a executar
+     * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
+     */
+    public void descarregarICompilar(URL gitUrl, String tag, String comanda) throws Exception {
+        descarregarICompilar(gitUrl.toString(), tag, comanda);
     }
 
     /**
