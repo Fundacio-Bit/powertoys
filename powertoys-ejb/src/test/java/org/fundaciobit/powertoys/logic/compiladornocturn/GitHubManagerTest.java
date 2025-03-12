@@ -1,5 +1,6 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
+import org.apache.log4j.Logger;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.junit.Before;
@@ -21,6 +22,8 @@ import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class GitHubManagerTest {
+
+    protected final static Logger log = Logger.getLogger(GitHubManagerTest.class);
 
     @Parameterized.Parameter(0)
     public String owner;
@@ -129,7 +132,8 @@ public class GitHubManagerTest {
     @BeforeClass
     public static void setUpClass() throws IOException {
         Properties configGH = new Properties();
-        configGH.load(new FileInputStream("src\\\\test\\\\java\\\\org\\\\fundaciobit\\\\powertoys\\\\logic\\\\compiladornocturn\\\\testfiles\\\\gh.properties"));
+        configGH.load(new FileInputStream(
+                "src\\\\test\\\\java\\\\org\\\\fundaciobit\\\\powertoys\\\\logic\\\\compiladornocturn\\\\testfiles\\\\gh.properties"));
 
         username = configGH.getProperty("githubmanager.username");
         token = configGH.getProperty("githubmanager.token");
@@ -251,5 +255,12 @@ public class GitHubManagerTest {
                 "El nom del darrer tag del repositori " + owner + "/" + repo
                         + " no pot ser un string buit. Commit del tag trobat com a darrer: " + result.getCommit(),
                 "", result.getName().trim());
+        String responsable = result.getCommit().getCommitter().getName();
+        log.info("El responsable del darrer tag del repositori " + owner + "/" + repo + " (" + result.getName()
+                + ") és en " + responsable);
+        assertNotEquals(
+                "El responsable del darrer tag del repositori " + owner + "/" + repo
+                        + " no pot ser un string buit. Commit del tag trobat com a darrer: " + result.getCommit(),
+                "", responsable);
     }
 }

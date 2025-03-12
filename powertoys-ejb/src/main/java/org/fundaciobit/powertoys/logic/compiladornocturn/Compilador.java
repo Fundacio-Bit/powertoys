@@ -10,7 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 public class Compilador {
+
+    protected final static Logger log = Logger.getLogger(Compilador.class);
 
     private GitHubManager ghManager;
 
@@ -66,7 +70,7 @@ public class Compilador {
             comandaList.add(0, "-c");
             comandaList.add(0, "sh");
         }
-        System.out.println("Comanda: " + comandaList);
+        log.info("Comanda: " + comandaList);
         ProcessBuilder processBuilder = new ProcessBuilder(comandaList);
         processBuilder.directory(repoDir);
         processBuilder.redirectErrorStream(true);
@@ -75,12 +79,12 @@ public class Compilador {
         // Llegir la sortida de la comanda
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String output = reader.lines().collect(Collectors.joining("\n"));
-            System.out.println(output);
+            log.info(output);
         }
 
         // Esperar a que el procés acabi
         int exitCode = process.waitFor();
-        System.out.println("Procés acabat: " + process.info() + ", codi de sortida: " + exitCode);
+        log.info("Procés acabat: " + process.info() + ", codi de sortida: " + exitCode);
         if (exitCode != 0) {
             throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
                     + comanda + " -- directori: " + repoDir);
@@ -101,13 +105,13 @@ public class Compilador {
         try {
             // Crear un directori temporal per descarregar el repositori
             tempDir = Files.createTempDirectory("repositori");
-            System.out.println("Directori temporal creat: " + tempDir);
+            log.info("Directori temporal creat: " + tempDir);
             File repoDir = descarregarRepositori(tempDir, gitUrl, tag);
             compilarRepositori(repoDir, comanda);
         } finally {
             if (tempDir != null) {
                 deleteDirectory(tempDir.toFile());
-                System.out.println("Directori temporal eliminat: " + tempDir);
+                log.info("Directori temporal eliminat: " + tempDir);
             }
         }
     }
@@ -134,7 +138,7 @@ public class Compilador {
 
     public static void main(String[] args) {
         if (args.length != 3) {
-            System.err.println("Ús: Compilador <git-url> <tag> <comanda>");
+            log.error("Ús: Compilador <git-url> <tag> <comanda>");
             System.exit(1);
         }
 
