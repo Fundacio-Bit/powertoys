@@ -2,8 +2,6 @@ package org.fundaciobit.powertoys.logic.compiladornocturn;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jgit.api.Git;
-import org.fundaciobit.powertoys.commons.utils.Configuracio;
-// import okhttp3.*;
 import org.kohsuke.github.*;
 import org.kohsuke.github.GHProject.ProjectStateFilter;
 
@@ -50,9 +48,6 @@ public class GitHubManager {
 
     private static final Logger LOG = Logger.getLogger(GitHubManager.class);
 
-    // private static final String BASE_URL = "https://api.github.com";
-    // private final OkHttpClient client;
-    // private final String credentials;
     private final GitHub github;
 
     /**
@@ -72,9 +67,6 @@ public class GitHubManager {
      *                     GitHub
      */
     public GitHubManager(AuthSchema authSchema, String username, String token) throws IOException {
-        // this.client = new OkHttpClient();
-        // this.credentials = Base64.getEncoder().encodeToString((username + ":" +
-        // token).getBytes());
         switch (authSchema) {
             case PASSWORD:
                 this.github = new GitHubBuilder().withPassword(username, token).build();
@@ -117,19 +109,6 @@ public class GitHubManager {
 
         LOG.info("GitHub client initialized!");
     }
-
-    // /**
-    // * Crea un Request.Builder amb les capçaleres d'autenticació i acceptació.
-    // *
-    // * @param url URL de la petició
-    // * @return Request.Builder configurat
-    // */
-    // private Request.Builder createRequestBuilder(String url) {
-    // return new Request.Builder()
-    // .url(url)
-    // .addHeader("Authorization", "Basic " + credentials)
-    // .addHeader("Accept", "application/vnd.github.v3+json");
-    // }
 
     /**
      * Consulta tots els repositoris d'una organització.
@@ -222,8 +201,6 @@ public class GitHubManager {
      */
     public List<GHIssue> getIssues(String owner, String repo) throws IOException {
         return github.getRepository(owner + "/" + repo).getIssues(GHIssueState.ALL);
-        // return github.getRepository(owner + "/" +
-        // repo).listIssues(GHIssueState.ALL).toList();
     }
 
     /**
