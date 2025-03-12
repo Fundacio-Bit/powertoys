@@ -9,9 +9,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.eclipse.jgit.api.Git;
 
 public class Compilador {
+
+    private GitHubManager ghManager;
+
+    public void setGhManager(GitHubManager ghManager) {
+        this.ghManager = ghManager;
+    }
+
+    /**
+     * Constructor per inicialitzar el compilador.
+     */
+    public Compilador() {
+    }
+
+    /**
+     * Constructor per inicialitzar el compilador amb una instància GitHubManager.
+     *
+     * @param gitHubManager Fitxer de propietats amb les credencials d'usuari
+     */
+    public Compilador(GitHubManager gitHubManager) {
+        this.ghManager = gitHubManager;
+    }
 
     /**
      * Descarrega un repositori de GitHub i fa checkout al tag especificat.
@@ -23,18 +43,10 @@ public class Compilador {
      * @throws Exception Si hi ha algun error durant la descàrrega o el checkout
      */
     public File descarregarRepositori(Path tempDir, String gitUrl, String tag) throws Exception {
-        File repoDir = tempDir.toFile();
-
-        // Descarregar el repositori de GitHub
-        try (Git git = Git.cloneRepository()
-                .setURI(gitUrl)
-                .setDirectory(repoDir)
-                .call()) {
-            // Fer checkout al tag especificat
-            git.checkout().setName(tag).call();
+        if (this.ghManager == null) {
+            throw new RuntimeException("GitHubManager no inicialitzat");
         }
-
-        return repoDir;
+        return this.ghManager.cloneRepositoryAtTag(tempDir, gitUrl, tag);
     }
 
     /**

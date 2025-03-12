@@ -1,15 +1,19 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
+import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Parameterized.Parameter;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Properties;
 
 @RunWith(Parameterized.class)
 public class CompiladorTest {
@@ -23,11 +27,33 @@ public class CompiladorTest {
     @Parameter(2)
     public String comanda;
 
-    private Compilador compilador;
+    private static Compilador compilador;
+
+    private static String username;
+
+    private static String token;
+
+    private static GitHubManager gitHubManager;
+
+    @BeforeClass
+    public static void setUpClass() throws IOException {
+        Properties configGH = new Properties();
+        configGH.load(new FileInputStream(
+                "src\\\\test\\\\java\\\\org\\\\fundaciobit\\\\powertoys\\\\logic\\\\compiladornocturn\\\\testfiles\\\\gh.properties"));
+
+        username = configGH.getProperty("githubmanager.username");
+        token = configGH.getProperty("githubmanager.token");
+
+        // username = Configuracio.getGitHubManagerUser();
+        // token = Configuracio.getGitHubManagerToken();
+        // organization = Configuracio.getGitHubManagerOrganization();
+
+        gitHubManager = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
+        compilador = new Compilador(gitHubManager);
+    }
 
     @Before
     public void setUp() {
-        compilador = new Compilador();
     }
 
     @Parameters

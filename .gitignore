@@ -50,6 +50,7 @@ rungenapp/lastconfig.properties
 
 #### Tests ####
 /powertoys-ejb/src/test/java/org/fundaciobit/powertoys/logic/earmoduls/testfiles
+/powertoys-ejb/src/test/java/org/fundaciobit/powertoys/logic/compiladornocturn/testfiles
 
 #### IDEs ####
 /.vscode/settings.json

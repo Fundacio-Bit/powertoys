@@ -192,4 +192,16 @@ public class Configuracio implements Constants {
         return getAppProperties().getProperty(POWERTOYS_PROPERTY_BASE + "filesystemmanagerclass");
     }
 
+    public static String getGitHubManagerUser() {
+        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.username");
+    }
+
+    public static String getGitHubManagerToken() {
+        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.token");
+    }
+
+    public static String getGitHubManagerOrganization() {
+        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.entitat");
+    }
+
 }
