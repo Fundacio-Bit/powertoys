@@ -130,8 +130,7 @@ public class GitHubManagerTest {
     @BeforeClass
     public static void setUpClass() throws IOException {
         Properties configGH = new Properties();
-        configGH.load(new FileInputStream(
-                "src\\\\test\\\\java\\\\org\\\\fundaciobit\\\\powertoys\\\\logic\\\\compiladornocturn\\\\testfiles\\\\gh.properties"));
+        configGH.load(new FileInputStream("gh.properties"));
 
         username = configGH.getProperty("githubmanager.username");
         token = configGH.getProperty("githubmanager.token");
