@@ -1,8 +1,8 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
-import org.apache.log4j.Logger;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
+import org.jboss.logging.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

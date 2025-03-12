@@ -1,7 +1,7 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
-import org.apache.log4j.Logger;
 import org.eclipse.jgit.api.Git;
+import org.jboss.logging.Logger;
 import org.kohsuke.github.*;
 import org.kohsuke.github.GHProject.ProjectStateFilter;
 

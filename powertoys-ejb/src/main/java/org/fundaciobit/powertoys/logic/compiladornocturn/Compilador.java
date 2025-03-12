@@ -11,7 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
+
 
 public class Compilador {
 

@@ -1,6 +1,7 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
+import org.jboss.logging.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,6 +26,8 @@ public class CompiladorTest {
 
     @RunWith(Parameterized.class)
     public static class CompiladorPassantUrlItag {
+
+        private static final Logger log = Logger.getLogger(CompiladorPassantUrlItag.class);
 
         @Parameter(0)
         public String gitUrl;
@@ -79,15 +82,14 @@ public class CompiladorTest {
         @Test
         public void testDescarregarICompilar() throws Exception {
             try {
-                System.out.println("Inici del test, descarregant i compilant el repositori: " + gitUrl + " amb el tag: "
+                log.info("Inici del test, descarregant i compilant el repositori: " + gitUrl + " amb el tag: "
                         + tag + " i la comanda: " + comanda);
                 compilador.descarregarICompilar(gitUrl, tag, comanda);
             } catch (IOException e) {
                 if (comanda.equals("invalidcommand")) {
                     // Expected exception for invalid command
-                    System.out
-                            .println("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
-                                    + "invalidcommand");
+                    log.info("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
+                            + "invalidcommand");
                     return;
                 } else {
                     throw e;
@@ -95,20 +97,20 @@ public class CompiladorTest {
             } catch (RuntimeException e) {
                 if (comanda.equals("invalidcommand")) {
                     // Expected exception for invalid command
-                    System.out
-                            .println("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
-                                    + "invalidcommand");
+                    log.info("Fi del test, NO hem fet la comanda, hem llançat una comanda invàlida a propòsit: "
+                            + "invalidcommand");
                     return;
                 } else {
                     throw e;
                 }
             }
-            System.out.println("Fi del test satisfactòriament.");
         }
     }
 
     @RunWith(Parameterized.class)
     public static class CompiladorDarrerTag {
+
+        private static final Logger log = Logger.getLogger(CompiladorDarrerTag.class);
 
         @Parameter(0)
         public String owner;
@@ -164,7 +166,7 @@ public class CompiladorTest {
                             + " no pot ser un string buit. Commit del tag trobat com a darrer: " + result.getCommit(),
                     "", result.getName().trim());
             String responsable = result.getCommit().getCommitter().getName();
-            System.out.println("El responsable del darrer tag del repositori " + owner + "/" + repo + " ("
+            log.info("El responsable del darrer tag del repositori " + owner + "/" + repo + " ("
                     + result.getName()
                     + ") és en " + responsable);
             assertNotEquals(
