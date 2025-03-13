@@ -142,6 +142,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entornList.jsp" />
     </definition>
 
+    <definition name="repoCompilacioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="repoCompilacio.repoCompilacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/repoCompilacioForm.jsp" />
+    </definition>
+    
+    <definition name="repoCompilacioListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/repoCompilacioList.jsp" />
+    </definition>
+
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">
