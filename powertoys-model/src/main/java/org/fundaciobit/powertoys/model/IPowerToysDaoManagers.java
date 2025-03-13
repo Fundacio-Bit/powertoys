@@ -4,6 +4,7 @@ import org.fundaciobit.powertoys.model.dao.*;
 
 public interface IPowerToysDaoManagers {
 	public IAplicacioManager getAplicacioManager();
+	public ICompilacioManager getCompilacioManager();
 	public IEarManager getEarManager();
 	public IEarInfoManager getEarInfoManager();
 	public IEarSimpleManager getEarSimpleManager();
@@ -11,6 +12,7 @@ public interface IPowerToysDaoManagers {
 	public IEntornAplicacioManager getEntornAplicacioManager();
 	public IFitxerManager getFitxerManager();
 	public IIdiomaManager getIdiomaManager();
+	public IRepoCompilacioManager getRepoCompilacioManager();
 	public ITraduccioManager getTraduccioManager();
 	public IVersioManager getVersioManager();
 

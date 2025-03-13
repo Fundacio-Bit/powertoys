@@ -187,6 +187,16 @@
     </definition>
 
 
+    <definition name="compilacioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="compilacio.compilacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/compilacioForm.jsp" />
+    </definition>
+    
+    <definition name="compilacioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/compilacioList.jsp" />
+    </definition>
+
+
     <definition name="earFormWebDB" extends="webdb">
         <put-attribute name="titol" value="ear.ear" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/earForm.jsp" />
@@ -254,6 +264,16 @@
     
     <definition name="idiomaListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaList.jsp" />
+    </definition>
+
+
+    <definition name="repoCompilacioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="repoCompilacio.repoCompilacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/repoCompilacioForm.jsp" />
+    </definition>
+    
+    <definition name="repoCompilacioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/repoCompilacioList.jsp" />
     </definition>
 
 

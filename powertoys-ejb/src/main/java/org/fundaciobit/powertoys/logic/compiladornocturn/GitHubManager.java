@@ -6,12 +6,14 @@ import org.kohsuke.github.*;
 import org.kohsuke.github.GHProject.ProjectStateFilter;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 public class GitHubManager {
@@ -285,8 +287,16 @@ public class GitHubManager {
 
     public static void main(String[] args) {
         try {
-            GitHubManager client = new GitHubManager(AuthSchema.OAUTH_TOKEN, "username", "token");
-            List<GHRepository> repos = client.getRepositories("organization");
+            Properties configGH = new Properties();
+            configGH.load(new FileInputStream("gh.properties"));
+            String username = configGH.getProperty("githubmanager.username");
+            String token = configGH.getProperty("githubmanager.token");
+
+            // username = Configuracio.getGitHubManagerUser();
+            // token = Configuracio.getGitHubManagerToken();
+
+            GitHubManager client = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
+            List<GHRepository> repos = client.getRepositories("Fundacio-Bit");
             LOG.info(repos);
 
             // Add more calls to test other methods
