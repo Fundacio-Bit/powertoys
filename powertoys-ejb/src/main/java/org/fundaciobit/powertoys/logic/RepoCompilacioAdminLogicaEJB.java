@@ -39,6 +39,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
     @EJB(mappedName = org.fundaciobit.powertoys.ejb.CompilacioService.JNDI_NAME)
     protected org.fundaciobit.powertoys.ejb.CompilacioService compilacioEjb;
 
+    private static String nightlyCompilationTempDir;
     private static Compilador compilador;
     private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();
 
@@ -46,6 +47,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         super();
         try {
             setUpCompilador();
+            nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
         } catch (IOException e) {
             String missatgeError = "Error inicialitzant el compilador: " + e.getMessage();
             log.error(missatgeError, e);
@@ -60,7 +62,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         // Configuracio.getGitHubOrganizations(configGH);
 
         Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations();
-        
+
         for (Entry<String, String[]> entry : ghConfig.entrySet()) {
             String organitzacio = entry.getKey();
             String username = entry.getValue()[0];
@@ -112,7 +114,8 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         newCompilacio.setDataInici(new Timestamp(startTime));
 
         Entry<Integer, String> compilacioResultat = compilador.descarregarICompilar(ghManager,
-                latestTag.getOwner().getHttpTransportUrl(), latestTag.getName(), Compilador.COMANDA_COMPILACIO_MAVEN);
+                latestTag.getOwner().getHttpTransportUrl(), latestTag.getName(), Compilador.COMANDA_COMPILACIO_MAVEN,
+                nightlyCompilationTempDir);
         newCompilacio.setExitCode(compilacioResultat.getKey().shortValue());
         newCompilacio.setOutput(compilacioResultat.getValue());
 

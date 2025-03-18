@@ -98,14 +98,19 @@ public class Compilador {
      * @param gitUrl  URL del repositori de GitHub
      * @param tag     Tag del repositori a fer checkout
      * @param comanda Comanda de compilació a executar
+     * @param pathTempDir Ruta del directori temporal on descarregar el repositori
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
      */
     public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, String gitUrl, String tag,
-            String comanda) throws Exception {
+            String comanda, String pathTempDir) throws Exception {
         Path tempDir = null;
         try {
             // Crear un directori temporal per descarregar el repositori
-            tempDir = Files.createTempDirectory("repositori");
+            if (pathTempDir == null) {
+                tempDir = Files.createTempDirectory("repositori");
+            } else {
+                tempDir = Files.createDirectory(Paths.get(pathTempDir));
+            }
             log.info("Directori temporal creat: " + tempDir);
             File repoDir = descarregarRepositori(ghManager, tempDir, gitUrl, tag);
             return compilarRepositori(repoDir, comanda);
@@ -124,11 +129,13 @@ public class Compilador {
      * @param gitUrl  URL del repositori de GitHub
      * @param tag     Tag del repositori a fer checkout
      * @param comanda Comanda de compilació a executar
+     * @param pathTempDir Ruta del directori temporal on descarregar el repositori
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
      */
-    public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, URL gitUrl, String tag, String comanda)
+    public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, URL gitUrl, String tag, String comanda,
+            String pathTempDir)
             throws Exception {
-        return descarregarICompilar(ghManager, gitUrl.toString(), tag, comanda);
+        return descarregarICompilar(ghManager, gitUrl.toString(), tag, comanda, pathTempDir);
     }
 
     /**
@@ -182,6 +189,8 @@ public class Compilador {
             // TODO: extreure el nom de l'organització del gitUrl
             String organization = "Fundacio-Bit";
             compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl, tag, comanda);
+            Entry<Integer, String> result = compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl,
+                    tag, comanda, null);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

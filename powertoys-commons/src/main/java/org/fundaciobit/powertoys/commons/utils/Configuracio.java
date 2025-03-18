@@ -246,6 +246,14 @@ public class Configuracio implements Constants {
         return gitHubOrganizations;
     }
 
+    public static String getNightlyCompilationTempDir(Properties properties) {
+        return properties.getProperty(POWERTOYS_PROPERTY_BASE + "nightlycompilation.tempfilesdirectory");
+    }
+
+    public static String getNightlyCompilationTempDir() {
+        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "nightlycompilation.tempfilesdirectory");
+    }
+
     public static String getGitHubManagerOrganization() {
         return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.entitat");
     }

@@ -46,6 +46,8 @@ public class CompiladorTest {
 
         private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();;
 
+        private static String nightlyCompilationTempDir;
+
         @BeforeClass
         public static void setUpClass() throws IOException {
             Properties configGH = new Properties();
@@ -61,6 +63,9 @@ public class CompiladorTest {
                 gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
             }
             compilador = new Compilador();
+
+            nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir(configGH);
+            // nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
         }
 
         @Before
@@ -86,7 +91,8 @@ public class CompiladorTest {
                         + tag + " i la comanda: " + comanda);
                 // TODO: extreure el nom de l'organització del gitUrl
                 String organization = "Fundacio-Bit";
-                compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl, tag, comanda);
+                Entry<Integer, String> result = compilador.descarregarICompilar(gitHubManagers.get(organization),
+                        gitUrl, tag, comanda, nightlyCompilationTempDir);
             } catch (IOException e) {
                 if (comanda.equals("invalidcommand")) {
                     // Expected exception for invalid command
@@ -124,6 +130,8 @@ public class CompiladorTest {
 
         private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();;
 
+        private static String nightlyCompilationTempDir;
+
         @BeforeClass
         public static void setUpClass() throws IOException {
             Properties configGH = new Properties();
@@ -139,6 +147,9 @@ public class CompiladorTest {
                 gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
             }
             compilador = new Compilador();
+
+            nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir(configGH);
+            // nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
         }
 
         @Before
@@ -173,8 +184,9 @@ public class CompiladorTest {
                             + " no pot ser un string buit. Commit del tag trobat com a darrer: " + result.getCommit(),
                     "", responsable);
 
-            compilador.descarregarICompilar(gitHubManager, result.getOwner().getHttpTransportUrl(), result.getName(),
-                    Compilador.COMANDA_COMPILACIO_MAVEN);
+            Entry<Integer, String> resultCompilacio = compilador.descarregarICompilar(gitHubManager,
+                    result.getOwner().getHttpTransportUrl(), result.getName(),
+                    Compilador.COMANDA_COMPILACIO_MAVEN, nightlyCompilationTempDir);
         }
     }
 }
