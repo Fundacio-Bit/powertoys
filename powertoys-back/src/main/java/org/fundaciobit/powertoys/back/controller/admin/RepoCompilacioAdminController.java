@@ -89,7 +89,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       orgs.add(new StringKeyValue(org, org));
       try {
         repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
-          repos.add(new StringKeyValue(repo.getFullName(), repo.getFullName()));
+          repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
         });
       } catch (Exception e) {
         String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
