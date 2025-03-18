@@ -3,6 +3,8 @@ package org.fundaciobit.powertoys.logic;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.commons.utils.Constants;
@@ -43,16 +46,29 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
     private static Compilador compilador;
     private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();
 
+    private static Map<String, List<StringKeyValue>> orgsRepos = new HashMap<>();
+
     public RepoCompilacioAdminLogicaEJB() {
         super();
+
         try {
             setUpCompilador();
-            nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
         } catch (IOException e) {
             String missatgeError = "Error inicialitzant el compilador: " + e.getMessage();
             log.error(missatgeError, e);
             // throw new I18NException("genapp.comodi", missatgeError);
         }
+
+        try {
+            setUpRepositoris();
+            nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
+        } catch (I18NException e) {
+            String missatgeError = "Error descarregant el llistat de repositoris: " + e.getMessage();
+            log.error(missatgeError, e);
+            // throw new I18NException("genapp.comodi", missatgeError);
+        }
+
+        nightlyCompilationTempDir = Configuracio.getNightlyCompilationTempDir();
     }
 
     private static void setUpCompilador() throws IOException {
@@ -70,6 +86,42 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
             gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
         }
         compilador = new Compilador();
+    }
+
+    private void setUpRepositoris() throws I18NException {
+        for (String org : getOrganizations()) {
+            List<StringKeyValue> repos = new ArrayList<>();
+            try {
+                getRepositories(org).forEach(repo -> {
+                    repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
+                });
+            } catch (Exception e) {
+                String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": "
+                        + e.getMessage();
+                log.error(missatgeError, e);
+                throw new I18NException("genapp.comodi", missatgeError);
+            }
+            orgsRepos.put(org, repos);
+        }
+    }
+
+    @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })
+    public Collection<String> getOrgs() {
+        return orgsRepos.keySet();
+    }
+
+    @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })
+    public List<StringKeyValue> getRepos(String org) {
+        if (org == null || org.isEmpty()) {
+            List<StringKeyValue> repos = new ArrayList<>();
+            for (List<StringKeyValue> orgRepos : orgsRepos.values()) {
+                repos.addAll(orgRepos);
+            }
+            return repos;
+
+        }
+
+        return orgsRepos.get(org);
     }
 
     @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })

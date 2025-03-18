@@ -1,10 +1,14 @@
 package org.fundaciobit.powertoys.logic;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.powertoys.ejb.RepoCompilacioService;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
@@ -25,6 +29,10 @@ public interface RepoCompilacioAdminLogicaService extends RepoCompilacioService 
      * 
      * public AnnexJPA createFull(AnnexJPA annex) throws I18NException;
      */
+    public List<StringKeyValue> getRepos(String org);
+
+    public Collection<String> getOrgs();
+
     public List<String> getOrganizations();
 
     public List<GHRepository> getRepositories(String owner) throws IOException, I18NException;

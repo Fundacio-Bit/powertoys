@@ -137,57 +137,20 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
 
-    List<StringKeyValue> repos = new ArrayList<>();
-    try {
-      repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
-        repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
-      });
-    } catch (Exception e) {
-      String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
-      HtmlUtils.saveMessageError(request, missatgeError);
-      log.error(missatgeError, e);
-      throw new I18NException("genapp.comodi", missatgeError);
-    }
-    return repos;
+    return repoCompilacioLogicaEjb.getRepos(org);
   }
 
   @Override
   public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request,
       ModelAndView mav, Where where) throws I18NException {
-    List<StringKeyValue> orgs = new ArrayList<>();
-    List<StringKeyValue> repos = new ArrayList<>();
-    for (String org : repoCompilacioLogicaEjb.getOrganizations()) {
-      orgs.add(new StringKeyValue(org, org));
-      try {
-        repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
-          repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
-        });
-      } catch (Exception e) {
-        String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
-        HtmlUtils.saveMessageError(request, missatgeError);
-        log.error(missatgeError, e);
-        throw new I18NException("genapp.comodi", missatgeError);
-      }
-    }
-    return repos;
+    return repoCompilacioLogicaEjb.getRepos(null);
   }
 
   public List<StringKeyValue> getReferenceListForOrganitzacioGitHub(HttpServletRequest request,
       ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> orgs = new ArrayList<>();
-    List<StringKeyValue> repos = new ArrayList<>();
-    for (String org : repoCompilacioLogicaEjb.getOrganizations()) {
+    for (String org : repoCompilacioLogicaEjb.getOrgs()) {
       orgs.add(new StringKeyValue(org, org));
-      try {
-        repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
-          repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
-        });
-      } catch (Exception e) {
-        String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
-        HtmlUtils.saveMessageError(request, missatgeError);
-        log.error(missatgeError, e);
-        throw new I18NException("genapp.comodi", missatgeError);
-      }
     }
     return orgs;
   }
