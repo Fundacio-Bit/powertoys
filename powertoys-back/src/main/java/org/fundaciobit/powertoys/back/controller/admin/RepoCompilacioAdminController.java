@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
@@ -27,11 +28,17 @@ import org.fundaciobit.powertoys.model.entity.RepoCompilacio;
 import org.fundaciobit.powertoys.model.fields.RepoCompilacioFields;
 import org.fundaciobit.powertoys.persistence.RepoCompilacioJPA;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * Controlador per a la gestió de repositoris de compilació.
+ * 
+ * @author jpou
+ */
 @MenuOption(labelCode = "repoCompilacio.repoCompilacio.plural", order = 3, group = "ADMIN", addSeparatorBefore = true)
 @Controller
 @RequestMapping(value = RepoCompilacioAdminController.CONTEXTWEB)
@@ -72,7 +79,8 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       repoCompilacioFilterForm.addAdditionalButton(veureExecucionsNocturnesButton);
 
       repoCompilacioFilterForm.setOrderBy(RepoCompilacioFields.ORDRE.getJavaName());
-      // repoCompilacioFilterForm.setOrderAsc(false);
+
+      // repoCompilacioFilterForm.setAttachedAdditionalJspCode(true);
     }
 
     return repoCompilacioFilterForm;
@@ -81,8 +89,71 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
   @Override
   public RepoCompilacioForm getRepoCompilacioForm(RepoCompilacioJPA _jpa, boolean __isView, HttpServletRequest request,
       ModelAndView mav) throws I18NException {
-    RepoCompilacioForm repoComilacioForm = super.getRepoCompilacioForm(_jpa, __isView, request, mav);
+    RepoCompilacioForm repoCompilacioForm = super.getRepoCompilacioForm(_jpa, __isView, request, mav);
 
+    // repoComilacioForm.setListOfValuesForOrganitzacioGitHub(orgs);
+    // repoComilacioForm.setListOfValuesForRepositoriGitHub(repos);
+
+    log.info("entram a getRepoCompilacioForm");
+    if (repoCompilacioForm.isNou()) {
+      RepoCompilacioJPA rpc = repoCompilacioForm.getRepoCompilacio();
+      rpc.setActiu(true);
+
+      if (rpc.getOrganitzacioGitHub() == null) {
+        Set<Field<?>> campsOcults = new HashSet<Field<?>>(
+            Arrays.asList(RepoCompilacioFields.ALL_REPOCOMPILACIO_FIELDS));
+        campsOcults.remove(RepoCompilacioFields.ORGANITZACIOGITHUB);
+        repoCompilacioForm.setHiddenFields(campsOcults);
+      }
+    } else {
+      repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
+      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
+      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.REPOSITORIGITHUB);
+    }
+
+    return repoCompilacioForm;
+  }
+
+  @Override
+  public void postValidate(HttpServletRequest request, RepoCompilacioForm repoCompilacioForm, BindingResult result)
+      throws I18NException {
+    log.info("entram a postValidate " + repoCompilacioForm.isNou());
+    RepoCompilacioJPA repoCompilacio = repoCompilacioForm.getRepoCompilacio();
+    if (repoCompilacioForm.isNou() && repoCompilacio.getOrganitzacioGitHub() != null
+        && repoCompilacio.getRepositoriGitHub() == null) {
+      repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
+      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
+
+      repoCompilacioForm.setListOfValuesForRepositoriGitHub(
+          getReferenceListForRepositoriGitHub(request, null, repoCompilacioForm, null));
+    }
+  }
+
+  @Override
+  public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request,
+      ModelAndView mav, RepoCompilacioForm repoCompilacioForm, Where where) throws I18NException {
+    String org = repoCompilacioForm.getRepoCompilacio().getOrganitzacioGitHub();
+    if (repoCompilacioForm.isHiddenField(REPOSITORIGITHUB) || org == null) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+
+    List<StringKeyValue> repos = new ArrayList<>();
+    try {
+      repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
+        repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
+      });
+    } catch (Exception e) {
+      String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
+      HtmlUtils.saveMessageError(request, missatgeError);
+      log.error(missatgeError, e);
+      throw new I18NException("genapp.comodi", missatgeError);
+    }
+    return repos;
+  }
+
+  @Override
+  public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
     List<StringKeyValue> orgs = new ArrayList<>();
     List<StringKeyValue> repos = new ArrayList<>();
     for (String org : repoCompilacioLogicaEjb.getOrganizations()) {
@@ -98,23 +169,27 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
         throw new I18NException("genapp.comodi", missatgeError);
       }
     }
-    repoComilacioForm.setListOfValuesForOrganitzacioGitHub(orgs);
-    repoComilacioForm.setListOfValuesForRepositoriGitHub(repos);
+    return repos;
+  }
 
-    if (repoComilacioForm.isNou()) {
-      repoComilacioForm.getRepoCompilacio().setActiu(true);
-
-      // repoComilacioForm.setReadOnlyFields(new
-      // HashSet<Field<?>>(Arrays.asList(RepoCompilacioFields.NOM)) );
+  public List<StringKeyValue> getReferenceListForOrganitzacioGitHub(HttpServletRequest request,
+      ModelAndView mav, Where where) throws I18NException {
+    List<StringKeyValue> orgs = new ArrayList<>();
+    List<StringKeyValue> repos = new ArrayList<>();
+    for (String org : repoCompilacioLogicaEjb.getOrganizations()) {
+      orgs.add(new StringKeyValue(org, org));
+      try {
+        repoCompilacioLogicaEjb.getRepositories(org).forEach(repo -> {
+          repos.add(new StringKeyValue(repo.getName(), repo.getFullName()));
+        });
+      } catch (Exception e) {
+        String missatgeError = "Error al consultar els repositoris de l'organització " + org + ": " + e.getMessage();
+        HtmlUtils.saveMessageError(request, missatgeError);
+        log.error(missatgeError, e);
+        throw new I18NException("genapp.comodi", missatgeError);
+      }
     }
-
-    // repoComilacioForm.setCancelButtonVisible(false);
-    // AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left",
-    // "ear.tornar",
-    // getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
-    // repoComilacioForm.addAdditionalButton(returnButton);
-
-    return repoComilacioForm;
+    return orgs;
   }
 
   @Override
