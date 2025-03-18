@@ -151,6 +151,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/repoCompilacioList.jsp" />
     </definition>
 
+    <definition name="compilacioFormAdmin" extends="admin">
+        <put-attribute name="titol" value="repoCompilacio.repoCompilacio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/compilacioForm.jsp" />
+    </definition>
+    
+    <definition name="compilacioListAdmin" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/compilacioList.jsp" />
+    </definition>
+
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

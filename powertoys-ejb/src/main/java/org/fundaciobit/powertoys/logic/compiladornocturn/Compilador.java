@@ -2,41 +2,35 @@ package org.fundaciobit.powertoys.logic.compiladornocturn;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
+import org.fundaciobit.powertoys.commons.utils.Configuracio;
+import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.jboss.logging.Logger;
-
 
 public class Compilador {
 
+    public final static String COMANDA_COMPILACIO_MAVEN = "mvn clean install -DskipTests";
+
     protected final static Logger log = Logger.getLogger(Compilador.class);
-
-    private GitHubManager ghManager;
-
-    public void setGhManager(GitHubManager ghManager) {
-        this.ghManager = ghManager;
-    }
 
     /**
      * Constructor per inicialitzar el compilador.
      */
     public Compilador() {
-    }
-
-    /**
-     * Constructor per inicialitzar el compilador amb una instància GitHubManager.
-     *
-     * @param gitHubManager Fitxer de propietats amb les credencials d'usuari
-     */
-    public Compilador(GitHubManager gitHubManager) {
-        this.ghManager = gitHubManager;
     }
 
     /**
@@ -48,11 +42,12 @@ public class Compilador {
      * @return El directori on s'ha descarregat el repositori
      * @throws Exception Si hi ha algun error durant la descàrrega o el checkout
      */
-    public File descarregarRepositori(Path tempDir, String gitUrl, String tag) throws Exception {
-        if (this.ghManager == null) {
+    public File descarregarRepositori(GitHubManager ghManager, Path tempDir, String gitUrl, String tag)
+            throws Exception {
+        if (ghManager == null) {
             throw new RuntimeException("GitHubManager no inicialitzat");
         }
-        return this.ghManager.cloneRepositoryAtTag(tempDir, gitUrl, tag);
+        return ghManager.cloneRepositoryAtTag(tempDir, gitUrl, tag);
     }
 
     /**
@@ -62,7 +57,7 @@ public class Compilador {
      * @param comanda Comanda de compilació a executar
      * @throws Exception Si hi ha algun error durant l'execució de la comanda
      */
-    public void compilarRepositori(File repoDir, String comanda) throws Exception {
+    public Entry<Integer, String> compilarRepositori(File repoDir, String comanda) throws Exception {
         // Executar la comanda de compilació
         List<String> comandaList = new ArrayList<String>(Arrays.asList(comanda.split(" ")));
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
@@ -79,8 +74,9 @@ public class Compilador {
         Process process = processBuilder.start();
 
         // Llegir la sortida de la comanda
+        String output = "";
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-            String output = reader.lines().collect(Collectors.joining("\n"));
+            output = reader.lines().collect(Collectors.joining("\n"));
             log.info(output);
         }
 
@@ -91,6 +87,8 @@ public class Compilador {
             throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
                     + comanda + " -- directori: " + repoDir);
         }
+
+        return new SimpleEntry<>(exitCode, output);
     }
 
     /**
@@ -102,14 +100,15 @@ public class Compilador {
      * @param comanda Comanda de compilació a executar
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
      */
-    public void descarregarICompilar(String gitUrl, String tag, String comanda) throws Exception {
+    public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, String gitUrl, String tag,
+            String comanda) throws Exception {
         Path tempDir = null;
         try {
             // Crear un directori temporal per descarregar el repositori
             tempDir = Files.createTempDirectory("repositori");
             log.info("Directori temporal creat: " + tempDir);
-            File repoDir = descarregarRepositori(tempDir, gitUrl, tag);
-            compilarRepositori(repoDir, comanda);
+            File repoDir = descarregarRepositori(ghManager, tempDir, gitUrl, tag);
+            return compilarRepositori(repoDir, comanda);
         } finally {
             if (tempDir != null) {
                 deleteDirectory(tempDir.toFile());
@@ -127,8 +126,9 @@ public class Compilador {
      * @param comanda Comanda de compilació a executar
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
      */
-    public void descarregarICompilar(URL gitUrl, String tag, String comanda) throws Exception {
-        descarregarICompilar(gitUrl.toString(), tag, comanda);
+    public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, URL gitUrl, String tag, String comanda)
+            throws Exception {
+        return descarregarICompilar(ghManager, gitUrl.toString(), tag, comanda);
     }
 
     /**
@@ -162,8 +162,26 @@ public class Compilador {
         String comanda = args[2];
 
         Compilador compilador = new Compilador();
+        Map<String, GitHubManager> gitHubManagers = new HashMap<>();
+        ;
         try {
-            compilador.descarregarICompilar(gitUrl, tag, comanda);
+            Properties configGH = new Properties();
+            configGH.load(new FileInputStream("gh.properties"));
+            Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations(configGH);
+
+            // Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations();
+
+            for (Entry<String, String[]> entry : ghConfig.entrySet()) {
+                String organitzacio = entry.getKey();
+                String username = entry.getValue()[0];
+                String token = entry.getValue()[1];
+                gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
+            }
+            compilador = new Compilador();
+
+            // TODO: extreure el nom de l'organització del gitUrl
+            String organization = "Fundacio-Bit";
+            compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl, tag, comanda);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

@@ -1,5 +1,6 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
+import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.jboss.logging.Logger;
 import org.junit.Before;
@@ -19,6 +20,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 @RunWith(Enclosed.class)
@@ -40,26 +44,23 @@ public class CompiladorTest {
 
         private static Compilador compilador;
 
-        private static String username;
-
-        private static String token;
-
-        private static GitHubManager gitHubManager;
+        private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();;
 
         @BeforeClass
         public static void setUpClass() throws IOException {
             Properties configGH = new Properties();
             configGH.load(new FileInputStream("gh.properties"));
+            Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations(configGH);
 
-            username = configGH.getProperty("githubmanager.username");
-            token = configGH.getProperty("githubmanager.token");
+            // Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations();
 
-            // username = Configuracio.getGitHubManagerUser();
-            // token = Configuracio.getGitHubManagerToken();
-            // organization = Configuracio.getGitHubManagerOrganization();
-
-            gitHubManager = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
-            compilador = new Compilador(gitHubManager);
+            for (Entry<String, String[]> entry : ghConfig.entrySet()) {
+                String organitzacio = entry.getKey();
+                String username = entry.getValue()[0];
+                String token = entry.getValue()[1];
+                gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
+            }
+            compilador = new Compilador();
         }
 
         @Before
@@ -83,7 +84,9 @@ public class CompiladorTest {
             try {
                 log.info("Inici del test, descarregant i compilant el repositori: " + gitUrl + " amb el tag: "
                         + tag + " i la comanda: " + comanda);
-                compilador.descarregarICompilar(gitUrl, tag, comanda);
+                // TODO: extreure el nom de l'organització del gitUrl
+                String organization = "Fundacio-Bit";
+                compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl, tag, comanda);
             } catch (IOException e) {
                 if (comanda.equals("invalidcommand")) {
                     // Expected exception for invalid command
@@ -117,29 +120,25 @@ public class CompiladorTest {
         @Parameter(1)
         public String repo;
 
-        private final static String COMANDA = "mvn clean install -DskipTests";
-
         private static Compilador compilador;
 
-        private static String username;
-
-        private static String token;
-
-        private static GitHubManager gitHubManager;
+        private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();;
 
         @BeforeClass
         public static void setUpClass() throws IOException {
             Properties configGH = new Properties();
             configGH.load(new FileInputStream("gh.properties"));
+            Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations(configGH);
 
-            username = configGH.getProperty("githubmanager.username");
-            token = configGH.getProperty("githubmanager.token");
+            // Map<String, String[]> ghConfig = Configuracio.getGitHubOrganizations();
 
-            // username = Configuracio.getGitHubManagerUser();
-            // token = Configuracio.getGitHubManagerToken();
-
-            gitHubManager = new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token);
-            compilador = new Compilador(gitHubManager);
+            for (Entry<String, String[]> entry : ghConfig.entrySet()) {
+                String organitzacio = entry.getKey();
+                String username = entry.getValue()[0];
+                String token = entry.getValue()[1];
+                gitHubManagers.put(organitzacio, new GitHubManager(AuthSchema.OAUTH_TOKEN, username, token));
+            }
+            compilador = new Compilador();
         }
 
         @Before
@@ -156,6 +155,8 @@ public class CompiladorTest {
 
         @Test
         public void testDescarregarICompilarLatestTag() throws Exception {
+            log.info("Inici del test, descarregant i compilant el darrer tag del repositori: " + owner + "/" + repo);
+            GitHubManager gitHubManager = gitHubManagers.get(owner);
             GHTag result = gitHubManager.getLatestTag(owner, repo);
 
             assertNotNull(result);
@@ -172,7 +173,8 @@ public class CompiladorTest {
                             + " no pot ser un string buit. Commit del tag trobat com a darrer: " + result.getCommit(),
                     "", responsable);
 
-            compilador.descarregarICompilar(result.getOwner().getHttpTransportUrl(), result.getName(), COMANDA);
+            compilador.descarregarICompilar(gitHubManager, result.getOwner().getHttpTransportUrl(), result.getName(),
+                    Compilador.COMANDA_COMPILACIO_MAVEN);
         }
     }
 }

@@ -5,7 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 
@@ -192,12 +197,53 @@ public class Configuracio implements Constants {
         return getAppProperties().getProperty(POWERTOYS_PROPERTY_BASE + "filesystemmanagerclass");
     }
 
-    public static String getGitHubManagerUser() {
-        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.username");
+    /**
+     * Consulta les organitzacions de GitHub des del fitxer de configuració.
+     * Aquestes venen en el següent format:
+     * github.[organitzacio].name=
+     * github.[organitzacio].token=
+     *
+     * @return Map on les claus són els noms d'organització i els valors són arrays
+     *         amb el nom i el token.
+     */
+    public static Map<String, String[]> getGitHubOrganizations() {
+        Properties properties = getAppSystemProperties();
+        return getGitHubOrganizations(properties);
     }
 
-    public static String getGitHubManagerToken() {
-        return getAppSystemProperties().getProperty(POWERTOYS_PROPERTY_BASE + "githubmanager.token");
+    /**
+     * Consulta les organitzacions de GitHub des del fitxer de configuració.
+     * Aquestes venen en el següent format:
+     * github.[organitzacio].name=
+     * github.[organitzacio].token=
+     *
+     * @param properties Propietats on es buscaran les organitzacions de GitHub.
+     * @return Map on les claus són els noms d'organització i els valors són arrays
+     *         amb el nom i el token.
+     */
+    public static Map<String, String[]> getGitHubOrganizations(Properties properties) {
+        Map<String, String[]> gitHubOrganizations = new HashMap<>();
+
+        // Expressió regular per verificar les claus i extreure el nom de l'organització
+        Pattern pattern = Pattern.compile("^github\\.([^.]+)\\.(name|token)$");
+
+        for (String key : properties.stringPropertyNames()) {
+            Matcher matcher = pattern.matcher(key);
+            if (matcher.matches()) {
+                String organization = matcher.group(1);
+                String type = matcher.group(2);
+                String value = properties.getProperty(key);
+
+                gitHubOrganizations.putIfAbsent(organization, new String[2]);
+                if ("name".equals(type)) {
+                    gitHubOrganizations.get(organization)[0] = value;
+                } else if ("token".equals(type)) {
+                    gitHubOrganizations.get(organization)[1] = value;
+                }
+            }
+        }
+
+        return gitHubOrganizations;
     }
 
     public static String getGitHubManagerOrganization() {
