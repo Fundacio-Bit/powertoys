@@ -1,6 +1,5 @@
 package org.fundaciobit.powertoys.back.controller.admin;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,6 +37,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Controlador per a la gestió de repositoris de compilació.
  * 
  * @author jpou
+ * 
  */
 @MenuOption(labelCode = "repoCompilacio.repoCompilacio.plural", order = 3, group = "ADMIN", addSeparatorBefore = true)
 @Controller
@@ -224,7 +224,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
 
     log.info("Redirigint per a veure les execucions nocturnes");
 
-    return "redirect:" + (new CompilacioAdminController()).getContextWeb() + "/list/1";
+    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
   }
 
   @RequestMapping(value = "/executeCompilacio/{repoCompilacioID}")
@@ -252,7 +252,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
     log.info("CODI DE SORTIDA: " + compilacioFeta.getExitCode());
     log.info("SORTIDA: " + compilacioFeta.getOutput());
 
-    return "redirect:" + (new CompilacioAdminController()).getContextWeb() + "/list/1";
+    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
   }
 
 }

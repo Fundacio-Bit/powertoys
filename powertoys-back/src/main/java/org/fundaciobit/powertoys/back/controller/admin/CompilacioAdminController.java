@@ -15,10 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * @author jpou
+ *
+ */
 @Controller
-@RequestMapping(value = "/admin/compilacio")
+@RequestMapping(value = CompilacioAdminController.CONTEXTWEB)
 @SessionAttributes(types = { CompilacioForm.class, CompilacioFilterForm.class })
 public class CompilacioAdminController extends CompilacioController {
+
+    public static final String CONTEXTWEB = "/admin/compilacio";
 
     @Override
     public boolean isActiveFormNew() {
@@ -65,7 +72,7 @@ public class CompilacioAdminController extends CompilacioController {
             // compilacioFilterForm.setDeleteButtonVisible(false);
             compilacioFilterForm.setViewButtonVisible(true);
             AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
-                    (new RepoCompilacioAdminController()).getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
+                    RepoCompilacioAdminController.CONTEXTWEB + "/list/1", AdditionalButtonStyle.DANGER);
             compilacioFilterForm.addAdditionalButton(returnButton);
         }
 

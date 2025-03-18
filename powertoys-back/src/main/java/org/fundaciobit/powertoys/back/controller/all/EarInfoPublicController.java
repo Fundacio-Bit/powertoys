@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/public/earInfo")
+@RequestMapping(value = EarInfoPublicController.CONTEXTWEB)
 @SessionAttributes(types = { EarInfoForm.class, EarInfoFilterForm.class })
 public class EarInfoPublicController extends EarInfoController {
+
+    public static final String CONTEXTWEB = "/public/earInfo";
 
     @Override
     public boolean isActiveList() {
@@ -82,7 +84,7 @@ public class EarInfoPublicController extends EarInfoController {
             earInfoFilterForm.setEditButtonVisible(false);
             earInfoFilterForm.setDeleteButtonVisible(false);
             AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
-                    (new EarNoSimplePublicController()).getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
+                    EarNoSimplePublicController.CONTEXTWEB + "/list/1", AdditionalButtonStyle.DANGER);
             earInfoFilterForm.addAdditionalButton(returnButton);
         }
 

@@ -41,9 +41,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 // @MenuOption(labelCode = "ear.ear.plural", order = 2, group = "PUBLIC", addSeparatorBefore = false)
 @Controller
-@RequestMapping(value = "/public/earNoSimple")
+@RequestMapping(value = EarNoSimplePublicController.CONTEXTWEB)
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
 public class EarNoSimplePublicController extends EarController {
+
+    public static final String CONTEXTWEB = "/public/earNoSimple";
 
     @Override
     public boolean isActiveList() {
@@ -199,7 +201,7 @@ public class EarNoSimplePublicController extends EarController {
         request.getSession().setAttribute("earID", earID);
         log.info("Redirigint per a verue els earInfo de l'EAR " + earID);
 
-        return "redirect:" + (new EarInfoPublicController()).getContextWeb() + "/list/1";
+        return "redirect:" + EarInfoPublicController.CONTEXTWEB + "/list/1";
     }
 
     @Override

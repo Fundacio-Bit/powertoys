@@ -76,7 +76,7 @@ public class VersionsAplicacioPublicController extends AplicacioController {
         AplicacioFilterForm appFilterForm = super.getAplicacioFilterForm(pagina, mav, request);
         if (appFilterForm.isNou()) {
             appFilterForm.addAdditionalButton(new AdditionalButton("fas fa-code-branch",
-                    "versionsversio.versio.plural", (new VersioControllerPublic()).getContextWeb() + "/list/1",
+                    "versionsversio.versio.plural", VersioControllerPublic.CONTEXTWEB + "/list/1",
                     AdditionalButtonStyle.INFO));
 
             if (isAdmin()) {
