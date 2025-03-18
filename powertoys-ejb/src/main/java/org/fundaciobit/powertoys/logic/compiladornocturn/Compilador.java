@@ -123,7 +123,11 @@ public class Compilador {
             if (pathTempDir == null) {
                 tempDir = Files.createTempDirectory("repositori");
             } else {
-                tempDir = Files.createDirectory(Paths.get(pathTempDir));
+                tempDir = Paths.get(pathTempDir);
+                if (!Files.exists(tempDir)) {
+                    tempDir = Files.createDirectory(tempDir);
+                }
+                tempDir = Files.createDirectory(Paths.get(tempDir.toString(), tag));
             }
             log.info("Directori temporal creat: " + tempDir);
             File repoDir = descarregarRepositori(ghManager, tempDir, gitUrl, tag);
