@@ -93,6 +93,11 @@ public class CompiladorTest {
                 String organization = "Fundacio-Bit";
                 Entry<Integer, String> result = compilador.descarregarICompilar(gitHubManagers.get(organization),
                         gitUrl, tag, comanda, nightlyCompilationTempDir);
+                int exitCode = result.getKey();
+                if (exitCode != 0) {
+                    throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
+                            + comanda + " -- gitUrl: " + gitUrl + " -- tag: " + tag);
+                }
             } catch (IOException e) {
                 if (comanda.equals("invalidcommand")) {
                     // Expected exception for invalid command
@@ -187,6 +192,12 @@ public class CompiladorTest {
             Entry<Integer, String> resultCompilacio = compilador.descarregarICompilar(gitHubManager,
                     result.getOwner().getHttpTransportUrl(), result.getName(),
                     Compilador.COMANDA_COMPILACIO_MAVEN, nightlyCompilationTempDir);
+            int exitCode = resultCompilacio.getKey();
+            if (exitCode != 0) {
+                throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
+                        + Compilador.COMANDA_COMPILACIO_MAVEN + " -- gitUrl: " + result.getOwner().getHttpTransportUrl()
+                        + " -- tag: " + result.getName());
+            }
         }
     }
 }

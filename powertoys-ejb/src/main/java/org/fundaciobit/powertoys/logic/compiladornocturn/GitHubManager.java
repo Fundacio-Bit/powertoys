@@ -1,6 +1,9 @@
 package org.fundaciobit.powertoys.logic.compiladornocturn;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.TransportException;
 import org.jboss.logging.Logger;
 import org.kohsuke.github.*;
 import org.kohsuke.github.GHProject.ProjectStateFilter;
@@ -267,10 +270,13 @@ public class GitHubManager {
      * @param directory Ruta del directori on descarregar el repositori
      * @param gitUrl    URL del repositori de GitHub
      * @param tag       Tag del repositori a fer checkout
+     * @throws GitAPIException
+     * @throws TransportException
+     * @throws InvalidRemoteException
      * @return El directori on clonar el repositori
-     * @throws Exception Si hi ha algun error durant la clonació o el checkout
      */
-    public File cloneRepositoryAtTag(Path directory, String gitUrl, String tag) throws Exception {
+    public File cloneRepositoryAtTag(Path directory, String gitUrl, String tag)
+            throws InvalidRemoteException, TransportException, GitAPIException {
         File repoDir = directory.toFile();
 
         // Descarregar el repositori de GitHub

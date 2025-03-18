@@ -3,10 +3,12 @@ package org.fundaciobit.powertoys.logic.compiladornocturn;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,9 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.TransportException;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.jboss.logging.Logger;
@@ -36,14 +41,17 @@ public class Compilador {
     /**
      * Descarrega un repositori de GitHub i fa checkout al tag especificat.
      *
-     * @param tempDir Ruta del directori temporal on descarregar el repositori
-     * @param gitUrl  URL del repositori de GitHub
-     * @param tag     Tag del repositori a fer checkout
+     * @param ghManager Gestor de GitHub
+     * @param tempDir   Ruta del directori temporal on descarregar el repositori
+     * @param gitUrl    URL del repositori de GitHub
+     * @param tag       Tag del repositori a fer checkout
+     * @throws GitAPIException
+     * @throws TransportException
+     * @throws InvalidRemoteException
      * @return El directori on s'ha descarregat el repositori
-     * @throws Exception Si hi ha algun error durant la descàrrega o el checkout
      */
     public File descarregarRepositori(GitHubManager ghManager, Path tempDir, String gitUrl, String tag)
-            throws Exception {
+            throws InvalidRemoteException, TransportException, GitAPIException {
         if (ghManager == null) {
             throw new RuntimeException("GitHubManager no inicialitzat");
         }
@@ -55,9 +63,13 @@ public class Compilador {
      *
      * @param repoDir Directori on s'ha descarregat el repositori
      * @param comanda Comanda de compilació a executar
-     * @throws Exception Si hi ha algun error durant l'execució de la comanda
+     * @throws IOException          Si hi ha algun error durant l'execució de la
+     *                              comanda
+     * @throws InterruptedException Si el procés és interromput
+     * @return Un Entry amb el codi de sortida de la comanda i la sortida generada
      */
-    public Entry<Integer, String> compilarRepositori(File repoDir, String comanda) throws Exception {
+    public Entry<Integer, String> compilarRepositori(File repoDir, String comanda)
+            throws IOException, InterruptedException {
         // Executar la comanda de compilació
         List<String> comandaList = new ArrayList<String>(Arrays.asList(comanda.split(" ")));
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
@@ -84,7 +96,7 @@ public class Compilador {
         int exitCode = process.waitFor();
         log.info("Procés acabat: " + process.info() + ", codi de sortida: " + exitCode);
         if (exitCode != 0) {
-            throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
+            log.info("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
                     + comanda + " -- directori: " + repoDir);
         }
 
@@ -95,11 +107,13 @@ public class Compilador {
      * Descarrega un repositori de GitHub i el compila utilitzant la comanda
      * especificada.
      *
-     * @param gitUrl  URL del repositori de GitHub
-     * @param tag     Tag del repositori a fer checkout
-     * @param comanda Comanda de compilació a executar
+     * @param ghManager   Gestor de GitHub
+     * @param gitUrl      URL del repositori de GitHub
+     * @param tag         Tag del repositori a fer checkout
+     * @param comanda     Comanda de compilació a executar
      * @param pathTempDir Ruta del directori temporal on descarregar el repositori
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
+     * @return Un Entry amb el codi de sortida de la comanda i la sortida generada
      */
     public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, String gitUrl, String tag,
             String comanda, String pathTempDir) throws Exception {
@@ -126,11 +140,13 @@ public class Compilador {
      * Descarrega un repositori de GitHub i el compila utilitzant la comanda
      * especificada.
      *
-     * @param gitUrl  URL del repositori de GitHub
-     * @param tag     Tag del repositori a fer checkout
-     * @param comanda Comanda de compilació a executar
+     * @param ghManager   Gestor de GitHub
+     * @param gitUrl      URL del repositori de GitHub
+     * @param tag         Tag del repositori a fer checkout
+     * @param comanda     Comanda de compilació a executar
      * @param pathTempDir Ruta del directori temporal on descarregar el repositori
      * @throws Exception Si hi ha algun error durant la descàrrega o la compilació
+     * @return Un Entry amb el codi de sortida de la comanda i la sortida generada
      */
     public Entry<Integer, String> descarregarICompilar(GitHubManager ghManager, URL gitUrl, String tag, String comanda,
             String pathTempDir)
@@ -170,7 +186,6 @@ public class Compilador {
 
         Compilador compilador = new Compilador();
         Map<String, GitHubManager> gitHubManagers = new HashMap<>();
-        ;
         try {
             Properties configGH = new Properties();
             configGH.load(new FileInputStream("gh.properties"));
@@ -188,9 +203,13 @@ public class Compilador {
 
             // TODO: extreure el nom de l'organització del gitUrl
             String organization = "Fundacio-Bit";
-            compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl, tag, comanda);
             Entry<Integer, String> result = compilador.descarregarICompilar(gitHubManagers.get(organization), gitUrl,
                     tag, comanda, null);
+            int exitCode = result.getKey();
+            if (exitCode != 0) {
+                throw new RuntimeException("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
+                        + comanda + " -- gitUrl: " + gitUrl + " -- tag: " + tag);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
