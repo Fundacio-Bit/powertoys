@@ -46,6 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RepoCompilacioAdminController extends RepoCompilacioController {
 
   public static final String CONTEXTWEB = "/admin/repocompilacio";
+  public static final String REPO_ID_SESSION_ATTRIBUTE_NAME = "repoID";
 
   @EJB(mappedName = RepoCompilacioAdminLogicaService.JNDI_NAME)
   protected RepoCompilacioAdminLogicaService repoCompilacioLogicaEjb;
@@ -75,7 +76,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       // repoCompilacioFilterForm.setDeleteButtonVisible(false);
       AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-eye",
           "repocompilacio.veurecompilacions",
-          getContextWeb() + "/veureExecucionsNocturnes", AdditionalButtonStyle.PRIMARY);
+          getContextWeb() + "/veureExecucionsNocturnes", AdditionalButtonStyle.INFO);
       repoCompilacioFilterForm.addAdditionalButton(veureExecucionsNocturnesButton);
 
       repoCompilacioFilterForm.setOrderBy(RepoCompilacioFields.ORDRE.getJavaName());
@@ -170,14 +171,14 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       AdditionalButton executeCompButton = new AdditionalButton("fas fa-play-circle",
           "repocompilacio.executarcompilacio",
           jsOpenModalContinuar,
-          AdditionalButtonStyle.INFO);
-      // AdditionalButton executeCompButton = new AdditionalButton("fas
-      // fa-play-circle",
-      // "repocompilacio.executarcompilacio",
-      // getContextWeb() + "/executeCompilacio/" + repoID,
-      // AdditionalButtonStyle.INFO);
-
+          AdditionalButtonStyle.PRIMARY);
       filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
+
+      AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-glasses",
+          "repocompilacio.executarcompilacio",
+          getContextWeb() + "/veureExecucionsNocturnes/" + repoID,
+          AdditionalButtonStyle.INFO);
+      filterForm.addAdditionalButtonByPK(repoID, veureExecucionsNocturnesButton);
     }
   }
 
@@ -185,7 +186,18 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
   public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response)
       throws I18NException {
 
+    request.getSession().removeAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME);
     log.info("Redirigint per a veure les execucions nocturnes");
+
+    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+  }
+
+  @RequestMapping(value = "/veureExecucionsNocturnes/{repoID}")
+  public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response,
+      @PathVariable Long repoID)
+      throws I18NException {
+    request.getSession().setAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME, repoID);
+    log.info("Redirigint per a veure les execucions nocturnes del repositori " + repoID);
 
     return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
   }

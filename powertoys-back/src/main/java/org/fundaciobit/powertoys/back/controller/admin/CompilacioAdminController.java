@@ -1,8 +1,10 @@
 package org.fundaciobit.powertoys.back.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
 import org.fundaciobit.powertoys.back.controller.webdb.CompilacioController;
@@ -90,5 +92,18 @@ public class CompilacioAdminController extends CompilacioController {
         compilacioForm.addAdditionalButton(returnButton);
 
         return compilacioForm;
+    }
+
+    @Override
+    public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+        HttpSession session = request.getSession();
+        Object repoIdAttr = session.getAttribute(RepoCompilacioAdminController.REPO_ID_SESSION_ATTRIBUTE_NAME);
+        if (repoIdAttr != null) {
+            long repoID = (long) repoIdAttr;
+            session.removeAttribute(RepoCompilacioAdminController.REPO_ID_SESSION_ATTRIBUTE_NAME);
+            return CompilacioFields.REPOCOMPILACIOID.equal(repoID);
+        }
+
+        return null;
     }
 }
