@@ -97,7 +97,6 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
     // repoComilacioForm.setListOfValuesForOrganitzacioGitHub(orgs);
     // repoComilacioForm.setListOfValuesForRepositoriGitHub(repos);
 
-    log.info("entram a getRepoCompilacioForm");
     if (repoCompilacioForm.isNou()) {
       RepoCompilacioJPA rpc = repoCompilacioForm.getRepoCompilacio();
       rpc.setActiu(true);
@@ -120,7 +119,6 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
   @Override
   public void postValidate(HttpServletRequest request, RepoCompilacioForm repoCompilacioForm, BindingResult result)
       throws I18NException {
-    log.info("entram a postValidate " + repoCompilacioForm.isNou());
     RepoCompilacioJPA repoCompilacio = repoCompilacioForm.getRepoCompilacio();
     if (repoCompilacioForm.isNou() && repoCompilacio.getOrganitzacioGitHub() != null
         && repoCompilacio.getRepositoriGitHub() == null) {
@@ -166,18 +164,20 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
 
     for (RepoCompilacio r : list) {
       long repoID = r.getRepocompilacioID();
-      String jsOpenModalContinuar = "javascript:createDivModal(traduccions.type['titol.compilacio.continuar'], traduccions.type['missatge.compilacio.continuar'], '"
-          + request.getContextPath() + getContextWeb() + "/executeCompilacio/" + repoID
-          + "', '', 'execute-comp-id', 'fa-play-circle');\r\n" + //
-          "        $('#execute-comp-id').modal('show');\r\n";
-      AdditionalButton executeCompButton = new AdditionalButton("fas fa-play-circle",
-          "repocompilacio.executarcompilacio",
-          jsOpenModalContinuar,
-          AdditionalButtonStyle.PRIMARY);
-      filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
+      if (!this.repoCompilacioLogicaEjb.compilationsRunning(repoID)) {
+        String jsOpenModalContinuar = "javascript:createDivModal(traduccions.type['titol.compilacio.continuar'], traduccions.type['missatge.compilacio.continuar'], '"
+            + request.getContextPath() + getContextWeb() + "/executeCompilacio/" + repoID
+            + "', '', 'execute-comp-id', 'fa-play-circle');\r\n" + //
+            "        $('#execute-comp-id').modal('show');\r\n";
+        AdditionalButton executeCompButton = new AdditionalButton("fas fa-play-circle",
+            "repocompilacio.executarcompilacio",
+            jsOpenModalContinuar,
+            AdditionalButtonStyle.PRIMARY);
+        filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
+      }
 
       AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-glasses",
-          "repocompilacio.executarcompilacio",
+          "repocompilacio.veurecompilacions",
           getContextWeb() + "/veureExecucionsNocturnes/" + repoID,
           AdditionalButtonStyle.INFO);
       filterForm.addAdditionalButtonByPK(repoID, veureExecucionsNocturnesButton);
@@ -207,6 +207,13 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
   @RequestMapping(value = "/executeCompilacio/{repoCompilacioID}")
   public String executeCompilacio(HttpServletRequest request, HttpServletResponse response,
       @PathVariable Long repoCompilacioID) throws I18NException {
+
+    if (this.repoCompilacioLogicaEjb.compilationsRunning(repoCompilacioID)) {
+      String missatgeError = "Ja hi ha una compilació en curs per a aquest repositori " + repoCompilacioID;
+      HtmlUtils.saveMessageError(request, missatgeError);
+      log.error(missatgeError);
+      return "redirect:" + getContextWeb() + "/veureExecucionsNocturnes/" + repoCompilacioID;
+    }
 
     log.info("Executant compilació forçada del repositori " + repoCompilacioID);
 

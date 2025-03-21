@@ -100,7 +100,7 @@ public class CompilacioAdminController extends CompilacioController {
         Object repoIdAttr = session.getAttribute(RepoCompilacioAdminController.REPO_ID_SESSION_ATTRIBUTE_NAME);
         if (repoIdAttr != null) {
             long repoID = (long) repoIdAttr;
-            session.removeAttribute(RepoCompilacioAdminController.REPO_ID_SESSION_ATTRIBUTE_NAME);
+            // session.removeAttribute(RepoCompilacioAdminController.REPO_ID_SESSION_ATTRIBUTE_NAME);
             return CompilacioFields.REPOCOMPILACIOID.equal(repoID);
         }
 

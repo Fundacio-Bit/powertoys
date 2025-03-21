@@ -2,9 +2,7 @@ package org.fundaciobit.powertoys.logic;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 
 import javax.ejb.Local;
@@ -39,7 +37,10 @@ public interface RepoCompilacioAdminLogicaService extends RepoCompilacioService 
 
     public List<GHRepository> getRepositories(String owner) throws IOException, I18NException;
 
-    public CompilacioGitHub descarregarLatestTagIcrearCompilacio(RepoCompilacio instance) throws I18NException, IOException;
+    public CompilacioGitHub descarregarLatestTagIcrearCompilacio(RepoCompilacio instance)
+            throws I18NException, IOException;
 
     public Future<Compilacio> compilarAsync(CompilacioGitHub compilacioGitHub) throws Exception;
+
+    public boolean compilationsRunning(long repoID) throws I18NException;
 }

@@ -42,14 +42,16 @@ import org.kohsuke.github.GHTag;
 @Stateless(name = "RepoCompilacioAdminLogicaEJB")
 public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements RepoCompilacioAdminLogicaService {
 
-    @EJB(mappedName = org.fundaciobit.powertoys.ejb.CompilacioService.JNDI_NAME)
-    protected org.fundaciobit.powertoys.ejb.CompilacioService compilacioEjb;
+    @EJB(mappedName = org.fundaciobit.powertoys.logic.CompilacioAdminLogicaService.JNDI_NAME)
+    protected org.fundaciobit.powertoys.logic.CompilacioAdminLogicaService compilacioEjb;
 
     private static String nightlyCompilationTempDir;
     private static Compilador compilador;
     private static Map<String, GitHubManager> gitHubManagers = new HashMap<>();
 
     private static Map<String, List<StringKeyValue>> orgsRepos = new HashMap<>();
+
+    private static final short EXIT_CODE_IN_PROGRESS = -1;
 
     public RepoCompilacioAdminLogicaEJB() {
         super();
@@ -168,7 +170,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
 
         long startTime = System.currentTimeMillis();
         newCompilacio.setDataInici(new Timestamp(startTime));
-        // newCompilacio.setExitCode(null);
+        newCompilacio.setExitCode(EXIT_CODE_IN_PROGRESS);
 
         return new CompilacioGitHub(ghManager, latestTag.getOwner().getHttpTransportUrl(),
                 compilacioEjb.create(newCompilacio), instance.getNom());
@@ -177,29 +179,55 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
     @Asynchronous
     @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })
     public Future<Compilacio> compilarAsync(CompilacioGitHub compilacioGitHub) throws Exception {
-        Compilacio compilacio = compilacioGitHub.getCompilacio();
-        String tagName = compilacio.getTagUrl();
-        Entry<Integer, String> compilacioResultat = compilador.descarregarICompilar(compilacioGitHub.getGitHubManager(),
-                compilacioGitHub.getGitUrl(), tagName, Compilador.COMANDA_COMPILACIO_MAVEN,
-                nightlyCompilationTempDir);
-        compilacio.setExitCode(compilacioResultat.getKey().shortValue());
-        compilacio.setOutput(compilacioResultat.getValue());
+        Compilacio compilacio = null;
+        Compilacio compilacioAcabada = null;
+        try {
+            compilacio = compilacioGitHub.getCompilacio();
+            String tagName = compilacio.getTagUrl();
+            Entry<Integer, String> compilacioResultat = compilador.descarregarICompilar(
+                    compilacioGitHub.getGitHubManager(),
+                    compilacioGitHub.getGitUrl(), tagName, Compilador.COMANDA_COMPILACIO_MAVEN,
+                    nightlyCompilationTempDir);
+            compilacio.setExitCode(compilacioResultat.getKey().shortValue());
+            compilacio.setOutput(compilacioResultat.getValue());
 
-        long endTime = System.currentTimeMillis();
-        compilacio.setDataFi(new Timestamp(endTime));
-        String repoCompilacioNom = compilacioGitHub.getRepoCompilacioNom();
-        log.info(repoCompilacioNom + " " + tagName + " compilat en " + (endTime - compilacio.getDataInici().getTime())
-                + " ms");
+            long endTime = System.currentTimeMillis();
+            compilacio.setDataFi(new Timestamp(endTime));
+            String repoCompilacioNom = compilacioGitHub.getRepoCompilacioNom();
+            log.info(repoCompilacioNom + " " + tagName + " compilat en "
+                    + (endTime - compilacio.getDataInici().getTime())
+                    + " ms");
 
-        Compilacio compilacioAcabada = compilacioEjb.update(compilacio);
+            compilacioAcabada = compilacioEjb.update(compilacio);
 
-        String missatge = "Compilació forçada del repositori " + compilacioAcabada.getRepocompilacioID() + " "
-                + repoCompilacioNom + " executada i element guardat a la base de dades";
-        log.info(missatge);
-        log.info("CODI DE SORTIDA: " + compilacioAcabada.getExitCode());
-        log.info("SORTIDA: " + compilacioAcabada.getOutput());
+            String missatge = "Compilació forçada del repositori " + compilacioAcabada.getRepocompilacioID() + " "
+                    + repoCompilacioNom + " executada i element guardat a la base de dades";
+            log.info(missatge);
+            log.info("CODI DE SORTIDA: " + compilacioAcabada.getExitCode());
+            log.info("SORTIDA: " + compilacioAcabada.getOutput());
 
-        return new javax.ejb.AsyncResult<Compilacio>(compilacioAcabada);
+            return new javax.ejb.AsyncResult<Compilacio>(compilacioAcabada);
+        } catch (Exception e) {
+            if (compilacioAcabada == null && compilacio != null) {
+                short exitCode = compilacio.getExitCode();
+                if (exitCode == EXIT_CODE_IN_PROGRESS) {
+                    compilacio.setDataFi(new Timestamp(System.currentTimeMillis()));
+                    compilacio.setExitCode((short) -2);
+                    compilacio.setOutput(e.getMessage());
+                    compilacioAcabada = compilacioEjb.update(compilacio);
+                }
+            }
+            throw e;
+        }
     }
 
+    public boolean compilationsRunning(long repoID) throws I18NException{
+        for (Compilacio compilacio : compilacioEjb.findCompilacionsByRepoCompilacioID(repoID)) {
+            if (compilacio.getExitCode() == EXIT_CODE_IN_PROGRESS) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
