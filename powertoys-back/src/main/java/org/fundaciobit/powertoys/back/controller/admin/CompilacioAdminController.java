@@ -90,6 +90,10 @@ public class CompilacioAdminController extends CompilacioController {
         AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                 getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
         compilacioForm.addAdditionalButton(returnButton);
+        AdditionalButton refreshButton = new AdditionalButton("fas fa-caret-left", "compilacio.refrescar",
+                getContextWeb() + "/view/" + compilacioForm.getCompilacio().getCompilacioID(),
+                AdditionalButtonStyle.INFO);
+        compilacioForm.addAdditionalButton(refreshButton);
 
         return compilacioForm;
     }
