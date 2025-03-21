@@ -23,8 +23,8 @@ create index pwt_repocompilacio_pk_i on pwt_repocompilacio (repocompilacioid);
         repocompilacioid int8 not null,
         tagurl varchar(255) not null,
         datainici timestamp not null,
-        datafi timestamp not null,
-        exitcode int2 not null,
+        datafi timestamp,
+        exitcode int2,
         output text,
         constraint pwt_compilacio_pk primary key (compilacioid)
     );

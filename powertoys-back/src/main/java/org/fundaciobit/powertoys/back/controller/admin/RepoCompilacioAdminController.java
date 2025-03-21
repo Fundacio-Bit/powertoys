@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Future;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.fundaciobit.powertoys.back.controller.webdb.RepoCompilacioController;
 import org.fundaciobit.powertoys.back.form.webdb.RepoCompilacioFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.RepoCompilacioForm;
 import org.fundaciobit.powertoys.logic.RepoCompilacioAdminLogicaService;
+import org.fundaciobit.powertoys.logic.compiladornocturn.CompilacioGitHub;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
 import org.fundaciobit.powertoys.model.entity.RepoCompilacio;
 import org.fundaciobit.powertoys.model.fields.RepoCompilacioFields;
@@ -209,25 +211,29 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
     log.info("Executant compilació forçada del repositori " + repoCompilacioID);
 
     RepoCompilacioJPA repoAcompilar = findByPrimaryKey(request, repoCompilacioID);
-    Compilacio compilacioFeta;
+    Compilacio novaCompilacio;
+    CompilacioGitHub compilacioEnCurs;
     try {
-      compilacioFeta = repoCompilacioLogicaEjb.descarregarICompilarLatestTag(repoAcompilar);
+      compilacioEnCurs = repoCompilacioLogicaEjb.descarregarLatestTagIcrearCompilacio(repoAcompilar);
+      novaCompilacio = compilacioEnCurs.getCompilacio();
     } catch (Exception e) {
-      String missatgeError = "Error al descarregar i compilar el repositori " + repoCompilacioID + ": "
+      String missatgeError = "Error al descarregar i crear l'objecte de compilacio " + repoCompilacioID + ": "
           + repoAcompilar.getNom() + ": " + e.getMessage();
       HtmlUtils.saveMessageError(request, missatgeError);
       log.error(missatgeError, e);
       throw new I18NException("genapp.comodi", missatgeError);
     }
 
-    String missatge = "Compilació forçada del repositori " + repoCompilacioID + " executada correctament: "
-        + repoAcompilar.getNom();
-    HtmlUtils.saveMessageSuccess(request, missatge);
-    log.info(missatge);
-    log.info("CODI DE SORTIDA: " + compilacioFeta.getExitCode());
-    log.info("SORTIDA: " + compilacioFeta.getOutput());
+    try {
+      Future<Compilacio> compilacioFeta = repoCompilacioLogicaEjb.compilarAsync(compilacioEnCurs);
+    } catch (Exception e) {
+      String missatgeError = "Error al compilar el repositori " + repoCompilacioID + ": "
+          + repoAcompilar.getNom() + ": " + e.getMessage();
+      HtmlUtils.saveMessageError(request, missatgeError);
+      log.error(missatgeError, e);
+      throw new I18NException("genapp.comodi", missatgeError);
+    }
 
-    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/view/" + novaCompilacio.getCompilacioID();
   }
-
 }

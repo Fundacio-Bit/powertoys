@@ -5,12 +5,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.powertoys.ejb.RepoCompilacioService;
+import org.fundaciobit.powertoys.logic.compiladornocturn.CompilacioGitHub;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
 import org.fundaciobit.powertoys.model.entity.RepoCompilacio;
 import org.kohsuke.github.GHRepository;
@@ -37,5 +39,7 @@ public interface RepoCompilacioAdminLogicaService extends RepoCompilacioService 
 
     public List<GHRepository> getRepositories(String owner) throws IOException, I18NException;
 
-    public Compilacio descarregarICompilarLatestTag(RepoCompilacio instance) throws Exception;
+    public CompilacioGitHub descarregarLatestTagIcrearCompilacio(RepoCompilacio instance) throws I18NException, IOException;
+
+    public Future<Compilacio> compilarAsync(CompilacioGitHub compilacioGitHub) throws Exception;
 }

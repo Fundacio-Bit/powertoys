@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -23,6 +25,7 @@ import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.powertoys.ejb.FitxerService;
 import org.fundaciobit.powertoys.ejb.RepoCompilacioEJB;
 import org.fundaciobit.powertoys.logic.compiladornocturn.Compilador;
+import org.fundaciobit.powertoys.logic.compiladornocturn.CompilacioGitHub;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
@@ -143,39 +146,60 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
     }
 
     @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })
-    public Compilacio descarregarICompilarLatestTag(RepoCompilacio instance) throws Exception {
+    public CompilacioGitHub descarregarLatestTagIcrearCompilacio(RepoCompilacio instance)
+            throws I18NException, IOException {
         Compilacio newCompilacio = new CompilacioJPA();
         newCompilacio.setRepocompilacioID(instance.getRepocompilacioID());
 
         // Obtenir darrer Tag
         String owner = instance.getOrganitzacioGitHub();
-        String repo = instance.getNom();
+        String repo = instance.getRepositoriGitHub();
         GitHubManager ghManager = gitHubManagers.get(owner);
         GHTag latestTag = ghManager.getLatestTag(owner, repo);
         if (latestTag == null) {
             throw new I18NException("No s'ha trobat cap tag al repositori " + owner + "/" + repo);
         }
-        if (latestTag.getName().trim().isEmpty()) {
+        String tagName = latestTag.getName();
+        if (tagName.trim().isEmpty()) {
             throw new I18NException("El nom del darrer tag del repositori " + owner + "/" + repo
                     + " no pot ser un string buit. Commit del tag trobat com a darrer: " + latestTag.getCommit());
         }
-        newCompilacio.setTagUrl(latestTag.getName());
+        newCompilacio.setTagUrl(tagName);
 
-        // Compilam
         long startTime = System.currentTimeMillis();
         newCompilacio.setDataInici(new Timestamp(startTime));
+        // newCompilacio.setExitCode(null);
 
-        Entry<Integer, String> compilacioResultat = compilador.descarregarICompilar(ghManager,
-                latestTag.getOwner().getHttpTransportUrl(), latestTag.getName(), Compilador.COMANDA_COMPILACIO_MAVEN,
+        return new CompilacioGitHub(ghManager, latestTag.getOwner().getHttpTransportUrl(),
+                compilacioEjb.create(newCompilacio), instance.getNom());
+    }
+
+    @Asynchronous
+    @RolesAllowed({ Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS, Constants.ROLE_EJB_WS_ACCESS })
+    public Future<Compilacio> compilarAsync(CompilacioGitHub compilacioGitHub) throws Exception {
+        Compilacio compilacio = compilacioGitHub.getCompilacio();
+        String tagName = compilacio.getTagUrl();
+        Entry<Integer, String> compilacioResultat = compilador.descarregarICompilar(compilacioGitHub.getGitHubManager(),
+                compilacioGitHub.getGitUrl(), tagName, Compilador.COMANDA_COMPILACIO_MAVEN,
                 nightlyCompilationTempDir);
-        newCompilacio.setExitCode(compilacioResultat.getKey().shortValue());
-        newCompilacio.setOutput(compilacioResultat.getValue());
+        compilacio.setExitCode(compilacioResultat.getKey().shortValue());
+        compilacio.setOutput(compilacioResultat.getValue());
 
         long endTime = System.currentTimeMillis();
-        newCompilacio.setDataFi(new Timestamp(endTime));
-        log.info(latestTag.getName() + " compilat en " + (endTime - startTime) + " ms");
+        compilacio.setDataFi(new Timestamp(endTime));
+        String repoCompilacioNom = compilacioGitHub.getRepoCompilacioNom();
+        log.info(repoCompilacioNom + " " + tagName + " compilat en " + (endTime - compilacio.getDataInici().getTime())
+                + " ms");
 
-        return compilacioEjb.create(newCompilacio);
+        Compilacio compilacioAcabada = compilacioEjb.update(compilacio);
+
+        String missatge = "Compilació forçada del repositori " + compilacioAcabada.getRepocompilacioID() + " "
+                + repoCompilacioNom + " executada i element guardat a la base de dades";
+        log.info(missatge);
+        log.info("CODI DE SORTIDA: " + compilacioAcabada.getExitCode());
+        log.info("SORTIDA: " + compilacioAcabada.getOutput());
+
+        return new javax.ejb.AsyncResult<Compilacio>(compilacioAcabada);
     }
 
 }
