@@ -51,7 +51,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
 
     private static Map<String, List<StringKeyValue>> orgsRepos = new HashMap<>();
 
-    private static final short EXIT_CODE_IN_PROGRESS = -1;
+    public static final short EXIT_CODE_IN_PROGRESS = -1;
 
     public RepoCompilacioAdminLogicaEJB() {
         super();

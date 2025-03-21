@@ -5,11 +5,14 @@ import javax.servlet.http.HttpSession;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.powertoys.back.controller.webdb.CompilacioController;
 import org.fundaciobit.powertoys.back.form.webdb.CompilacioFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.CompilacioForm;
+import org.fundaciobit.powertoys.logic.RepoCompilacioAdminLogicaEJB;
 import org.fundaciobit.powertoys.model.fields.CompilacioFields;
 import org.fundaciobit.powertoys.persistence.CompilacioJPA;
 import org.springframework.stereotype.Controller;
@@ -76,6 +79,9 @@ public class CompilacioAdminController extends CompilacioController {
             AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                     RepoCompilacioAdminController.CONTEXTWEB + "/list/1", AdditionalButtonStyle.DANGER);
             compilacioFilterForm.addAdditionalButton(returnButton);
+
+            compilacioFilterForm.setOrderBy(CompilacioFields.DATAFI.getJavaName());
+            compilacioFilterForm.setOrderAsc(false);
         }
 
         return compilacioFilterForm;
@@ -90,11 +96,16 @@ public class CompilacioAdminController extends CompilacioController {
         AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                 getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
         compilacioForm.addAdditionalButton(returnButton);
-        AdditionalButton refreshButton = new AdditionalButton("fas fa-caret-left", "compilacio.refrescar",
-                getContextWeb() + "/view/" + compilacioForm.getCompilacio().getCompilacioID(),
+        CompilacioJPA compilacio = compilacioForm.getCompilacio();
+        AdditionalButton refreshButton = new AdditionalButton("fas fa-sync-alt", "compilacio.refrescar",
+                getContextWeb() + "/view/" + compilacio.getCompilacioID(),
                 AdditionalButtonStyle.INFO);
         compilacioForm.addAdditionalButton(refreshButton);
 
+        if (compilacio.getExitCode() == RepoCompilacioAdminLogicaEJB.EXIT_CODE_IN_PROGRESS) {
+            compilacioForm.setDeleteButtonVisible(false);
+            HtmlUtils.saveMessageInfo(request, I18NUtils.tradueix("compilacio.encurs"));
+        }
         return compilacioForm;
     }
 
