@@ -2,7 +2,7 @@ package org.fundaciobit.powertoys.commons.utils;
 
 /**
  *
- * @author anadal
+ * @author jpou
  *
  */
 public interface Constants {
@@ -24,4 +24,8 @@ public interface Constants {
     public static final String ROLE_EJB_FULL_ACCESS  = PWT_ADMIN;
     public static final String ROLE_EJB_BASIC_ACCESS = PWT_USER;
     public static final String ROLE_EJB_WS_ACCESS = PWT_WS;
+
+    // COMPILACIO RESULTAT
+    public static final short EXIT_CODE_IN_PROGRESS = -1;
+    public static final short EXIT_CODE_NO_ERRORS = 0;
 }

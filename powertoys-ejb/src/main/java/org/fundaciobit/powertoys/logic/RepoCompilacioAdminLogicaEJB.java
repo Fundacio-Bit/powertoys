@@ -51,8 +51,6 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
 
     private static Map<String, List<StringKeyValue>> orgsRepos = new HashMap<>();
 
-    public static final short EXIT_CODE_IN_PROGRESS = -1;
-
     public RepoCompilacioAdminLogicaEJB() {
         super();
 
@@ -170,7 +168,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
 
         long startTime = System.currentTimeMillis();
         newCompilacio.setDataInici(new Timestamp(startTime));
-        newCompilacio.setExitCode(EXIT_CODE_IN_PROGRESS);
+        newCompilacio.setExitCode(Constants.EXIT_CODE_IN_PROGRESS);
 
         return new CompilacioGitHub(ghManager, latestTag.getOwner().getHttpTransportUrl(),
                 compilacioEjb.create(newCompilacio), instance.getNom());
@@ -210,7 +208,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         } catch (Exception e) {
             if (compilacioAcabada == null && compilacio != null) {
                 short exitCode = compilacio.getExitCode();
-                if (exitCode == EXIT_CODE_IN_PROGRESS) {
+                if (exitCode == Constants.EXIT_CODE_IN_PROGRESS) {
                     compilacio.setDataFi(new Timestamp(System.currentTimeMillis()));
                     compilacio.setExitCode((short) -2);
                     compilacio.setOutput(e.getMessage());
@@ -223,7 +221,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
 
     public boolean compilationsRunning(long repoID) throws I18NException{
         for (Compilacio compilacio : compilacioEjb.findCompilacionsByRepoCompilacioID(repoID)) {
-            if (compilacio.getExitCode() == EXIT_CODE_IN_PROGRESS) {
+            if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
                 return true;
             }
         }

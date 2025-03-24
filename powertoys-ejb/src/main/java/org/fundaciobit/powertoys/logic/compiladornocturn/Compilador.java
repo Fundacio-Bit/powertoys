@@ -23,6 +23,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
+import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.powertoys.logic.compiladornocturn.GitHubManager.AuthSchema;
 import org.jboss.logging.Logger;
 
@@ -95,7 +96,7 @@ public class Compilador {
         // Esperar a que el procés acabi
         int exitCode = process.waitFor();
         log.info("Procés acabat: " + process.info() + ", codi de sortida: " + exitCode);
-        if (exitCode != 0) {
+        if (exitCode != Constants.EXIT_CODE_NO_ERRORS) {
             log.info("Error en la compilació, codi de sortida: " + exitCode + " -- comanda: "
                     + comanda + " -- directori: " + repoDir);
         }

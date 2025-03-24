@@ -1,5 +1,9 @@
 package org.fundaciobit.powertoys.back.controller.admin;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +12,13 @@ import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
+import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.powertoys.back.controller.webdb.CompilacioController;
 import org.fundaciobit.powertoys.back.form.webdb.CompilacioFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.CompilacioForm;
-import org.fundaciobit.powertoys.logic.RepoCompilacioAdminLogicaEJB;
+import org.fundaciobit.powertoys.commons.utils.Constants;
+import org.fundaciobit.powertoys.model.entity.Compilacio;
 import org.fundaciobit.powertoys.model.fields.CompilacioFields;
 import org.fundaciobit.powertoys.persistence.CompilacioJPA;
 import org.springframework.stereotype.Controller;
@@ -82,6 +88,17 @@ public class CompilacioAdminController extends CompilacioController {
 
             compilacioFilterForm.setOrderBy(CompilacioFields.DATAFI.getJavaName());
             compilacioFilterForm.setOrderAsc(false);
+
+            // convertirem CompilacioFields.EXITCODE en columna "Resultat"
+            compilacioFilterForm.addHiddenField(CompilacioFields.EXITCODE);
+            AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
+            additionalField.setCodeName("compilacio.resultat");
+            // additionalField.setCodeName("=" + I18NUtils.tradueix("compilacio.resultat")+ "<br/>");
+            additionalField.setPosition(1);
+            additionalField.setEscapeXml(false);
+            // Els valors s'ompliran al mètode postList()
+            additionalField.setValueMap(new HashMap<Long, String>());
+            compilacioFilterForm.addAdditionalField(additionalField);
         }
 
         return compilacioFilterForm;
@@ -102,7 +119,7 @@ public class CompilacioAdminController extends CompilacioController {
                 AdditionalButtonStyle.INFO);
         compilacioForm.addAdditionalButton(refreshButton);
 
-        if (compilacio.getExitCode() == RepoCompilacioAdminLogicaEJB.EXIT_CODE_IN_PROGRESS) {
+        if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
             compilacioForm.setDeleteButtonVisible(false);
             HtmlUtils.saveMessageInfo(request, I18NUtils.tradueix("compilacio.encurs"));
         }
@@ -120,5 +137,32 @@ public class CompilacioAdminController extends CompilacioController {
         }
 
         return null;
+    }
+
+    @Override
+    public void postList(HttpServletRequest request, ModelAndView mav, CompilacioFilterForm filterForm,
+            List<Compilacio> list) throws I18NException {
+        Map<Long, String> codiSortidaN = (Map<Long, String>) filterForm.getAdditionalField(1)
+                .getValueMap();
+
+        for (Compilacio compilacio : list) {
+            String resultatCellContent = "";
+
+            if (compilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
+                resultatCellContent = "<div style=\"margin: 5px auto;display: table;\"><img src=\""
+                        + request.getContextPath() + "/img/icn_alert_success.png\" alt=\"ok\" title=\"ok\"/></div>";
+            } else if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
+                resultatCellContent = "<div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs") + "\"></div>";
+
+                // TODO:ocultar botó de eliminar per aquesta fila
+                // filterForm.setDeleteButtonVisible(false);
+            } else {
+                resultatCellContent = "<div style=\"margin: 5px auto;display: table;\"><img src=\""
+                        + request.getContextPath() + "/img/icn_alert_error.png\" alt=\"error\" title=\"error\"/></div>";
+            }
+            StringBuilder str = new StringBuilder();
+            str.append(resultatCellContent);
+            codiSortidaN.put(compilacio.getCompilacioID(), str.toString());
+        }
     }
 }
