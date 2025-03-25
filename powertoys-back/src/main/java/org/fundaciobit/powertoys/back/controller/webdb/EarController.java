@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.fundaciobit.powertoys.back.form.webdb.*;
 import org.fundaciobit.powertoys.back.form.webdb.EarForm;
@@ -36,7 +37,11 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.powertoys.persistence.EarJPA;
 import org.fundaciobit.powertoys.model.entity.Ear;
 import org.fundaciobit.powertoys.model.fields.*;
+import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
 
 /**
  * Controller per gestionar un Ear
@@ -44,10 +49,14 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="ear.ear.plural", order=20, group="WEBDB")
+@MenuOption(labelCode="ear.ear.plural", order=20, group=Constants.MENU_BACK_WEBDB_ACCESS)
 @Controller
 @RequestMapping(value = "/webdb/ear")
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
+@Tile(name="earFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="ear.ear")})
+@Tile(name="earListWebDB", contentJsp="/WEB-INF/jsp/webdb/earList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="ear.ear") })
 public class EarController
     extends org.fundaciobit.powertoys.back.controller.PowerToysFilesBaseController<Ear, java.lang.Long, EarForm> implements EarFields {
 
@@ -622,12 +631,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "earFormWebDB";
   }
 
-  public String getTileList() {
-    return "earListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "earListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Ear_FilterForm_" + this.getClass().getName();

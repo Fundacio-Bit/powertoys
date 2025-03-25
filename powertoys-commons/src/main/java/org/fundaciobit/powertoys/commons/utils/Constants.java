@@ -26,6 +26,12 @@ public interface Constants {
     public static final String ROLE_EJB_WS_ACCESS = PWT_WS;
 
     // COMPILACIO RESULTAT
+    public static final short EXIT_CODE_COMPILATION_EXCEPTION = -2;
     public static final short EXIT_CODE_IN_PROGRESS = -1;
     public static final short EXIT_CODE_NO_ERRORS = 0;
+
+    public static final String MENU_BACK_WEBDB_ACCESS = "webdb";
+    public static final String MENU_BACK_PUBLIC_AND_COMMON_ACCESS = "common";
+    public static final String MENU_BACK_BASIC_ACCESS = "user";
+    public static final String MENU_BACK_ADMIN_ACCESS = "admin";
 }

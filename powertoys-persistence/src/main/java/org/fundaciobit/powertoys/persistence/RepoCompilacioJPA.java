@@ -131,11 +131,6 @@ public class RepoCompilacioJPA implements RepoCompilacio {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getRepocompilacioID())).hashCode();
-    }
-
 // EXP  Field:repocompilacioid | Table: pwt_compilacio | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "repoCompilacio")

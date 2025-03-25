@@ -70,11 +70,6 @@ public class TraduccioJPA implements Traduccio {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getTraduccioID())).hashCode();
-    }
-
   @ElementCollection(fetch= FetchType.EAGER, targetClass = org.fundaciobit.powertoys.persistence.TraduccioMapJPA.class)
   @Cascade(value=org.hibernate.annotations.CascadeType.ALL)
   @LazyCollection(value= LazyCollectionOption.FALSE)

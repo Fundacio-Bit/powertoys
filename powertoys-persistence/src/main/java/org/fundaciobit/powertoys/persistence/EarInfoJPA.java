@@ -163,11 +163,6 @@ public class EarInfoJPA implements EarInfo {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getEarinfoID())).hashCode();
-    }
-
 // IMP Field:earid | Table: pwt_ear | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)

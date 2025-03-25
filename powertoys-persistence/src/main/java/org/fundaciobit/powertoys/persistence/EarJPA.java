@@ -111,11 +111,6 @@ public class EarJPA implements Ear {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getEarID())).hashCode();
-    }
-
 // EXP  Field:earid | Table: pwt_earinfo | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "ear")

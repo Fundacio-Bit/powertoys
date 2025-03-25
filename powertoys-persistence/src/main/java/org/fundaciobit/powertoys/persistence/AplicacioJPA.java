@@ -92,11 +92,6 @@ public class AplicacioJPA implements Aplicacio {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getAplicacioID())).hashCode();
-    }
-
 // EXP  Field:aplicacioid | Table: pwt_entornaplicacio | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "aplicacio")

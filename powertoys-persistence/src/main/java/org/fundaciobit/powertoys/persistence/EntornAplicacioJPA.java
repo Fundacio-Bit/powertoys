@@ -100,11 +100,6 @@ public class EntornAplicacioJPA implements EntornAplicacio {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getEntornaplicacioid())).hashCode();
-    }
-
 // EXP  Field:entornaplicacioid | Table: pwt_versio | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "entornAplicacio")

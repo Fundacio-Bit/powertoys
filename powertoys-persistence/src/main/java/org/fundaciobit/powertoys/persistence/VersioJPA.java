@@ -139,11 +139,6 @@ public class VersioJPA implements Versio {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getVersioID())).hashCode();
-    }
-
 // IMP Field:entornaplicacioid | Table: pwt_entornaplicacio | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)

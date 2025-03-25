@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.fundaciobit.powertoys.back.form.webdb.*;
 import org.fundaciobit.powertoys.back.form.webdb.EntornAplicacioForm;
@@ -35,7 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.EntornAplicacioWebValidato
 import org.fundaciobit.powertoys.persistence.EntornAplicacioJPA;
 import org.fundaciobit.powertoys.model.entity.EntornAplicacio;
 import org.fundaciobit.powertoys.model.fields.*;
+import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
 
 /**
  * Controller per gestionar un EntornAplicacio
@@ -43,10 +48,14 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="entornAplicacio.entornAplicacio.plural", order=60, group="WEBDB")
+@MenuOption(labelCode="entornAplicacio.entornAplicacio.plural", order=60, group=Constants.MENU_BACK_WEBDB_ACCESS)
 @Controller
 @RequestMapping(value = "/webdb/entornAplicacio")
 @SessionAttributes(types = { EntornAplicacioForm.class, EntornAplicacioFilterForm.class })
+@Tile(name="entornAplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="entornAplicacio.entornAplicacio")})
+@Tile(name="entornAplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="entornAplicacio.entornAplicacio") })
 public class EntornAplicacioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<EntornAplicacio, java.lang.Long> implements EntornAplicacioFields {
 
@@ -717,12 +726,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "entornAplicacioFormWebDB";
   }
 
-  public String getTileList() {
-    return "entornAplicacioListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "entornAplicacioListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "EntornAplicacio_FilterForm_" + this.getClass().getName();

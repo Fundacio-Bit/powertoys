@@ -13,30 +13,9 @@
               </c:if>
             </td>
           <td id="repoCompilacio_nom_columnvalueid">
-              <form:errors path="repoCompilacio.nom" cssClass="errorField alert alert-danger" />
-  <table style="width:100%">
-  <tr>
-  <td>
-       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,RepoCompilacioFields.NOM)? 'true' : 'false'}" path="repoCompilacio.nom"  />
-   </td>
-   <td style="width:40px">
-      <div id="dropdownMenuButton_nom" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_nom" class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('repoCompilacio.nom'); ta.wrap='off';" >No Wrap</a>
-          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('repoCompilacio.nom'); ta.wrap='soft';">Soft Wrap</a>
-          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('repoCompilacio.nom'); ta.wrap='hard';">Hard Wrap</a>
-        </div>
-      </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_nom').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_nom').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_nom').css('display', valor);
-                 return false;
-				});
-      </script>   </td>
-   </tr>
-   </table>
+            <form:errors path="repoCompilacio.nom" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,RepoCompilacioFields.NOM)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,RepoCompilacioFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="repoCompilacio.nom"   />
+
            </td>
         </tr>
         </c:if>
@@ -97,6 +76,11 @@
                   <c:set var="containEmptyValue"  value="true" />
                 </c:if>
             </c:forEach>
+          <script>
+              $(document).ready(function() {
+                  $('#repoCompilacio_repositoriGitHub').select2();
+              });
+          </script>
           </form:select>
           </c:if>
            </td>

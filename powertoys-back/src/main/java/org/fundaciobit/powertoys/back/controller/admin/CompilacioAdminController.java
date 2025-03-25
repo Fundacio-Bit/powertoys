@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { CompilacioForm.class, CompilacioFilterForm.class })
 public class CompilacioAdminController extends CompilacioController {
 
+    private static final int COLUMNA_RESULTAT_INDEX = 1;
     public static final String CONTEXTWEB = "/admin/compilacio";
 
     @Override
@@ -93,9 +94,7 @@ public class CompilacioAdminController extends CompilacioController {
             compilacioFilterForm.addHiddenField(CompilacioFields.EXITCODE);
             AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
             additionalField.setCodeName("compilacio.resultat");
-            // additionalField.setCodeName("=" + I18NUtils.tradueix("compilacio.resultat")+
-            // "<br/>");
-            additionalField.setPosition(1);
+            additionalField.setPosition(COLUMNA_RESULTAT_INDEX);
             additionalField.setEscapeXml(false);
             // Els valors s'ompliran al mètode postList()
             additionalField.setValueMap(new HashMap<Long, String>());
@@ -143,13 +142,13 @@ public class CompilacioAdminController extends CompilacioController {
     @Override
     public void postList(HttpServletRequest request, ModelAndView mav, CompilacioFilterForm filterForm,
             List<Compilacio> list) throws I18NException {
-        Map<Long, String> codiSortidaN = (Map<Long, String>) filterForm.getAdditionalField(1)
+        Map<Long, String> codiSortidaN = (Map<Long, String>) filterForm.getAdditionalField(COLUMNA_RESULTAT_INDEX)
                 .getValueMap();
         filterForm.getAdditionalButtonsByPK().clear();
 
         for (Compilacio compilacio : list) {
-            String resultatCellContent = "";
-            boolean mostrarBotoDelete = false;
+            String resultatCellContent;
+            boolean mostrarBotoDelete;
             long compilacioId = compilacio.getCompilacioID();
 
             if (compilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
@@ -158,16 +157,15 @@ public class CompilacioAdminController extends CompilacioController {
                 mostrarBotoDelete = true;
             } else if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
                 resultatCellContent = "<div class=\"spinner spinner-18px\" title=\""
-                        + I18NUtils.tradueix("compilacio.encurs") + "\"></div>";
+                + I18NUtils.tradueix("compilacio.encurs") + "\"></div>";
+                mostrarBotoDelete = false;
             } else {
                 resultatCellContent = "<div style=\"margin: 5px auto;display: table;\"><img src=\""
                         + request.getContextPath() + "/img/icn_alert_error.png\" alt=\"error\" title=\"error\"/></div>";
                 mostrarBotoDelete = true;
             }
 
-            StringBuilder str = new StringBuilder();
-            str.append(resultatCellContent);
-            codiSortidaN.put(compilacioId, str.toString());
+            codiSortidaN.put(compilacioId, resultatCellContent);
 
             if (mostrarBotoDelete) {
                 AdditionalButton deleteButton = new AdditionalButton("fas fa-trash", "genapp.delete",

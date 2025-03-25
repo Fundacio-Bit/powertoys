@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.fundaciobit.powertoys.back.form.webdb.*;
 import org.fundaciobit.powertoys.back.form.webdb.EarSimpleForm;
@@ -36,7 +37,11 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.powertoys.persistence.EarSimpleJPA;
 import org.fundaciobit.powertoys.model.entity.EarSimple;
 import org.fundaciobit.powertoys.model.fields.*;
+import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
 
 /**
  * Controller per gestionar un EarSimple
@@ -44,10 +49,14 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="earSimple.earSimple.plural", order=40, group="WEBDB")
+@MenuOption(labelCode="earSimple.earSimple.plural", order=40, group=Constants.MENU_BACK_WEBDB_ACCESS)
 @Controller
 @RequestMapping(value = "/webdb/earSimple")
 @SessionAttributes(types = { EarSimpleForm.class, EarSimpleFilterForm.class })
+@Tile(name="earSimpleFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earSimpleForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="earSimple.earSimple")})
+@Tile(name="earSimpleListWebDB", contentJsp="/WEB-INF/jsp/webdb/earSimpleList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="earSimple.earSimple") })
 public class EarSimpleController
     extends org.fundaciobit.powertoys.back.controller.PowerToysFilesBaseController<EarSimple, java.lang.Long, EarSimpleForm> implements EarSimpleFields {
 
@@ -622,12 +631,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "earSimpleFormWebDB";
   }
 
-  public String getTileList() {
-    return "earSimpleListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "earSimpleListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "EarSimple_FilterForm_" + this.getClass().getName();

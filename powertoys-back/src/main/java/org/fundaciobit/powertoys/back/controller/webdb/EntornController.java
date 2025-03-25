@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.fundaciobit.powertoys.back.form.webdb.*;
 import org.fundaciobit.powertoys.back.form.webdb.EntornForm;
@@ -33,7 +34,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.EntornWebValidator;
 import org.fundaciobit.powertoys.persistence.EntornJPA;
 import org.fundaciobit.powertoys.model.entity.Entorn;
 import org.fundaciobit.powertoys.model.fields.*;
+import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
+import org.fundaciobit.genapp.common.web.tiles.Tile;
+import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
+import org.fundaciobit.genapp.common.web.tiles.TileType;
 
 /**
  * Controller per gestionar un Entorn
@@ -41,10 +46,14 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="entorn.entorn.plural", order=50, group="WEBDB")
+@MenuOption(labelCode="entorn.entorn.plural", order=50, group=Constants.MENU_BACK_WEBDB_ACCESS)
 @Controller
 @RequestMapping(value = "/webdb/entorn")
 @SessionAttributes(types = { EntornForm.class, EntornFilterForm.class })
+@Tile(name="entornFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+      type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="entorn.entorn")})
+@Tile(name="entornListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+       type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="entorn.entorn") })
 public class EntornController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Entorn, java.lang.Long> implements EntornFields {
 
@@ -586,12 +595,46 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getTileForm() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_FORM) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileForm: " + e.getMessage(), e);
+        }
     return "entornFormWebDB";
   }
 
-  public String getTileList() {
-    return "entornListWebDB";
-  }
+    public String getTileList() {
+        try {
+            Set<Tile> rm;
+            rm=AnnotationUtils.getDeclaredRepeatableAnnotations(this.getClass(), Tile.class);
+            if (rm != null && !rm.isEmpty()) {
+                String trobada = null;
+                for (Tile tile : rm) {
+                    if (tile.type() == TileType.WEBDB_LIST) {
+                        trobada = tile.name();
+                    }
+                }
+                if (trobada != null) {
+                    return trobada;
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error en el getTileList: " + e.getMessage(), e);
+        }
+        return "entornListWebDB";
+    }
 
   public String getSessionAttributeFilterForm() {
     return "Entorn_FilterForm_" + this.getClass().getName();

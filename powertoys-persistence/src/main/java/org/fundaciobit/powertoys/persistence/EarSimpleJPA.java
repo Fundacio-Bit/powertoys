@@ -125,11 +125,6 @@ public class EarSimpleJPA implements EarSimple {
         return __result;
     }
 
-    @Override
-    public int hashCode() {
-        return (String.valueOf(this.getEarSimpleID())).hashCode();
-    }
-
 // IMP Field:fitxerid | Table: pwt_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)

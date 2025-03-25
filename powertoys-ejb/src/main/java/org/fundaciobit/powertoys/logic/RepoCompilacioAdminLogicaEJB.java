@@ -210,7 +210,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
                 short exitCode = compilacio.getExitCode();
                 if (exitCode == Constants.EXIT_CODE_IN_PROGRESS) {
                     compilacio.setDataFi(new Timestamp(System.currentTimeMillis()));
-                    compilacio.setExitCode((short) -2);
+                    compilacio.setExitCode((short) Constants.EXIT_CODE_COMPILATION_EXCEPTION);
                     compilacio.setOutput(e.getMessage());
                     compilacioAcabada = compilacioEjb.update(compilacio);
                 }
