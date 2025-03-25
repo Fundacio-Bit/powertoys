@@ -2,6 +2,8 @@
  -- INICI PKs
     alter table pwt_aplicacio add constraint pwt_aplicacio_pk primary key (aplicacioid);
 
+    alter table pwt_compilacio add constraint pwt_compilacio_pk primary key (compilacioid);
+
     alter table pwt_ear add constraint pwt_ear_pk primary key (earid);
 
     alter table pwt_earinfo add constraint pwt_earinfo_pk primary key (earinfoid);
@@ -16,6 +18,8 @@
 
     alter table pwt_idioma add constraint pwt_idioma_pk primary key (idiomaid);
 
+    alter table pwt_repocompilacio add constraint pwt_repocompilacio_pk primary key (repocompilacioid);
+
     alter table pwt_traduccio add constraint pwt_traduccio_pk primary key (traduccioid);
 
     alter table pwt_traducciomap add constraint pwt_traducmap_pk primary key (traducciomapid, idiomaid);
@@ -26,6 +30,11 @@
 
 
  -- INICI FKs
+
+    alter table pwt_compilacio 
+       add constraint pwt_compilacio_repocomp_rid_fk 
+       foreign key (repocompilacioid) 
+       references pwt_repocompilacio;
 
     alter table pwt_ear 
        add constraint pwt_ear_fitxer_fk 

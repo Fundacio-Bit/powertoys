@@ -5,6 +5,16 @@
         nom varchar2(255 char) not null
     );
 
+    create table pwt_compilacio (
+       compilacioid number(19,0) not null,
+        datafi timestamp not null,
+        datainici timestamp not null,
+        exitcode number(5,0) not null,
+        output clob,
+        repocompilacioid number(19,0) not null,
+        tagurl varchar2(255 char) not null
+    );
+
     create table pwt_ear (
        earid number(19,0) not null,
         data timestamp not null,
@@ -58,6 +68,15 @@
         suportat number(1,0) not null
     );
 
+    create table pwt_repocompilacio (
+       repocompilacioid number(19,0) not null,
+        actiu number(1,0) not null,
+        nom varchar2(255 char) not null,
+        ordre number(19,0),
+        organitzaciogithub varchar2(255 char) not null,
+        repositorigithub varchar2(255 char) not null
+    );
+
     create table pwt_traduccio (
        traduccioid number(19,0) not null
     );
@@ -76,6 +95,5 @@
         entornaplicacioid number(19,0) not null,
         versio varchar2(100 char) not null
     );
-
 
 

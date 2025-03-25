@@ -1,10 +1,12 @@
 create sequence pwt_aplicacio_seq start with 1000 increment by  1;
+create sequence pwt_compilacio_seq start with 1000 increment by  1;
 create sequence pwt_ear_seq start with 1000 increment by  1;
 create sequence pwt_earinfo_seq start with 1000 increment by  1;
 create sequence pwt_earsimple_seq start with 1000 increment by  1;
 create sequence pwt_entorn_seq start with 1000 increment by  1;
 create sequence pwt_entornaplicacio_seq start with 1000 increment by  1;
 create sequence pwt_fitxer_seq start with 1000 increment by  1;
+create sequence pwt_repocompilacio_seq start with 1000 increment by  1;
 create sequence pwt_traduccio_seq start with 1000 increment by  1;
 create sequence pwt_versio_seq start with 1000 increment by  1;
 
@@ -13,6 +15,17 @@ create sequence pwt_versio_seq start with 1000 increment by  1;
         contextpath varchar2(255 char) not null,
         nom varchar2(255 char) not null,
         primary key (aplicacioid)
+    );
+
+    create table pwt_compilacio (
+       compilacioid number(19,0) not null,
+        datafi timestamp not null,
+        datainici timestamp not null,
+        exitcode number(5,0) not null,
+        output long,
+        repocompilacioid number(19,0) not null,
+        tagurl varchar2(255 char) not null,
+        primary key (compilacioid)
     );
 
     create table pwt_ear (
@@ -75,6 +88,16 @@ create sequence pwt_versio_seq start with 1000 increment by  1;
         primary key (idiomaid)
     );
 
+    create table pwt_repocompilacio (
+       repocompilacioid number(19,0) not null,
+        actiu number(1,0) not null,
+        nom varchar2(255 char) not null,
+        ordre number(19,0),
+        organitzaciogithub varchar2(255 char) not null,
+        repositorigithub varchar2(255 char) not null,
+        primary key (repocompilacioid)
+    );
+
     create table pwt_traduccio (
        traduccioid number(19,0) not null,
         primary key (traduccioid)
@@ -97,6 +120,8 @@ create sequence pwt_versio_seq start with 1000 increment by  1;
         primary key (versioid)
     );
 create index pwt_aplicacio_pk_i on pwt_aplicacio (aplicacioid);
+create index pwt_compilacio_pk_i on pwt_compilacio (compilacioid);
+create index pwt_compilacio_repocompid_fk_i on pwt_compilacio (repocompilacioid);
 create index pwt_ear_pk_i on pwt_ear (earid);
 create index pwt_ear_fitxerid_fk_i on pwt_ear (fitxerid);
 create index pwt_earinfo_pk_i on pwt_earinfo (earinfoid);
@@ -112,9 +137,15 @@ create index pwt_entornapli_entornid_fk_i on pwt_entornaplicacio (entornid);
        add constraint pwt_entornapli_entorn_apli_uk unique (aplicacioid, entornid);
 create index pwt_fitxer_pk_i on pwt_fitxer (fitxerid);
 create index pwt_idioma_pk_i on pwt_idioma (idiomaid);
+create index pwt_repocompilacio_pk_i on pwt_repocompilacio (repocompilacioid);
 create index pwt_traduccio_pk_i on pwt_traduccio (traduccioid);
 create index pwt_versio_pk_i on pwt_versio (versioid);
 create index pwt_versio_entornapli_fk_i on pwt_versio (entornaplicacioid);
+
+    alter table pwt_compilacio 
+       add constraint pwt_compilacio_repocomp_rid_fk 
+       foreign key (repocompilacioid) 
+       references pwt_repocompilacio;
 
     alter table pwt_ear 
        add constraint pwt_ear_fitxer_fk 
