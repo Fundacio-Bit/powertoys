@@ -80,7 +80,7 @@ public class CompilacioAdminController extends CompilacioController {
 
             compilacioFilterForm.setAddButtonVisible(false);
             compilacioFilterForm.setEditButtonVisible(false);
-            // compilacioFilterForm.setDeleteButtonVisible(false);
+            compilacioFilterForm.setDeleteButtonVisible(false);// ja l'habilitarem per a cada fila que correspongui
             compilacioFilterForm.setViewButtonVisible(true);
             AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                     RepoCompilacioAdminController.CONTEXTWEB + "/list/1", AdditionalButtonStyle.DANGER);
@@ -93,7 +93,8 @@ public class CompilacioAdminController extends CompilacioController {
             compilacioFilterForm.addHiddenField(CompilacioFields.EXITCODE);
             AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
             additionalField.setCodeName("compilacio.resultat");
-            // additionalField.setCodeName("=" + I18NUtils.tradueix("compilacio.resultat")+ "<br/>");
+            // additionalField.setCodeName("=" + I18NUtils.tradueix("compilacio.resultat")+
+            // "<br/>");
             additionalField.setPosition(1);
             additionalField.setEscapeXml(false);
             // Els valors s'ompliran al mètode postList()
@@ -144,25 +145,45 @@ public class CompilacioAdminController extends CompilacioController {
             List<Compilacio> list) throws I18NException {
         Map<Long, String> codiSortidaN = (Map<Long, String>) filterForm.getAdditionalField(1)
                 .getValueMap();
+        filterForm.getAdditionalButtonsByPK().clear();
 
         for (Compilacio compilacio : list) {
             String resultatCellContent = "";
+            boolean mostrarBotoDelete = false;
+            long compilacioId = compilacio.getCompilacioID();
 
             if (compilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
                 resultatCellContent = "<div style=\"margin: 5px auto;display: table;\"><img src=\""
                         + request.getContextPath() + "/img/icn_alert_success.png\" alt=\"ok\" title=\"ok\"/></div>";
+                mostrarBotoDelete = true;
             } else if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
-                resultatCellContent = "<div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs") + "\"></div>";
-
-                // TODO:ocultar botó de eliminar per aquesta fila
-                // filterForm.setDeleteButtonVisible(false);
+                resultatCellContent = "<div class=\"spinner spinner-18px\" title=\""
+                        + I18NUtils.tradueix("compilacio.encurs") + "\"></div>";
             } else {
                 resultatCellContent = "<div style=\"margin: 5px auto;display: table;\"><img src=\""
                         + request.getContextPath() + "/img/icn_alert_error.png\" alt=\"error\" title=\"error\"/></div>";
+                mostrarBotoDelete = true;
             }
+
             StringBuilder str = new StringBuilder();
             str.append(resultatCellContent);
-            codiSortidaN.put(compilacio.getCompilacioID(), str.toString());
+            codiSortidaN.put(compilacioId, str.toString());
+
+            if (mostrarBotoDelete) {
+                AdditionalButton deleteButton = new AdditionalButton("fas fa-trash", "genapp.delete",
+                        "javascript:openModal('" + request.getContextPath() + getContextWeb() + "/"
+                                + compilacioId + "/delete','show');",
+                        AdditionalButtonStyle.DANGER);
+                filterForm.addAdditionalButtonByPK(compilacioId, deleteButton);
+            }
         }
+    }
+
+    @Override
+    public void delete(HttpServletRequest request, Compilacio compilacio) throws I18NException {
+        if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
+            throw new I18NException("compilacio.encurs");
+        }
+        compilacioEjb.delete(compilacio);
     }
 }
