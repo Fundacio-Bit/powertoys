@@ -200,7 +200,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
           darrerResultatCellContent = "<a title=\""
               + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
               + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
-              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs")
+              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
               + "\"></div>";
           darreraCompilacioIsRunning = true;
         } else {
@@ -229,7 +229,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
           darrerResultatCellContent = "<a title=\""
               + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
               + request.getContextPath() + getContextWeb() + "/veureExecucionsNocturnes/" + repoID
-              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs")
+              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
               + "\"></div>";
         }
       }
