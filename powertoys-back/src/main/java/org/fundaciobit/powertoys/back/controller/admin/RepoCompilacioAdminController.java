@@ -2,8 +2,10 @@ package org.fundaciobit.powertoys.back.controller.admin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 
@@ -18,10 +20,14 @@ import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalButtonStyle;
+import org.fundaciobit.genapp.common.web.form.AdditionalField;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.powertoys.back.controller.webdb.RepoCompilacioController;
 import org.fundaciobit.powertoys.back.form.webdb.RepoCompilacioFilterForm;
 import org.fundaciobit.powertoys.back.form.webdb.RepoCompilacioForm;
+import org.fundaciobit.powertoys.commons.utils.Constants;
+import org.fundaciobit.powertoys.logic.CompilacioAdminLogicaService;
 import org.fundaciobit.powertoys.logic.RepoCompilacioAdminLogicaService;
 import org.fundaciobit.powertoys.logic.compiladornocturn.CompilacioGitHub;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
@@ -49,9 +55,13 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
 
   public static final String CONTEXTWEB = "/admin/repocompilacio";
   public static final String REPO_ID_SESSION_ATTRIBUTE_NAME = "repoID";
+  private static final int COLUMNA_DARRER_RESULTAT_INDEX = 1;
 
   @EJB(mappedName = RepoCompilacioAdminLogicaService.JNDI_NAME)
   protected RepoCompilacioAdminLogicaService repoCompilacioLogicaEjb;
+
+  @EJB(mappedName = CompilacioAdminLogicaService.JNDI_NAME)
+  protected CompilacioAdminLogicaService compilacioLogicaEjb;
 
   @Override
   public String getTileForm() {
@@ -76,7 +86,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       // repoCompilacioFilterForm.setEditButtonVisible(false);
       // repoCompilacioFilterForm.setAddButtonVisible(false);
       // repoCompilacioFilterForm.setDeleteButtonVisible(false);
-      AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-eye",
+      AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-history",
           "repocompilacio.veurecompilacions",
           getContextWeb() + "/veureExecucionsNocturnes", AdditionalButtonStyle.INFO);
       repoCompilacioFilterForm.addAdditionalButton(veureExecucionsNocturnesButton);
@@ -84,6 +94,15 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
       repoCompilacioFilterForm.setOrderBy(RepoCompilacioFields.ORDRE.getJavaName());
 
       // repoCompilacioFilterForm.setAttachedAdditionalJspCode(true);
+
+      // afegirem columna "Darrer Resultat"
+      AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
+      additionalField.setCodeName("repocompilacio.darrerresultat");
+      additionalField.setPosition(COLUMNA_DARRER_RESULTAT_INDEX);
+      additionalField.setEscapeXml(false);
+      // Els valors s'ompliran al mètode postList()
+      additionalField.setValueMap(new HashMap<Long, String>());
+      repoCompilacioFilterForm.addAdditionalField(additionalField);
     }
 
     return repoCompilacioFilterForm;
@@ -160,10 +179,40 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
   public void postList(HttpServletRequest request, ModelAndView mav, RepoCompilacioFilterForm filterForm,
       List<RepoCompilacio> list)
       throws I18NException {
+    Map<Long, String> darrerResultatN = (Map<Long, String>) filterForm.getAdditionalField(COLUMNA_DARRER_RESULTAT_INDEX)
+        .getValueMap();
     filterForm.getAdditionalButtonsByPK().clear();
 
     for (RepoCompilacio r : list) {
       long repoID = r.getRepocompilacioID();
+      String darrerResultatCellContent = null;
+
+      Compilacio darreraCompilacio = this.repoCompilacioLogicaEjb.darreraCompilacio(repoID);
+      boolean darreraCompilacioIsRunning = false;
+      if (darreraCompilacio != null) {
+        long compilacioID = darreraCompilacio.getCompilacioID();
+        if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
+          darrerResultatCellContent = "<a style=\"color:mediumseagreen;margin: 5px auto;display: table;\" title=\""
+              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
+              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
+              + "\"><i class=\"fas fa-calendar-check\"></i></a>";
+        } else if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
+          darrerResultatCellContent = "<a title=\""
+              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
+              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
+              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs")
+              + "\"></div>";
+          darreraCompilacioIsRunning = true;
+        } else {
+          darrerResultatCellContent = "<a style=\"color:orangered;margin: 5px auto;display: table;\" title=\""
+              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
+              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
+              + "\"><i class=\"fas fa-calendar-times\"></i></a>";
+        }
+      }
+
+      // podria haver-hi una compil·lació en curs que no sigui la darrera.
+      // TODO: revisar, perque sembla que no ho permetem
       if (!this.repoCompilacioLogicaEjb.compilationsRunning(repoID)) {
         String jsOpenModalContinuar = "javascript:createDivModal(traduccions.type['titol.compilacio.continuar'], traduccions.type['missatge.compilacio.continuar'], '"
             + request.getContextPath() + getContextWeb() + "/executeCompilacio/" + repoID
@@ -174,6 +223,19 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
             jsOpenModalContinuar,
             AdditionalButtonStyle.PRIMARY);
         filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
+      } else {
+        // TODO:cas molt estrany. Sanity check
+        if (!darreraCompilacioIsRunning) {
+          darrerResultatCellContent = "<a title=\""
+              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
+              + request.getContextPath() + getContextWeb() + "/veureExecucionsNocturnes/" + repoID
+              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("compilacio.encurs")
+              + "\"></div>";
+        }
+      }
+
+      if (darrerResultatCellContent != null) {
+        darrerResultatN.put(repoID, darrerResultatCellContent);
       }
 
       AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-glasses",
@@ -228,7 +290,7 @@ public class RepoCompilacioAdminController extends RepoCompilacioController {
           + repoAcompilar.getNom() + ": " + e.getMessage();
       HtmlUtils.saveMessageError(request, missatgeError);
       log.error(missatgeError, e);
-      throw new I18NException("genapp.comodi", missatgeError);
+      return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
     }
 
     try {

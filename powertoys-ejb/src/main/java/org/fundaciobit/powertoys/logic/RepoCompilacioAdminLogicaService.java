@@ -43,4 +43,6 @@ public interface RepoCompilacioAdminLogicaService extends RepoCompilacioService 
     public Future<Compilacio> compilarAsync(CompilacioGitHub compilacioGitHub) throws Exception;
 
     public boolean compilationsRunning(long repoID) throws I18NException;
+
+    public Compilacio darreraCompilacio(long repoID) throws I18NException;
 }

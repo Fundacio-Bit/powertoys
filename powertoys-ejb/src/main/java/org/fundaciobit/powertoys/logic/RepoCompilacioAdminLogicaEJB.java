@@ -157,7 +157,7 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         GitHubManager ghManager = gitHubManagers.get(owner);
         GHTag latestTag = ghManager.getLatestTag(owner, repo);
         if (latestTag == null) {
-            throw new I18NException("No s'ha trobat cap tag al repositori " + owner + "/" + repo);
+            throw new I18NException("repocompilacio.executarcompilacio.notag", owner, repo);
         }
         String tagName = latestTag.getName();
         if (tagName.trim().isEmpty()) {
@@ -219,13 +219,34 @@ public class RepoCompilacioAdminLogicaEJB extends RepoCompilacioEJB implements R
         }
     }
 
-    public boolean compilationsRunning(long repoID) throws I18NException{
+    public boolean compilationsRunning(long repoID) throws I18NException {
         for (Compilacio compilacio : compilacioEjb.findCompilacionsByRepoCompilacioID(repoID)) {
             if (compilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
                 return true;
             }
         }
-        
+
         return false;
+    }
+
+    public Compilacio darreraCompilacio(long repoID) throws I18NException {
+        List<Compilacio> compilacions = compilacioEjb.findCompilacionsByRepoCompilacioID(repoID);
+        compilacions.sort((c1, c2) -> {
+            if (c1.getDataFi() == null) {
+                if (c2.getDataFi() != null || c1.getDataInici() == null) {
+                    return -1;
+                } else {
+                    if (c2.getDataInici() == null) {
+                        return 1;
+                    }
+                    return c1.getDataInici().compareTo(c2.getDataInici());
+                }
+            }
+            if (c2.getDataFi() == null) {
+                return 1;
+            }
+            return c1.getDataFi().compareTo(c2.getDataFi());
+        });
+        return compilacions.size() > 0 ? compilacions.get(0) : null;
     }
 }
