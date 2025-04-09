@@ -435,7 +435,7 @@
           "isAutoIncrement": false,
           "sqlName": "data",
           "sqlType": 93,
-          "size": 35,
+          "size": 29,
           "digits": 6,
           "isNotNullable": true,
           "labels": {
@@ -840,7 +840,7 @@
           "isAutoIncrement": false,
           "sqlName": "data",
           "sqlType": 93,
-          "size": 35,
+          "size": 29,
           "digits": 6,
           "isNotNullable": true,
           "labels": {

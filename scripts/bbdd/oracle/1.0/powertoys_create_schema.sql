@@ -106,7 +106,7 @@ create sequence pwt_versio_seq start with 1000 increment by  1;
     create table pwt_traducciomap (
        traducciomapid number(19,0) not null,
         valor varchar2(4000 char),
-        idiomaid varchar2(255 char) not null,
+        idiomaid varchar2(10 char) not null,
         primary key (traducciomapid, idiomaid)
     );
 
@@ -139,6 +139,8 @@ create index pwt_fitxer_pk_i on pwt_fitxer (fitxerid);
 create index pwt_idioma_pk_i on pwt_idioma (idiomaid);
 create index pwt_repocompilacio_pk_i on pwt_repocompilacio (repocompilacioid);
 create index pwt_traduccio_pk_i on pwt_traduccio (traduccioid);
+create index pwt_traducciomap_idiomaid_fk_i ON pwt_traducciomap (idiomaid);
+create index pwt_traducciomap_pk_i on pwt_traducciomap (traducciomapid);
 create index pwt_versio_pk_i on pwt_versio (versioid);
 create index pwt_versio_entornapli_fk_i on pwt_versio (entornaplicacioid);
 

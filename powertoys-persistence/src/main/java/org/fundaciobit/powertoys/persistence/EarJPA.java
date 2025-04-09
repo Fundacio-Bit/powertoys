@@ -34,7 +34,7 @@ public class EarJPA implements Ear {
     @Column(name="fitxerid",nullable = false,length = 19)
     long fitxerID;
 
-    @Column(name="data",nullable = false,length = 35,precision = 6)
+    @Column(name="data",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp data;
 
     @Column(name="nom",nullable = false,length = 255)

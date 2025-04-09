@@ -36,11 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.CompilacioWebValidator;
 import org.fundaciobit.powertoys.persistence.CompilacioJPA;
 import org.fundaciobit.powertoys.model.entity.Compilacio;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un Compilacio
@@ -48,13 +48,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="compilacio.compilacio.plural", order=10, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="compilacio.compilacio.plural", order=10, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/compilacio")
 @SessionAttributes(types = { CompilacioForm.class, CompilacioFilterForm.class })
-@Tile(name="compilacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/compilacioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="compilacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/compilacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="compilacio.compilacio")})
-@Tile(name="compilacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/compilacioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="compilacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/compilacioList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="compilacio.compilacio") })
 public class CompilacioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Compilacio, java.lang.Long> implements CompilacioFields {

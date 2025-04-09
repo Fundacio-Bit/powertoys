@@ -84,7 +84,7 @@
     create table pwt_traducciomap (
        traducciomapid number(19,0) not null,
         valor varchar2(4000 char),
-        idiomaid varchar2(255 char) not null
+        idiomaid varchar2(10 char) not null
     );
 
     create table pwt_versio (

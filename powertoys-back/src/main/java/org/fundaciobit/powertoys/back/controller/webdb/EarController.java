@@ -37,11 +37,11 @@ import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.powertoys.persistence.EarJPA;
 import org.fundaciobit.powertoys.model.entity.Ear;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un Ear
@@ -49,13 +49,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="ear.ear.plural", order=20, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="ear.ear.plural", order=20, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/ear")
 @SessionAttributes(types = { EarForm.class, EarFilterForm.class })
-@Tile(name="earFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="earFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="ear.ear")})
-@Tile(name="earListWebDB", contentJsp="/WEB-INF/jsp/webdb/earList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="earListWebDB", contentJsp="/WEB-INF/jsp/webdb/earList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="ear.ear") })
 public class EarController
     extends org.fundaciobit.powertoys.back.controller.PowerToysFilesBaseController<Ear, java.lang.Long, EarForm> implements EarFields {

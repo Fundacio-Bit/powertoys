@@ -41,7 +41,7 @@ public class EarSimpleJPA implements EarSimple {
     @Type(type = "org.hibernate.type.TextType")
     java.lang.String detall;
 
-    @Column(name="data",nullable = false,length = 35,precision = 6)
+    @Column(name="data",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp data;
 
 

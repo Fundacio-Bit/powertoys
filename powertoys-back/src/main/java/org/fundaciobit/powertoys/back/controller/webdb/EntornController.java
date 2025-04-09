@@ -34,11 +34,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.EntornWebValidator;
 import org.fundaciobit.powertoys.persistence.EntornJPA;
 import org.fundaciobit.powertoys.model.entity.Entorn;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un Entorn
@@ -46,13 +46,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="entorn.entorn.plural", order=50, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="entorn.entorn.plural", order=50, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/entorn")
 @SessionAttributes(types = { EntornForm.class, EntornFilterForm.class })
-@Tile(name="entornFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="entornFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="entorn.entorn")})
-@Tile(name="entornListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="entornListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="entorn.entorn") })
 public class EntornController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Entorn, java.lang.Long> implements EntornFields {

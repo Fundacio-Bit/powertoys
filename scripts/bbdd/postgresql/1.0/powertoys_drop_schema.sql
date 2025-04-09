@@ -1,4 +1,7 @@
 
+    alter table pwt_compilacio 
+       drop constraint pwt_compilacio_repocomp_rid_fk;
+
     alter table pwt_ear 
        drop constraint pwt_ear_fitxer_fk;
 
@@ -22,6 +25,8 @@
 
     drop table if exists pwt_aplicacio cascade;
 
+    drop table if exists pwt_compilacio cascade;
+
     drop table if exists pwt_ear cascade;
 
     drop table if exists pwt_earinfo cascade;
@@ -36,6 +41,8 @@
 
     drop table if exists pwt_idioma cascade;
 
+    drop table if exists pwt_repocompilacio cascade;
+
     drop table if exists pwt_traduccio cascade;
 
     drop table if exists pwt_traducciomap cascade;
@@ -43,6 +50,8 @@
     drop table if exists pwt_versio cascade;
 
     drop sequence if exists pwt_aplicacio_seq;
+
+    drop sequence if exists pwt_compilacio_seq;
 
     drop sequence if exists pwt_ear_seq;
 
@@ -55,6 +64,8 @@
     drop sequence if exists pwt_entornaplicacio_seq;
 
     drop sequence if exists pwt_fitxer_seq;
+
+    drop sequence if exists pwt_repocompilacio_seq;
 
     drop sequence if exists pwt_traduccio_seq;
 

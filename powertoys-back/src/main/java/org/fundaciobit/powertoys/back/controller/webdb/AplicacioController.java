@@ -34,11 +34,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.AplicacioWebValidator;
 import org.fundaciobit.powertoys.persistence.AplicacioJPA;
 import org.fundaciobit.powertoys.model.entity.Aplicacio;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un Aplicacio
@@ -46,13 +46,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="aplicacio.aplicacio.plural", order=0, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="aplicacio.aplicacio.plural", order=0, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/aplicacio")
 @SessionAttributes(types = { AplicacioForm.class, AplicacioFilterForm.class })
-@Tile(name="aplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/aplicacioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="aplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/aplicacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="aplicacio.aplicacio")})
-@Tile(name="aplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/aplicacioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="aplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/aplicacioList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="aplicacio.aplicacio") })
 public class AplicacioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Aplicacio, java.lang.Long> implements AplicacioFields {

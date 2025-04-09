@@ -36,11 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.VersioWebValidator;
 import org.fundaciobit.powertoys.persistence.VersioJPA;
 import org.fundaciobit.powertoys.model.entity.Versio;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un Versio
@@ -48,13 +48,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="versio.versio.plural", order=120, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="versio.versio.plural", order=120, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/versio")
 @SessionAttributes(types = { VersioForm.class, VersioFilterForm.class })
-@Tile(name="versioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/versioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="versioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/versioForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="versio.versio")})
-@Tile(name="versioListWebDB", contentJsp="/WEB-INF/jsp/webdb/versioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="versioListWebDB", contentJsp="/WEB-INF/jsp/webdb/versioList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="versio.versio") })
 public class VersioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<Versio, java.lang.Long> implements VersioFields {

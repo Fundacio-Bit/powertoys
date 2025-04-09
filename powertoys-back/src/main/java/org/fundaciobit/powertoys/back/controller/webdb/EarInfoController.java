@@ -36,11 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.EarInfoWebValidator;
 import org.fundaciobit.powertoys.persistence.EarInfoJPA;
 import org.fundaciobit.powertoys.model.entity.EarInfo;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un EarInfo
@@ -48,13 +48,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="earInfo.earInfo.plural", order=30, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="earInfo.earInfo.plural", order=30, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/earInfo")
 @SessionAttributes(types = { EarInfoForm.class, EarInfoFilterForm.class })
-@Tile(name="earInfoFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earInfoForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="earInfoFormWebDB", contentJsp="/WEB-INF/jsp/webdb/earInfoForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="earInfo.earInfo")})
-@Tile(name="earInfoListWebDB", contentJsp="/WEB-INF/jsp/webdb/earInfoList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="earInfoListWebDB", contentJsp="/WEB-INF/jsp/webdb/earInfoList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="earInfo.earInfo") })
 public class EarInfoController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<EarInfo, java.lang.Long> implements EarInfoFields {

@@ -36,11 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.RepoCompilacioWebValidator
 import org.fundaciobit.powertoys.persistence.RepoCompilacioJPA;
 import org.fundaciobit.powertoys.model.entity.RepoCompilacio;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un RepoCompilacio
@@ -48,13 +48,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="repoCompilacio.repoCompilacio.plural", order=90, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="repoCompilacio.repoCompilacio.plural", order=90, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/repoCompilacio")
 @SessionAttributes(types = { RepoCompilacioForm.class, RepoCompilacioFilterForm.class })
-@Tile(name="repoCompilacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/repoCompilacioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="repoCompilacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/repoCompilacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="repoCompilacio.repoCompilacio")})
-@Tile(name="repoCompilacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/repoCompilacioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="repoCompilacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/repoCompilacioList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="repoCompilacio.repoCompilacio") })
 public class RepoCompilacioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<RepoCompilacio, java.lang.Long> implements RepoCompilacioFields {

@@ -36,11 +36,11 @@ import org.fundaciobit.powertoys.back.validator.webdb.EntornAplicacioWebValidato
 import org.fundaciobit.powertoys.persistence.EntornAplicacioJPA;
 import org.fundaciobit.powertoys.model.entity.EntornAplicacio;
 import org.fundaciobit.powertoys.model.fields.*;
-import org.fundaciobit.powertoys.commons.utils.Constants;
 import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.genapp.common.web.tiles.Tile;
 import org.fundaciobit.genapp.common.web.tiles.TileAttribute;
 import org.fundaciobit.genapp.common.web.tiles.TileType;
+import org.fundaciobit.powertoys.back.utils.Tab;
 
 /**
  * Controller per gestionar un EntornAplicacio
@@ -48,13 +48,13 @@ import org.fundaciobit.genapp.common.web.tiles.TileType;
  * 
  * @author GenApp
  */
-@MenuOption(labelCode="entornAplicacio.entornAplicacio.plural", order=60, group=Constants.MENU_BACK_WEBDB_ACCESS)
+@MenuOption(labelCode="entornAplicacio.entornAplicacio.plural", order=60, group=Tab.MENU_WEBDB)
 @Controller
 @RequestMapping(value = "/webdb/entornAplicacio")
 @SessionAttributes(types = { EntornAplicacioForm.class, EntornAplicacioFilterForm.class })
-@Tile(name="entornAplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioForm.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="entornAplicacioFormWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioForm.jsp", extendsTile=Tab.MENU_WEBDB,
       type=TileType.WEBDB_FORM , attributes={ @TileAttribute(name="titol", value="entornAplicacio.entornAplicacio")})
-@Tile(name="entornAplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioList.jsp", extendsTile=Constants.MENU_BACK_WEBDB_ACCESS,
+@Tile(name="entornAplicacioListWebDB", contentJsp="/WEB-INF/jsp/webdb/entornAplicacioList.jsp", extendsTile=Tab.MENU_WEBDB,
        type=TileType.WEBDB_LIST, attributes={ @TileAttribute(name="titol", value="entornAplicacio.entornAplicacio") })
 public class EntornAplicacioController
     extends org.fundaciobit.powertoys.back.controller.PowerToysBaseController<EntornAplicacio, java.lang.Long> implements EntornAplicacioFields {
