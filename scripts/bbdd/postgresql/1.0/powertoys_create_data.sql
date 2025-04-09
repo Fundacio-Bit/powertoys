@@ -7,7 +7,7 @@ INSERT INTO pwt_idioma(idiomaid, nom, suportat, ordre) VALUES ('en', 'English', 
 -- Data for Name: pwt_aplicacio; Type: TABLE DATA; Schema: public; Owner: powertoys
 --
 
-INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1000, 'VersioApp', '/versioappback');
+
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1001, 'Carpeta', '/carpetaback');
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1002, 'RegWeb3', '/regweb3');
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1003, 'EnviaFIB', '/enviafibback');
@@ -16,13 +16,14 @@ INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1006, 'Interdoc
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1008, 'DigitalIB', '/digitalibback');
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1007, 'PortaFIB', '/portafibback');
 INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1009, 'EvidènciesIB', '/evidenciesibback');
+INSERT INTO pwt_aplicacio(aplicacioid, nom, contextpath) VALUES (1010, 'PowerToys', '/powertoysback');
 
 
 --
 -- Name: pwt_aplicacio_seq; Type: SEQUENCE SET; Schema: public; Owner: powertoys
 --
 
-SELECT pg_catalog.setval('pwt_aplicacio_seq', 1009, true);
+SELECT pg_catalog.setval('pwt_aplicacio_seq', 1010, true);
 
 
 --
@@ -47,7 +48,6 @@ SELECT pg_catalog.setval('pwt_entorn_seq', 1004, true);
 -- Data for Name: pwt_entornaplicacio; Type: TABLE DATA; Schema: public; Owner: powertoys
 --
 
-INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1000, 1000, 1000);
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1001, 1001, 1000);
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1002, 1001, 1001);
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1003, 1002, 1001);
@@ -88,13 +88,14 @@ INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1044, 1009, 1002);
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1045, 1009, 1004);
 INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1046, 1009, 1003);
+INSERT INTO pwt_entornaplicacio(entornaplicacioid, aplicacioid, entornid) VALUES (1047, 1010, 1000);
 
 
 --
 -- Name: pwt_entornaplicacio_seq; Type: SEQUENCE SET; Schema: public; Owner: powertoys
 --
 
-SELECT pg_catalog.setval('pwt_entornaplicacio_seq', 1046, true);
+SELECT pg_catalog.setval('pwt_entornaplicacio_seq', 1047, true);
 
 
 --
@@ -139,46 +140,38 @@ SELECT pg_catalog.setval('pwt_traduccio_seq', 1000, false);
 -- Data for Name: pwt_versio; Type: TABLE DATA; Schema: public; Owner: powertoys
 --
 
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1000, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-15 11:34:19.99', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1001, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-15 11:34:45.119', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1002, 1001, '1.1.23', NULL, '2023-06-15 11:38:40.256', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1003, 1003, '3.3.2', NULL, '2023-06-15 11:45:15.98', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1004, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-15 11:52:51.386', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1005, 1001, '1.1.23', NULL, '2023-06-15 11:52:51.4', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1006, 1003, '3.3.2', NULL, '2023-06-15 11:52:51.562', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1007, 1004, '3.3.2', NULL, '2023-06-15 11:54:26.48', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1008, 1007, '1.0.7', NULL, '2023-06-15 11:55:13.824', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1009, 1004, '3.3.2', NULL, '2023-06-15 12:04:04.109', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1010, 1009, '1.0.7', NULL, '2023-06-15 12:04:06.608', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1011, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-16 05:10:00.191', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1012, 1001, '1.1.23', NULL, '2023-06-16 05:10:00.207', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1013, 1003, '3.3.2', NULL, '2023-06-16 05:10:00.378', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1014, 1004, '3.3.2', NULL, '2023-06-16 05:10:00.437', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1015, 1007, '1.0.7', NULL, '2023-06-16 05:10:00.545', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1016, 1009, '1.0.7', NULL, '2023-06-16 05:10:00.604', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1018, 1013, '1.0.0', NULL, '2023-06-16 12:23:05.609', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1019, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-17 05:10:00.212', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1020, 1001, '1.1.23', NULL, '2023-06-17 05:10:00.23', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1021, 1003, '3.3.2', NULL, '2023-06-17 05:10:00.758', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1022, 1004, '3.3.2', NULL, '2023-06-17 05:10:01.42', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1023, 1007, '1.0.7', NULL, '2023-06-17 05:10:01.501', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1024, 1009, '1.0.7', NULL, '2023-06-17 05:10:01.772', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1026, 1013, '1.0.0', NULL, '2023-06-17 05:10:01.799', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1027, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-18 05:10:00.192', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1028, 1001, '1.1.23', NULL, '2023-06-18 05:10:00.209', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1029, 1003, '3.3.2', NULL, '2023-06-18 05:10:00.354', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1030, 1004, '3.3.2', NULL, '2023-06-18 05:10:00.401', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1031, 1007, '1.0.7', NULL, '2023-06-18 05:10:00.477', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1032, 1009, '1.0.7', NULL, '2023-06-18 05:10:00.509', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1034, 1013, '1.0.0', NULL, '2023-06-18 05:10:00.534', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1035, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-19 05:10:00.139', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1036, 1001, '1.1.23', NULL, '2023-06-19 05:10:00.163', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1037, 1003, '3.3.2', NULL, '2023-06-19 05:10:00.383', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1038, 1004, '3.3.2', NULL, '2023-06-19 05:10:00.44', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1039, 1007, '1.0.7', NULL, '2023-06-19 05:10:00.513', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1040, 1009, '1.0.7', NULL, '2023-06-19 05:10:00.956', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1042, 1013, '1.0.0', NULL, '2023-06-19 05:10:01.001', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1043, 1000, '1.0.0', '2023-06-15T07:16:41Z', '2023-06-20 05:10:00.409', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1044, 1001, '1.1.23', NULL, '2023-06-20 05:10:00.485', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1045, 1003, '3.3.2', NULL, '2023-06-20 05:10:00.786', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1046, 1004, '3.3.2', NULL, '2023-06-20 05:10:00.894', NULL);
@@ -187,7 +180,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1050, 1013, '1.0.0', NULL, '2023-06-20 05:10:01.26', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1052, 1015, '1.1.1', NULL, '2023-06-20 09:47:43.665', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1053, 1016, '1.1.1', NULL, '2023-06-20 09:47:51.31', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1076, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2023-06-21 10:23:41.369', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1488, 1001, '1.1.24', '11/07/2023 10:11', '2023-07-11 13:26:14.728', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1489, 1015, '1.1.1', NULL, '2023-07-11 13:26:57.068', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (1490, 1016, '1.1.1', NULL, '2023-07-11 13:27:01.381', NULL);
@@ -209,7 +201,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (15628, 1036, '3.0.1', '2024-10-21T08:58:52Z', '2024-10-24 08:37:53.6', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (15629, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-10-24 08:37:56.307', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (15630, 1039, '3.0.0', '2024-09-26T09:08:18Z', '2024-10-24 08:38:03.785', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6937, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-01 05:10:00.179', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6938, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-01 05:10:00.201', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6939, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-01 05:10:00.36', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6940, 1003, '3.3.3', NULL, '2024-03-01 05:10:00.382', NULL);
@@ -225,7 +216,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6951, 1017, '1.1.1', NULL, '2024-03-01 05:10:00.847', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6952, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-01 05:10:00.875', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6955, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-01 05:10:01.003', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6956, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-02 05:10:00.101', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6957, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-02 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6958, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-02 05:10:00.192', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6959, 1003, '3.3.3', NULL, '2024-03-02 05:10:00.206', NULL);
@@ -241,7 +231,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6970, 1017, '1.1.1', NULL, '2024-03-02 05:10:00.777', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6971, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-02 05:10:00.798', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6974, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-02 05:10:00.886', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6975, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-03 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6976, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-03 05:10:00.15', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6977, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-03 05:10:00.201', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6978, 1003, '3.3.3', NULL, '2024-03-03 05:10:00.218', NULL);
@@ -257,7 +246,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6989, 1017, '1.1.1', NULL, '2024-03-03 05:10:00.482', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6990, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-03 05:10:00.502', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6993, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-03 05:10:00.582', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6994, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-04 05:10:00.103', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6995, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-04 05:10:00.124', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6996, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-04 05:10:00.179', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (6997, 1003, '3.3.3', NULL, '2024-03-04 05:10:00.195', NULL);
@@ -273,7 +261,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7008, 1017, '1.1.1', NULL, '2024-03-04 05:10:00.878', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7009, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-04 05:10:00.901', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7012, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-04 05:10:00.983', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7013, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-05 05:10:00.109', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7014, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-05 05:10:00.579', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7015, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-05 05:10:00.701', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7016, 1003, '3.3.3', NULL, '2024-03-05 05:10:00.716', NULL);
@@ -289,7 +276,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7027, 1017, '1.1.1', NULL, '2024-03-05 05:10:01.245', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7028, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-05 05:10:01.36', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7031, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-05 05:10:01.484', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7032, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-06 05:10:00.098', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7033, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-06 05:10:00.119', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7034, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-06 05:10:00.166', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7035, 1003, '3.3.3', NULL, '2024-03-06 05:10:00.191', NULL);
@@ -305,7 +291,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7046, 1017, '1.1.1', NULL, '2024-03-06 05:10:00.534', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7047, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-06 05:10:00.555', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7050, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-06 05:10:00.659', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7051, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-07 05:10:00.097', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7052, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-07 05:10:00.124', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7053, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-07 05:10:00.182', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7054, 1003, '3.3.3', NULL, '2024-03-07 05:10:00.269', NULL);
@@ -321,7 +306,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7065, 1017, '1.1.1', NULL, '2024-03-07 05:10:01.028', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7066, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-07 05:10:01.048', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7069, 1022, '1.1.26', '11/01/2024 10:53', '2024-03-07 05:10:01.145', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7070, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-08 05:10:00.092', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7071, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-08 05:10:00.115', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7072, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-08 05:10:00.166', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7073, 1003, '3.3.3', NULL, '2024-03-08 05:10:00.188', NULL);
@@ -337,7 +321,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7084, 1017, '1.1.1', NULL, '2024-03-08 05:10:00.565', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7085, 1018, '2.2.0', '2023-11-17T12:54:36Z', '2024-03-08 05:10:00.586', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7088, 1022, '1.1.28', '29/02/2024 12:54', '2024-03-08 05:10:01.874', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7089, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-09 05:10:00.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7090, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-09 05:10:00.172', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7091, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-09 05:10:00.332', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7092, 1003, '3.3.3', NULL, '2024-03-09 05:10:00.349', NULL);
@@ -353,7 +336,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7103, 1017, '1.1.1', NULL, '2024-03-09 05:10:00.76', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7104, 1018, '2.2.0', '2024-03-08T09:44:00Z', '2024-03-09 05:10:00.839', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7107, 1022, '1.1.28', '29/02/2024 12:54', '2024-03-09 05:10:01.049', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7108, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-10 05:10:00.155', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7109, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-10 05:10:00.175', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7110, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-10 05:10:00.221', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7111, 1003, '3.3.3', NULL, '2024-03-10 05:10:00.237', NULL);
@@ -369,7 +351,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7122, 1017, '1.1.1', NULL, '2024-03-10 05:10:00.523', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7123, 1018, '2.2.0', '2024-03-08T09:44:00Z', '2024-03-10 05:10:00.561', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7126, 1022, '1.1.28', '29/02/2024 12:54', '2024-03-10 05:10:00.651', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7127, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-11 05:10:00.099', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7128, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-11 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7129, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-11 05:10:00.173', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7130, 1003, '3.3.3', NULL, '2024-03-11 05:10:00.188', NULL);
@@ -385,7 +366,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7141, 1017, '1.1.1', NULL, '2024-03-11 05:10:00.47', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7142, 1018, '2.2.0', '2024-03-08T09:44:00Z', '2024-03-11 05:10:00.514', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7145, 1022, '1.1.28', '29/02/2024 12:54', '2024-03-11 05:10:00.638', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7146, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-03-12 05:10:00.164', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7147, 1001, '1.1.28', '28/02/2024 09:26', '2024-03-12 05:10:00.184', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7148, 1002, '1.1.28', '29/02/2024 12:54', '2024-03-12 05:10:00.466', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (7149, 1003, '3.3.3', NULL, '2024-03-12 05:10:00.479', NULL);
@@ -406,7 +386,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13821, 1009, '2.0.0', NULL, '2024-09-20 10:33:54.91', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13822, 1007, '2.0.0', NULL, '2024-09-20 10:34:12.03', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13823, 1001, '1.1.29', '09/09/2024 10:58', '2024-09-20 10:34:15.011', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13824, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-09-20 10:34:18.002', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13825, 1002, '1.1.29', '10/09/2024 06:08', '2024-09-20 10:34:21.021', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13826, 1006, '1.1.28', '29/02/2024 12:54', '2024-09-20 10:34:23.355', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13827, 1033, '1.1.28', '29/02/2024 12:54', '2024-09-20 10:34:25.765', NULL);
@@ -430,7 +409,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10770, 1005, '3.3.4', NULL, '2024-06-11 08:54:30.121', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10771, 1022, '1.1.28', '29/02/2024 12:54', '2024-06-11 08:54:36.85', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10772, 1006, '1.1.28', '29/02/2024 12:54', '2024-06-11 08:54:39.523', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10773, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-06-11 08:54:42.869', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10774, 1013, '1.0.0', NULL, '2024-06-11 08:54:50.783', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10775, 1026, '1.0.0', NULL, '2024-06-11 08:55:03.739', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (14189, 1022, '1.1.28', '29/02/2024 12:54', '2024-09-26 13:33:14.272', NULL);
@@ -445,7 +423,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (10786, 1033, '1.1.28', '29/02/2024 12:54', '2024-06-11 09:00:12.365', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13836, 1010, '1.0.11', NULL, '2024-09-20 10:49:01.31', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (13837, 1031, '2.0.3', '2024-08-26T07:15:57Z', '2024-09-20 10:49:10.97', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16943, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-14 05:10:03.171', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16944, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-14 05:10:03.181', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16945, 1002, '1.1.29', '10/09/2024 06:08', '2024-11-14 05:10:03.192', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16946, 1003, '4.0.0', NULL, '2024-11-14 05:10:03.199', NULL);
@@ -476,13 +453,11 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16971, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-14 05:10:03.742', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16972, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-14 05:10:03.746', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (16973, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-14 05:10:03.751', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17006, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-15 05:10:04.091', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17007, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-15 05:10:04.108', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17008, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-15 05:10:04.121', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17009, 1003, '4.0.0', NULL, '2024-11-15 05:10:04.129', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17010, 1004, '3.3.5', NULL, '2024-11-15 05:10:04.139', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (11225, 1003, '3.3.4', NULL, '2024-06-18 14:15:03.285', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (11226, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-06-18 14:15:09.011', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (11227, 1027, '2.0.3', '2024-05-13T10:46:06Z', '2024-06-18 14:15:12.146', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (11228, 1028, '2.0.3', '2024-06-14T06:38:07Z', '2024-06-18 14:15:17.677', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (11229, 1029, '2.0.2', '2024-02-16T07:04:52Z', '2024-06-18 14:15:20.475', NULL);
@@ -512,7 +487,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17034, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-15 05:10:04.428', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17035, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-15 05:10:04.434', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17036, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-15 05:10:04.44', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17037, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-16 05:10:00.11', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17038, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-16 05:10:00.164', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17039, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-16 05:10:00.223', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17040, 1003, '4.0.0', NULL, '2024-11-16 05:10:00.243', NULL);
@@ -543,7 +517,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17065, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-16 05:10:01.829', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17066, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-16 05:10:01.836', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17067, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-16 05:10:01.849', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17068, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-17 05:10:00.098', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17069, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-17 05:10:00.144', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17070, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-17 05:10:00.205', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17071, 1003, '4.0.0', NULL, '2024-11-17 05:10:00.221', NULL);
@@ -574,7 +547,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17096, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-17 05:10:00.871', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17097, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-17 05:10:00.878', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17098, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-17 05:10:00.888', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17099, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-18 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17100, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-18 05:10:00.155', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17101, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-18 05:10:00.2', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17102, 1003, '4.0.0', NULL, '2024-11-18 05:10:00.216', NULL);
@@ -605,7 +577,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17127, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-18 05:10:01.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17128, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-18 05:10:01.158', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17129, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-18 05:10:01.165', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17130, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-19 05:10:00.1', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17131, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-19 05:10:00.123', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17132, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-19 05:10:00.171', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17133, 1003, '4.0.0', NULL, '2024-11-19 05:10:00.194', NULL);
@@ -636,7 +607,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17158, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-19 05:10:03.17', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17159, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-19 05:10:03.176', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17160, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-19 05:10:03.189', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17161, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-20 05:10:00.174', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17162, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-20 05:10:00.197', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17163, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-20 05:10:00.232', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17164, 1003, '4.0.0', NULL, '2024-11-20 05:10:00.25', NULL);
@@ -667,7 +637,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17189, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-20 05:10:03.16', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17190, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-20 05:10:03.167', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17191, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-20 05:10:03.185', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17192, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-21 05:10:00.229', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17193, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-21 05:10:00.257', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17194, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-21 05:10:00.297', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17195, 1003, '4.0.0', NULL, '2024-11-21 05:10:00.314', NULL);
@@ -698,7 +667,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17220, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-21 05:10:03.343', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17221, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-21 05:10:03.348', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17222, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-21 05:10:03.362', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17223, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-22 05:10:00.12', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17224, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-22 05:10:00.143', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17225, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-22 05:10:00.184', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17226, 1003, '4.0.0', NULL, '2024-11-22 05:10:00.28', NULL);
@@ -729,7 +697,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17251, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-22 05:10:03.582', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17252, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-22 05:10:03.588', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17253, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-22 05:10:03.596', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17254, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-23 05:10:00.137', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17255, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-23 05:10:00.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17256, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-23 05:10:00.194', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17257, 1003, '4.0.0', NULL, '2024-11-23 05:10:00.214', NULL);
@@ -760,7 +727,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17282, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-23 05:10:02.9', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17283, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-23 05:10:02.906', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17284, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-23 05:10:02.932', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17285, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-24 05:10:00.157', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17286, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-24 05:10:00.176', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17287, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-24 05:10:00.221', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17288, 1003, '4.0.0', NULL, '2024-11-24 05:10:00.235', NULL);
@@ -790,7 +756,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17312, 1036, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-24 05:10:00.727', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17313, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-24 05:10:00.764', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17314, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-24 05:10:00.77', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17315, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-25 05:10:00.106', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17316, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-25 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17317, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-25 05:10:00.182', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17318, 1003, '4.0.0', NULL, '2024-11-25 05:10:00.196', NULL);
@@ -820,7 +785,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17342, 1036, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-25 05:10:01.073', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17343, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-25 05:10:01.107', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17344, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-25 05:10:01.115', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17345, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-26 05:10:00.144', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17346, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-26 05:10:00.161', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17347, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-26 05:10:00.448', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17348, 1003, '4.0.0', NULL, '2024-11-26 05:10:00.462', NULL);
@@ -851,7 +815,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17373, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-26 05:10:05.367', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17374, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-26 05:10:05.375', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17375, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-26 05:10:05.393', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17376, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-27 05:10:00.072', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17377, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-27 05:10:00.141', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17378, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-27 05:10:00.184', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17379, 1003, '4.0.0', NULL, '2024-11-27 05:10:00.197', NULL);
@@ -882,7 +845,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17404, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-27 05:10:03.235', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17405, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-27 05:10:03.243', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17406, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-27 05:10:03.262', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17407, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-28 05:10:00.144', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17408, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-28 05:10:00.172', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17409, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-28 05:10:00.448', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17410, 1003, '4.0.0', NULL, '2024-11-28 05:10:00.465', NULL);
@@ -913,7 +875,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17435, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-28 05:10:06.065', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17436, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-28 05:10:06.073', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17437, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-28 05:10:06.09', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17438, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-29 05:10:00.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17439, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-29 05:10:00.808', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17440, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-29 05:10:00.939', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17441, 1003, '4.0.0', NULL, '2024-11-29 05:10:00.956', NULL);
@@ -944,7 +905,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17466, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-29 05:10:01.732', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17467, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-29 05:10:01.739', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17468, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-29 05:10:01.751', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17469, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-11-30 05:10:00.119', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17470, 1001, '1.1.29', '09/09/2024 10:58', '2024-11-30 05:10:00.149', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17471, 1002, '1.1.30', '14/11/2024 12:47', '2024-11-30 05:10:00.411', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17472, 1003, '4.0.0', NULL, '2024-11-30 05:10:00.67', NULL);
@@ -975,7 +935,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17497, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-30 05:10:01.443', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17498, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-30 05:10:01.449', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17499, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-11-30 05:10:01.461', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17500, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-01 05:10:00.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17501, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-01 05:10:00.165', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17502, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-01 05:10:00.209', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17503, 1003, '4.0.0', NULL, '2024-12-01 05:10:00.226', NULL);
@@ -1006,7 +965,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17528, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-01 05:10:00.735', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17529, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-01 05:10:00.744', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17530, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-01 05:10:00.761', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17531, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-02 05:10:00.132', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17532, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-02 05:10:00.163', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17533, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-02 05:10:00.22', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17534, 1003, '4.0.0', NULL, '2024-12-02 05:10:00.238', NULL);
@@ -1037,7 +995,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17559, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-02 05:10:00.848', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17560, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-02 05:10:00.859', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17561, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-02 05:10:00.876', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17562, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-03 05:10:00.124', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17563, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-03 05:10:00.165', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17564, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-03 05:10:00.448', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17565, 1003, '4.0.0', NULL, '2024-12-03 05:10:00.463', NULL);
@@ -1069,7 +1026,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17591, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-03 05:10:02.738', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17592, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-03 05:10:02.759', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17593, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-03 05:10:02.78', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17594, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-04 05:10:00.121', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17595, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-04 05:10:00.164', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17596, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-04 05:10:00.221', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17597, 1003, '4.0.0', NULL, '2024-12-04 05:10:00.235', NULL);
@@ -1101,7 +1057,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17623, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-04 05:10:03.785', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17624, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-04 05:10:03.811', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17625, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-04 05:10:03.835', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17626, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-05 05:10:00.147', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17627, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-05 05:10:00.173', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17628, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-05 05:10:00.465', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17629, 1003, '4.0.0', NULL, '2024-12-05 05:10:00.482', NULL);
@@ -1133,7 +1088,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17655, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-05 05:10:02.279', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17656, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-05 05:10:02.29', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17657, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-05 05:10:02.326', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17658, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-06 05:10:00.176', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17659, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-06 05:10:00.199', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17660, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-06 05:10:00.242', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17661, 1003, '4.0.0', NULL, '2024-12-06 05:10:00.259', NULL);
@@ -1165,7 +1119,6 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17687, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-06 05:10:01.941', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17688, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-06 05:10:01.954', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17689, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-06 05:10:01.975', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17690, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-07 05:10:00.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17691, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-07 05:10:00.177', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17692, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-07 05:10:00.22', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17693, 1003, '4.0.0', NULL, '2024-12-07 05:10:00.237', NULL);
@@ -1197,7 +1150,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17719, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-07 05:10:02.091', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17720, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-07 05:10:02.122', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17721, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-07 05:10:02.146', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17722, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-08 05:10:00.193', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17723, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-08 05:10:00.225', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17724, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-08 05:10:00.285', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17725, 1003, '4.0.0', NULL, '2024-12-08 05:10:00.301', NULL);
@@ -1229,7 +1182,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17751, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-08 05:10:00.921', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17752, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-08 05:10:00.935', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17753, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-08 05:10:00.956', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17754, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-09 05:10:00.127', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17755, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-09 05:10:00.153', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17756, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-09 05:10:00.198', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17757, 1003, '4.0.0', NULL, '2024-12-09 05:10:00.216', NULL);
@@ -1261,7 +1214,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17783, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-09 05:10:01.07', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17784, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-09 05:10:01.081', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17785, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-09 05:10:01.105', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17786, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-10 05:10:00.15', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17787, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-10 05:10:00.18', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17788, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-10 05:10:00.225', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17789, 1003, '4.0.0', NULL, '2024-12-10 05:10:00.451', NULL);
@@ -1293,7 +1246,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17815, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-10 05:10:01.533', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17816, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-10 05:10:01.647', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17817, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-10 05:10:02.673', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17818, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-11 05:10:00.36', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17819, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-11 05:10:00.41', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17820, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-11 05:10:00.455', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17821, 1003, '4.0.0', NULL, '2024-12-11 05:10:00.469', NULL);
@@ -1326,7 +1279,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17847, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-11 05:10:02.396', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17848, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-11 05:10:02.417', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17849, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-11 05:10:02.437', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17850, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-12 05:10:00.128', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17851, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-12 05:10:00.144', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17852, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-12 05:10:00.185', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17853, 1003, '4.0.0', NULL, '2024-12-12 05:10:00.203', NULL);
@@ -1358,7 +1311,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17879, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-12 05:10:01.792', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17880, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-12 05:10:01.801', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17881, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-12 05:10:01.819', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17882, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-13 05:10:00.126', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17883, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-13 05:10:00.152', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17884, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-13 05:10:00.191', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17885, 1003, '4.0.0', NULL, '2024-12-13 05:10:00.214', NULL);
@@ -1390,7 +1343,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17911, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-13 05:10:01.09', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17912, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-13 05:10:01.105', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17913, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-13 05:10:01.125', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17914, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-14 05:10:00.129', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17915, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-14 05:10:00.157', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17916, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-14 05:10:00.275', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17917, 1003, '4.0.0', NULL, '2024-12-14 05:10:00.29', NULL);
@@ -1421,7 +1374,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17942, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-14 05:10:01.34', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17943, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-14 05:10:01.346', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17944, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-14 05:13:01.51', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17945, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-15 05:10:00.126', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17946, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-15 05:10:00.142', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17947, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-15 05:10:00.19', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17948, 1003, '4.0.0', NULL, '2024-12-15 05:10:00.209', NULL);
@@ -1452,7 +1405,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17973, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-15 05:10:00.868', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17974, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-15 05:10:00.877', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17975, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-15 05:12:12.413', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17976, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-16 05:10:00.134', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17977, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-16 05:10:00.151', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17978, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-16 05:10:00.191', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (17979, 1003, '4.0.0', NULL, '2024-12-16 05:10:00.208', NULL);
@@ -1483,7 +1436,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18004, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-16 05:10:00.714', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18005, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-16 05:10:00.723', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18006, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-16 05:12:11.274', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18007, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-17 05:10:00.135', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18008, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-17 05:10:00.153', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18009, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-17 05:10:00.197', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18010, 1003, '4.0.0', NULL, '2024-12-17 05:10:00.211', NULL);
@@ -1514,7 +1467,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18035, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-17 05:10:08.213', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18036, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-17 05:10:08.22', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18037, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-17 05:13:08.385', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18038, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-18 05:10:00.345', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18039, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-18 05:10:00.413', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18040, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-18 05:10:00.455', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18041, 1003, '4.0.0', NULL, '2024-12-18 05:10:00.472', NULL);
@@ -1546,7 +1499,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18067, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-18 05:10:04.009', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18068, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-18 05:10:04.018', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18069, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-18 05:10:04.047', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18070, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-19 05:10:00.137', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18071, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-19 05:10:00.16', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18072, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-19 05:10:00.201', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18074, 1004, '3.3.5', NULL, '2024-12-19 05:10:00.399', NULL);
@@ -1577,7 +1530,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18099, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-19 05:10:02.929', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18100, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-19 05:10:02.94', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18101, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-19 05:10:02.966', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18102, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-20 05:10:00.156', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18103, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-20 05:10:00.174', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18104, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-20 05:10:00.215', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18105, 1003, '4.0.0', NULL, '2024-12-20 05:10:00.235', NULL);
@@ -1609,7 +1562,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18131, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-20 05:10:00.853', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18132, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-20 05:10:00.912', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18133, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-20 05:10:01.141', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18134, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-21 05:10:00.143', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18135, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-21 05:10:00.162', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18136, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-21 05:10:00.207', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18137, 1003, '4.0.0', NULL, '2024-12-21 05:10:00.225', NULL);
@@ -1641,7 +1594,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18163, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-21 05:10:01.161', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18164, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-21 05:10:01.168', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18165, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-21 05:10:01.188', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18166, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-22 05:10:00.215', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18167, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-22 05:10:00.237', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18168, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-22 05:10:00.274', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18169, 1003, '4.0.0', NULL, '2024-12-22 05:10:00.292', NULL);
@@ -1672,7 +1625,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18194, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-22 05:10:00.752', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18195, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-22 05:10:00.762', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18196, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-22 05:12:11.447', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18229, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-23 05:12:10.497', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18230, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-23 05:12:10.507', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18231, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-23 05:12:10.543', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18232, 1003, '4.0.0', NULL, '2024-12-23 05:12:10.555', NULL);
@@ -1703,7 +1656,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18257, 1037, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-23 05:12:10.873', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18258, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-23 05:12:10.881', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18259, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-23 05:14:21.5', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18260, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-24 05:10:00.129', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18261, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-24 05:10:00.146', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18262, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-24 05:10:00.401', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18263, 1003, '4.0.0', NULL, '2024-12-24 05:10:00.585', NULL);
@@ -1735,7 +1688,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18289, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-24 05:10:01.822', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18290, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-24 05:10:01.83', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18291, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-24 05:10:01.849', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18292, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-25 05:10:00.143', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18293, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-25 05:10:00.167', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18294, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-25 05:10:00.225', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18295, 1003, '4.0.0', NULL, '2024-12-25 05:10:00.242', NULL);
@@ -1767,7 +1720,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18321, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-25 05:10:00.952', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18322, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-25 05:10:00.963', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18323, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-25 05:10:00.982', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18324, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-26 05:10:00.213', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18325, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-26 05:10:00.236', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18326, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-26 05:10:00.279', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18327, 1003, '4.0.0', NULL, '2024-12-26 05:10:00.294', NULL);
@@ -1799,7 +1752,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18353, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-26 05:10:01.171', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18354, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-26 05:10:01.183', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18355, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-26 05:10:01.207', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18356, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-27 05:10:00.405', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18357, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-27 05:10:00.423', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18358, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-27 05:10:00.489', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18359, 1003, '4.0.0', NULL, '2024-12-27 05:10:00.505', NULL);
@@ -1831,7 +1784,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18385, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-27 05:10:01.415', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18386, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-27 05:10:01.426', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18387, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-27 05:10:01.445', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18388, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-28 05:10:00.143', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18389, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-28 05:10:00.16', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18390, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-28 05:10:00.203', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18391, 1003, '4.0.0', NULL, '2024-12-28 05:10:00.218', NULL);
@@ -1863,7 +1816,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18417, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-28 05:10:01.277', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18418, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-28 05:10:01.287', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18419, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-28 05:10:01.309', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18420, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-29 05:10:00.145', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18421, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-29 05:10:00.161', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18422, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-29 05:10:00.199', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18423, 1003, '4.0.0', NULL, '2024-12-29 05:10:00.216', NULL);
@@ -1896,7 +1849,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18449, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-29 05:10:00.813', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18450, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-29 05:10:00.824', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18451, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-29 05:10:00.85', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18452, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-30 05:10:00.151', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18453, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-30 05:10:00.173', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18454, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-30 05:10:00.213', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18455, 1003, '4.0.0', NULL, '2024-12-30 05:10:00.229', NULL);
@@ -1928,7 +1881,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18481, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-30 05:10:00.976', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18482, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-30 05:10:00.985', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18483, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-30 05:10:01.007', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18484, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2024-12-31 05:10:00.155', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18485, 1001, '1.1.29', '09/09/2024 10:58', '2024-12-31 05:10:00.176', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18486, 1002, '1.1.30', '14/11/2024 12:47', '2024-12-31 05:10:00.213', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18487, 1003, '4.0.0', NULL, '2024-12-31 05:10:00.229', NULL);
@@ -1960,7 +1913,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18513, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-31 05:10:01.74', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18514, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2024-12-31 05:10:01.746', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18515, 1042, '1.0.2', '02/12/2024 09:23', '2024-12-31 05:10:01.766', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18516, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-01 05:10:00.152', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18517, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-01 05:10:00.171', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18518, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-01 05:10:00.232', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18519, 1003, '4.0.0', NULL, '2025-01-01 05:10:00.249', NULL);
@@ -1992,7 +1945,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18545, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-01 05:10:02.199', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18546, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-01 05:10:02.208', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18547, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-01 05:10:02.227', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18548, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-02 05:10:00.166', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18549, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-02 05:10:00.199', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18550, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-02 05:10:00.236', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18551, 1003, '4.0.0', NULL, '2025-01-02 05:10:00.253', NULL);
@@ -2023,7 +1976,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18577, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-02 05:10:01.253', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18578, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-02 05:10:01.26', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18579, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-02 05:10:01.279', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18580, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-03 05:10:00.356', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18581, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-03 05:10:00.393', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18582, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-03 05:10:00.433', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18583, 1003, '4.0.0', NULL, '2025-01-03 05:10:00.45', NULL);
@@ -2055,7 +2008,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18609, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-03 05:10:01.107', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18610, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-03 05:10:01.119', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18611, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-03 05:10:01.14', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18612, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-04 05:10:00.186', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18613, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-04 05:10:00.215', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18614, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-04 05:10:00.257', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18615, 1003, '4.0.0', NULL, '2025-01-04 05:10:00.272', NULL);
@@ -2087,7 +2040,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18641, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-04 05:10:01.712', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18642, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-04 05:10:01.722', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18643, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-04 05:10:01.742', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18644, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-05 05:10:00.148', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18645, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-05 05:10:00.167', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18646, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-05 05:10:00.207', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18647, 1003, '4.0.0', NULL, '2025-01-05 05:10:00.223', NULL);
@@ -2119,7 +2072,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18673, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-05 05:10:00.866', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18674, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-05 05:10:00.879', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18675, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-05 05:10:00.897', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18676, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-06 05:10:00.233', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18677, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-06 05:10:00.249', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18678, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-06 05:10:00.282', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18679, 1003, '4.0.0', NULL, '2025-01-06 05:10:00.293', NULL);
@@ -2151,7 +2104,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18705, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-06 05:10:00.945', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18706, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-06 05:10:00.954', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18707, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-06 05:10:00.973', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18708, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-07 05:10:00.163', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18709, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-07 05:10:00.182', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18710, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-07 05:10:00.216', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18711, 1003, '4.0.0', NULL, '2025-01-07 05:10:00.23', NULL);
@@ -2183,7 +2136,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18737, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-07 05:10:01.046', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18738, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-07 05:10:01.054', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18739, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-07 05:10:01.074', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18740, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-08 05:10:00.152', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18741, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-08 05:10:00.17', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18742, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-08 05:10:00.206', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18743, 1003, '4.0.0', NULL, '2025-01-08 05:10:00.219', NULL);
@@ -2213,7 +2166,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18767, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-08 05:10:03.774', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18768, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-08 05:10:03.783', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18769, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-08 05:10:03.822', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18770, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-09 05:10:00.373', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18771, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-09 05:10:00.391', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18772, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-09 05:10:00.432', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18773, 1003, '4.0.0', NULL, '2025-01-09 05:10:00.449', NULL);
@@ -2245,7 +2198,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18799, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-09 05:10:04.046', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18800, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-09 05:10:04.057', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18801, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-09 05:10:04.078', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18802, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-10 05:10:00.152', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18803, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-10 05:10:00.17', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18804, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-10 05:10:00.213', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18805, 1003, '4.0.0', NULL, '2025-01-10 05:10:00.231', NULL);
@@ -2277,7 +2230,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18831, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-10 05:10:03.268', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18832, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-10 05:10:03.274', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18833, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-10 05:10:03.294', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18834, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-11 05:10:00.162', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18835, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-11 05:10:00.186', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18836, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-11 05:10:00.224', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18837, 1003, '4.0.0', NULL, '2025-01-11 05:10:00.239', NULL);
@@ -2309,7 +2262,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18863, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-11 05:10:02.869', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18864, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-11 05:10:02.88', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18865, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-11 05:10:02.901', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18866, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-12 05:10:00.154', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18867, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-12 05:10:00.171', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18868, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-12 05:10:00.214', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18869, 1003, '4.0.0', NULL, '2025-01-12 05:10:00.23', NULL);
@@ -2341,7 +2294,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18895, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-12 05:10:00.922', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18896, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-12 05:10:00.929', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18897, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-12 05:10:00.956', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18898, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-13 05:10:00.176', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18899, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-13 05:10:00.194', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18900, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-13 05:10:00.23', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18901, 1003, '4.0.0', NULL, '2025-01-13 05:10:00.242', NULL);
@@ -2373,7 +2326,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18927, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-13 05:10:00.968', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18928, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-13 05:10:00.976', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18929, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-13 05:10:00.994', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18930, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-14 05:10:00.159', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18931, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-14 05:10:00.177', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18932, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-14 05:10:00.423', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18933, 1003, '4.0.0', NULL, '2025-01-14 05:10:00.437', NULL);
@@ -2405,7 +2358,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18959, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-14 05:10:05.076', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18960, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-14 05:10:05.292', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18961, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-14 05:10:05.313', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18962, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-15 05:10:00.16', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18963, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-15 05:10:00.177', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18964, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-15 05:10:00.217', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18965, 1003, '4.0.0', NULL, '2025-01-15 05:10:00.233', NULL);
@@ -2438,7 +2391,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18992, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-15 05:10:07.471', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18993, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-15 05:10:07.482', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18994, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-15 05:10:07.503', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18995, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-16 05:10:00.069', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18996, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-16 05:10:00.088', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18997, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-16 05:10:00.132', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (18998, 1003, '4.0.0', NULL, '2025-01-16 05:10:00.153', NULL);
@@ -2471,7 +2424,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19025, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-16 05:10:01.125', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19026, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-16 05:10:01.15', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19027, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-16 05:10:01.166', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19028, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-17 05:10:00.182', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19029, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-17 05:10:00.206', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19030, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-17 05:10:00.47', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19031, 1003, '4.0.0', NULL, '2025-01-17 05:10:00.485', NULL);
@@ -2504,7 +2457,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19058, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-17 05:10:01.704', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19059, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-17 05:10:01.742', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19060, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-17 05:10:01.767', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19061, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-18 05:10:00.249', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19062, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-18 05:10:00.266', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19063, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-18 05:10:00.305', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19064, 1003, '4.0.0', NULL, '2025-01-18 05:10:00.323', NULL);
@@ -2537,7 +2490,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19091, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-18 05:10:02.728', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19092, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-18 05:10:02.762', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19093, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-18 05:10:02.786', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19094, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-19 05:10:00.163', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19095, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-19 05:10:00.189', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19096, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-19 05:10:00.246', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19097, 1003, '4.0.0', NULL, '2025-01-19 05:10:00.261', NULL);
@@ -2570,7 +2523,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19124, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-19 05:10:00.737', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19125, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-19 05:10:00.756', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19126, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-19 05:10:00.773', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19127, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-20 05:10:00.213', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19128, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-20 05:10:00.24', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19129, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-20 05:10:00.276', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19130, 1003, '4.0.0', NULL, '2025-01-20 05:10:00.291', NULL);
@@ -2603,7 +2556,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19157, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-20 05:10:00.833', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19158, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-20 05:10:00.864', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19159, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-20 05:10:00.884', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19160, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-21 05:10:00.166', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19161, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-21 05:10:00.187', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19162, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-21 05:10:00.245', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19163, 1003, '4.0.0', NULL, '2025-01-21 05:10:00.259', NULL);
@@ -2636,7 +2589,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19190, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-21 05:10:01.44', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19191, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-21 05:10:01.455', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19192, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-21 05:10:02.477', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19193, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-22 05:10:00.171', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19194, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-22 05:10:00.188', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19195, 1002, '1.1.30', '14/11/2024 12:47', '2025-01-22 05:10:00.242', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19196, 1003, '4.0.0', NULL, '2025-01-22 05:10:00.259', NULL);
@@ -2669,7 +2622,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19223, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-22 05:10:02.729', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19224, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-22 05:10:02.738', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19225, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-22 05:10:02.757', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19226, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-23 05:10:00.089', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19227, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-23 05:10:00.106', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19228, 1003, '4.0.0', NULL, '2025-01-23 05:10:00.165', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19229, 1004, '3.3.5', NULL, '2025-01-23 05:10:00.24', NULL);
@@ -2701,7 +2654,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19255, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-23 05:10:01.903', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19256, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-23 05:10:01.915', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19257, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-23 05:10:01.934', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19258, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-24 05:10:00.172', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19259, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-24 05:10:00.189', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19260, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-24 05:10:00.232', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19261, 1003, '4.0.0', NULL, '2025-01-24 05:10:00.25', NULL);
@@ -2734,7 +2687,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19288, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-24 05:10:00.909', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19289, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-24 05:10:00.921', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19290, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-24 05:10:00.944', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19291, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-25 05:10:00.162', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19292, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-25 05:10:00.201', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19293, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-25 05:10:00.239', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19294, 1003, '4.0.0', NULL, '2025-01-25 05:10:00.253', NULL);
@@ -2767,7 +2720,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19321, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-25 05:10:04.762', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19322, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-25 05:10:04.777', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19323, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-25 05:10:04.796', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19324, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-26 05:10:00.169', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19325, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-26 05:10:00.187', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19326, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-26 05:10:00.234', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19327, 1003, '4.0.0', NULL, '2025-01-26 05:10:00.247', NULL);
@@ -2800,7 +2753,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19354, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-26 05:10:00.874', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19355, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-26 05:10:00.884', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19356, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-26 05:10:00.9', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19357, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-27 05:10:00.169', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19358, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-27 05:10:00.186', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19359, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-27 05:10:00.238', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19360, 1003, '4.0.0', NULL, '2025-01-27 05:10:00.252', NULL);
@@ -2833,7 +2786,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19387, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-27 05:10:00.747', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19388, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-27 05:10:00.761', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19389, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-27 05:10:01.013', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19390, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-28 05:10:00.25', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19391, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-28 05:10:00.281', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19392, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-28 05:10:00.324', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19393, 1003, '4.0.0', NULL, '2025-01-28 05:10:00.34', NULL);
@@ -2866,7 +2819,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19420, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-28 05:10:03.122', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19421, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-28 05:10:03.356', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19422, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-28 05:10:03.378', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19423, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-29 05:10:00.187', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19424, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-29 05:10:00.216', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19425, 1002, '1.1.30', '23/01/2025 10:42', '2025-01-29 05:10:00.249', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19426, 1003, '4.0.0', NULL, '2025-01-29 05:10:00.263', NULL);
@@ -2899,7 +2852,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19453, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-29 05:10:01.405', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19454, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-29 05:10:01.417', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19455, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-29 05:10:01.442', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19456, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-30 05:10:00.163', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19457, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-30 05:10:00.178', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19458, 1002, '1.1.30', '29/01/2025 08:26', '2025-01-30 05:10:00.219', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19459, 1003, '4.0.0', NULL, '2025-01-30 05:10:00.238', NULL);
@@ -2932,7 +2885,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19486, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-30 05:10:06.769', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19487, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-30 05:10:06.786', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19488, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-30 05:10:06.806', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19489, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-01-31 05:10:00.174', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19490, 1001, '1.1.29', '09/09/2024 10:58', '2025-01-31 05:10:00.203', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19491, 1002, '1.1.30', '29/01/2025 08:26', '2025-01-31 05:10:00.241', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19492, 1003, '4.0.0', NULL, '2025-01-31 05:10:00.258', NULL);
@@ -2965,7 +2918,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19519, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-31 05:10:01.231', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19520, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-01-31 05:10:01.246', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19521, 1042, '1.0.2', '02/12/2024 09:23', '2025-01-31 05:10:01.266', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19522, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-01 05:10:00.169', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19523, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-01 05:10:00.194', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19524, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-01 05:10:00.234', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19525, 1003, '4.0.0', NULL, '2025-02-01 05:10:00.253', NULL);
@@ -2998,7 +2951,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19552, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-01 05:10:01.747', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19553, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-01 05:10:01.757', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19554, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-01 05:10:02.142', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19555, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-02 05:10:00.175', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19556, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-02 05:10:00.203', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19557, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-02 05:10:00.241', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19558, 1003, '4.0.0', NULL, '2025-02-02 05:10:00.257', NULL);
@@ -3031,7 +2984,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19585, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-02 05:10:00.74', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19586, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-02 05:10:00.761', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19587, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-02 05:10:00.779', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19588, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-03 05:10:00.171', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19589, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-03 05:10:00.189', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19590, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-03 05:10:00.225', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19591, 1003, '4.0.0', NULL, '2025-02-03 05:10:00.239', NULL);
@@ -3064,7 +3017,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19618, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-03 05:10:00.862', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19619, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-03 05:10:00.872', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19620, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-03 05:10:00.901', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19621, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-04 05:10:00.158', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19622, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-04 05:10:00.185', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19623, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-04 05:10:00.225', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19624, 1003, '4.0.0', NULL, '2025-02-04 05:10:00.241', NULL);
@@ -3097,7 +3050,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19651, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-04 05:10:02.086', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19652, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-04 05:10:02.1', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19653, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-04 05:10:02.118', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19654, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-05 05:10:00.207', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19655, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-05 05:10:00.227', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19656, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-05 05:10:00.264', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19657, 1003, '4.0.0', NULL, '2025-02-05 05:10:00.277', NULL);
@@ -3130,7 +3083,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19684, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-05 05:10:01.803', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19685, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-05 05:10:01.815', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19686, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-05 05:10:01.839', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19687, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-06 05:10:00.17', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19688, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-06 05:10:00.186', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19689, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-06 05:10:00.306', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19690, 1003, '4.0.0', NULL, '2025-02-06 05:10:00.329', NULL);
@@ -3163,7 +3116,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19717, 1038, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-06 05:10:01.673', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19718, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-06 05:10:01.708', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19719, 1042, '1.0.2', '02/12/2024 09:23', '2025-02-06 05:10:01.729', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19720, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-07 05:10:00.23', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19721, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-07 05:10:00.255', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19722, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-07 05:10:00.39', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19723, 1003, '4.0.0', NULL, '2025-02-07 05:10:00.41', NULL);
@@ -3212,7 +3165,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19766, 1009, '2.0.1', NULL, '2025-02-07 11:51:52.963', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19767, 1015, '1.1.1', NULL, '2025-02-07 12:36:22.623', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19768, 1027, '2.0.3', '2024-05-13T10:46:06Z', '2025-02-07 12:36:33.015', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19769, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-08 05:10:00.16', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19770, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-08 05:10:00.179', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19771, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-08 05:10:00.454', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19772, 1003, '4.0.0', NULL, '2025-02-08 05:10:00.474', NULL);
@@ -3249,7 +3202,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19803, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-08 05:10:01.866', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19804, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-08 05:10:01.896', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19805, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-08 05:10:01.942', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19806, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-09 05:10:00.129', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19807, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-09 05:10:00.155', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19808, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-09 05:10:00.212', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19809, 1003, '4.0.0', NULL, '2025-02-09 05:10:00.229', NULL);
@@ -3286,7 +3239,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19840, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-09 05:10:00.887', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19841, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-09 05:10:00.905', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19842, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-09 05:10:00.943', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19843, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-10 05:10:00.129', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19844, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-10 05:10:00.154', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19845, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-10 05:10:00.213', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19846, 1003, '4.0.0', NULL, '2025-02-10 05:10:00.227', NULL);
@@ -3322,7 +3275,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19876, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-10 05:10:00.895', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19877, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-10 05:10:00.926', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19878, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-10 05:10:00.963', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19879, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-11 05:10:00.145', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19880, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-11 05:10:00.174', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19881, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-11 05:10:00.272', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19882, 1003, '4.0.0', NULL, '2025-02-11 05:10:00.289', NULL);
@@ -3359,7 +3312,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19913, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-11 05:10:01.99', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19914, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-11 05:10:02.214', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19915, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-11 05:10:02.244', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19916, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-12 05:10:00.621', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19917, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-12 05:10:00.7', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19918, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-12 05:10:00.767', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19919, 1003, '4.0.0', NULL, '2025-02-12 05:10:00.79', NULL);
@@ -3396,7 +3349,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19950, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-12 05:10:02.341', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19951, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-12 05:10:02.368', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19952, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-12 05:10:02.411', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19953, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-13 05:10:00.209', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19954, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-13 05:10:00.228', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19955, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-13 05:10:00.357', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19956, 1003, '4.0.0', NULL, '2025-02-13 05:10:00.379', NULL);
@@ -3433,7 +3386,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19987, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-13 05:10:02.372', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19988, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-13 05:10:02.41', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19989, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-13 05:10:02.455', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19990, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-14 05:10:00.177', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19991, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-14 05:10:00.204', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19992, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-14 05:10:00.351', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (19993, 1003, '4.0.0', NULL, '2025-02-14 05:10:00.371', NULL);
@@ -3470,7 +3423,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20024, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-14 05:10:01.123', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20025, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-14 05:10:01.146', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20026, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-14 05:10:01.186', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20027, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-15 05:10:00.226', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20028, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-15 05:10:00.249', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20029, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-15 05:10:00.309', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20030, 1003, '4.0.0', NULL, '2025-02-15 05:10:00.526', NULL);
@@ -3506,7 +3459,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20060, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-15 05:12:13.985', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20061, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-15 05:12:14.028', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20062, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-15 05:12:14.073', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20063, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-16 05:10:00.118', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20064, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-16 05:10:00.135', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20065, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-16 05:10:00.198', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20066, 1003, '4.0.0', NULL, '2025-02-16 05:10:00.213', NULL);
@@ -3542,7 +3495,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20096, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-16 05:12:12.488', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20097, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-16 05:12:12.525', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20098, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-16 05:12:12.548', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20099, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-17 05:10:00.145', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20100, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-17 05:10:00.165', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20101, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-17 05:10:00.222', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20102, 1003, '4.0.0', NULL, '2025-02-17 05:10:00.239', NULL);
@@ -3578,7 +3531,7 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20132, 1044, '1.0.3', '22/01/2025 13:27', '2025-02-17 05:10:00.985', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20133, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-17 05:10:01.008', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20134, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-17 05:10:01.035', NULL);
-INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20135, 1000, '1.0.1', '2023-06-21T07:11:59Z', '2025-02-18 05:10:00.16', NULL);
+
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20136, 1001, '1.1.29', '09/09/2024 10:58', '2025-02-18 05:10:00.191', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20137, 1002, '1.1.30', '29/01/2025 08:26', '2025-02-18 05:10:00.305', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20138, 1003, '4.0.0', NULL, '2025-02-18 05:10:00.331', NULL);
@@ -3616,10 +3569,13 @@ INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresd
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20170, 1045, '1.0.3', '22/01/2025 13:27', '2025-02-18 05:10:02.218', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20171, 1046, '1.0.3', '22/01/2025 13:27', '2025-02-18 05:10:02.248', NULL);
 INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20172, 1039, '3.0.1', '2024-10-21T08:58:52Z', '2025-02-18 10:44:12.417', NULL);
+INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20173, 1047, '1.0.0', '2025-03-05T08:58:52Z', '2025-04-09T08:58:52Z', NULL);
+INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20174, 1047, '1.0.1', '2025-02-24T08:58:52Z', '2025-04-09T08:58:52Z', NULL);
+INSERT INTO pwt_versio(versioid, entornaplicacioid, versio, build, data, altresdades) VALUES (20175, 1047, '1.0.2', '2025-04-09T08:58:52Z', '2025-04-09T08:58:52Z', NULL);
 
 
 --
 -- Name: pwt_versio_seq; Type: SEQUENCE SET; Schema: public; Owner: powertoys
 --
 
-SELECT pg_catalog.setval('pwt_versio_seq', 20172, true);
+SELECT pg_catalog.setval('pwt_versio_seq', 20175, true);
