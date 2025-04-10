@@ -73,11 +73,13 @@ public class Compilador {
     public Entry<Integer, String> compilarRepositori(File repoDir, String comanda)
             throws IOException, InterruptedException {
         // Executar la comanda de compilació
-        List<String> comandaList = new ArrayList<String>(Arrays.asList(comanda.split(" ")));
+        List<String> comandaList;
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            comandaList = new ArrayList<String>(Arrays.asList(comanda.split(" ")));
             comandaList.add(0, "/C");
             comandaList.add(0, "cmd.exe");
         } else {
+            comandaList = new ArrayList<String>(Arrays.asList(comanda));
             comandaList.add(0, "-c");
             comandaList.add(0, "sh");
         }
