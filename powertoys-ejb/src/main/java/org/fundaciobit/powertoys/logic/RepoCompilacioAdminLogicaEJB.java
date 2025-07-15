@@ -1,6 +1,5 @@
 package org.fundaciobit.powertoys.logic;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -22,7 +20,6 @@ import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.powertoys.commons.utils.Configuracio;
 import org.fundaciobit.powertoys.commons.utils.Constants;
-import org.fundaciobit.powertoys.ejb.FitxerService;
 import org.fundaciobit.powertoys.ejb.RepoCompilacioEJB;
 import org.fundaciobit.powertoys.logic.compiladornocturn.Compilador;
 import org.fundaciobit.powertoys.logic.compiladornocturn.CompilacioGitHub;

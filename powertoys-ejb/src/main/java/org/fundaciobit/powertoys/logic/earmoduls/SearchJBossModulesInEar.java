@@ -23,62 +23,11 @@ import org.apache.commons.io.IOUtils;
  */
 public class SearchJBossModulesInEar {
 
+    
+   
 
 
-    public static class EarWarInfo {
-
-        protected final String fileName;
-
-        protected String redhatJarsToModules = "";
-
-        protected String jbossDeploymentStructure = "";
-
-        protected String potencialCanviDeJarAModul = "";
-
-        protected String errors = "";
-
-        public EarWarInfo(String fileName) {
-            super();
-            this.fileName = fileName;
-        }
-
-        public String getFileName() {
-            return fileName;
-        }
-
-        public String getRedhatJarsToModules() {
-            return redhatJarsToModules;
-        }
-
-        public void setRedhatJarsToModules(String redhatJarsToModules) {
-            this.redhatJarsToModules = redhatJarsToModules;
-        }
-
-        public String getJbossDeploymentStructure() {
-            return jbossDeploymentStructure;
-        }
-
-        public void setJbossDeploymentStructure(String jbossDeploymentStructure) {
-            this.jbossDeploymentStructure = jbossDeploymentStructure;
-        }
-
-        public String getPotencialCanviDeJarAModul() {
-            return potencialCanviDeJarAModul;
-        }
-
-        public void setPotencialCanviDeJarAModul(String potencialCanviDeJarAModul) {
-            this.potencialCanviDeJarAModul = potencialCanviDeJarAModul;
-        }
-
-        public String getErrors() {
-            return errors;
-        }
-
-        public void setErrors(String errors) {
-            this.errors = errors;
-        }
-
-    }
+    
 
     public static void processFileEarWar(File earWarFile, List<EarWarInfo> trobats) throws Exception {
         processFileEarWar(earWarFile, earWarFile.getName(), trobats);
@@ -97,9 +46,9 @@ public class SearchJBossModulesInEar {
 
         Set<String> jaProcessats = new HashSet<String>();
 
-        StringBuilder redhatJarsToModules = new StringBuilder();
+        List<String> redhatJarsToModules = new ArrayList<String>();
 
-        StringBuilder jbossDeploymentStructure = new StringBuilder();
+        List<String> jbossDeploymentStructure = new ArrayList<String>();
 
         Set<String> errors = new HashSet<String>();
         
@@ -128,9 +77,9 @@ public class SearchJBossModulesInEar {
 
                 //System.out.println(" ----- " + redhat + " -------------");
 
-                redhatJarsToModules.append(m.getEarEntry());
+                redhatJarsToModules.add(m.getEarEntry());
 
-                jbossDeploymentStructure.append(m.getDeploymentStructure());
+                jbossDeploymentStructure.add(m.getDeploymentStructure());
 
                 jaProcessats.add(m.getModule());
 
@@ -142,48 +91,46 @@ public class SearchJBossModulesInEar {
         
         final boolean isEar = name.endsWith(".ear");
 
-        if (redhatJarsToModules.length() != 0) {
+        if (redhatJarsToModules.size() != 0) {
             String plugin = isEar ? "maven-ear-plugin" : "maven-war-plugin";
 
-            ewinfo.setRedhatJarsToModules(
-                    "<!-- Afegir dins el pom.xml de " + name.substring(0, name.lastIndexOf('.')) + (isEar?"-ear":"")+ " en el <configuration> del plugin "
-                            + plugin + " -->\n" + "                    <packagingExcludes>\n"
-                            + redhatJarsToModules.toString() + "                    </packagingExcludes>\n");
+            ewinfo.setRedhatJarsToModules(new RedhatJarsToModules(name.substring(0, name.lastIndexOf('.')), isEar, redhatJarsToModules, plugin));
+
         }
 
-        if (jbossDeploymentStructure.length() != 0) {
+        if (jbossDeploymentStructure.size() != 0) {
 
-            ewinfo.setJbossDeploymentStructure(
-                    "<!-- Afegir dins del fitxer src/main/application/META-INF/jboss-deployment-structure.xml de l'ear -->\n"
-                    
-                    + (isEar?"   <deployment>":"   <sub-deployment name=\"" + name + "\">") 
-                            + "\n        <dependencies>\n"
-                            + jbossDeploymentStructure.toString()
-                            + "        </dependencies>\n"
+            String titol = "S'han trobat jars que poden ser substituits pels segünts mòduls de JBoss. Per activar aquests mòduls el que hem de fer és afegir aquestes entrades dins del fitxer src/main/application/META-INF/jboss-deployment-structure.xml del projecte d'ear";
+            String deploymentStart = isEar ? "   <deployment>" : "   <sub-deployment name=\"" + name + "\">";
+            String deploymentEnd = isEar ? "   </deployment>" : "   </sub-deployment>";
             
-                    + (isEar?"   </deployment>":"   </sub-deployment>")
-                    );
+            ewinfo.setJbossDeploymentStructure(
+                    new JbossDeploymentStructure(titol, deploymentStart, deploymentEnd,
+                            jbossDeploymentStructure));
+                  
         }
 
         if (errors.size() > 0) {
+            /*
             StringBuilder sb = new StringBuilder();
             for (String error : errors) {
                 sb.append("Revisi manualment el JAR " + error + " dins  [jboss7]\\modules\\system\\layers\\base")
                         .append("\n");
             }
-
-            ewinfo.setErrors(sb.toString());
+*/
+            ewinfo.setErrors(new ArrayList<String>(errors));
 
         }
 
         if (potencialCanviDeJarAModul.size() != 0) {
+            /*
             StringBuilder sb = new StringBuilder(
                     "\n  +Potencials canvis de JAR a mòdul:\n");
             for (String potencial : potencialCanviDeJarAModul) {
                 sb.append("   + " + potencial + "\n");
             }
-
-            ewinfo.setPotencialCanviDeJarAModul(sb.toString());
+*/
+            ewinfo.setPotencialCanviDeJarAModul(potencialCanviDeJarAModul);
 
         }
 

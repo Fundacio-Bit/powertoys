@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
@@ -23,7 +24,9 @@ import org.fundaciobit.genapp.common.web.menuoptions.MenuOption;
 import org.fundaciobit.powertoys.logic.EarSimplePublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar;
-import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar.EarWarInfo;
+import org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo;
+import org.fundaciobit.powertoys.logic.earmoduls.JbossDeploymentStructure;
+import org.fundaciobit.powertoys.logic.earmoduls.RedhatJarsToModules;
 import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
 import org.fundaciobit.powertoys.back.controller.webdb.EarSimpleController;
 import org.fundaciobit.powertoys.back.form.webdb.EarSimpleFilterForm;
@@ -57,7 +60,7 @@ public class EarSimplePublicController extends EarSimpleController {
     protected FitxerPublicLogicaService fitxerLogicaEjb;
 
     @Override
-    protected FilesFormManager<Fitxer> getFilesFormManager() {
+    public FilesFormManager<Fitxer> getFilesFormManager() {
         return new PowerToysFilesFormManager(fitxerLogicaEjb);
     }
 
@@ -79,6 +82,10 @@ public class EarSimplePublicController extends EarSimpleController {
         earSimpleFilterForm = super.getEarSimpleFilterForm(pagina, mav, request);
 
         if (earSimpleFilterForm.isNou()) {
+            
+            
+            earSimpleFilterForm.setSubTitleCode("ear.subtitle");
+            
             earSimpleFilterForm.addHiddenField(EarSimpleFields.EARSIMPLEID);
             earSimpleFilterForm.addHiddenField(EarSimpleFields.NOM);
             earSimpleFilterForm.addHiddenField(EarSimpleFields.DETALL);
@@ -115,10 +122,18 @@ public class EarSimplePublicController extends EarSimpleController {
             earSimpleForm.setTitleCode("ear.processarearsimple");
         }
 
+        if (__isView) {
+            earSimpleForm.getReadOnlyFields().remove(DETALL);
+        }
+        
+        earSimpleForm.setSubTitleCode("ear.subtitle");
+
         earSimpleForm.setCancelButtonVisible(false);
         AdditionalButton returnButton = new AdditionalButton("fas fa-caret-left", "ear.tornar",
                 getContextWeb() + "/list/1", AdditionalButtonStyle.DANGER);
         earSimpleForm.addAdditionalButton(returnButton);
+
+        earSimpleForm.setAttachedAdditionalJspCode(true);
 
         return earSimpleForm;
     }
@@ -134,7 +149,7 @@ public class EarSimplePublicController extends EarSimpleController {
 
         Fitxer fitxer = fitxerEjb.findByPrimaryKey(earSimple.getFitxerID());
         String nom = fitxer.getNom();
-        String detall = "";
+        StringBuilder detall = new StringBuilder();
 
         earWarFile = FileSystemManager.getFile(earSimple.getFitxerID());
         try {
@@ -148,15 +163,34 @@ public class EarSimplePublicController extends EarSimpleController {
 
         log.info("fitxer EAR llegit al preValidate, actualitzam nom i detall");
 
-        for (EarWarInfo earWarInfo : trobats) {
-            detall += earWarInfoToString(earWarInfo) + "\n";
-            detall += "--------------------------------------\n";
-        }
-        log.info("trobats: " + detall);
+        detall.append("<html>\n");
+        detall.append("<body>\n");
 
-        detall = "<p style=\"font-family: Courier;\">" + detall.replaceAll("\n", "<br\\>\n") + "</p>";
+        for (EarWarInfo earWarInfo : trobats) {
+
+ //           try {
+                String info = earWarInfoToString(earWarInfo);
+                if (info == null || info.isEmpty()) {
+                    continue;
+                }
+
+                detall.append("<div style=\"border: 2px solid #ccc; border-radius: 15px; padding:10px;margin:10px;\">\n");
+                detall.append(info);
+                detall.append("</div>\n");
+                detall.append("\n<br/>\n");
+//            } catch (Throwable e) {
+//                // TODO: handle exception
+//                String msg = "Error processant l'EAR: " + e.getMessage();
+//                HtmlUtils.saveMessageError(request, msg);
+//                log.error(msg, e);
+//            }
+            
+        }
+        log.info("trobats: " + detall.toString());
+
+        //detall = "<p style=\"font-family: Courier;\">" + detall.replaceAll("\n", "<br\\>\n") + "</p>";
         earSimple.setNom(nom);
-        earSimple.setDetall(detall);
+        earSimple.setDetall(detall.toString()); // .replaceAll("\n", "<br\\>\n"));
         earSimple.setData(new Timestamp(System.currentTimeMillis()));
     }
 
@@ -174,8 +208,8 @@ public class EarSimplePublicController extends EarSimpleController {
      */
     @Override
     @RequestMapping(value = "/{earSimpleID}/delete")
-    public String eliminarEarSimple(@PathVariable("earSimpleID") java.lang.Long earSimpleID,
-            HttpServletRequest request, HttpServletResponse response) {
+    public String eliminarEarSimple(@PathVariable("earSimpleID")
+    java.lang.Long earSimpleID, HttpServletRequest request, HttpServletResponse response) {
         String responseStr = super.eliminarEarSimple(earSimpleID, request, response);
 
         for (Cookie cookie : request.getCookies()) {
@@ -207,9 +241,9 @@ public class EarSimplePublicController extends EarSimpleController {
      */
     @Override
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String crearEarSimplePost(@ModelAttribute EarSimpleForm earSimpleForm,
-            BindingResult result, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+    public String crearEarSimplePost(@ModelAttribute
+    EarSimpleForm earSimpleForm, BindingResult result, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
         String responseStr = super.crearEarSimplePost(earSimpleForm, result, request, response);
 
         EarSimpleJPA earSimple = earSimpleForm.getEarSimple();
@@ -288,12 +322,133 @@ public class EarSimplePublicController extends EarSimpleController {
     }
 
     public String earWarInfoToString(EarWarInfo earWarInfo) {
-        String result = "";
-        result += "FileName: " + earWarInfo.getFileName() + "\n";
-        result += "RedhatJarsToModules: " + earWarInfo.getRedhatJarsToModules() + "\n";
-        result += "JbossDeploymentStructure: " + earWarInfo.getJbossDeploymentStructure() + "\n";
-        result += "PotencialCanviDeJarAModul: " + earWarInfo.getPotencialCanviDeJarAModul() + "\n";
-        result += "Errors: " + earWarInfo.getErrors() + "\n";
-        return result;
+        StringBuilder result = new StringBuilder();
+
+        result.append("<h3>Fitxer " + earWarInfo.getFileName() + "</h3>\n");
+
+        result.append("<form>");
+        
+        boolean isOK = true;
+
+        RedhatJarsToModules redhatJarsToModules = earWarInfo.getRedhatJarsToModules();
+        if (redhatJarsToModules != null) {
+
+            result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
+                    .append("\n");
+            result.append("<legend>Eliminar JARs de dins del contenidor</legend>").append("\n");
+
+            result.append("Hem trobat els següents jars que les podem substituir per mòduls JBoss. "
+                    + "El primer que hem de fer és eliminar-los del contenidor, per això afegirem dins el pom.xml del projecte " + redhatJarsToModules.getFileName()
+                    + (redhatJarsToModules.isEar() ? "-ear" : "") + " en el <configuration> del plugin "
+                    + redhatJarsToModules.getPlugin() + " les següents entrades:<br/>\n");
+
+            result.append("<div style=\"border: 1px; border-style: solid;padding: 10px;margin: 10px;\">\n");
+            result.append("<code>\n");
+            result.append(StringEscapeUtils.escapeHtml4("<packagingExcludes>")).append("<br/>\n");
+
+            for (String jar : redhatJarsToModules.getRedhatJarsToModules()) {
+                result.append(StringEscapeUtils.escapeHtml4(jar).replace("\n", "<br/>\n")).append("\n");
+            }
+            result.append(StringEscapeUtils.escapeHtml4("</packagingExcludes>")).append("<br/>\n");
+            result.append("</code>\n");
+            result.append("</div>\n");
+
+            result.append("</fieldset>").append("\n");
+            isOK = false;
+
+        }
+
+        //result += "RedhatJarsToModules: " + earWarInfo.getRedhatJarsToModules() + "\n";
+
+        JbossDeploymentStructure jds = earWarInfo.getJbossDeploymentStructure();
+        if (jds != null) {
+            result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
+                    .append("\n");
+            result.append("<legend>Afegir mòduls JBoss (JBoss Deployment Structure)</legend>").append("\n");
+            
+            result.append(jds.getTitol()).append("<br/>\n");
+            
+            result.append("<div style=\"border: 1px; border-style: solid;padding: 10px;margin: 10px;\">\n");
+            result.append("<code>").append("\n");
+
+            // + (isEar?"   <deployment>":"   <sub-deployment name=\"" + name + "\">")
+            result.append(StringEscapeUtils.escapeHtml4(jds.getDeploymentStart())).append("<br/>\n");
+            
+
+            result.append(StringEscapeUtils.escapeHtml4("<dependencies>")).append("<br/>\n");
+            
+            for (String module : jds.getModules()) {            
+                result.append(StringEscapeUtils.escapeHtml4(module).replace("\n", "<br/>\n")).append("\n");                    
+            }
+            result.append(StringEscapeUtils.escapeHtml4("</dependencies>")).append("<br>\n");
+            
+            
+            // + (isEar?"   </deployment>":"   </sub-deployment>")
+            result.append(StringEscapeUtils.escapeHtml4(jds.getDeploymentEnd())).append("<br/>\n");
+            
+            result.append("</code>").append("\n");
+            result.append("</div>\n");
+            
+            result.append("</fieldset>").append("\n");
+            isOK = false;
+        } 
+        //result.append("JbossDeploymentStructure: " + earWarInfo.getJbossDeploymentStructure() + "\n");
+
+        List<String> potentialChange = earWarInfo.getPotencialCanviDeJarAModul();
+        if (potentialChange != null && potentialChange.size() != 0) {
+            result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
+                    .append("\n");
+            result.append("<legend>Potencials canvis de JAR a Mòdul</legend>").append("\n");
+            
+            result.append("Revisar si els següents JARs(dependències) es poden substituir per Mòduls JBoss "
+                    + "(requereix un estudi per part del desenvolupador per veure si els canvis proposats són "
+                    + "compatibles amb el funcionament de l'aplicació):").append("<br/>\n");
+            
+            result.append("<ol>\n");
+            for (String change : potentialChange) {
+                result.append("<li>").append(StringEscapeUtils.escapeHtml4(change).replace("\n", "<br/>\n")).append("</li>\n");
+                //result.append(StringEscapeUtils.escapeHtml4(potentialChange).replaceAll("\n", "<br/>\n")).append("\n");
+            } 
+            result.append("<ol>\n");
+            
+            result.append("</fieldset>").append("\n");
+            
+            isOK = false;
+        }
+
+        List<String> errors = earWarInfo.getErrors();
+        if (errors != null && errors.size() != 0) {
+            result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
+                    .append("\n");
+            result.append("<legend>Errors</legend>").append("\n");
+            
+            result.append("S'han trobat els següents errors en el contenidor o configuració:").append("<br/>\n");
+            
+            
+            result.append("<ol>\n");
+            for (String error : errors) {
+                result.append("<li>").append(StringEscapeUtils.escapeHtml4(error).replace("\n", "<br/>\n")).append("</li>\n");
+                //result.append(StringEscapeUtils.escapeHtml4(potentialChange).replaceAll("\n", "<br/>\n")).append("\n");
+            } 
+            result.append("<ol>\n");
+            
+            result.append("</fieldset>").append("\n");
+            
+            isOK = false;
+        }
+        
+        if (isOK) {
+            result.append("<div class=\"alert alert-success\" role=\"alert\">\r\n"
+                    + "  Aquest contenidor està perfecte !!!!\r\n"
+                    + "</div>").append("\n");
+        }
+        
+        //result.append("Errors: " + earWarInfo.getErrors() + "\n");
+
+        result.append("</form>");
+        result.append("</body>\n");
+        result.append("</html>");
+
+        return result.toString();
     }
 }

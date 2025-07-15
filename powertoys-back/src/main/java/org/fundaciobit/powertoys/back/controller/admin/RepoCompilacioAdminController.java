@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Future;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -53,256 +52,253 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { RepoCompilacioForm.class, RepoCompilacioFilterForm.class })
 public class RepoCompilacioAdminController extends RepoCompilacioController {
 
-  public static final String CONTEXTWEB = "/admin/repocompilacio";
-  public static final String REPO_ID_SESSION_ATTRIBUTE_NAME = "repoID";
-  private static final int COLUMNA_DARRER_RESULTAT_INDEX = 1;
+    public static final String CONTEXTWEB = "/admin/repocompilacio";
+    public static final String REPO_ID_SESSION_ATTRIBUTE_NAME = "repoID";
+    private static final int COLUMNA_DARRER_RESULTAT_INDEX = 1;
 
-  @EJB(mappedName = RepoCompilacioAdminLogicaService.JNDI_NAME)
-  protected RepoCompilacioAdminLogicaService repoCompilacioLogicaEjb;
+    @EJB(mappedName = RepoCompilacioAdminLogicaService.JNDI_NAME)
+    protected RepoCompilacioAdminLogicaService repoCompilacioLogicaEjb;
 
-  @EJB(mappedName = CompilacioAdminLogicaService.JNDI_NAME)
-  protected CompilacioAdminLogicaService compilacioLogicaEjb;
+    @EJB(mappedName = CompilacioAdminLogicaService.JNDI_NAME)
+    protected CompilacioAdminLogicaService compilacioLogicaEjb;
 
-  @Override
-  public String getTileForm() {
-    return "repoCompilacioFormAdmin";
-  }
-
-  @Override
-  public String getTileList() {
-    return "repoCompilacioListAdmin";
-  }
-
-  @Override
-  public RepoCompilacioFilterForm getRepoCompilacioFilterForm(Integer pagina, ModelAndView mav,
-      HttpServletRequest request)
-      throws I18NException {
-    RepoCompilacioFilterForm repoCompilacioFilterForm;
-    repoCompilacioFilterForm = super.getRepoCompilacioFilterForm(pagina, mav, request);
-
-    if (repoCompilacioFilterForm.isNou()) {
-      repoCompilacioFilterForm.addHiddenField(RepoCompilacioFields.REPOCOMPILACIOID);
-
-      // repoCompilacioFilterForm.setEditButtonVisible(false);
-      // repoCompilacioFilterForm.setAddButtonVisible(false);
-      // repoCompilacioFilterForm.setDeleteButtonVisible(false);
-      AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-history",
-          "repocompilacio.veurecompilacions",
-          getContextWeb() + "/veureExecucionsNocturnes", AdditionalButtonStyle.INFO);
-      repoCompilacioFilterForm.addAdditionalButton(veureExecucionsNocturnesButton);
-
-      repoCompilacioFilterForm.setOrderBy(RepoCompilacioFields.ORDRE.getJavaName());
-
-      // repoCompilacioFilterForm.setAttachedAdditionalJspCode(true);
-
-      // afegirem columna "Darrer Resultat"
-      AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
-      additionalField.setCodeName("repocompilacio.darrerresultat");
-      additionalField.setPosition(COLUMNA_DARRER_RESULTAT_INDEX);
-      additionalField.setEscapeXml(false);
-      // Els valors s'ompliran al mètode postList()
-      additionalField.setValueMap(new HashMap<Long, String>());
-      repoCompilacioFilterForm.addAdditionalField(additionalField);
+    @Override
+    public String getTileForm() {
+        return "repoCompilacioFormAdmin";
     }
 
-    return repoCompilacioFilterForm;
-  }
-
-  @Override
-  public RepoCompilacioForm getRepoCompilacioForm(RepoCompilacioJPA _jpa, boolean __isView, HttpServletRequest request,
-      ModelAndView mav) throws I18NException {
-    RepoCompilacioForm repoCompilacioForm = super.getRepoCompilacioForm(_jpa, __isView, request, mav);
-
-    // repoComilacioForm.setListOfValuesForOrganitzacioGitHub(orgs);
-    // repoComilacioForm.setListOfValuesForRepositoriGitHub(repos);
-
-    if (repoCompilacioForm.isNou()) {
-      RepoCompilacioJPA rpc = repoCompilacioForm.getRepoCompilacio();
-      rpc.setActiu(true);
-
-      if (rpc.getOrganitzacioGitHub() == null) {
-        Set<Field<?>> campsOcults = new HashSet<Field<?>>(
-            Arrays.asList(RepoCompilacioFields.ALL_REPOCOMPILACIO_FIELDS));
-        campsOcults.remove(RepoCompilacioFields.ORGANITZACIOGITHUB);
-        repoCompilacioForm.setHiddenFields(campsOcults);
-      }
-    } else {
-      repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
-      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
-      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.REPOSITORIGITHUB);
+    @Override
+    public String getTileList() {
+        return "repoCompilacioListAdmin";
     }
 
-    return repoCompilacioForm;
-  }
+    @Override
+    public RepoCompilacioFilterForm getRepoCompilacioFilterForm(Integer pagina, ModelAndView mav,
+            HttpServletRequest request) throws I18NException {
+        RepoCompilacioFilterForm repoCompilacioFilterForm;
+        repoCompilacioFilterForm = super.getRepoCompilacioFilterForm(pagina, mav, request);
 
-  @Override
-  public void postValidate(HttpServletRequest request, RepoCompilacioForm repoCompilacioForm, BindingResult result)
-      throws I18NException {
-    RepoCompilacioJPA repoCompilacio = repoCompilacioForm.getRepoCompilacio();
-    if (repoCompilacioForm.isNou() && repoCompilacio.getOrganitzacioGitHub() != null
-        && repoCompilacio.getRepositoriGitHub() == null) {
-      repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
-      repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
+        if (repoCompilacioFilterForm.isNou()) {
+            repoCompilacioFilterForm.addHiddenField(RepoCompilacioFields.REPOCOMPILACIOID);
 
-      repoCompilacioForm.setListOfValuesForRepositoriGitHub(
-          getReferenceListForRepositoriGitHub(request, null, repoCompilacioForm, null));
+            // repoCompilacioFilterForm.setEditButtonVisible(false);
+            // repoCompilacioFilterForm.setAddButtonVisible(false);
+            // repoCompilacioFilterForm.setDeleteButtonVisible(false);
+            AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-history",
+                    "repocompilacio.veurecompilacions", getContextWeb() + "/veureExecucionsNocturnes",
+                    AdditionalButtonStyle.INFO);
+            repoCompilacioFilterForm.addAdditionalButton(veureExecucionsNocturnesButton);
+
+            repoCompilacioFilterForm.setOrderBy(RepoCompilacioFields.ORDRE.getJavaName());
+
+            // repoCompilacioFilterForm.setAttachedAdditionalJspCode(true);
+
+            // afegirem columna "Darrer Resultat"
+            AdditionalField<Long, String> additionalField = new AdditionalField<Long, String>();
+            additionalField.setCodeName("repocompilacio.darrerresultat");
+            additionalField.setPosition(COLUMNA_DARRER_RESULTAT_INDEX);
+            additionalField.setEscapeXml(false);
+            // Els valors s'ompliran al mètode postList()
+            additionalField.setValueMap(new HashMap<Long, String>());
+            repoCompilacioFilterForm.addAdditionalField(additionalField);
+        }
+
+        return repoCompilacioFilterForm;
     }
-  }
 
-  @Override
-  public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request,
-      ModelAndView mav, RepoCompilacioForm repoCompilacioForm, Where where) throws I18NException {
-    String org = repoCompilacioForm.getRepoCompilacio().getOrganitzacioGitHub();
-    if (repoCompilacioForm.isHiddenField(REPOSITORIGITHUB) || org == null) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
+    @Override
+    public RepoCompilacioForm getRepoCompilacioForm(RepoCompilacioJPA _jpa, boolean __isView,
+            HttpServletRequest request, ModelAndView mav) throws I18NException {
+        RepoCompilacioForm repoCompilacioForm = super.getRepoCompilacioForm(_jpa, __isView, request, mav);
 
-    return repoCompilacioLogicaEjb.getRepos(org);
-  }
+        // repoComilacioForm.setListOfValuesForOrganitzacioGitHub(orgs);
+        // repoComilacioForm.setListOfValuesForRepositoriGitHub(repos);
 
-  @Override
-  public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request,
-      ModelAndView mav, Where where) throws I18NException {
-    return repoCompilacioLogicaEjb.getRepos(null);
-  }
+        if (repoCompilacioForm.isNou()) {
+            RepoCompilacioJPA rpc = repoCompilacioForm.getRepoCompilacio();
+            rpc.setActiu(true);
 
-  public List<StringKeyValue> getReferenceListForOrganitzacioGitHub(HttpServletRequest request,
-      ModelAndView mav, Where where) throws I18NException {
-    List<StringKeyValue> orgs = new ArrayList<>();
-    for (String org : repoCompilacioLogicaEjb.getOrgs()) {
-      orgs.add(new StringKeyValue(org, org));
-    }
-    return orgs;
-  }
-
-  @Override
-  public void postList(HttpServletRequest request, ModelAndView mav, RepoCompilacioFilterForm filterForm,
-      List<RepoCompilacio> list)
-      throws I18NException {
-    Map<Long, String> darrerResultatN = (Map<Long, String>) filterForm.getAdditionalField(COLUMNA_DARRER_RESULTAT_INDEX)
-        .getValueMap();
-    filterForm.getAdditionalButtonsByPK().clear();
-
-    for (RepoCompilacio r : list) {
-      long repoID = r.getRepocompilacioID();
-      String darrerResultatCellContent = null;
-
-      Compilacio darreraCompilacio = this.repoCompilacioLogicaEjb.darreraCompilacio(repoID);
-      boolean darreraCompilacioIsRunning = false;
-      if (darreraCompilacio != null) {
-        long compilacioID = darreraCompilacio.getCompilacioID();
-        if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
-          darrerResultatCellContent = "<a style=\"color:mediumseagreen;margin: 5px auto;display: table;\" title=\""
-              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
-              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
-              + "\"><i class=\"fas fa-calendar-check\"></i></a>";
-        } else if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
-          darrerResultatCellContent = "<a title=\""
-              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
-              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
-              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
-              + "\"></div>";
-          darreraCompilacioIsRunning = true;
+            if (rpc.getOrganitzacioGitHub() == null) {
+                Set<Field<?>> campsOcults = new HashSet<Field<?>>(
+                        Arrays.asList(RepoCompilacioFields.ALL_REPOCOMPILACIO_FIELDS));
+                campsOcults.remove(RepoCompilacioFields.ORGANITZACIOGITHUB);
+                repoCompilacioForm.setHiddenFields(campsOcults);
+            }
         } else {
-          darrerResultatCellContent = "<a style=\"color:orangered;margin: 5px auto;display: table;\" title=\""
-              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
-              + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/" + compilacioID
-              + "\"><i class=\"fas fa-calendar-times\"></i></a>";
+            repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
+            repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
+            repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.REPOSITORIGITHUB);
         }
-      }
 
-      // podria haver-hi una compil·lació en curs que no sigui la darrera.
-      // TODO: revisar, perque sembla que no ho permetem
-      if (!this.repoCompilacioLogicaEjb.compilationsRunning(repoID)) {
-        String jsOpenModalContinuar = "javascript:createDivModal(traduccions.type['titol.compilacio.continuar'], traduccions.type['missatge.compilacio.continuar'], '"
-            + request.getContextPath() + getContextWeb() + "/executeCompilacio/" + repoID
-            + "', '', 'execute-comp-id', 'fa-play-circle');\r\n" + //
-            "        $('#execute-comp-id').modal('show');\r\n";
-        AdditionalButton executeCompButton = new AdditionalButton("fas fa-play-circle",
-            "repocompilacio.executarcompilacio",
-            jsOpenModalContinuar,
-            AdditionalButtonStyle.PRIMARY);
-        filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
-      } else {
-        // TODO:cas molt estrany. Sanity check
-        if (!darreraCompilacioIsRunning) {
-          darrerResultatCellContent = "<a title=\""
-              + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl()) + "\" href=\""
-              + request.getContextPath() + getContextWeb() + "/veureExecucionsNocturnes/" + repoID
-              + "\"><div class=\"spinner spinner-18px\" title=\"" + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
-              + "\"></div>";
+        return repoCompilacioForm;
+    }
+
+    @Override
+    public void postValidate(HttpServletRequest request, RepoCompilacioForm repoCompilacioForm, BindingResult result)
+            throws I18NException {
+        RepoCompilacioJPA repoCompilacio = repoCompilacioForm.getRepoCompilacio();
+        if (repoCompilacioForm.isNou() && repoCompilacio.getOrganitzacioGitHub() != null
+                && repoCompilacio.getRepositoriGitHub() == null) {
+            repoCompilacioForm.setHiddenFields(new HashSet<Field<?>>());
+            repoCompilacioForm.addReadOnlyField(RepoCompilacioFields.ORGANITZACIOGITHUB);
+
+            repoCompilacioForm.setListOfValuesForRepositoriGitHub(
+                    getReferenceListForRepositoriGitHub(request, null, repoCompilacioForm, null));
         }
-      }
-
-      if (darrerResultatCellContent != null) {
-        darrerResultatN.put(repoID, darrerResultatCellContent);
-      }
-
-      AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-glasses",
-          "repocompilacio.veurecompilacions",
-          getContextWeb() + "/veureExecucionsNocturnes/" + repoID,
-          AdditionalButtonStyle.INFO);
-      filterForm.addAdditionalButtonByPK(repoID, veureExecucionsNocturnesButton);
-    }
-  }
-
-  @RequestMapping(value = "/veureExecucionsNocturnes")
-  public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response)
-      throws I18NException {
-
-    request.getSession().removeAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME);
-    log.info("Redirigint per a veure les execucions nocturnes");
-
-    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
-  }
-
-  @RequestMapping(value = "/veureExecucionsNocturnes/{repoID}")
-  public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response,
-      @PathVariable Long repoID)
-      throws I18NException {
-    request.getSession().setAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME, repoID);
-    log.info("Redirigint per a veure les execucions nocturnes del repositori " + repoID);
-
-    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
-  }
-
-  @RequestMapping(value = "/executeCompilacio/{repoCompilacioID}")
-  public String executeCompilacio(HttpServletRequest request, HttpServletResponse response,
-      @PathVariable Long repoCompilacioID) throws I18NException {
-
-    if (this.repoCompilacioLogicaEjb.compilationsRunning(repoCompilacioID)) {
-      String missatgeError = "Ja hi ha una compilació en curs per a aquest repositori " + repoCompilacioID;
-      HtmlUtils.saveMessageError(request, missatgeError);
-      log.error(missatgeError);
-      return "redirect:" + getContextWeb() + "/veureExecucionsNocturnes/" + repoCompilacioID;
     }
 
-    log.info("Executant compilació forçada del repositori " + repoCompilacioID);
+    @Override
+    public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request, ModelAndView mav,
+            RepoCompilacioForm repoCompilacioForm, Where where) throws I18NException {
+        String org = repoCompilacioForm.getRepoCompilacio().getOrganitzacioGitHub();
+        if (repoCompilacioForm.isHiddenField(REPOSITORIGITHUB) || org == null) {
+            return EMPTY_STRINGKEYVALUE_LIST;
+        }
 
-    RepoCompilacioJPA repoAcompilar = findByPrimaryKey(request, repoCompilacioID);
-    Compilacio novaCompilacio;
-    CompilacioGitHub compilacioEnCurs;
-    try {
-      compilacioEnCurs = repoCompilacioLogicaEjb.descarregarLatestTagIcrearCompilacio(repoAcompilar);
-      novaCompilacio = compilacioEnCurs.getCompilacio();
-    } catch (Exception e) {
-      String missatgeError = "Error al descarregar i crear l'objecte de compilacio " + repoCompilacioID + ": "
-          + repoAcompilar.getNom() + ": " + e.getMessage();
-      HtmlUtils.saveMessageError(request, missatgeError);
-      log.error(missatgeError, e);
-      return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+        return repoCompilacioLogicaEjb.getRepos(org);
     }
 
-    try {
-      Future<Compilacio> compilacioFeta = repoCompilacioLogicaEjb.compilarAsync(compilacioEnCurs);
-    } catch (Exception e) {
-      String missatgeError = "Error al compilar el repositori " + repoCompilacioID + ": "
-          + repoAcompilar.getNom() + ": " + e.getMessage();
-      HtmlUtils.saveMessageError(request, missatgeError);
-      log.error(missatgeError, e);
-      throw new I18NException("genapp.comodi", missatgeError);
+    @Override
+    public List<StringKeyValue> getReferenceListForRepositoriGitHub(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
+        return repoCompilacioLogicaEjb.getRepos(null);
     }
 
-    return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/view/" + novaCompilacio.getCompilacioID();
-  }
+    public List<StringKeyValue> getReferenceListForOrganitzacioGitHub(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
+        List<StringKeyValue> orgs = new ArrayList<>();
+        for (String org : repoCompilacioLogicaEjb.getOrgs()) {
+            orgs.add(new StringKeyValue(org, org));
+        }
+        return orgs;
+    }
+
+    @Override
+    public void postList(HttpServletRequest request, ModelAndView mav, RepoCompilacioFilterForm filterForm,
+            List<RepoCompilacio> list) throws I18NException {
+        Map<Long, String> darrerResultatN = (Map<Long, String>) filterForm
+                .getAdditionalField(COLUMNA_DARRER_RESULTAT_INDEX).getValueMap();
+        filterForm.getAdditionalButtonsByPK().clear();
+
+        for (RepoCompilacio r : list) {
+            long repoID = r.getRepocompilacioID();
+            String darrerResultatCellContent = null;
+
+            Compilacio darreraCompilacio = this.repoCompilacioLogicaEjb.darreraCompilacio(repoID);
+            boolean darreraCompilacioIsRunning = false;
+            if (darreraCompilacio != null) {
+                long compilacioID = darreraCompilacio.getCompilacioID();
+                if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_NO_ERRORS) {
+                    darrerResultatCellContent = "<a style=\"color:mediumseagreen;margin: 5px auto;display: table;\" title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\" href=\"" + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/"
+                            + compilacioID + "\"><i class=\"fas fa-calendar-check\"></i></a>";
+                } else if (darreraCompilacio.getExitCode() == Constants.EXIT_CODE_IN_PROGRESS) {
+                    darrerResultatCellContent = "<a title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\" href=\"" + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/"
+                            + compilacioID + "\"><div class=\"spinner spinner-18px\" title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\"></div>";
+                    darreraCompilacioIsRunning = true;
+                } else {
+                    darrerResultatCellContent = "<a style=\"color:orangered;margin: 5px auto;display: table;\" title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\" href=\"" + request.getContextPath() + CompilacioAdminController.CONTEXTWEB + "/view/"
+                            + compilacioID + "\"><i class=\"fas fa-calendar-times\"></i></a>";
+                }
+            }
+
+            // podria haver-hi una compil·lació en curs que no sigui la darrera.
+            // TODO: revisar, perque sembla que no ho permetem
+            if (!this.repoCompilacioLogicaEjb.compilationsRunning(repoID)) {
+                String jsOpenModalContinuar = "javascript:createDivModal(traduccions.type['titol.compilacio.continuar'], traduccions.type['missatge.compilacio.continuar'], '"
+                        + request.getContextPath() + getContextWeb() + "/executeCompilacio/" + repoID
+                        + "', '', 'execute-comp-id', 'fa-play-circle');\r\n" + //
+                        "        $('#execute-comp-id').modal('show');\r\n";
+                AdditionalButton executeCompButton = new AdditionalButton("fas fa-play-circle",
+                        "repocompilacio.executarcompilacio", jsOpenModalContinuar, AdditionalButtonStyle.PRIMARY);
+                filterForm.addAdditionalButtonByPK(repoID, executeCompButton);
+            } else {
+                // TODO:cas molt estrany. Sanity check
+                if (!darreraCompilacioIsRunning) {
+                    darrerResultatCellContent = "<a title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\" href=\"" + request.getContextPath() + getContextWeb() + "/veureExecucionsNocturnes/"
+                            + repoID + "\"><div class=\"spinner spinner-18px\" title=\""
+                            + I18NUtils.tradueix("repocompilacio.veurecompilacio", darreraCompilacio.getTagUrl())
+                            + "\"></div>";
+                }
+            }
+
+            if (darrerResultatCellContent != null) {
+                darrerResultatN.put(repoID, darrerResultatCellContent);
+            }
+
+            AdditionalButton veureExecucionsNocturnesButton = new AdditionalButton("fas fa-glasses",
+                    "repocompilacio.veurecompilacions", getContextWeb() + "/veureExecucionsNocturnes/" + repoID,
+                    AdditionalButtonStyle.INFO);
+            filterForm.addAdditionalButtonByPK(repoID, veureExecucionsNocturnesButton);
+        }
+    }
+
+    @RequestMapping(value = "/veureExecucionsNocturnes")
+    public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response)
+            throws I18NException {
+
+        request.getSession().removeAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME);
+        log.info("Redirigint per a veure les execucions nocturnes");
+
+        return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+    }
+
+    @RequestMapping(value = "/veureExecucionsNocturnes/{repoID}")
+    public String veureExecucionsNocturnes(HttpServletRequest request, HttpServletResponse response, @PathVariable
+    Long repoID) throws I18NException {
+        request.getSession().setAttribute(REPO_ID_SESSION_ATTRIBUTE_NAME, repoID);
+        log.info("Redirigint per a veure les execucions nocturnes del repositori " + repoID);
+
+        return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+    }
+
+    @RequestMapping(value = "/executeCompilacio/{repoCompilacioID}")
+    public String executeCompilacio(HttpServletRequest request, HttpServletResponse response, @PathVariable
+    Long repoCompilacioID) throws I18NException {
+
+        if (this.repoCompilacioLogicaEjb.compilationsRunning(repoCompilacioID)) {
+            String missatgeError = "Ja hi ha una compilació en curs per a aquest repositori " + repoCompilacioID;
+            HtmlUtils.saveMessageError(request, missatgeError);
+            log.error(missatgeError);
+            return "redirect:" + getContextWeb() + "/veureExecucionsNocturnes/" + repoCompilacioID;
+        }
+
+        log.info("Executant compilació forçada del repositori " + repoCompilacioID);
+
+        RepoCompilacioJPA repoAcompilar = findByPrimaryKey(request, repoCompilacioID);
+        Compilacio novaCompilacio;
+        CompilacioGitHub compilacioEnCurs;
+        try {
+            compilacioEnCurs = repoCompilacioLogicaEjb.descarregarLatestTagIcrearCompilacio(repoAcompilar);
+            novaCompilacio = compilacioEnCurs.getCompilacio();
+        } catch (Exception e) {
+            String missatgeError = "Error al descarregar i crear l'objecte de compilacio " + repoCompilacioID + ": "
+                    + repoAcompilar.getNom() + ": " + e.getMessage();
+            HtmlUtils.saveMessageError(request, missatgeError);
+            log.error(missatgeError, e);
+            return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/list/1";
+        }
+
+        try {
+            //Future<Compilacio> compilacioFeta = 
+                    repoCompilacioLogicaEjb.compilarAsync(compilacioEnCurs);
+        } catch (Exception e) {
+            String missatgeError = "Error al compilar el repositori " + repoCompilacioID + ": " + repoAcompilar.getNom()
+                    + ": " + e.getMessage();
+            HtmlUtils.saveMessageError(request, missatgeError);
+            log.error(missatgeError, e);
+            throw new I18NException("genapp.comodi", missatgeError);
+        }
+
+        return "redirect:" + CompilacioAdminController.CONTEXTWEB + "/view/" + novaCompilacio.getCompilacioID();
+    }
 }

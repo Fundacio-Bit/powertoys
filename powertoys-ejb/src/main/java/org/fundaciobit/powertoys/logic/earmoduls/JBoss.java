@@ -134,8 +134,10 @@ public abstract class JBoss {
 
     private static String getMessageReplaceJarForModule(Map<String, Module> modulByModuleName, String module) {
         Module m = modulByModuleName.get(module);
-        return "CAS PUNTUAL: Es recomana susbtiruir el jar {0} pel mòdul de JBoss ''" + m.getModule() + "'' ("
-                + Arrays.toString(m.getJars()) + ")";
+        
+        return "CAS PUNTUAL: Es recomana substiruir el jar {0} pel mòdul de JBoss [" + m.getModule() + "]:\n" + 
+               "(i) Afegir entrada '" + m.getDeploymentStructure() + "' a jboss-deployment-structure.xml\n"
+                + "(ii) Afegir entrada **/{0} a <packagingExcludes> del plugin de ear/war.";
     }
 
     public List<Module> getModuls() {

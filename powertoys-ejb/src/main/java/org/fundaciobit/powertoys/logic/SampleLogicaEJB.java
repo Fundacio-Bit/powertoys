@@ -16,7 +16,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 */
 
 import javax.ejb.Stateless;
-import javax.transaction.TransactionSynchronizationRegistry;
 
 /**
  * 

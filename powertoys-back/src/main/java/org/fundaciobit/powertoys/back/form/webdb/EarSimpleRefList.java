@@ -22,22 +22,23 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
  * 
  */
 @Component
-public class EarSimpleRefList extends RefListBase
-    implements EarSimpleFields {
+public class EarSimpleRefList extends RefListBase implements EarSimpleFields {
 
-  @EJB(mappedName = EarSimpleService.JNDI_NAME)
-  private EarSimpleService earSimpleEjb;
+    @EJB(mappedName = EarSimpleService.JNDI_NAME)
+    private EarSimpleService earSimpleEjb;
 
-  public EarSimpleRefList(EarSimpleRefList __clone) {
-    super(__clone);
-    this.earSimpleEjb = __clone.earSimpleEjb;
-  }
-  public EarSimpleRefList() {
-    setSelects(new Select<?>[] { NOM.select });
-  }
-  public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
-    Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
-    List<StringKeyValue> list = earSimpleEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
+    public EarSimpleRefList(EarSimpleRefList __clone) {
+        super(__clone);
+        this.earSimpleEjb = __clone.earSimpleEjb;
+    }
+
+    public EarSimpleRefList() {
+        setSelects(new Select<?>[] { NOM.select });
+    }
+
+    public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
+        Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
+        List<StringKeyValue> list = earSimpleEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
     return list;
-  }
+    }
 }

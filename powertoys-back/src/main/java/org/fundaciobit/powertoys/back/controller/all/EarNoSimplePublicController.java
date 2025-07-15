@@ -21,7 +21,7 @@ import org.fundaciobit.powertoys.logic.EarInfoPublicLogicaService;
 import org.fundaciobit.powertoys.logic.EarPublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar;
-import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar.EarWarInfo;
+import org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo;
 import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
 import org.fundaciobit.powertoys.back.controller.webdb.EarController;
 import org.fundaciobit.powertoys.back.form.webdb.EarFilterForm;
@@ -218,7 +218,7 @@ public class EarNoSimplePublicController extends EarController {
         String nom = fitxer.getNom();
 
         File earWarFile = null;
-        List<EarWarInfo> trobats = new ArrayList<EarWarInfo>();
+        List<org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo> trobats = new ArrayList<EarWarInfo>();
         earWarFile = FileSystemManager.getFile(ear.getFitxerID());
         try {
             SearchJBossModulesInEar.processFileEarWar(earWarFile, nom, trobats);

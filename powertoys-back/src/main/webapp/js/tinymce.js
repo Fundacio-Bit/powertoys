@@ -48,6 +48,7 @@ tinyMCE.init({
 	    editor_selector : "mceEditorReadOnly",
 	    theme : "advanced",
 	    readonly : "true",
+        plugins : "autoresize",
 	    //plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",  
 	    language : lang, 
 	  

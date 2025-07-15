@@ -22,22 +22,23 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
  * 
  */
 @Component
-public class VersioRefList extends RefListBase
-    implements VersioFields {
+public class VersioRefList extends RefListBase implements VersioFields {
 
-  @EJB(mappedName = VersioService.JNDI_NAME)
-  private VersioService versioEjb;
+    @EJB(mappedName = VersioService.JNDI_NAME)
+    private VersioService versioEjb;
 
-  public VersioRefList(VersioRefList __clone) {
-    super(__clone);
-    this.versioEjb = __clone.versioEjb;
-  }
-  public VersioRefList() {
-    setSelects(new Select<?>[] { ENTORNAPLICACIOID.select, VERSIO.select });
-  }
-  public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
-    Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
-    List<StringKeyValue> list = versioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
+    public VersioRefList(VersioRefList __clone) {
+        super(__clone);
+        this.versioEjb = __clone.versioEjb;
+    }
+
+    public VersioRefList() {
+        setSelects(new Select<?>[] { ENTORNAPLICACIOID.select, VERSIO.select });
+    }
+
+    public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
+        Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());
+        List<StringKeyValue> list = versioEjb.executeQuery(select, where, (orderBy==null || orderBy.length == 0) ? getOrderBy() : orderBy);
     return list;
-  }
+    }
 }
