@@ -3,7 +3,10 @@ package org.fundaciobit.powertoys.back.controller.all;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.servlet.http.Cookie;
@@ -37,11 +40,11 @@ import org.fundaciobit.powertoys.model.fields.EarSimpleFields;
 import org.fundaciobit.powertoys.persistence.EarSimpleJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @MenuOption(labelCode = "ear.menu", order = 1, group = "PUBLIC", addSeparatorBefore = true)
@@ -49,10 +52,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/public/earSimple")
 @SessionAttributes(types = { EarSimpleForm.class, EarSimpleFilterForm.class })
 public class EarSimplePublicController extends EarSimpleController {
-
+    /*
     private static final String EARS_PUJATS_COOKIE_NAME = "__Secure_ears_pujats";
     private static final String EARS_PUJATS_COOKIE_ITEM_PREFIX = "#";
-
+    */
     @EJB(mappedName = EarSimplePublicLogicaService.JNDI_NAME)
     protected EarSimplePublicLogicaService earSimpleLogicaEjb;
 
@@ -82,10 +85,9 @@ public class EarSimplePublicController extends EarSimpleController {
         earSimpleFilterForm = super.getEarSimpleFilterForm(pagina, mav, request);
 
         if (earSimpleFilterForm.isNou()) {
-            
-            
+
             earSimpleFilterForm.setSubTitleCode("ear.subtitle");
-            
+
             earSimpleFilterForm.addHiddenField(EarSimpleFields.EARSIMPLEID);
             earSimpleFilterForm.addHiddenField(EarSimpleFields.NOM);
             earSimpleFilterForm.addHiddenField(EarSimpleFields.DETALL);
@@ -125,7 +127,7 @@ public class EarSimplePublicController extends EarSimpleController {
         if (__isView) {
             earSimpleForm.getReadOnlyFields().remove(DETALL);
         }
-        
+
         earSimpleForm.setSubTitleCode("ear.subtitle");
 
         earSimpleForm.setCancelButtonVisible(false);
@@ -168,23 +170,23 @@ public class EarSimplePublicController extends EarSimpleController {
 
         for (EarWarInfo earWarInfo : trobats) {
 
- //           try {
-                String info = earWarInfoToString(earWarInfo);
-                if (info == null || info.isEmpty()) {
-                    continue;
-                }
+            //           try {
+            String info = earWarInfoToString(earWarInfo);
+            if (info == null || info.isEmpty()) {
+                continue;
+            }
 
-                detall.append("<div style=\"border: 2px solid #ccc; border-radius: 15px; padding:10px;margin:10px;\">\n");
-                detall.append(info);
-                detall.append("</div>\n");
-                detall.append("\n<br/>\n");
-//            } catch (Throwable e) {
-//                // TODO: handle exception
-//                String msg = "Error processant l'EAR: " + e.getMessage();
-//                HtmlUtils.saveMessageError(request, msg);
-//                log.error(msg, e);
-//            }
-            
+            detall.append("<div style=\"border: 2px solid #ccc; border-radius: 15px; padding:10px;margin:10px;\">\n");
+            detall.append(info);
+            detall.append("</div>\n");
+            detall.append("\n<br/>\n");
+            //            } catch (Throwable e) {
+            //                // TODO: handle exception
+            //                String msg = "Error processant l'EAR: " + e.getMessage();
+            //                HtmlUtils.saveMessageError(request, msg);
+            //                log.error(msg, e);
+            //            }
+
         }
         log.info("trobats: " + detall.toString());
 
@@ -206,60 +208,63 @@ public class EarSimplePublicController extends EarSimpleController {
     /**
      * Eliminar un EarSimple existent
      */
+    /*
     @Override
     @RequestMapping(value = "/{earSimpleID}/delete")
     public String eliminarEarSimple(@PathVariable("earSimpleID")
     java.lang.Long earSimpleID, HttpServletRequest request, HttpServletResponse response) {
         String responseStr = super.eliminarEarSimple(earSimpleID, request, response);
-
+    
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
                 String newCookieValue = cookie.getValue()
                         .replace(EARS_PUJATS_COOKIE_ITEM_PREFIX + earSimpleID.toString(), "");
                 cookie.setValue(newCookieValue);
-
+    
                 cookie.setPath(request.getContextPath());
                 cookie.setSecure(true);
                 cookie.setHttpOnly(true);
                 cookie.setMaxAge(60 * 60 * 24 * 365);
-
+    
                 if (newCookieValue.isEmpty()) {
                     cookie.setMaxAge(0);
                     cookie.setValue(null);
                 }
-
+    
                 response.addCookie(cookie);
                 break;
             }
         }
-
+    
         return responseStr;
     }
+    */
 
     /**
      * Guardar un nou EarSimple
      */
+    /*
     @Override
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String crearEarSimplePost(@ModelAttribute
     EarSimpleForm earSimpleForm, BindingResult result, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String responseStr = super.crearEarSimplePost(earSimpleForm, result, request, response);
-
+    
         EarSimpleJPA earSimple = earSimpleForm.getEarSimple();
         long newId = earSimple.getEarSimpleID();
-
+    
         Cookie newCookie = null;
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
                 newCookie = cookie;
-
+    
                 String newCookieValue = cookie.getValue() + EARS_PUJATS_COOKIE_ITEM_PREFIX + newId;
                 newCookie.setValue(newCookieValue);
                 break;
             }
         }
-
+    
         if (newCookie == null) {
             newCookie = new Cookie(EARS_PUJATS_COOKIE_NAME, EARS_PUJATS_COOKIE_ITEM_PREFIX + newId);
         }
@@ -268,12 +273,15 @@ public class EarSimplePublicController extends EarSimpleController {
         newCookie.setHttpOnly(true);
         newCookie.setMaxAge(60 * 60 * 24 * 365);
         response.addCookie(newCookie);
-
+    
         return responseStr;
     }
+    */
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+
+        /*
         List<Long> earIds = new ArrayList<Long>();
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(EARS_PUJATS_COOKIE_NAME)) {
@@ -286,7 +294,8 @@ public class EarSimplePublicController extends EarSimpleController {
                 break;
             }
         }
-        return EarSimpleFields.EARSIMPLEID.in(earIds);
+        */
+        return EarSimpleFields.EARSIMPLEID.in(llegirEarsProcessatsDeCookies(request));
     }
 
     @Override
@@ -301,13 +310,28 @@ public class EarSimplePublicController extends EarSimpleController {
 
     @Override
     public void delete(HttpServletRequest request, EarSimple earSimple) throws I18NException {
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        HttpServletResponse response = ((ServletRequestAttributes) requestAttributes).getResponse();
+
         earSimpleLogicaEjb.deleteIncludingFiles(earSimple, fitxerEjb);
+
+        esborrarIdEnCookies(request, response, earSimple.getEarSimpleID());
+
     }
 
     @Override
     public EarSimpleJPA create(HttpServletRequest request, EarSimpleJPA earSimple)
             throws I18NException, I18NValidationException {
-        return (EarSimpleJPA) earSimpleLogicaEjb.create(earSimple);
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        HttpServletResponse response = ((ServletRequestAttributes) requestAttributes).getResponse();
+
+        EarSimpleJPA jpa = (EarSimpleJPA) earSimpleLogicaEjb.create(earSimple);
+
+        afegirIdEnCookies(request, response, jpa.getEarSimpleID());
+
+        return jpa;
     }
 
     @Override
@@ -327,7 +351,7 @@ public class EarSimplePublicController extends EarSimpleController {
         result.append("<h3>Fitxer " + earWarInfo.getFileName() + "</h3>\n");
 
         result.append("<form>");
-        
+
         boolean isOK = true;
 
         RedhatJarsToModules redhatJarsToModules = earWarInfo.getRedhatJarsToModules();
@@ -338,9 +362,10 @@ public class EarSimplePublicController extends EarSimpleController {
             result.append("<legend>Eliminar JARs de dins del contenidor</legend>").append("\n");
 
             result.append("Hem trobat els següents jars que les podem substituir per mòduls JBoss. "
-                    + "El primer que hem de fer és eliminar-los del contenidor, per això afegirem dins el pom.xml del projecte " + redhatJarsToModules.getFileName()
-                    + (redhatJarsToModules.isEar() ? "-ear" : "") + " en el <configuration> del plugin "
-                    + redhatJarsToModules.getPlugin() + " les següents entrades:<br/>\n");
+                    + "El primer que hem de fer és eliminar-los del contenidor, per això afegirem dins el pom.xml del projecte "
+                    + redhatJarsToModules.getFileName() + (redhatJarsToModules.isEar() ? "-ear" : "")
+                    + " en el <configuration> del plugin " + redhatJarsToModules.getPlugin()
+                    + " les següents entrades:<br/>\n");
 
             result.append("<div style=\"border: 1px; border-style: solid;padding: 10px;margin: 10px;\">\n");
             result.append("<code>\n");
@@ -365,33 +390,31 @@ public class EarSimplePublicController extends EarSimpleController {
             result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
                     .append("\n");
             result.append("<legend>Afegir mòduls JBoss (JBoss Deployment Structure)</legend>").append("\n");
-            
+
             result.append(jds.getTitol()).append("<br/>\n");
-            
+
             result.append("<div style=\"border: 1px; border-style: solid;padding: 10px;margin: 10px;\">\n");
             result.append("<code>").append("\n");
 
             // + (isEar?"   <deployment>":"   <sub-deployment name=\"" + name + "\">")
             result.append(StringEscapeUtils.escapeHtml4(jds.getDeploymentStart())).append("<br/>\n");
-            
 
             result.append(StringEscapeUtils.escapeHtml4("<dependencies>")).append("<br/>\n");
-            
-            for (String module : jds.getModules()) {            
-                result.append(StringEscapeUtils.escapeHtml4(module).replace("\n", "<br/>\n")).append("\n");                    
+
+            for (String module : jds.getModules()) {
+                result.append(StringEscapeUtils.escapeHtml4(module).replace("\n", "<br/>\n")).append("\n");
             }
             result.append(StringEscapeUtils.escapeHtml4("</dependencies>")).append("<br>\n");
-            
-            
+
             // + (isEar?"   </deployment>":"   </sub-deployment>")
             result.append(StringEscapeUtils.escapeHtml4(jds.getDeploymentEnd())).append("<br/>\n");
-            
+
             result.append("</code>").append("\n");
             result.append("</div>\n");
-            
+
             result.append("</fieldset>").append("\n");
             isOK = false;
-        } 
+        }
         //result.append("JbossDeploymentStructure: " + earWarInfo.getJbossDeploymentStructure() + "\n");
 
         List<String> potentialChange = earWarInfo.getPotencialCanviDeJarAModul();
@@ -399,20 +422,21 @@ public class EarSimplePublicController extends EarSimpleController {
             result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
                     .append("\n");
             result.append("<legend>Potencials canvis de JAR a Mòdul</legend>").append("\n");
-            
+
             result.append("Revisar si els següents JARs(dependències) es poden substituir per Mòduls JBoss "
                     + "(requereix un estudi per part del desenvolupador per veure si els canvis proposats són "
                     + "compatibles amb el funcionament de l'aplicació):").append("<br/>\n");
-            
+
             result.append("<ol>\n");
             for (String change : potentialChange) {
-                result.append("<li>").append(StringEscapeUtils.escapeHtml4(change).replace("\n", "<br/>\n")).append("</li>\n");
+                result.append("<li>").append(StringEscapeUtils.escapeHtml4(change).replace("\n", "<br/>\n"))
+                        .append("</li>\n");
                 //result.append(StringEscapeUtils.escapeHtml4(potentialChange).replaceAll("\n", "<br/>\n")).append("\n");
-            } 
+            }
             result.append("<ol>\n");
-            
+
             result.append("</fieldset>").append("\n");
-            
+
             isOK = false;
         }
 
@@ -421,28 +445,27 @@ public class EarSimplePublicController extends EarSimpleController {
             result.append("<fieldset style=\"margin:10px;padding:10px;border: 3px;border-style: dashed;\" >")
                     .append("\n");
             result.append("<legend>Errors</legend>").append("\n");
-            
+
             result.append("S'han trobat els següents errors en el contenidor o configuració:").append("<br/>\n");
-            
-            
+
             result.append("<ol>\n");
             for (String error : errors) {
-                result.append("<li>").append(StringEscapeUtils.escapeHtml4(error).replace("\n", "<br/>\n")).append("</li>\n");
+                result.append("<li>").append(StringEscapeUtils.escapeHtml4(error).replace("\n", "<br/>\n"))
+                        .append("</li>\n");
                 //result.append(StringEscapeUtils.escapeHtml4(potentialChange).replaceAll("\n", "<br/>\n")).append("\n");
-            } 
+            }
             result.append("<ol>\n");
-            
+
             result.append("</fieldset>").append("\n");
-            
+
             isOK = false;
         }
-        
+
         if (isOK) {
             result.append("<div class=\"alert alert-success\" role=\"alert\">\r\n"
-                    + "  Aquest contenidor està perfecte !!!!\r\n"
-                    + "</div>").append("\n");
+                    + "  Aquest contenidor està perfecte !!!!\r\n" + "</div>").append("\n");
         }
-        
+
         //result.append("Errors: " + earWarInfo.getErrors() + "\n");
 
         result.append("</form>");
@@ -451,4 +474,55 @@ public class EarSimplePublicController extends EarSimpleController {
 
         return result.toString();
     }
+
+    public static final String COOKIE_EARS_PROCESSATS = "COOKIE_EARS_PROCESSATS";
+
+    protected void afegirIdEnCookies(HttpServletRequest request, HttpServletResponse response, Long id) {
+
+        List<Long> ids = llegirEarsProcessatsDeCookies(request);
+
+        ids.add(id);
+
+        String valor = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        Cookie cookie = new Cookie(COOKIE_EARS_PROCESSATS, valor);
+        cookie.setPath("/");
+        cookie.setMaxAge(365 * 60 * 60 * 24); // 1 any en segons 
+        response.addCookie(cookie);
+    }
+
+    protected void esborrarIdEnCookies(HttpServletRequest request, HttpServletResponse response, Long id) {
+
+        List<Long> ids = llegirEarsProcessatsDeCookies(request);
+
+        ids.remove((Object) id);
+
+        String valor = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        Cookie cookie = new Cookie(COOKIE_EARS_PROCESSATS, valor);
+        cookie.setPath("/");
+        cookie.setMaxAge(365 * 60 * 60 * 24); // 1 any en segons 
+        response.addCookie(cookie);
+    }
+
+    protected List<Long> llegirEarsProcessatsDeCookies(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return new ArrayList<>();
+        }
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(COOKIE_EARS_PROCESSATS)) {
+                String valor = cookie.getValue();
+                if (valor == null || valor.isEmpty())
+                    return Collections.emptyList();
+
+                return Arrays.stream(valor.split(",")).map(String::trim).filter(s -> !s.isEmpty()).map(Long::parseLong)
+                        .collect(Collectors.toList());
+            }
+        }
+
+        return new ArrayList<>(); // Cookie no encontrada
+    }
+
 }
