@@ -216,6 +216,17 @@
                          **/javax.activation-api-*.jar,
                         <!-- Requereix afegir mòdul 'org.jboss.logging.commons.logging' a jboss-deployment-structure.xml -->
                          **/commons-logging-jboss-logging*redhat*.jar,
+                         <!-- Requereix afegir mòdul 'com.googlecode.javaewah' a jboss-deployment-structure.xml -->
+                        **/JavaEWAH*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.jcraft.jsch' a jboss-deployment-structure.xml -->
+                        **/jsch*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'com.jcraft.jzlib' a jboss-deployment-structure.xml -->
+                        **/jzlib*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.apache.httpcomponents.core' a jboss-deployment-structure.xml -->
+                        **/httpclient*redhat*.jar,
+                        **/httpcore*redhat*.jar,
+                        <!-- Requereix afegir mòdul 'org.eclipse.jgit' a jboss-deployment-structure.xml -->
+                        **/org.eclipse.jgit*redhat*.jar,
                     </packagingExcludes>
 
 					<includeLibInApplicationXml>false</includeLibInApplicationXml>
