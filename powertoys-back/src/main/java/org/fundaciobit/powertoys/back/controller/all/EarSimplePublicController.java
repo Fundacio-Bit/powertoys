@@ -176,10 +176,10 @@ public class EarSimplePublicController extends EarSimpleController {
                 continue;
             }
 
-            detall.append("<div style=\"border: 2px solid #ccc; border-radius: 15px; padding:10px;margin:10px;\">\n");
+            //detall.append("<div style=\"border: 2px solid #ccc; border-radius: 15px; padding:10px;margin:10px;\">\n");
             detall.append(info);
-            detall.append("</div>\n");
-            detall.append("\n<br/>\n");
+            //detall.append("</div>\n");
+            //detall.append("\n<br/>\n");
             //            } catch (Throwable e) {
             //                // TODO: handle exception
             //                String msg = "Error processant l'EAR: " + e.getMessage();
