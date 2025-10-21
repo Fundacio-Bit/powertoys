@@ -55,8 +55,8 @@ public class EarSimpleJPAManager
         return list.toArray(new EarSimple[list.size()]);
     };
 
-    public EarSimple create( long _fitxerID_, java.lang.String _nom_, java.lang.String _detall_, java.sql.Timestamp _data_) throws I18NException {
-        EarSimpleJPA __bean =  new EarSimpleJPA(_fitxerID_,_nom_,_detall_,_data_);
+    public EarSimple create( long _fitxerID_, java.lang.String _nom_, java.lang.String _detall_, java.sql.Timestamp _data_, java.lang.String _jbossVersion_) throws I18NException {
+        EarSimpleJPA __bean =  new EarSimpleJPA(_fitxerID_,_nom_,_detall_,_data_,_jbossVersion_);
         return create(__bean);
     }
 

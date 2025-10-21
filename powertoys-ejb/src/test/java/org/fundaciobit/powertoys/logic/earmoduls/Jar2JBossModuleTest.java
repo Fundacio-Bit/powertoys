@@ -45,8 +45,10 @@ public class Jar2JBossModuleTest {
 
         try {
             List<EarWarInfo> trobats = new ArrayList<EarWarInfo>();
+            
+            JBoss jboss = new JBoss7_2_8();
 
-            SearchJBossModulesInEar.processFileEarWar(earWarFile, trobats);
+            SearchJBossModulesInEar.processFileEarWar(earWarFile, trobats, jboss);
 
             for (EarWarInfo earWarInfo : trobats) {
                 System.out.println(" =============================================================================");

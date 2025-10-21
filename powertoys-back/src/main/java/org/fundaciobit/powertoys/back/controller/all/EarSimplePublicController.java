@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.text.StringEscapeUtils;
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
@@ -28,6 +29,9 @@ import org.fundaciobit.powertoys.logic.EarSimplePublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar;
 import org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss7_2_0;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss7_4_0;
 import org.fundaciobit.powertoys.logic.earmoduls.JbossDeploymentStructure;
 import org.fundaciobit.powertoys.logic.earmoduls.RedhatJarsToModules;
 import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
@@ -155,7 +159,27 @@ public class EarSimplePublicController extends EarSimpleController {
 
         earWarFile = FileSystemManager.getFile(earSimple.getFitxerID());
         try {
-            SearchJBossModulesInEar.processFileEarWar(earWarFile, nom, trobats);
+
+            String ver = earSimple.getJbossVersion();
+            
+            log.info(" \n\n  JBoss Version  STRING COMBOBOX: " + ver + "\n\n ");
+            
+            JBoss jboss;
+            if (ver == null || ver.trim().length() == 0) {
+                jboss = new JBoss7_2_0();
+            } else if (ver.equals(JBoss7_4_0.VERSION)) {
+                HtmlUtils.saveMessageInfo(request, "S'ha seleccionat la versió de JBoss " + JBoss7_4_0.VERSION);
+                jboss = new JBoss7_4_0();
+            } else if (ver.equals(JBoss7_2_0.VERSION)) {
+                HtmlUtils.saveMessageInfo(request, "S'ha seleccionat la versió de JBoss " + JBoss7_2_0.VERSION);
+                jboss = new JBoss7_2_0();
+            } else {
+                HtmlUtils.saveMessageWarning(request,
+                        "Versió de JBoss desconeguda: " + ver + ", s'utilitzarà la " + JBoss7_2_0.VERSION);
+                jboss = new JBoss7_2_0();
+            }
+
+            SearchJBossModulesInEar.processFileEarWar(earWarFile, nom, trobats, jboss);
         } catch (Exception e) {
             String missatgeError = "Error a l'actualitzar el nom i detall de l'EAR: " + e.getMessage();
             HtmlUtils.saveMessageError(request, missatgeError);
@@ -188,7 +212,9 @@ public class EarSimplePublicController extends EarSimpleController {
             //            }
 
         }
-        log.info("trobats: " + detall.toString());
+        if (log.isDebugEnabled()) {
+            log.debug("Trobats: " + detall.toString());
+        }
 
         //detall = "<p style=\"font-family: Courier;\">" + detall.replaceAll("\n", "<br\\>\n") + "</p>";
         earSimple.setNom(nom);
@@ -523,6 +549,15 @@ public class EarSimplePublicController extends EarSimpleController {
         }
 
         return new ArrayList<>(); // Cookie no encontrada
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForJbossVersion(HttpServletRequest request, ModelAndView mav,
+            Where where) throws I18NException {
+        List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+        __tmp.add(new StringKeyValue(String.valueOf(JBoss7_2_0.VERSION), "JBoss " + JBoss7_2_0.VERSION));
+        __tmp.add(new StringKeyValue(String.valueOf(JBoss7_4_0.VERSION), "JBoss " + JBoss7_4_0.VERSION));
+        return __tmp;
     }
 
 }

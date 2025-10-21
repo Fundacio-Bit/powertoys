@@ -1,5 +1,7 @@
 package org.fundaciobit.powertoys.back.controller.webdb;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.GroupByItem;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Arrays;
 
 import org.fundaciobit.powertoys.back.form.webdb.*;
 import org.fundaciobit.powertoys.back.form.webdb.EarForm;
@@ -186,6 +191,19 @@ public class EarController
       groupByItemsMap.put(groupByItem.getField(),groupByItem);
     }
 
+    Map<String, String> _tmp;
+    List<StringKeyValue> _listSKV;
+
+    // Field jbossVersion
+    {
+      _listSKV = getReferenceListForJbossVersion(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForJbossVersion(_tmp);
+      if (filterForm.getGroupByFields().contains(JBOSSVERSION)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, JBOSSVERSION, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -201,6 +219,7 @@ public class EarController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(JBOSSVERSION, filterForm.getMapOfValuesForJbossVersion());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -248,6 +267,15 @@ public class EarController
 
   public void fillReferencesForForm(EarForm earForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (earForm.getListOfValuesForJbossVersion() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForJbossVersion(request, mav, earForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      earForm.setListOfValuesForJbossVersion(_listSKV);
+    }
     
   }
 
@@ -591,12 +619,69 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
+  public List<StringKeyValue> getReferenceListForJbossVersion(HttpServletRequest request,
+       ModelAndView mav, EarForm earForm, Where where)  throws I18NException {
+    if (earForm.isHiddenField(JBOSSVERSION)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForJbossVersion(request, mav, where);
   }
+
+
+  public List<StringKeyValue> getReferenceListForJbossVersion(HttpServletRequest request,
+       ModelAndView mav, EarFilterForm earFilterForm,
+       List<Ear> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (earFilterForm.isHiddenField(JBOSSVERSION)
+       && !earFilterForm.isGroupByField(JBOSSVERSION)
+       && !earFilterForm.isFilterByField(JBOSSVERSION)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForJbossVersion(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForJbossVersion(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("7.2.0" , "7.2.0"));
+    __tmp.add(new StringKeyValue("7.4.0" , "7.4.0"));
+    return __tmp;
+  }
+
+
+    @Override
+    /** Ha de ser igual que el RequestMapping de la Classe */
+    public String getContextWeb() {
+        RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+        final String[] values = rm.value();
+        if (values.length == 1) {
+            return values[0];
+        } else {
+            final HttpServletRequest request;
+            request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+            final String servletPath = request.getServletPath();
+
+            for (String webcontext : values) {
+                if (servletPath.startsWith(webcontext)) {
+                    return webcontext;
+                }
+            }
+
+            log.warn(" No puc trobar el contextweb associat a la cridada.");
+            log.warn(" ==== RequestMapping::value=" + Arrays.toString(values));
+            log.warn(" ++++ getContextWeb::Scheme: " + request.getScheme());
+            log.warn(" ++++ getContextWeb::PathInfo: " + request.getPathInfo());
+            log.warn(" ++++ getContextWeb::PathTrans: " + request.getPathTranslated());
+            log.warn(" ++++ getContextWeb::ContextPath: " + request.getContextPath());
+            log.warn(" ++++ getContextWeb::ServletPath: " + request.getServletPath());
+            log.warn(" ++++ getContextWeb::getRequestURI: " + request.getRequestURI());
+            log.warn(" ++++ getContextWeb::getRequestURL: " + request.getRequestURL().toString());
+            log.warn(" ++++ getContextWeb::getQueryString: " + request.getQueryString());
+
+            return values[0];
+        }  }
 
   public void preValidate(HttpServletRequest request,EarForm earForm , BindingResult result)  throws I18NException {
   }

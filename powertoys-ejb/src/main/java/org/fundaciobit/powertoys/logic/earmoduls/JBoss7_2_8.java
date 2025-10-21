@@ -1,7 +1,9 @@
 package org.fundaciobit.powertoys.logic.earmoduls;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author anadal
@@ -89,21 +91,20 @@ public class JBoss7_2_8 extends JBoss {
                 new String[] { "commons-beanutils-1.9.4.redhat-00002.jar" }));
         moduls_7_2
                 .add(new Module("org.apache.commons.codec", new String[] { "commons-codec-1.11.0.redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.apache.commons.lang3", new String[] { "commons-lang3-3.8.0.redhat-00001.jar" }));
-        moduls_7_2.add(new Module("org.apache.cxf.impl", new String[] {
-                "cxf-rt-bindings-coloc-3.2.12.redhat-00001.jar", "cxf-rt-bindings-soap-3.2.12.redhat-00001.jar",
-                "cxf-rt-bindings-xml-3.2.12.redhat-00001.jar", "cxf-rt-databinding-aegis-3.2.12.redhat-00001.jar",
-                "cxf-rt-databinding-jaxb-3.2.12.redhat-00001.jar", "cxf-rt-features-clustering-3.2.12.redhat-00001.jar",
-                "cxf-rt-frontend-jaxws-3.2.12.redhat-00001.jar", "cxf-rt-frontend-simple-3.2.12.redhat-00001.jar",
-                "cxf-rt-management-3.2.12.redhat-00001.jar", "cxf-rt-security-3.2.12.redhat-00001.jar",
-                "cxf-rt-security-saml-3.2.12.redhat-00001.jar", "cxf-rt-transports-http-3.2.12.redhat-00001.jar",
-                "cxf-rt-transports-http-hc-3.2.12.redhat-00001.jar", "cxf-rt-transports-jms-3.2.12.redhat-00001.jar",
-                "cxf-rt-transports-local-3.2.12.redhat-00001.jar", "cxf-rt-wsdl-3.2.12.redhat-00001.jar",
-                "cxf-rt-ws-addr-3.2.12.redhat-00001.jar", "cxf-rt-ws-mex-3.2.12.redhat-00001.jar",
-                "cxf-rt-ws-policy-3.2.12.redhat-00001.jar", "cxf-rt-ws-rm-3.2.12.redhat-00001.jar",
-                "cxf-tools-common-3.2.12.redhat-00001.jar", "cxf-tools-java2ws-3.2.12.redhat-00001.jar",
-                "cxf-tools-validator-3.2.12.redhat-00001.jar", "cxf-tools-wsdlto-core-3.2.12.redhat-00001.jar",
+        moduls_7_2.add(new Module("org.apache.commons.lang3", new String[] { "commons-lang3-3.8.0.redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.apache.cxf.impl", new String[] { "cxf-rt-bindings-coloc-3.2.12.redhat-00001.jar",
+                "cxf-rt-bindings-soap-3.2.12.redhat-00001.jar", "cxf-rt-bindings-xml-3.2.12.redhat-00001.jar",
+                "cxf-rt-databinding-aegis-3.2.12.redhat-00001.jar", "cxf-rt-databinding-jaxb-3.2.12.redhat-00001.jar",
+                "cxf-rt-features-clustering-3.2.12.redhat-00001.jar", "cxf-rt-frontend-jaxws-3.2.12.redhat-00001.jar",
+                "cxf-rt-frontend-simple-3.2.12.redhat-00001.jar", "cxf-rt-management-3.2.12.redhat-00001.jar",
+                "cxf-rt-security-3.2.12.redhat-00001.jar", "cxf-rt-security-saml-3.2.12.redhat-00001.jar",
+                "cxf-rt-transports-http-3.2.12.redhat-00001.jar", "cxf-rt-transports-http-hc-3.2.12.redhat-00001.jar",
+                "cxf-rt-transports-jms-3.2.12.redhat-00001.jar", "cxf-rt-transports-local-3.2.12.redhat-00001.jar",
+                "cxf-rt-wsdl-3.2.12.redhat-00001.jar", "cxf-rt-ws-addr-3.2.12.redhat-00001.jar",
+                "cxf-rt-ws-mex-3.2.12.redhat-00001.jar", "cxf-rt-ws-policy-3.2.12.redhat-00001.jar",
+                "cxf-rt-ws-rm-3.2.12.redhat-00001.jar", "cxf-tools-common-3.2.12.redhat-00001.jar",
+                "cxf-tools-java2ws-3.2.12.redhat-00001.jar", "cxf-tools-validator-3.2.12.redhat-00001.jar",
+                "cxf-tools-wsdlto-core-3.2.12.redhat-00001.jar",
                 "cxf-tools-wsdlto-databinding-jaxb-3.2.12.redhat-00001.jar",
                 "cxf-tools-wsdlto-frontend-jaxws-3.2.12.redhat-00001.jar",
                 "cxf-services-ws-discovery-api-3.2.12.redhat-00001.jar", "cxf-xjc-boolean-3.2.3.redhat-00002.jar",
@@ -119,16 +120,14 @@ public class JBoss7_2_8 extends JBoss {
                 new String[] { "httpclient-4.5.4.redhat-00001.jar", "httpcore-4.4.5.redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.apache.httpcomponents", new String[] { "httpcore-nio-4.4.5.redhat-00001.jar",
                 "httpasyncclient-4.1.4.redhat-00001.jar", "httpmime-4.5.4.redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.apache.openjpa", new String[] { "jipijapa-openjpa-7.2.8.GA-redhat-00002.jar" }));
+        moduls_7_2.add(new Module("org.apache.openjpa", new String[] { "jipijapa-openjpa-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.apache.santuario.xmlsec", new String[] { "xmlsec-2.1.4.redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.apache.thrift", new String[] { "libthrift-0.13.0.redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.apache.ws.security", new String[] { "wss4j-bindings-2.2.5.redhat-00001.jar",
                 "wss4j-policy-2.2.5.redhat-00001.jar", "wss4j-ws-security-common-2.2.5.redhat-00001.jar",
                 "wss4j-ws-security-dom-2.2.5.redhat-00001.jar", "wss4j-ws-security-policy-stax-2.2.5.redhat-00001.jar",
                 "wss4j-ws-security-stax-2.2.5.redhat-00001.jar", "jasypt-1.9.3.redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.apache.ws.xmlschema", new String[] { "xmlschema-core-2.2.4.redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.apache.ws.xmlschema", new String[] { "xmlschema-core-2.2.4.redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.bouncycastle", new String[] { "bcprov-jdk15on-1.60.0.redhat-00002.jar",
                 "bcmail-jdk15on-1.60.0.redhat-00002.jar", "bcpkix-jdk15on-1.60.0.redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.codehaus.jackson.jackson-core-asl",
@@ -149,8 +148,7 @@ public class JBoss7_2_8 extends JBoss {
                 .add(new Module("org.glassfish.javax.el", new String[] { "javax.el-impl-3.0.1.b08-redhat-00004.jar" }));
         moduls_7_2.add(new Module("org.glassfish.soteria",
                 new String[] { "javax.security.enterprise-1.0.0.redhat-00002.jar" }));
-        moduls_7_2
-                .add(new Module("org.hibernate", new String[] { "jipijapa-hibernate4-1-7.2.8.GA-redhat-00002.jar" }));
+        moduls_7_2.add(new Module("org.hibernate", new String[] { "jipijapa-hibernate4-1-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.hibernate.bytecodetransformer",
                 new String[] { "wildfly-ormtransformer-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.hibernate.commons-annotations",
@@ -234,8 +232,7 @@ public class JBoss7_2_8 extends JBoss {
                 new Module("org.jboss.as.ejb3", new String[] { "wildfly-ejb3-7.2.8.GA-redhat-00002.jar", "timers" }));
         moduls_7_2.add(new Module("org.jboss.as.host-controller",
                 new String[] { "wildfly-host-controller-6.0.27.Final-redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.as.jacorb", new String[] { "wildfly-jacorb-7.2.8.GA-redhat-00002.jar" }));
+        moduls_7_2.add(new Module("org.jboss.as.jacorb", new String[] { "wildfly-jacorb-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.jaxr", new String[] { "wildfly-jaxr-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.jaxrs", new String[] { "wildfly-jaxrs-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(
@@ -254,8 +251,7 @@ public class JBoss7_2_8 extends JBoss {
                 new String[] { "wildfly-management-client-content-6.0.27.Final-redhat-00001.jar" }));
         moduls_7_2.add(
                 new Module("org.jboss.as.messaging", new String[] { "wildfly-messaging-7.2.8.GA-redhat-00002.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.as.naming", new String[] { "wildfly-naming-7.2.8.GA-redhat-00002.jar" }));
+        moduls_7_2.add(new Module("org.jboss.as.naming", new String[] { "wildfly-naming-7.2.8.GA-redhat-00002.jar" }));
         moduls_7_2.add(
                 new Module("org.jboss.as.network", new String[] { "wildfly-network-6.0.27.Final-redhat-00001.jar" }));
         moduls_7_2.add(
@@ -332,12 +328,10 @@ public class JBoss7_2_8 extends JBoss {
                 new Module("org.jboss.jaxbintros", new String[] { "jboss-jaxb-intros-1.0.3.GA-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.jts.integration",
                 new String[] { "narayana-jts-integration-5.9.8.Final-redhat-00002.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.jts", new String[] { "narayana-jts-idlj-5.9.8.Final-redhat-00002.jar" }));
+        moduls_7_2.add(new Module("org.jboss.jts", new String[] { "narayana-jts-idlj-5.9.8.Final-redhat-00002.jar" }));
         moduls_7_2.add(new Module("org.jboss.log4j.logmanager",
                 new String[] { "log4j-jboss-logmanager-1.1.6.Final-redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.logging", new String[] { "jboss-logging-3.3.3.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.jboss.logging", new String[] { "jboss-logging-3.3.3.Final-redhat-00001.jar" }));
         moduls_7_2.add(
                 new Module("org.jboss.logmanager", new String[] { "jboss-logmanager-2.1.14.Final-redhat-00001.jar" }));
         moduls_7_2.add(
@@ -427,8 +421,7 @@ public class JBoss7_2_8 extends JBoss {
                         "jboss-negotiation-extras-3.0.6.Final-redhat-00001.jar",
                         "jboss-negotiation-ntlm-3.0.6.Final-redhat-00001.jar",
                         "jboss-negotiation-spnego-3.0.6.Final-redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.threads", new String[] { "jboss-threads-2.3.3.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.jboss.threads", new String[] { "jboss-threads-2.3.3.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.weld.core",
                 new String[] { "weld-core-impl-3.0.6.Final-redhat-00003.jar", "weld-ejb-3.0.6.Final-redhat-00003.jar",
                         "weld-jta-3.0.6.Final-redhat-00003.jar", "weld-web-3.0.6.Final-redhat-00003.jar" }));
@@ -440,8 +433,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("org.jboss.xnio.nio", new String[] { "xnio-nio-3.7.6.SP2-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.xts", new String[] { "jbossxts-5.9.8.Final-redhat-00002.jar",
                 "jbosstxbridge-5.9.8.Final-redhat-00002.jar" }));
-        moduls_7_2
-                .add(new Module("org.jgroups.azure", new String[] { "jgroups-azure-1.2.1.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.jgroups.azure", new String[] { "jgroups-azure-1.2.1.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jgroups.kubernetes",
                 new String[] { "jgroups-kubernetes-1.0.13.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jgroups", new String[] { "jgroups-4.0.20.Final-redhat-00002.jar" }));
@@ -619,8 +611,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("com.h2database.h2", new String[] { "h2-1.4.193.redhat-2.jar" }));
         moduls_7_2.add(new Module("com.jcraft.jsch", new String[] { "jsch-0.1.54.redhat-00001.jar" }));
         moduls_7_2.add(new Module("com.jcraft.jzlib", new String[] { "jzlib-1.1.1.redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("com.microsoft.azure.storage", new String[] { "azure-storage-6.1.0.redhat-1.jar" }));
+        moduls_7_2.add(new Module("com.microsoft.azure.storage", new String[] { "azure-storage-6.1.0.redhat-1.jar" }));
         moduls_7_2.add(new Module("com.oracle", new String[] { "ojdbc7.jar" }));
         moduls_7_2.add(new Module("com.oracle", new String[] { "ojdbc8.jar" }));
         moduls_7_2.add(new Module("com.squareup.okhttp3",
@@ -633,8 +624,7 @@ public class JBoss7_2_8 extends JBoss {
                         "jaxb-jxc-2.3.1.redhat-00001.jar", "codemodel-2.3.1.redhat-00001.jar",
                         "rngom-2.3.1.redhat-00001.jar" }));
         moduls_7_2.add(new Module("com.sun.xml.fastinfoset", new String[] { "FastInfoset-1.2.13.redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("com.sun.xml.messaging.saaj", new String[] { "saaj-impl-1.3.16.SP1-redhat-6.jar" }));
+        moduls_7_2.add(new Module("com.sun.xml.messaging.saaj", new String[] { "saaj-impl-1.3.16.SP1-redhat-6.jar" }));
         moduls_7_2.add(new Module("com.sun.xml.txw2", new String[] { "txw2-2.3.1.redhat-00001.jar" }));
         moduls_7_2.add(new Module("com.sun.xsom", new String[] { "xsom-2.3.1.redhat-00001.jar" }));
         moduls_7_2.add(new Module("gnu.getopt", new String[] { "java-getopt-1.0.13.redhat-5.jar" }));
@@ -663,8 +653,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("io.smallrye.health", new String[] { "smallrye-health-1.0.2.redhat-00001.jar" }));
         moduls_7_2.add(
                 new Module("io.smallrye.opentracing", new String[] { "smallrye-opentracing-1.1.1.redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("io.undertow.core", new String[] { "undertow-core-2.0.15.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("io.undertow.core", new String[] { "undertow-core-2.0.15.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("io.undertow.js", new String[] { "undertow-js-1.0.2.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("io.undertow.jsp", new String[] { "jastow-2.0.6.Final-redhat-00001.jar" }));
         moduls_7_2.add(
@@ -678,20 +667,17 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("javax.api", new String[] { "" }));
         moduls_7_2.add(
                 new Module("javax.batch.api", new String[] { "jboss-batch-api_1.0_spec-1.0.1.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("javax.ejb.api", new String[] { "jboss-ejb-api_3.2_spec-1.0.1.Final-redhat-1.jar" }));
+        moduls_7_2.add(new Module("javax.ejb.api", new String[] { "jboss-ejb-api_3.2_spec-1.0.1.Final-redhat-1.jar" }));
         moduls_7_2.add(
                 new Module("javax.el.api", new String[] { "jboss-el-api_3.0_spec-1.0.12.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("javax.enterprise.api", new String[] { "cdi-api-2.0.0.SP1-redhat-00001.jar" }));
         moduls_7_2.add(new Module("javax.enterprise.concurrent.api",
                 new String[] { "jboss-concurrency-api_1.0_spec-1.0.2.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("javax.faces.api", new String[] { "jboss-jsf-api_2.3_spec-2.3.5.SP1-redhat-1.jar" }));
+        moduls_7_2.add(new Module("javax.faces.api", new String[] { "jboss-jsf-api_2.3_spec-2.3.5.SP1-redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.inject.api", new String[] { "javax.inject-1.0.0.redhat-6.jar" }));
         moduls_7_2.add(new Module("javax.interceptor.api",
                 new String[] { "jboss-interceptors-api_1.2_spec-1.0.1.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("javax.jms.api", new String[] { "jboss-jms-api_2.0_spec-1.0.2.Final-redhat-1.jar" }));
+        moduls_7_2.add(new Module("javax.jms.api", new String[] { "jboss-jms-api_2.0_spec-1.0.2.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.json.api", new String[] { "javax.json-api-1.1.2.redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.json.bind.api", new String[] { "javax.json.bind-api-1.0.0.redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.jws.api", new String[] { "jsr181-api-1.0.0.MR1-redhat-8.jar" }));
@@ -721,8 +707,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("javax.sql.api", new String[] { "" }));
         moduls_7_2.add(new Module("javax.transaction.api",
                 new String[] { "jboss-transaction-api_1.2_spec-1.1.1.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("javax.validation.api", new String[] { "validation-api-2.0.1.Final-redhat-1.jar" }));
+        moduls_7_2.add(new Module("javax.validation.api", new String[] { "validation-api-2.0.1.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.websocket.api",
                 new String[] { "jboss-websocket-api_1.1_spec-1.1.3.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("javax.ws.rs.api",
@@ -768,19 +753,19 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("org.apache.commons.lang", new String[] { "commons-lang-2.6.0.redhat-7.jar" }));
         moduls_7_2.add(new Module("org.apache.commons.lang3", new String[] { "commons-lang3-3.6.0.redhat-1.jar" }));
         moduls_7_2.add(new Module("org.apache.commons.logging", new String[] { "" }));
-        moduls_7_2.add(new Module("org.apache.cxf.impl", new String[] {
-                "cxf-rt-bindings-coloc-3.2.5.redhat-00001.jar", "cxf-rt-bindings-soap-3.2.5.redhat-00001.jar",
-                "cxf-rt-bindings-xml-3.2.5.redhat-00001.jar", "cxf-rt-databinding-aegis-3.2.5.redhat-00001.jar",
-                "cxf-rt-databinding-jaxb-3.2.5.redhat-00001.jar", "cxf-rt-features-clustering-3.2.5.redhat-00001.jar",
-                "cxf-rt-frontend-jaxws-3.2.5.redhat-00001.jar", "cxf-rt-frontend-simple-3.2.5.redhat-00001.jar",
-                "cxf-rt-management-3.2.5.redhat-00001.jar", "cxf-rt-security-3.2.5.redhat-00001.jar",
-                "cxf-rt-security-saml-3.2.5.redhat-00001.jar", "cxf-rt-transports-http-3.2.5.redhat-00001.jar",
-                "cxf-rt-transports-http-hc-3.2.5.redhat-00001.jar", "cxf-rt-transports-jms-3.2.5.redhat-00001.jar",
-                "cxf-rt-transports-local-3.2.5.redhat-00001.jar", "cxf-rt-wsdl-3.2.5.redhat-00001.jar",
-                "cxf-rt-ws-addr-3.2.5.redhat-00001.jar", "cxf-rt-ws-mex-3.2.5.redhat-00001.jar",
-                "cxf-rt-ws-policy-3.2.5.redhat-00001.jar", "cxf-rt-ws-rm-3.2.5.redhat-00001.jar",
-                "cxf-tools-common-3.2.5.redhat-00001.jar", "cxf-tools-java2ws-3.2.5.redhat-00001.jar",
-                "cxf-tools-validator-3.2.5.redhat-00001.jar", "cxf-tools-wsdlto-core-3.2.5.redhat-00001.jar",
+        moduls_7_2.add(new Module("org.apache.cxf.impl", new String[] { "cxf-rt-bindings-coloc-3.2.5.redhat-00001.jar",
+                "cxf-rt-bindings-soap-3.2.5.redhat-00001.jar", "cxf-rt-bindings-xml-3.2.5.redhat-00001.jar",
+                "cxf-rt-databinding-aegis-3.2.5.redhat-00001.jar", "cxf-rt-databinding-jaxb-3.2.5.redhat-00001.jar",
+                "cxf-rt-features-clustering-3.2.5.redhat-00001.jar", "cxf-rt-frontend-jaxws-3.2.5.redhat-00001.jar",
+                "cxf-rt-frontend-simple-3.2.5.redhat-00001.jar", "cxf-rt-management-3.2.5.redhat-00001.jar",
+                "cxf-rt-security-3.2.5.redhat-00001.jar", "cxf-rt-security-saml-3.2.5.redhat-00001.jar",
+                "cxf-rt-transports-http-3.2.5.redhat-00001.jar", "cxf-rt-transports-http-hc-3.2.5.redhat-00001.jar",
+                "cxf-rt-transports-jms-3.2.5.redhat-00001.jar", "cxf-rt-transports-local-3.2.5.redhat-00001.jar",
+                "cxf-rt-wsdl-3.2.5.redhat-00001.jar", "cxf-rt-ws-addr-3.2.5.redhat-00001.jar",
+                "cxf-rt-ws-mex-3.2.5.redhat-00001.jar", "cxf-rt-ws-policy-3.2.5.redhat-00001.jar",
+                "cxf-rt-ws-rm-3.2.5.redhat-00001.jar", "cxf-tools-common-3.2.5.redhat-00001.jar",
+                "cxf-tools-java2ws-3.2.5.redhat-00001.jar", "cxf-tools-validator-3.2.5.redhat-00001.jar",
+                "cxf-tools-wsdlto-core-3.2.5.redhat-00001.jar",
                 "cxf-tools-wsdlto-databinding-jaxb-3.2.5.redhat-00001.jar",
                 "cxf-tools-wsdlto-frontend-jaxws-3.2.5.redhat-00001.jar",
                 "cxf-services-ws-discovery-api-3.2.5.redhat-00001.jar", "cxf-xjc-boolean-3.2.2.redhat-00001.jar",
@@ -805,8 +790,7 @@ public class JBoss7_2_8 extends JBoss {
                         "lucene-facet-5.5.5.redhat-2.jar", "lucene-queries-5.5.5.redhat-2.jar",
                         "lucene-queryparser-5.5.5.redhat-2.jar" }));
         moduls_7_2.add(new Module("org.apache.neethi", new String[] { "neethi-3.1.1.redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("org.apache.openjpa", new String[] { "jipijapa-openjpa-7.2.0.GA-redhat-00005.jar" }));
+        moduls_7_2.add(new Module("org.apache.openjpa", new String[] { "jipijapa-openjpa-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(new Module("org.apache.santuario.xmlsec", new String[] { "xmlsec-2.1.2.redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.apache.thrift", new String[] { "libthrift-0.11.0.redhat-00006.jar" }));
         moduls_7_2.add(new Module("org.apache.velocity", new String[] { "velocity-engine-core-2.0.0.redhat-1.jar" }));
@@ -854,8 +838,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("org.glassfish.javax.json", new String[] { "javax.json-1.1.2.redhat-1.jar" }));
         moduls_7_2.add(
                 new Module("org.glassfish.soteria", new String[] { "javax.security.enterprise-1.0.0.redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("org.hibernate", new String[] { "jipijapa-hibernate4-1-7.2.0.GA-redhat-00005.jar" }));
+        moduls_7_2.add(new Module("org.hibernate", new String[] { "jipijapa-hibernate4-1-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(new Module("org.hibernate", new String[] { "" }));
         moduls_7_2.add(new Module("org.hibernate", new String[] { "" }));
         moduls_7_2.add(new Module("org.hibernate", new String[] { "" }));
@@ -950,8 +933,7 @@ public class JBoss7_2_8 extends JBoss {
                 new Module("org.jboss.as.ejb3", new String[] { "wildfly-ejb3-7.2.0.GA-redhat-00005.jar", "timers" }));
         moduls_7_2.add(new Module("org.jboss.as.host-controller",
                 new String[] { "wildfly-host-controller-6.0.11.Final-redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.as.jacorb", new String[] { "wildfly-jacorb-7.2.0.GA-redhat-00005.jar" }));
+        moduls_7_2.add(new Module("org.jboss.as.jacorb", new String[] { "wildfly-jacorb-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.jaxr", new String[] { "wildfly-jaxr-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.jaxrs", new String[] { "wildfly-jaxrs-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(
@@ -973,8 +955,7 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(
                 new Module("org.jboss.as.messaging", new String[] { "wildfly-messaging-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.modcluster", new String[] { "" }));
-        moduls_7_2
-                .add(new Module("org.jboss.as.naming", new String[] { "wildfly-naming-7.2.0.GA-redhat-00005.jar" }));
+        moduls_7_2.add(new Module("org.jboss.as.naming", new String[] { "wildfly-naming-7.2.0.GA-redhat-00005.jar" }));
         moduls_7_2.add(
                 new Module("org.jboss.as.network", new String[] { "wildfly-network-6.0.11.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.as.patching.cli", new String[] { "" }));
@@ -1059,22 +1040,19 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("org.jboss.ironjacamar.jdbcadapters",
                 new String[] { "ironjacamar-jdbc-1.4.11.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.jandex", new String[] { "jandex-2.0.5.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.jaxbintros", new String[] { "jboss-jaxb-intros-1.0.2.GA-redhat-8.jar" }));
+        moduls_7_2.add(new Module("org.jboss.jaxbintros", new String[] { "jboss-jaxb-intros-1.0.2.GA-redhat-8.jar" }));
         moduls_7_2.add(new Module("org.jboss.jboss-transaction-spi",
                 new String[] { "jboss-transaction-spi-7.6.0.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("org.jboss.jts.integration",
                 new String[] { "narayana-jts-integration-5.9.0.Final-redhat-00001.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.jts", new String[] { "narayana-jts-idlj-5.9.0.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.jboss.jts", new String[] { "narayana-jts-idlj-5.9.0.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.log4j.logmanager",
                 new String[] { "log4j-jboss-logmanager-1.1.6.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.logging.commons.logging",
                 new String[] { "commons-logging-jboss-logging-1.0.0.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("org.jboss.logging.jul-to-slf4j-stub",
                 new String[] { "jul-to-slf4j-stub-1.0.1.Final-redhat-3.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.logging", new String[] { "jboss-logging-3.3.2.Final-redhat-00001.jar" }));
+        moduls_7_2.add(new Module("org.jboss.logging", new String[] { "jboss-logging-3.3.2.Final-redhat-00001.jar" }));
         moduls_7_2.add(
                 new Module("org.jboss.logmanager", new String[] { "jboss-logmanager-2.1.5.Final-redhat-00001.jar" }));
         moduls_7_2.add(
@@ -1132,8 +1110,7 @@ public class JBoss7_2_8 extends JBoss {
                 new String[] { "txframework-5.9.0.Final-redhat-00001.jar" }));
         moduls_7_2.add(new Module("org.jboss.remote-naming", new String[] { "" }));
         moduls_7_2.add(new Module("org.jboss.remoting", new String[] { "jboss-remoting-5.0.8.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.remoting-jmx", new String[] { "remoting-jmx-3.0.0.Final-redhat-1.jar" }));
+        moduls_7_2.add(new Module("org.jboss.remoting-jmx", new String[] { "remoting-jmx-3.0.0.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("org.jboss.remoting3", new String[] { "" }));
         moduls_7_2.add(new Module("org.jboss.remoting3.remoting-jmx", new String[] { "" }));
         moduls_7_2
@@ -1176,8 +1153,7 @@ public class JBoss7_2_8 extends JBoss {
                         "jboss-negotiation-extras-3.0.4.Final-redhat-1.jar",
                         "jboss-negotiation-ntlm-3.0.4.Final-redhat-1.jar",
                         "jboss-negotiation-spnego-3.0.4.Final-redhat-1.jar" }));
-        moduls_7_2
-                .add(new Module("org.jboss.security.xacml", new String[] { "jbossxacml-2.0.8.Final-redhat-8.jar" }));
+        moduls_7_2.add(new Module("org.jboss.security.xacml", new String[] { "jbossxacml-2.0.8.Final-redhat-8.jar" }));
         moduls_7_2.add(new Module("org.jboss.staxmapper", new String[] { "staxmapper-1.3.0.Final-redhat-1.jar" }));
         moduls_7_2.add(new Module("org.jboss.stdio", new String[] { "jboss-stdio-1.0.2.GA-redhat-2.jar" }));
         moduls_7_2.add(new Module("org.jboss.threads", new String[] { "jboss-threads-2.3.2.Final-redhat-1.jar" }));
@@ -1383,6 +1359,26 @@ public class JBoss7_2_8 extends JBoss {
         moduls_7_2.add(new Module("sun.jdk", new String[] { "service-loader-resources" }));
         moduls_7_2.add(new Module("sun.scripting", new String[] { "service-loader-resources" }));
 
+    }
+
+    @Override
+    public Map<String, String> getDefaultAnothersBaseJarToModule() {
+        Map<String, String> anothers = new HashMap<>();
+        // KEY es la base del jar !!!!   
+        anothers.put("activation", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+
+        anothers.put("javax.activation-api", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+        anothers.put("javax.activation", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+        anothers.put("javax.annotation-api", getMessageReplaceJarForModule(modulByModuleName, "javax.annotation.api"));
+        anothers.put("javax.ejb-api", getMessageReplaceJarForModule(modulByModuleName, "javax.ejb.api"));
+        anothers.put("javax.jws-api", getMessageReplaceJarForModule(modulByModuleName, "javax.jws.api"));
+        anothers.put("javax.transaction-api",
+                getMessageReplaceJarForModule(modulByModuleName, "javax.transaction.api"));
+        anothers.put("jaxb-core", getMessageReplaceJarForModule(modulByModuleName, "com.sun.xml.bind"));
+
+        anothers.put("jsr311-api", getMessageReplaceJarForModule(modulByModuleName, "javax.ws.rs.api"));
+
+        return anothers;
     }
 
 }

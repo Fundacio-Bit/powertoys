@@ -27,6 +27,10 @@ public class EarQueryPath extends org.fundaciobit.genapp.common.query.QueryPath 
     return new StringField(getQueryPath(), EarFields.NOM);
   }
 
+  public StringField JBOSSVERSION() {
+    return new StringField(getQueryPath(), EarFields.JBOSSVERSION);
+  }
+
 
 
   @Override

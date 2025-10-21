@@ -480,6 +480,33 @@
             "webtype": 1
           },
           "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "jbossversion",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Versió JBoss",
+            "es": "Versión JBoss"
+          },
+          "javaName": "jbossVersion",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "\u00277.2\u0027::character varying",
+          "minAllowedValue": "7.2.0,7.4.0",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
         }
       ]
     },
@@ -858,6 +885,33 @@
           "groupBy": false,
           "webFieldInfo": {
             "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "jbossversion",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Versió JBoss",
+            "es": "Versión JBoss"
+          },
+          "javaName": "jbossVersion",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "\u00277.2\u0027::character varying",
+          "minAllowedValue": "7.2.0,7.4.0",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
           },
           "foreignKeys": []
         }

@@ -49,6 +49,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarSimpleFields.DATA)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${earSimple.data}" /></td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarSimpleFields.JBOSSVERSION)}">
+          <td>
+          <c:set var="tmp">${earSimple.jbossVersion}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForJbossVersion[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

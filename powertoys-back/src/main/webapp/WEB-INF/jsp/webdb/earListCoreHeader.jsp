@@ -24,6 +24,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.NOM)}">
         <th>${pwt:getSortIcons(__theFilterForm,EarFields.NOM)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.JBOSSVERSION)}">
+        <th>${pwt:getSortIcons(__theFilterForm,EarFields.JBOSSVERSION)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

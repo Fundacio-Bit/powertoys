@@ -13,6 +13,7 @@ public class EarSimpleBean implements EarSimple {
 	java.lang.String nom;
 	java.lang.String detall;
 	java.sql.Timestamp data;
+	java.lang.String jbossVersion;
 
 
   /** Constructor Buit */
@@ -20,19 +21,21 @@ public class EarSimpleBean implements EarSimple {
   }
 
   /** Constructor amb tots els camps  */
-  public EarSimpleBean(long earSimpleID , long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data) {
+  public EarSimpleBean(long earSimpleID , long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data , java.lang.String jbossVersion) {
     this.earSimpleID=earSimpleID;
     this.fitxerID=fitxerID;
     this.nom=nom;
     this.detall=detall;
     this.data=data;
+    this.jbossVersion=jbossVersion;
 }
   /** Constructor sense valors autoincrementals */
-  public EarSimpleBean(long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data) {
+  public EarSimpleBean(long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data , java.lang.String jbossVersion) {
     this.fitxerID=fitxerID;
     this.nom=nom;
     this.detall=detall;
     this.data=data;
+    this.jbossVersion=jbossVersion;
 }
   public EarSimpleBean(EarSimple __bean) {
     this.setEarSimpleID(__bean.getEarSimpleID());
@@ -40,6 +43,7 @@ public class EarSimpleBean implements EarSimple {
     this.setNom(__bean.getNom());
     this.setDetall(__bean.getDetall());
     this.setData(__bean.getData());
+    this.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     this.setFitxer(FitxerBean.toBean(__bean.getFitxer()));
 	}
@@ -79,6 +83,13 @@ public class EarSimpleBean implements EarSimple {
 		this.data = _data_;
 	};
 
+	public java.lang.String getJbossVersion() {
+		return(jbossVersion);
+	};
+	public void setJbossVersion(java.lang.String _jbossVersion_) {
+		this.jbossVersion = _jbossVersion_;
+	};
+
 
 
   // ======================================
@@ -91,6 +102,7 @@ public class EarSimpleBean implements EarSimple {
     __tmp.setNom(__bean.getNom());
     __tmp.setDetall(__bean.getDetall());
     __tmp.setData(__bean.getData());
+    __tmp.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     __tmp.setFitxer(FitxerBean.toBean(__bean.getFitxer()));
 		return __tmp;

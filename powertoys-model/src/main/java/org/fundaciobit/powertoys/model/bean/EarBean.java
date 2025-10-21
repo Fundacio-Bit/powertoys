@@ -12,6 +12,7 @@ public class EarBean implements Ear {
 	long fitxerID;
 	java.sql.Timestamp data;
 	java.lang.String nom;
+	java.lang.String jbossVersion;
 
 
   /** Constructor Buit */
@@ -19,23 +20,26 @@ public class EarBean implements Ear {
   }
 
   /** Constructor amb tots els camps  */
-  public EarBean(long earID , long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
+  public EarBean(long earID , long fitxerID , java.sql.Timestamp data , java.lang.String nom , java.lang.String jbossVersion) {
     this.earID=earID;
     this.fitxerID=fitxerID;
     this.data=data;
     this.nom=nom;
+    this.jbossVersion=jbossVersion;
 }
   /** Constructor sense valors autoincrementals */
-  public EarBean(long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
+  public EarBean(long fitxerID , java.sql.Timestamp data , java.lang.String nom , java.lang.String jbossVersion) {
     this.fitxerID=fitxerID;
     this.data=data;
     this.nom=nom;
+    this.jbossVersion=jbossVersion;
 }
   public EarBean(Ear __bean) {
     this.setEarID(__bean.getEarID());
     this.setFitxerID(__bean.getFitxerID());
     this.setData(__bean.getData());
     this.setNom(__bean.getNom());
+    this.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     this.setFitxer(FitxerBean.toBean(__bean.getFitxer()));
 	}
@@ -68,6 +72,13 @@ public class EarBean implements Ear {
 		this.nom = _nom_;
 	};
 
+	public java.lang.String getJbossVersion() {
+		return(jbossVersion);
+	};
+	public void setJbossVersion(java.lang.String _jbossVersion_) {
+		this.jbossVersion = _jbossVersion_;
+	};
+
 
 
   // ======================================
@@ -79,6 +90,7 @@ public class EarBean implements Ear {
     __tmp.setFitxerID(__bean.getFitxerID());
     __tmp.setData(__bean.getData());
     __tmp.setNom(__bean.getNom());
+    __tmp.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     __tmp.setFitxer(FitxerBean.toBean(__bean.getFitxer()));
 		return __tmp;

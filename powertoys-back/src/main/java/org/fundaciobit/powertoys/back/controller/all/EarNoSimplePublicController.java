@@ -22,6 +22,9 @@ import org.fundaciobit.powertoys.logic.EarPublicLogicaService;
 import org.fundaciobit.powertoys.logic.FitxerPublicLogicaService;
 import org.fundaciobit.powertoys.logic.earmoduls.SearchJBossModulesInEar;
 import org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss7_2_0;
+import org.fundaciobit.powertoys.logic.earmoduls.JBoss7_4_0;
 import org.fundaciobit.powertoys.back.controller.PowerToysFilesFormManager;
 import org.fundaciobit.powertoys.back.controller.webdb.EarController;
 import org.fundaciobit.powertoys.back.form.webdb.EarFilterForm;
@@ -127,8 +130,8 @@ public class EarNoSimplePublicController extends EarController {
     }
 
     @Override
-    public EarForm getEarForm(EarJPA _jpa, boolean __isView, HttpServletRequest request,
-            ModelAndView mav) throws I18NException {
+    public EarForm getEarForm(EarJPA _jpa, boolean __isView, HttpServletRequest request, ModelAndView mav)
+            throws I18NException {
         EarForm earForm = super.getEarForm(_jpa, __isView, request, mav);
 
         if (earForm.isNou()) {
@@ -152,8 +155,7 @@ public class EarNoSimplePublicController extends EarController {
     }
 
     @Override
-    public void preValidate(HttpServletRequest request, EarForm earForm, BindingResult result)
-            throws I18NException {
+    public void preValidate(HttpServletRequest request, EarForm earForm, BindingResult result) throws I18NException {
         log.info("EAR al preValidate");
 
         EarJPA ear = earForm.getEar();
@@ -187,16 +189,15 @@ public class EarNoSimplePublicController extends EarController {
         for (Ear e : list) {
             long earID = e.getEarID();
             AdditionalButton infoEarButton = new AdditionalButton("fas fa-eye", "ear.veureear",
-                    getContextWeb() + "/veureEarInfos/" + earID,
-                    AdditionalButtonStyle.INFO);
+                    getContextWeb() + "/veureEarInfos/" + earID, AdditionalButtonStyle.INFO);
 
             filterForm.addAdditionalButtonByPK(earID, infoEarButton);
         }
     }
 
     @RequestMapping(value = "/veureEarInfos/{earID}")
-    public String veureEarInfos(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable Long earID) throws I18NException {
+    public String veureEarInfos(HttpServletRequest request, HttpServletResponse response, @PathVariable
+    Long earID) throws I18NException {
 
         request.getSession().setAttribute("earID", earID);
         log.info("Redirigint per a verue els earInfo de l'EAR " + earID);
@@ -211,8 +212,7 @@ public class EarNoSimplePublicController extends EarController {
     }
 
     @Override
-    public EarJPA create(HttpServletRequest request, EarJPA ear)
-            throws I18NException, I18NValidationException {
+    public EarJPA create(HttpServletRequest request, EarJPA ear) throws I18NException, I18NValidationException {
         log.info("Processant EAR al create");
         Fitxer fitxer = fitxerEjb.findByPrimaryKey(ear.getFitxerID());
         String nom = fitxer.getNom();
@@ -220,8 +220,27 @@ public class EarNoSimplePublicController extends EarController {
         File earWarFile = null;
         List<org.fundaciobit.powertoys.logic.earmoduls.EarWarInfo> trobats = new ArrayList<EarWarInfo>();
         earWarFile = FileSystemManager.getFile(ear.getFitxerID());
+
+        String ver = ear.getJbossVersion();
+        
+        log.info(" \n\n  JBoss Version  STRING COMBOBOX: " + ver + "\n\n ");
+        
+        JBoss jboss;
+        if (ver == null || ver.trim().length() == 0) {
+            jboss = new JBoss7_2_0();
+        } else if (ver.equals(JBoss7_4_0.VERSION)) {
+            HtmlUtils.saveMessageInfo(request, "S'ha seleccionat la versió de JBoss " + JBoss7_4_0.VERSION);
+            jboss = new JBoss7_4_0();
+        } else if (ver.equals(JBoss7_2_0.VERSION)) {
+            HtmlUtils.saveMessageInfo(request, "S'ha seleccionat la versió de JBoss " + JBoss7_2_0.VERSION);
+            jboss = new JBoss7_2_0();
+        } else {
+            HtmlUtils.saveMessageWarning(request,
+                    "Versió de JBoss desconeguda: " + ver + ", s'utilitzarà la " + JBoss7_2_0.VERSION);
+            jboss = new JBoss7_2_0();
+        }
         try {
-            SearchJBossModulesInEar.processFileEarWar(earWarFile, nom, trobats);
+            SearchJBossModulesInEar.processFileEarWar(earWarFile, nom, trobats, jboss);
         } catch (Exception e) {
             String missatgeError = "Error a l'actualitzar el nom i detall de l'EAR: " + e.getMessage();
             HtmlUtils.saveMessageError(request, missatgeError);
@@ -248,10 +267,8 @@ public class EarNoSimplePublicController extends EarController {
                 String potencialCanviDeJarAModul = "<p style=\"font-family: Courier;\">"
                         + earWarInfo.getPotencialCanviDeJarAModul() + "</p>";
 
-                earInfoCreats.add(earInfoLogicaEjb.create(newId, earWarInfo.getFileName(),
-                        errors,
-                        redhatJarsToModules, jbossDeploymentStructure,
-                        potencialCanviDeJarAModul));
+                earInfoCreats.add(earInfoLogicaEjb.create(newId, earWarInfo.getFileName(), errors, redhatJarsToModules,
+                        jbossDeploymentStructure, potencialCanviDeJarAModul));
             } catch (Exception e) {
                 String missatgeError = "Error al crear l'EarInfo amb fileName " + earWarInfo.getFileName() + ": "
                         + e.getMessage();
@@ -290,8 +307,7 @@ public class EarNoSimplePublicController extends EarController {
     }
 
     @Override
-    public EarJPA update(HttpServletRequest request, EarJPA ear)
-            throws I18NException, I18NValidationException {
+    public EarJPA update(HttpServletRequest request, EarJPA ear) throws I18NException, I18NValidationException {
         return (EarJPA) earLogicaEjb.update(ear);
     }
 

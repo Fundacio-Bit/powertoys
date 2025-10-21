@@ -17,6 +17,7 @@ public interface EarSimpleFields extends java.io.Serializable {
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
 	 public static final StringField DETALL = new StringField(_TABLE_MODEL, "detall", "detall");
 	 public static final TimestampField DATA = new TimestampField(_TABLE_MODEL, "data", "data");
+	 public static final StringField JBOSSVERSION = new StringField(_TABLE_MODEL, "jbossVersion", "jbossversion");
 
 
   public static final Field<?>[] ALL_EARSIMPLE_FIELDS = {
@@ -24,7 +25,8 @@ public interface EarSimpleFields extends java.io.Serializable {
     FITXERID,
     NOM,
     DETALL,
-    DATA
+    DATA,
+    JBOSSVERSION
   };
 
 

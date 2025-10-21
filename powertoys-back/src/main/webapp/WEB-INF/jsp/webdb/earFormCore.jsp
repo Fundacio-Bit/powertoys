@@ -108,3 +108,34 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EarFields.JBOSSVERSION)}">
+        <tr id="ear_jbossVersion_rowid">
+          <td id="ear_jbossVersion_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EarFields.JBOSSVERSION])?'ear.jbossVersion':__theForm.labels[EarFields.JBOSSVERSION]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EarFields.JBOSSVERSION]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EarFields.JBOSSVERSION]}" ></i>
+              </c:if>
+            </td>
+          <td id="ear_jbossVersion_columnvalueid">
+          <form:errors path="ear.jbossVersion" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EarFields.JBOSSVERSION)}" >
+          <form:hidden path="ear.jbossVersion"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.ear.jbossVersion,__theForm.listOfValuesForJbossVersion)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EarFields.JBOSSVERSION)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="ear_jbossVersion"  onchange="if(typeof onChangeJbossVersion == 'function') {  onChangeJbossVersion(this); };"  cssClass="form-control col-md-9-optional" path="ear.jbossVersion">
+            <c:forEach items="${__theForm.listOfValuesForJbossVersion}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

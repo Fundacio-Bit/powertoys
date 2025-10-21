@@ -1,5 +1,7 @@
 package org.fundaciobit.powertoys.back.form.webdb;
 
+import java.util.List;
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.fundaciobit.powertoys.back.form.PowerToysBaseForm;
 import org.fundaciobit.powertoys.persistence.EarSimpleJPA;
@@ -22,6 +24,7 @@ public class EarSimpleForm extends PowerToysBaseForm {
   public EarSimpleForm(EarSimpleForm __toClone) {
     super(__toClone);
       this.earSimple = __toClone.earSimple;
+    this.listOfValuesForJbossVersion = __toClone.listOfValuesForJbossVersion;
   }
   
   public EarSimpleForm(EarSimpleJPA earSimple, boolean nou) {
@@ -51,5 +54,17 @@ public class EarSimpleForm extends PowerToysBaseForm {
   public void setFitxerIDDelete(boolean fitxerIDDelete) {
     this.fitxerIDDelete = fitxerIDDelete;
    }
+  private List<StringKeyValue> listOfValuesForJbossVersion;
+
+  public List<StringKeyValue> getListOfValuesForJbossVersion() {
+    return this.listOfValuesForJbossVersion;
+  }
+
+  public void setListOfValuesForJbossVersion(List<StringKeyValue> listOfValuesForJbossVersion) {
+    this.listOfValuesForJbossVersion = listOfValuesForJbossVersion;
+  }
+
+
+
   
 } // Final de Classe 

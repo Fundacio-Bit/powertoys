@@ -31,6 +31,10 @@ public class EarSimpleQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new TimestampField(getQueryPath(), EarSimpleFields.DATA);
   }
 
+  public StringField JBOSSVERSION() {
+    return new StringField(getQueryPath(), EarSimpleFields.JBOSSVERSION);
+  }
+
 
 
   @Override

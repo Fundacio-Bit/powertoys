@@ -3,6 +3,7 @@ package org.fundaciobit.powertoys.back.form.webdb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -75,6 +76,17 @@ public class EarFilterForm extends PowerToysBaseFilterForm implements EarFields 
   }
 
 
+  private java.lang.String jbossVersion;
+
+  public java.lang.String getJbossVersion() {
+    return this.jbossVersion;
+  }
+
+  public void setJbossVersion(java.lang.String jbossVersion) {
+    this.jbossVersion = jbossVersion;
+  }
+
+
   public EarFilterForm() {
   }
   
@@ -85,6 +97,8 @@ public class EarFilterForm extends PowerToysBaseFilterForm implements EarFields 
     this.dataDesde = __toClone.dataDesde;
     this.dataFins = __toClone.dataFins;
     this.nom = __toClone.nom;
+    this.jbossVersion = __toClone.jbossVersion;
+    this.mapOfValuesForJbossVersion = __toClone.mapOfValuesForJbossVersion;
   }
   
   /* ========= UTILS ========== */
@@ -119,6 +133,18 @@ public class EarFilterForm extends PowerToysBaseFilterForm implements EarFields 
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForJbossVersion;
+
+  public Map<String, String> getMapOfValuesForJbossVersion() {
+    return this.mapOfValuesForJbossVersion;
+  }
+
+  public void setMapOfValuesForJbossVersion(Map<String, String> mapOfValuesForJbossVersion) {
+    this.mapOfValuesForJbossVersion = mapOfValuesForJbossVersion;
+  }
+
+
+
 
    // --------------------------------
    // Camps traduibles de referencies.

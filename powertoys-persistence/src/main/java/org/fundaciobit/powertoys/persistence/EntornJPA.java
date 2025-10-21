@@ -33,8 +33,8 @@ public class EntornJPA implements Entorn {
     @Column(name="domini",nullable = false,length = 255)
     java.lang.String domini;
 
-    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="ordre",nullable = false,length = 10)
+    @org.hibernate.annotations.ColumnDefault("0")
     int ordre = 0;
 
 

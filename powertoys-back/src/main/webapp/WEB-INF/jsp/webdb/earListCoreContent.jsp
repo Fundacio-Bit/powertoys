@@ -44,6 +44,14 @@
           ${ear.nom}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EarFields.JBOSSVERSION)}">
+          <td>
+          <c:set var="tmp">${ear.jbossVersion}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForJbossVersion[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

@@ -1,12 +1,16 @@
 package org.fundaciobit.powertoys.logic.earmoduls;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author anadal
  */
 public class JBoss7_2_0 extends JBoss {
+    
+    public static final String VERSION = "7.2.0";
 
     public JBoss7_2_0() {
         super(moduls_7_2);
@@ -809,6 +813,26 @@ public class JBoss7_2_0 extends JBoss {
         moduls_7_2.add(new Module("sun.jdk", new String[] { "service-loader-resources" }));
         moduls_7_2.add(new Module("sun.scripting", new String[] { "service-loader-resources" }));
 
+    }
+    
+    @Override
+    public Map<String, String> getDefaultAnothersBaseJarToModule() {
+        Map<String, String> anothers = new HashMap<>();
+        // KEY es la base del jar !!!!   
+        anothers.put("activation", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+
+        anothers.put("javax.activation-api", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+        anothers.put("javax.activation", getMessageReplaceJarForModule(modulByModuleName, "javax.activation.api"));
+        anothers.put("javax.annotation-api", getMessageReplaceJarForModule(modulByModuleName, "javax.annotation.api"));
+        anothers.put("javax.ejb-api", getMessageReplaceJarForModule(modulByModuleName, "javax.ejb.api"));
+        anothers.put("javax.jws-api", getMessageReplaceJarForModule(modulByModuleName, "javax.jws.api"));
+        anothers.put("javax.transaction-api",
+                getMessageReplaceJarForModule(modulByModuleName, "javax.transaction.api"));
+        anothers.put("jaxb-core", getMessageReplaceJarForModule(modulByModuleName, "com.sun.xml.bind"));
+
+        anothers.put("jsr311-api", getMessageReplaceJarForModule(modulByModuleName, "javax.ws.rs.api"));
+
+        return anothers;
     }
 
 }

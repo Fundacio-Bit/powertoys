@@ -16,13 +16,15 @@ public interface EarFields extends java.io.Serializable {
 	 public static final LongField FITXERID = new LongField(_TABLE_MODEL, "fitxerID", "fitxerid");
 	 public static final TimestampField DATA = new TimestampField(_TABLE_MODEL, "data", "data");
 	 public static final StringField NOM = new StringField(_TABLE_MODEL, "nom", "nom");
+	 public static final StringField JBOSSVERSION = new StringField(_TABLE_MODEL, "jbossVersion", "jbossversion");
 
 
   public static final Field<?>[] ALL_EAR_FIELDS = {
     EARID,
     FITXERID,
     DATA,
-    NOM
+    NOM,
+    JBOSSVERSION
   };
 
 

@@ -40,6 +40,10 @@ public class EarJPA implements Ear {
     @Column(name="nom",nullable = false,length = 255)
     java.lang.String nom;
 
+    @Column(name="jbossversion",nullable = false,length = 50)
+    @org.hibernate.annotations.ColumnDefault("7.2")
+    java.lang.String jbossVersion = "7.2";
+
 
 
   /** Constructor Buit */
@@ -47,23 +51,26 @@ public class EarJPA implements Ear {
   }
 
   /** Constructor amb tots els camps  */
-  public EarJPA(long earID , long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
+  public EarJPA(long earID , long fitxerID , java.sql.Timestamp data , java.lang.String nom , java.lang.String jbossVersion) {
     this.earID=earID;
     this.fitxerID=fitxerID;
     this.data=data;
     this.nom=nom;
+    this.jbossVersion=jbossVersion;
 }
   /** Constructor sense valors autoincrementals */
-  public EarJPA(long fitxerID , java.sql.Timestamp data , java.lang.String nom) {
+  public EarJPA(long fitxerID , java.sql.Timestamp data , java.lang.String nom , java.lang.String jbossVersion) {
     this.fitxerID=fitxerID;
     this.data=data;
     this.nom=nom;
+    this.jbossVersion=jbossVersion;
 }
   public EarJPA(Ear __bean) {
     this.setEarID(__bean.getEarID());
     this.setFitxerID(__bean.getFitxerID());
     this.setData(__bean.getData());
     this.setNom(__bean.getNom());
+    this.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     this.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 	}
@@ -94,6 +101,13 @@ public class EarJPA implements Ear {
 	};
 	public void setNom(java.lang.String _nom_) {
 		this.nom = _nom_;
+	};
+
+	public java.lang.String getJbossVersion() {
+		return(jbossVersion);
+	};
+	public void setJbossVersion(java.lang.String _jbossVersion_) {
+		this.jbossVersion = _jbossVersion_;
 	};
 
 
@@ -147,6 +161,7 @@ public class EarJPA implements Ear {
     __tmp.setFitxerID(__bean.getFitxerID());
     __tmp.setData(__bean.getData());
     __tmp.setNom(__bean.getNom());
+    __tmp.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     __tmp.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 		return __tmp;

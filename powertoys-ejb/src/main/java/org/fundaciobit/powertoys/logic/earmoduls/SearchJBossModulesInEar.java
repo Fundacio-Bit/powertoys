@@ -23,20 +23,15 @@ import org.apache.commons.io.IOUtils;
  */
 public class SearchJBossModulesInEar {
 
-    
-   
-
-
-    
-
-    public static void processFileEarWar(File earWarFile, List<EarWarInfo> trobats) throws Exception {
-        processFileEarWar(earWarFile, earWarFile.getName(), trobats);
+    public static void processFileEarWar(File earWarFile, List<EarWarInfo> trobats, JBoss jboss) throws Exception {
+        processFileEarWar(earWarFile, earWarFile.getName(), trobats, jboss);
 
     }
 
-    public static void processFileEarWar(File earWarFile, String name, List<EarWarInfo> trobats) throws Exception {
+    public static void processFileEarWar(File earWarFile, String name, List<EarWarInfo> trobats, JBoss jboss)
+            throws Exception {
         //JBoss jboss = new JBoss7_2_8();
-        JBoss jboss = new JBoss7_2_0();
+        //JBoss jboss = new JBoss7_2_0();
 
         Map<String, Module> jarNameToModule = jboss.getJarNameToModule();
 
@@ -51,18 +46,17 @@ public class SearchJBossModulesInEar {
         List<String> jbossDeploymentStructure = new ArrayList<String>();
 
         Set<String> errors = new HashSet<String>();
-        
+
         Collections.sort(redhats);
-        
-        Map<String, String>  modulenameToJar = new TreeMap<String, String>();
-        
+
+        Map<String, String> modulenameToJar = new TreeMap<String, String>();
+
         for (String redhat : redhats) {
             Module m = jarNameToModule.get(redhat);
             if (m != null) {
                 modulenameToJar.put(m.getModule(), redhat);
             }
         }
-        
 
         for (String redhat : modulenameToJar.values()) {
 
@@ -88,13 +82,14 @@ public class SearchJBossModulesInEar {
         }
 
         EarWarInfo ewinfo = new EarWarInfo(name);
-        
+
         final boolean isEar = name.endsWith(".ear");
 
         if (redhatJarsToModules.size() != 0) {
             String plugin = isEar ? "maven-ear-plugin" : "maven-war-plugin";
 
-            ewinfo.setRedhatJarsToModules(new RedhatJarsToModules(name.substring(0, name.lastIndexOf('.')), isEar, redhatJarsToModules, plugin));
+            ewinfo.setRedhatJarsToModules(new RedhatJarsToModules(name.substring(0, name.lastIndexOf('.')), isEar,
+                    redhatJarsToModules, plugin));
 
         }
 
@@ -103,11 +98,10 @@ public class SearchJBossModulesInEar {
             String titol = "S'han trobat jars que poden ser substituits pels segünts mòduls de JBoss. Per activar aquests mòduls el que hem de fer és afegir aquestes entrades dins del fitxer src/main/application/META-INF/jboss-deployment-structure.xml del projecte d'ear";
             String deploymentStart = isEar ? "   <deployment>" : "   <sub-deployment name=\"" + name + "\">";
             String deploymentEnd = isEar ? "   </deployment>" : "   </sub-deployment>";
-            
+
             ewinfo.setJbossDeploymentStructure(
-                    new JbossDeploymentStructure(titol, deploymentStart, deploymentEnd,
-                            jbossDeploymentStructure));
-                  
+                    new JbossDeploymentStructure(titol, deploymentStart, deploymentEnd, jbossDeploymentStructure));
+
         }
 
         if (errors.size() > 0) {
@@ -117,7 +111,7 @@ public class SearchJBossModulesInEar {
                 sb.append("Revisi manualment el JAR " + error + " dins  [jboss7]\\modules\\system\\layers\\base")
                         .append("\n");
             }
-*/
+            */
             ewinfo.setErrors(new ArrayList<String>(errors));
 
         }
@@ -129,7 +123,7 @@ public class SearchJBossModulesInEar {
             for (String potencial : potencialCanviDeJarAModul) {
                 sb.append("   + " + potencial + "\n");
             }
-*/
+            */
             ewinfo.setPotencialCanviDeJarAModul(potencialCanviDeJarAModul);
 
         }
@@ -140,8 +134,8 @@ public class SearchJBossModulesInEar {
     /**
      * Mètode que se li passa un File a un fitxer .ear i retorna un llistat dels noms de fitxers del directori lib del fitxer .ear que contenen la paraula redhat
      */
-    public static List<String> getLibsRedhat(File earFile, String name, List<String> potencialCanviDeJarAModul, JBoss jboss,
-            List<EarWarInfo> trobats) throws Exception {
+    public static List<String> getLibsRedhat(File earFile, String name, List<String> potencialCanviDeJarAModul,
+            JBoss jboss, List<EarWarInfo> trobats) throws Exception {
         // Llistat fitxers d'un zip
         // https://www.baeldung.com/java-compress-and-uncompress
 
@@ -201,7 +195,7 @@ public class SearchJBossModulesInEar {
 
                     IOUtils.write(war, new FileOutputStream(temp));
 
-                    processFileEarWar(temp, zipEntry.getName(), trobats);
+                    processFileEarWar(temp, zipEntry.getName(), trobats, jboss);
 
                     temp.delete();
                     temp.deleteOnExit();

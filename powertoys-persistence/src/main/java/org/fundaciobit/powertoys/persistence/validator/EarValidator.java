@@ -38,12 +38,24 @@ public class EarValidator<I extends Ear>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,JBOSSVERSION, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(JBOSSVERSION)));
+
     // Check size
     if (__vr.getFieldErrorCount(NOM) == 0) {
       java.lang.String __nom = __target__.getNom();
       if (__nom!= null && __nom.length() > 255) {
         __vr.rejectValue(NOM, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOM)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(JBOSSVERSION) == 0) {
+      java.lang.String __jbossversion = __target__.getJbossVersion();
+      if (__jbossversion!= null && __jbossversion.length() > 50) {
+        __vr.rejectValue(JBOSSVERSION, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(JBOSSVERSION)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
       }
     }
 

@@ -17,6 +17,9 @@ public interface EarSimple extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.sql.Timestamp getData();
 	public void setData(java.sql.Timestamp _data_);
 
+	public java.lang.String getJbossVersion();
+	public void setJbossVersion(java.lang.String _jbossVersion_);
+
   // Fitxer
   public <F extends Fitxer> F getFitxer();
 

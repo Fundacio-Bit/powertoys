@@ -14,6 +14,9 @@ public interface Ear extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getNom();
 	public void setNom(java.lang.String _nom_);
 
+	public java.lang.String getJbossVersion();
+	public void setJbossVersion(java.lang.String _jbossVersion_);
+
   // Fitxer
   public <F extends Fitxer> F getFitxer();
 

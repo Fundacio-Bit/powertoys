@@ -44,6 +44,10 @@ public class EarSimpleJPA implements EarSimple {
     @Column(name="data",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp data;
 
+    @Column(name="jbossversion",nullable = false,length = 50)
+    @org.hibernate.annotations.ColumnDefault("7.2")
+    java.lang.String jbossVersion = "7.2";
+
 
 
   /** Constructor Buit */
@@ -51,19 +55,21 @@ public class EarSimpleJPA implements EarSimple {
   }
 
   /** Constructor amb tots els camps  */
-  public EarSimpleJPA(long earSimpleID , long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data) {
+  public EarSimpleJPA(long earSimpleID , long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data , java.lang.String jbossVersion) {
     this.earSimpleID=earSimpleID;
     this.fitxerID=fitxerID;
     this.nom=nom;
     this.detall=detall;
     this.data=data;
+    this.jbossVersion=jbossVersion;
 }
   /** Constructor sense valors autoincrementals */
-  public EarSimpleJPA(long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data) {
+  public EarSimpleJPA(long fitxerID , java.lang.String nom , java.lang.String detall , java.sql.Timestamp data , java.lang.String jbossVersion) {
     this.fitxerID=fitxerID;
     this.nom=nom;
     this.detall=detall;
     this.data=data;
+    this.jbossVersion=jbossVersion;
 }
   public EarSimpleJPA(EarSimple __bean) {
     this.setEarSimpleID(__bean.getEarSimpleID());
@@ -71,6 +77,7 @@ public class EarSimpleJPA implements EarSimple {
     this.setNom(__bean.getNom());
     this.setDetall(__bean.getDetall());
     this.setData(__bean.getData());
+    this.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     this.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 	}
@@ -108,6 +115,13 @@ public class EarSimpleJPA implements EarSimple {
 	};
 	public void setData(java.sql.Timestamp _data_) {
 		this.data = _data_;
+	};
+
+	public java.lang.String getJbossVersion() {
+		return(jbossVersion);
+	};
+	public void setJbossVersion(java.lang.String _jbossVersion_) {
+		this.jbossVersion = _jbossVersion_;
 	};
 
 
@@ -149,6 +163,7 @@ public class EarSimpleJPA implements EarSimple {
     __tmp.setNom(__bean.getNom());
     __tmp.setDetall(__bean.getDetall());
     __tmp.setData(__bean.getData());
+    __tmp.setJbossVersion(__bean.getJbossVersion());
     // Fitxer
     __tmp.setFitxer(FitxerJPA.toJPA(__bean.getFitxer()));
 		return __tmp;

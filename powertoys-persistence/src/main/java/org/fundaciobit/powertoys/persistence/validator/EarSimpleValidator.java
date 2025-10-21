@@ -42,6 +42,10 @@ public class EarSimpleValidator<I extends EarSimple>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATA)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,JBOSSVERSION, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(JBOSSVERSION)));
+
     // Check size
     if (__vr.getFieldErrorCount(NOM) == 0) {
       java.lang.String __nom = __target__.getNom();
@@ -56,6 +60,14 @@ public class EarSimpleValidator<I extends EarSimple>
       if (__detall!= null && __detall.length() > 2147483647) {
         __vr.rejectValue(DETALL, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DETALL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(JBOSSVERSION) == 0) {
+      java.lang.String __jbossversion = __target__.getJbossVersion();
+      if (__jbossversion!= null && __jbossversion.length() > 50) {
+        __vr.rejectValue(JBOSSVERSION, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(JBOSSVERSION)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
       }
     }
 

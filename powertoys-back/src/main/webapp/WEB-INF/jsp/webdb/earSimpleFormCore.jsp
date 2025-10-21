@@ -125,3 +125,34 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EarSimpleFields.JBOSSVERSION)}">
+        <tr id="earSimple_jbossVersion_rowid">
+          <td id="earSimple_jbossVersion_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EarSimpleFields.JBOSSVERSION])?'earSimple.jbossVersion':__theForm.labels[EarSimpleFields.JBOSSVERSION]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[EarSimpleFields.JBOSSVERSION]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EarSimpleFields.JBOSSVERSION]}" ></i>
+              </c:if>
+            </td>
+          <td id="earSimple_jbossVersion_columnvalueid">
+          <form:errors path="earSimple.jbossVersion" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EarSimpleFields.JBOSSVERSION)}" >
+          <form:hidden path="earSimple.jbossVersion"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.earSimple.jbossVersion,__theForm.listOfValuesForJbossVersion)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EarSimpleFields.JBOSSVERSION)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="earSimple_jbossVersion"  onchange="if(typeof onChangeJbossVersion == 'function') {  onChangeJbossVersion(this); };"  cssClass="form-control col-md-9-optional" path="earSimple.jbossVersion">
+            <c:forEach items="${__theForm.listOfValuesForJbossVersion}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
