@@ -218,10 +218,13 @@
                          **/commons-logging-jboss-logging*redhat*.jar,
                          <!-- Requereix afegir mòdul 'com.googlecode.javaewah' a jboss-deployment-structure.xml -->
                         **/JavaEWAH*redhat*.jar,
+                        
+                        <!-- NO COMPATIBLE AMB JBOSS 7.4 !!!!  -->
                         <!-- Requereix afegir mòdul 'com.jcraft.jsch' a jboss-deployment-structure.xml -->
-                        **/jsch*redhat*.jar,
+                        <!-- **/jsch*redhat*.jar, -->
                         <!-- Requereix afegir mòdul 'com.jcraft.jzlib' a jboss-deployment-structure.xml -->
-                        **/jzlib*redhat*.jar,
+                        <!-- **/jzlib*redhat*.jar, -->
+                        
                         <!-- Requereix afegir mòdul 'org.apache.httpcomponents.core' a jboss-deployment-structure.xml -->
                         **/httpclient*redhat*.jar,
                         **/httpcore*redhat*.jar,

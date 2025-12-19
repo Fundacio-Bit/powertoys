@@ -44,8 +44,14 @@
             <module name="org.apache.log4j" export="TRUE"/>
             <module name="org.jboss.logging.commons.logging" export="TRUE"/>
             <module name="com.googlecode.javaewah" export="TRUE"/>
+            
+            <!-- NO CAMPATIBLE AMB JBOSS 7.4 -->
+            <!--
             <module name="com.jcraft.jsch" export="TRUE"/>
             <module name="com.jcraft.jzlib" export="TRUE"/>
+            -->
+            
+            
             <module name="org.apache.httpcomponents.core" export="TRUE"/>
             <module name="org.eclipse.jgit" export="TRUE"/>
         </dependencies>

@@ -503,11 +503,17 @@ public class EarSimplePublicController extends EarSimpleController {
 
     public static final String COOKIE_EARS_PROCESSATS = "COOKIE_EARS_PROCESSATS";
 
-    protected void afegirIdEnCookies(HttpServletRequest request, HttpServletResponse response, Long id) {
+    protected void afegirIdEnCookies(HttpServletRequest request, HttpServletResponse response, long id) {
+        
+        log.info("Afegint id " + id + " en cookies de ears processats");
+        
+        
 
         List<Long> ids = llegirEarsProcessatsDeCookies(request);
+        
+        log.info("Class List: " + ids.getClass().getName() + "  amb " + ids.size() + " elements ja processats.");
 
-        ids.add(id);
+        ids.add(Long.valueOf(id));
 
         String valor = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
 
@@ -517,7 +523,7 @@ public class EarSimplePublicController extends EarSimpleController {
         response.addCookie(cookie);
     }
 
-    protected void esborrarIdEnCookies(HttpServletRequest request, HttpServletResponse response, Long id) {
+    protected void esborrarIdEnCookies(HttpServletRequest request, HttpServletResponse response, long id) {
 
         List<Long> ids = llegirEarsProcessatsDeCookies(request);
 
@@ -541,7 +547,7 @@ public class EarSimplePublicController extends EarSimpleController {
             if (cookie.getName().equals(COOKIE_EARS_PROCESSATS)) {
                 String valor = cookie.getValue();
                 if (valor == null || valor.isEmpty())
-                    return Collections.emptyList();
+                    return new ArrayList<>();
 
                 return Arrays.stream(valor.split(",")).map(String::trim).filter(s -> !s.isEmpty()).map(Long::parseLong)
                         .collect(Collectors.toList());
